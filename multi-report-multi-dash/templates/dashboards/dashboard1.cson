@@ -6,36 +6,48 @@ default: "{{ default | bool }}"
 categories: [
     name: "Dash 1 Dashboard dependent data"
     kpis: [
-      name: "Metric from the report data"
-      value: "{{ value }}"
+      name: "From dashboard data"
       source: "2016, Toucan Toco"
       type: "value"
+      value: "{{ value }}"
     ,
-      name: "Metric from another data source filtered for this dashboard"
-      value: "{{ value }}"
+      name: "From other data source"
       source: "2016, Toucan Toco"
-      type: "value"
+      
+      type: "value-dynamic"
+      
+      data: 
+        value:
+          query:
+            domain: "my_dashboards_data"
+            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
+            report_period: "<%= requestersManager.my_date_selector %>"
+          field: "metric1"
+      
+      precision: 
+        value: ".1f"
+      
+      value: "value"
     ]
   ,
     name: "Dash 1 Report dependent data"
     kpis: [
-        name: "Metric from the report query"
-        value: "<%= report.reportValue %>"
-        source: "2016, Toucan Toco"
-        type: "value"
-      ,
-        name: "Metric from another data source filtered for this report"
-        data: 
-          value:
-            query:
-              domain: "my_reports_data"
-              my_report_name_column: "<%= report.entityName %>"
-              report_period: "<%= requestersManager.my_date_selector %>"
-            field: "metric2"
-        precision: 
-          value: ".1f"
-        value: "value"
-        source: "2016, Toucan Toco"
-        type: "value-dynamic"
+      name: "From other data source"
+      source: "2016, Toucan Toco"
+      
+      type: "value-dynamic"
+      
+      data: 
+        value:
+          query:
+            domain: "my_reports_data"
+            my_report_name_column: "<%= report.entityName %>"
+            report_period: "<%= requestersManager.my_date_selector %>"
+          field: "metric2"
+      
+      precision: 
+        value: ".1f"
+      
+      value: "value"
     ]
 ]

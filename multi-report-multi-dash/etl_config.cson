@@ -15,6 +15,14 @@ etl_config:
         domain: "my_reports_data"
         type: "csv"
         file: "my_reports_data.csv"
+    ,
+        domain: "my_dashboards_data"
+        type: "csv"
+        file: "my_dashbaords_data.csv"
+    ,
+        domain: "slide_data"
+        type: "csv"
+        file: "slide_data.csv"
     ]
     DATA_PROVIDERS: []
     REPORTS: [
