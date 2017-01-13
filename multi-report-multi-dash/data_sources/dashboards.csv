@@ -1,4 +1,4 @@
-report,dashboard,value,type,default
+my_report_name_column,my_dashboard_name_column,value,type,default
 Report 1,Dashboard 0,10,1,1
 Report 1,Dashboard 1,20,1,0
 Report 2,Dashboard 2,30,2,0

@@ -1,16 +1,34 @@
+#the name can be whatever you want
 name: "Toucan Toco's report"
-entityName: "{{ name }}"
+#column of the report query containing the reports names
+entityName: "{{ my_report_name_column }}"
+reportValue : "{{ a_report_value }}"
+#do not change this parameter!!
 id: "{{ index }}"
-date: "Avril 2016"
+
+#this is a date selector
+#it allows the user to a period that can be refered to in the dashboards screens and the front-configuration slides
+date:
+  id: "my_date_selector"
+  type: "buttons"
+  query:
+    domain: 'my_dates_data'
+  fields: ['my_periods']
+#How to use the date selector?
+#To refer to the date selector use this syntax: "<%= requestersManager.id %>"
+#The above date selector's id is my_date_selector so you would refer to the date choosen by the user with : "<%= requestersManager.id %>
+#To learn more see the documentation : https://docs.toucantoco.com/global-app-config/03-requesters.html?highlight=requester
+
 background:
-  id: 1
+  assetName: "my_background_img"
   overlay: true
-execsumTitle: "This is the report {{ roman_number }}, bitch!"
-execsumNote: "* Crafted with <strong><3</strong> by Pauline, Cécile & David"
+
+execsumTitle: "This is the report {{ roman_number }}"
+execsumNote: "* Crafted with <strong><3</strong> by the Toucan Team"
 
 search:
   default: '{{ default | bool }}'
-  'placeholder': 'Choose your report, bitch!'
+  'placeholder': 'Choose your report'
 
 dashboards:
   search: "Search among dashboards..."

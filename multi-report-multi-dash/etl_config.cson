@@ -7,6 +7,14 @@ etl_config:
         domain: "sample_dashboards"
         type: "csv"
         file: "dashboards.csv"
+    ,
+        domain: "my_dates_data"
+        type: "csv"
+        file: "my_dates_data.csv"
+    ,
+        domain: "my_reports_data"
+        type: "csv"
+        file: "my_reports_data.csv"
     ]
     DATA_PROVIDERS: []
     REPORTS: [
@@ -15,19 +23,20 @@ etl_config:
       template: "report"
     ]
     DASHBOARDS: [
+      #usual data query that should return the elements for which you want a synthesis 
       query:
         domain: "sample_dashboards"
         type: 1
-      report: "report"
-      template: "dashboard1"
+      report: "my_report_name_column"#column that contain the corresponding report name
+      template: "dashboard1"#file_name.cson which contain the template to use for the elements of the query
     ,
+      #usual data query that should return the elements for which you want a synthesis
       query:
         domain: "sample_dashboards"
         type: 2
-      report: "report"
-      template: "dashboard2"
+      report: "my_report_name_column"#column that contain the corresponding report name
+      template: "dashboard2"#file_name.cson which contain the template to use for the elements of the query
     ]
-    MAX_DASHBOARDS: 500
     MONGO_INDEXES: [
       "domain"
     ]
