@@ -23,6 +23,9 @@ slides: [
       data:
         query:
           domain: "slide_data"
+          #in my data I have a report_column_name that match each row to one of the report
+          #I can use the <%= report.entityName %> to refer to the report currently selecter by the user and use it to filter my data.
+          #As a result I will display only the rows for which the report column name corresponds to the current report.          
           report_column_name:"<%= report.entityName %>"
         precision:
           my_value:',2f'
