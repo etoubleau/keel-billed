@@ -7,16 +7,16 @@ background:#link between the reports and the background img to display
   assetName: "my_background_img"
   overlay: true
 
-execsumTitle: "This is the only report"#title
+execsumTitle: "This is the report {{roman_number}}"#dynamic title
 execsumNote: "* Crafted with <strong><3</strong> by the Toucan Team"#footnote
 
 #parameters for the reports search bar
-search:
+# search:
   #If there is more than 1 report which report shall be selected by default?
   #In your reports dataset add a 'default' column containing the value 1 if the row corresponds to the default report you want to display and 0 otherwise.
-  default: '{{ my_report_default_column | bool }}'
+  # default: '{{ my_report_default_column | bool }}'
   #Choose a message to display in the report search bar
-  placeholder: 'Choose your report'
+  # placeholder: 'Choose your report'
 
 dashboards:
   #Choose a message to display in the dashboard search bar
