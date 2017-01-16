@@ -1,0 +1,88 @@
+entityName: "{{ my_dashboard_name_column }}"
+#For a given report if there is more than 1 dashboard which one shall be selected by default?
+#In your dashboard dataset add a 'default' column containing the value 1 if the row corresponds to the default dashboard you want to display and 0 otherwise.
+default: "{{ my_dashboard_default_column | bool }}"
+
+categories: [
+    name: "Dash 2,3,4 Dashboard dependent data"
+    kpis: [
+      name: "From dashboard data"
+      source: "2016, Toucan Toco"
+      type: "value"
+      #The {{}} templating notation allow you to access all the columns of the current dashboard {{the_column_name}}
+      value: "{{ value }}"
+    ,
+      name: "From other data source"
+      source: "2016, Toucan Toco"
+      
+      type: "value-dynamic"
+      
+      data: 
+        value:
+          query:
+            domain: "my_dashboards_data"
+            #Using the {{}} I can refer to the dashboard data column containing the column name and thus filter the data to display only the rows
+            #corresponding to the current dashboard
+            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
+            #Using the <%= requestersManager.id => you can access the current date selected by the user.
+            #the "id" corresponds to the name you have choser in your report template (templates > reports > my_report.cson)
+            #If you have a column containing the Period you can then filter the data to display only the data corresponding to the current Period selection.
+            report_period: "<%= requestersManager.my_date_selector %>"
+          field: "metric1"
+      
+      precision: 
+        value: ".1f"
+      
+      value: "value"
+    ]
+  ,
+    name: "Dash 2,3,4 Report dependent data"
+    kpis: [
+      name: "From other data source"
+      source: "2016, Toucan Toco"
+      
+      type: "value-dynamic"
+      
+      data: 
+        value:
+          query:
+            domain: "my_reports_data"
+            #Using the <%= report.id => you can access all the columns in the reports data of the current report if you have given them an id.
+            #the "id" corresponds to the name you have choser in your report template (templates > reports > my_report.cson)
+            #the attribution of an id is done with the syntax : entityName = {{colum in the report data containing the entity name}}
+            my_report_name_column: "<%= report.entityName %>"
+            #same as above!
+            report_period: "<%= requestersManager.my_date_selector %>"
+          field: "metric2"
+      
+      precision: 
+        value: ".1f"
+      
+      value: "value"
+    ]
+  ,
+    name: "This is specific to dash 2,3 and 4!"
+    kpis: [
+      name: "From other data source"
+      source: "2016, Toucan Toco"
+      
+      type: "value-dynamic"
+      
+      data: 
+        value:
+          query:
+            domain: "my_reports_data"
+            my_report_name_column: "<%= report.entityName %>"
+            report_period: "<%= requestersManager.my_date_selector %>"
+          field: "metric2"
+      
+      precision: 
+        value: ".1f"
+      
+      value: "value"
+    ]
+]
+
+#do not change those parameters!!
+id: "{{ index }}"
+report: "{{ report_id }}"
