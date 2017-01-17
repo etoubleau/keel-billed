@@ -1,0 +1,60 @@
+etl_config:
+    DATA_SOURCES: [
+        domain: "sample_reports"
+        type: "csv"
+        file: "reports.csv"
+    ,
+        domain: "sample_dashboards"
+        type: "csv"
+        file: "dashboards.csv"
+    ,
+        domain: "my_dates_data"
+        type: "csv"
+        file: "my_dates_data.csv"
+    ,
+        domain: "my_reports_data"
+        type: "csv"
+        file: "my_reports_data.csv"
+    ,
+        domain: "my_dashboards_data"
+        type: "csv"
+        file: "my_dashbaords_data.csv"
+    ,
+        domain: "slide_data"
+        type: "csv"
+        file: "slide_data.csv"
+    ]
+    
+    DATA_PROVIDERS: []
+    
+    REPORTS: [
+      query:
+        #which domain contains the report I want the user to choose among?
+        domain: "sample_reports"
+      #which report template shall be used for those reports?
+      #This file.cson shall be located inside template > reports > file.cson
+      template: "report"
+    ]
+    
+    DASHBOARDS: [
+      #usual data query that should return the elements for which you want a synthesis 
+      query:
+        #which domain contains the dashboards I want to apply the below template?
+        domain: "sample_dashboards"
+        type: 1
+      report: "my_report_name_column"#column that contain the dashboard corresponding report name
+      #file_name.cson which contain the template to use for the elements of the query
+      #This file.cson shall be located inside template > dashboards > file.cson
+      template: "dashboard1"
+    ,
+      #same as above, here all the dashboards are split using 2 queries and linked to 2 different templates
+      query:
+        domain: "sample_dashboards"
+        type: 2
+      report: "my_report_name_column"
+      template: "dashboard2"
+    ]
+    
+    MONGO_INDEXES: [
+      "domain"
+    ]
