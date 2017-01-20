@@ -34,18 +34,6 @@ DATA_SOURCES: [
     domain: "funnelchart"
     type: "csv"
     file: "funnelchart.csv"
-,
-    domain: "free_text_home"
-    type: "csv"
-    file: "free_text_home.csv"
-,
-    domain: "free_pdf_home"
-    type: "csv"
-    file: "free_pdf_home.csv"
-,
-    domain: "scorecard_home"
-    type: "csv"
-    file: "scorecard_home.csv"
 # ,
 #     domain: "ga_example"
 #     type: "google_analytics"

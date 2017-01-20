@@ -22,7 +22,7 @@ glossary:
     meaning: "A slang term for a sketching of what someone plans on tagging. graffiti. <br><em>NOT A CHART!</em>"
   ]
 
-slidePdfEnabled: false
+slidePdfEnabled: true
 dashboardPdfEnabled: false
 sharingOptions: true
 comments: true
@@ -260,6 +260,7 @@ slides: [
 
         crossfilter:
           on: "date"
+          datasets: [1]
         groups: "Centre"
         date: "date"
         value: "value"
@@ -283,7 +284,8 @@ slides: [
           Effectif: " répondants"
 
         meta: "Effectif"
-        average: 77
+        average: 
+          values: [77]
         packs: "group"
         packsOrder: ["Caraibes", "Autres"]
         size: 0.75
@@ -1851,274 +1853,6 @@ slides: [
           type: "dropdown"
 
     id: 40306
-  }
-  {
-    level: 2
-    title: "New horizontal barchart"
-    parent_id: 40
-    id: 410
-  }
-  {
-    level: 3
-    title: "With groups"
-    parent_id: 410
-
-    chartOptions:
-
-      data:
-        file:
-          name: "horizontal_barchart_groups"
-        order:
-          by: "label"
-
-      chartType: "horizontal-barchart"
-      groups: "cat"
-      value: "value"
-      label: "label"
-      legend: true
-
-      units:
-        value: "%"
-    filters:
-      "bottom-right":
-        on: "type"
-        type: "buttons"
-        order:
-          custom:[
-            "3 mois glissants"
-            "Mois en cours"
-            "12 mois glissants"]
-
-    id: 41001
-  }
-  {
-    level: 3
-    title: "With ordinal scaled sparklines"
-
-    parent_id: 410
-    chartOptions:
-      data:
-        file:
-          name: "horizontal_barchart_evolution"
-
-      chartType: "horizontal-barchart"
-      value: "Pourcentage"
-      variation: "evolution"
-      variationLegend: "Écart<br>année passée"
-      label: "Evenements"
-      units:
-        Pourcentage: " %"
-        evolution: "%"
-
-      sort: "desc"
-      sparklines:
-        data:
-          file:
-            name: "horizontal_barchart_sparklines"
-        joins: ["Evenements"]
-        legend: "Évolution<br>sur 8 mois"
-        value: "Value"
-        date: "Date"
-        unit: "%"
-        orderDates: true
-      showAverage: true
-      meta: "Effectif"
-
-    id: 41002
-  }
-  {
-    level: 3
-    title: "With date scaled sparklines"
-
-    parent_id: 410
-    chartOptions:
-      data:
-        file:
-          name: "horizontal_barchart_evolution"
-      chartType: "horizontal-barchart"
-      value: "Pourcentage"
-      variation: "evolution"
-      variationLegend: "Écart<br>année passée"
-      label: "Evenements"
-      units:
-        Pourcentage: " %"
-        evolution: "%"
-
-      sort: "desc"
-      sparklines:
-        data:
-          file:
-            name: "horizontal_barchart_sparklines"
-          date:
-            selector: "Date"
-            format: "%m"
-        joins: ["Evenements"]
-        legend: "Évolution<br>sur 8 mois"
-        value: "Value"
-        date: "Date"
-        dateFormat: "%B %Y"
-        unit: "%"
-      showAverage: true
-      meta: "Effectif"
-
-    id: 41003
-  }
-  {
-    level: 3
-    title: "With legacy sparklines"
-
-    parent_id: 410
-    chartOptions:
-      data:
-        file:
-          name: "horizontal_barchart_legacy_sparklines"
-
-      chartType: "horizontal-barchart"
-      value: "Pourcentage"
-      variation: "evolution"
-      variationLegend: "Écart<br>année passée"
-      label: "Evenements"
-      units:
-        Pourcentage: " %"
-        evolution: "%"
-
-      sort: "desc"
-      sparklines:
-        prefix: "sparkline"
-        legend: "Évolution<br>sur 8 mois"
-        unit: "%"
-      showAverage: true
-      meta: "Effectif"
-
-    id: 41004
-  }
-  {
-    level: 3
-    title: "With average"
-    parent_id: 410
-
-    chartOptions:
-
-      data:
-        file:
-          name: "horizontal_barchart_simple"
-
-      chartType: "horizontal-barchart"
-      groups: "cat"
-      value: "value"
-      label: "label"
-
-      average: 85
-
-      units:
-        value: "%"
-
-    id: 41005
-  }
-  {
-    level: 3
-    title: "With average and filters"
-    parent_id: 410
-
-    filters:
-      "bottom-right":
-        on: "type"
-        type: "buttons"
-        order:
-          custom:[
-            "3 mois glissants"
-            "Mois en cours"
-            "12 mois glissants"]
-
-    chartOptions:
-      data:
-        file:
-          name: "horizontal_barchart_groups"
-
-      chartType: "horizontal-barchart"
-      value: "value"
-      label: "label"
-
-      average:
-        data: file: name: "horizontal_barchart_groups_avg"
-        joins: [
-          "cat"
-          "type"
-        ]
-        value: "value"
-
-      averageText: "France"
-
-      units:
-        value: "%"
-
-      filters:
-        "upper-right":
-          on: "cat"
-          type: "dropdown"
-
-    id: 41006
-  }
-  {
-    level: 3
-    title: "With new chart, filters, evolution, and sparklines"
-
-    parent_id: 410
-    chartOptions:
-      data:
-        file:
-          name: "horizontal_barchart_evolution"
-        precision:
-          evolution: ",.1f"
-      chartType: "horizontal-barchart"
-      value: "Pourcentage"
-      variation: "evolution"
-      variationLegend: "Écart<br>année passée"
-      sentiment:
-        evolution:
-          domain: [0]
-          range: ['positive', 'negative']
-        evolution: [
-          sentiment:
-            domain: [0, 0.0001]
-            range: ['positive', 'neutral', 'negative']
-          where:
-            pack: 'group1'
-        ,
-          sentiment:
-            domain: [0, 0.0001]
-            range: ['negative', 'neutral', 'positive']
-          where:
-            pack: 'group2'
-        ,
-          sentiment:
-            domain: [0, 0.0001]
-            range: ['negative', 'neutral', 'positive']
-          where:
-            pack: 'group3'
-        ]
-      label: "Evenements"
-      units:
-        Pourcentage: " %"
-        evolution: "%"
-      sort: "desc"
-      sparklines:
-        data:
-          file:
-            name: "horizontal_barchart_sparklines"
-        joins: ["Evenements"]
-        legend: "Évolution<br>sur 8 mois"
-        value: "Value"
-        date: "Date"
-        unit: "%"
-        orderDates: true
-      showAverage: true
-      meta: "Effectif"
-      filters:
-        "upper-middle":
-          on: "pack"
-          type: "buttons"
-    id: 41007
   }
   {
     level: 2

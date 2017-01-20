@@ -113,8 +113,8 @@ categories: [
         evolution: 'pt'
         variation: '%'
       data:
-        query:
-          domain: "scorecard_home"
+        file:
+          name: "scorecard_home"
         precision: 0
   ,
     name: "Skincare"
@@ -134,8 +134,8 @@ categories: [
         evolution: 'pt'
         variation: '%'
       data:
-        query:
-          domain: "scorecard_home"
+        file:
+          name: "scorecard_home"
         precision: 0
     unit: "%"
   ]
@@ -144,19 +144,17 @@ categories: [
   kpis: [
     name: "Long free text"
     type: "text-dynamic"
-    data:
-      query:
-        domain: "free_text_home"
+    data: file: name: "free_text_home"
     content: "content"
     source: "2015, source Smart Toucan"
   ,
     name: "Votre Business Case"
     type: "text-dynamic"
     data:
-      query:
-        domain: "free_pdf_home"
-      type: "pdf"
-      object_name: "<%= report.entityName %>"
+      file:
+        name: "free_pdf_home"
+        type: "pdf"
+        object_name: "<%= report.entityName %>"
     style:
       width: '700px'
     content: "content"

@@ -1,0 +1,55 @@
+etl_config:
+    DATA_SOURCE_DIR: "data_sources"
+    DATA_SOURCES: [
+        domain: "dashboards"
+        type: "excel"
+        file: "dashboards.xls"
+        sheetname: "Data"
+    ,
+        domain: "0_10"
+        type: "csv"
+        file: "0_10.csv"
+    ,
+        domain: "0_11"
+        type: "csv"
+        file: "0_11.csv"
+    ,
+        domain: "0_12"
+        type: "csv"
+        file: "0_12.csv"
+    ,
+        domain: "0_13"
+        type: "csv"
+        file: "0_13.csv"
+    ,
+        domain: "0_14"
+        type: "csv"
+        file: "0_14.csv"
+    ,
+        domain: "0_209"
+        type: "csv"
+        file: "0_209.csv"
+    ,
+        domain: "0_101"
+        type: "csv"
+        file: "0_101.csv"
+    ]
+    REPORTS: [
+      query:
+        domain: "dashboards"
+        dashboards: "All"
+      template: "report"
+    ]
+    DASHBOARDS: [
+      query:
+        domain: "dashboards"
+      report: "report_name"
+      template: "dashboard"
+    ]
+    MONGO_INDEXES: [
+        "domain"
+        [
+            "domain"
+            "subdomain"
+        ]
+    ]
