@@ -1,18 +1,25 @@
-name: 'Activity Report'
-entityName: "{{center}}"
-attributes: [ "226 tenants", "139 400 m²" ]
-id: "{{ index }}"
-date: "September 2016"
-background:
-  assetName: "bg-1"
-  overlay: false
+# name: 'Établissements de santé en France'
+# # entityName: "{{etablissement}}"
+# id: 0
+# date: "2016"
+# background:
+#   assetName: "bg-1"
+#   overlay: false
+# execsumTitle: 'Établissements de santé en France'
+#
+# dashboards:
+#   default: 0
+#   search: "Cherchez un établissement:"
 
-cartoFiles:
-  "Floor 0": "MAP_QT_0_topojson.json"
-  "Floor 1": "MAP_QT_1_topojson.json"
-  "Floor 2": "MAP_QT_2_topojson.json"
-  "Floor 3": "MAP_QT_3_topojson.json"
 
-slideInfos: {}
+
+name: 'Établissements de santé en France'
+entityName: '{{ etablissement }}'
 dashboards:
-  search: "Search a tenant"
+  search: 'Cherchez un établissement:'
+id: '{{ index }}'
+background:
+  'assetName': 'bg-1'
+  'overlay': false
+date: "2016"
+execsumTitle: 'Établissements de santé en France'
