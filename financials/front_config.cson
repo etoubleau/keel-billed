@@ -1,0 +1,703 @@
+settings:
+  comparison:
+    description: "Sur tous les écrans de comparaison, comparer avec :"
+    values: [
+      "Par défaut"
+      "Entity A"
+      "Entity B"
+      "Entity C"
+    ]
+    default: "Par défaut"
+
+glossary:
+  title: 'Glossaire'
+  terms: [
+    term: "Data"
+    meaning: "An android from the 24th century who serves on the star ship Enterprise.<br><em>Data kicked some borg ass and then fed his cat lunch.</em>"
+  ,
+    term: "Hipsterectomy"
+    meaning: "The removal or dismissal of what is largely accepted to be cool or trendy. The process of de-hipsterizing someone or something."
+  ,
+    term: "Graph"
+    meaning: "A slang term for a sketching of what someone plans on tagging. graffiti. <br><em>NOT A CHART!</em>"
+  ]
+
+slidePdfEnabled: false
+dashboardPdfEnabled: false
+sharingOptions: true
+comments: true
+embedCharts: true
+
+noDataError:
+  message: "<div class=\"error-first-word\">Désolé,</div>aucune donnée n'est disponible. Pour obtenir des données sur cet écran choisissez un autre rapport"
+  clues: ['report-selector', 'bottom-filter', 'settings', 'menu']
+
+title: 'Test'
+
+dataProviders:
+  "google-sheets": {}
+
+home:
+  skipToReport: "0"
+
+slides: [
+  {
+    level: 0
+    id: 0
+  }
+  {
+    level: 1
+    title: "CAC40 and Economy"
+    id: 10
+  }
+  {
+    level: 1
+    title: "Social engagement"
+    id: 30
+  }
+  {
+    level: 1
+    title: "By company"
+    id: 40
+  }
+  {
+    level: 3
+    title: "Economic situation"
+    parent_id: 10
+    filters:
+      "bottom-right":
+        on: "breakdown"
+        type: "buttons"
+    chartOptions:
+      data:
+        query:
+          domain: "economy"
+          annee: $gte: 2000
+        date:
+          selector: 'date'
+          format: '%m/%Y'
+      chartType: "linechart"
+      units:
+        value: " "
+      # events: [
+      #   {
+      #     date: "11-12"
+      #     label: "Chaussures de ville"
+      #     name: "Nouvelle collection"
+      #   }
+      #   {
+      #     date: "02-14"
+      #     label: "Baskets"
+      #     name: "Soldes d'hiver"
+      #   }
+      # ]
+      value: "value"
+      groups: "breakdown"
+      date: "date"
+      legend: true
+    source: "Source: INSEE"
+    id: 10000
+  }
+  {
+    level: 3
+    title: "Top Sectors"
+    commentary: "What is the share of each sector or campany in the CAC40"
+    filters:
+      "bottom-right":
+        on: "year"
+        type: "slider"
+    parent_id: 10
+    chartOptions:
+      data:
+        query:
+          domain: "data_bourso"
+          metric: $in: ["Chiffre d'affaires","Résultat net","Capitaux propres","Marge opérationnelle","Rentabilité Financière"]
+          year: $ne: "2016"
+        # date:
+        #   selector: "date"
+        #   format: "%Y"
+        precision:
+          value: ',.0f'
+      chartType: "treemap"
+      value: "value"
+      color: true
+      # target: "target"
+      sortByValues: true
+      labels: ['industry','supersector','company']
+      filters:
+        "upper-right":
+          on: "metric"
+          type: "dropdown"
+          default: "Chiffre d'affaires"
+          order:
+            custom: ["Chiffre d'affaires","Résultat net","Capitaux propres","Marge opérationnelle","Rentabilité Financière"]
+     # sentiment:
+     #   target:
+     #     domain: [-5,5]
+     #     range: ['negative','warning','positive']
+      meta: []
+    source: "Source : Rapports financiers"
+    id: 10001
+  }
+
+  {
+    level: 3
+    title: "Top companies"
+    parent_id: 10
+    filters:
+      "bottom-right":
+        on: "metric"
+        type: "buttons"
+        default: "Chiffre d'affaires"
+        order:
+          custom: ["Chiffre d'affaires","Résultat net","Capitaux propres","Marge opérationnelle","Rentabilité Financière"]
+    chartOptions:
+      data:
+        query:[
+          [
+            $match:
+              domain: "data_bourso"
+              metric: $in: ["Chiffre d'affaires","Résultat net","Capitaux propres"]
+              year: "2015"
+          ,
+            $project:
+              metric: 1
+              value: $divide: [ "$value", 1000000]
+              company: 1
+          ]
+          [
+            $match:
+              domain: "data_bourso"
+              metric: $in: ["Marge opérationnelle","Rentabilité Financière"]
+              year: "2015"
+          ,
+            $project:
+              metric: 1
+              value: 1
+              company: 1
+          ]
+        ]
+        multiple_queries: true
+        precision:
+          value: ",.1f"
+      chartType: "horizontalBarchart"
+      label: "company"
+      units:
+        value:[
+          unit: "M€"
+        ,
+          unit: " "
+          where: variable: "Marge opérationnelle"
+        ,
+          unit: " "
+          where: variable: "Rentabilité Financière"
+        ]
+      value: "value"
+      filters:
+        "upper-right":
+          on: "supersector"
+          type: "dropdown"
+          reset: "- All sectors"
+          withSize: true
+      # sentiment:
+      #   value:
+      #     domain: [8,18]
+      #     range: ['negative','warning','positive']
+      sparklines:
+        data:
+          query:
+            domain: "data_bourso"
+            metric: $in: ["Chiffre d'affaires","Résultat net","Capitaux propres","Marge opérationnelle","Rentabilité Financière"]
+            year: $ne: "2016"
+        joins: ["metric","company"]
+        legend: "Évolution"
+        value: "value"
+        date: "year"
+        unit: " "
+        orderDates: true
+      legend:
+        type: 'identity-card'
+        filter: 'bottom-right'
+      sort: "desc"
+      meta: [
+      ]
+      # showAverage: true
+    source: "Source : Rapports financiers"
+    id: 10002
+  }
+  {
+    level: 3
+    title: "Financial ratios"
+    # commentary: "The heatmap helps you to see what's going on instantly"
+    filters:
+      "bottom-right":
+        on: "year"
+        type: "slider"
+    parent_id: 10
+    chartOptions:
+      data:
+        query:
+          domain: "data_bourso"
+          year: $ne: "2016"
+          category: "Ratios financiers"
+          metric: $nin: ["Effectif en fin d'année","Effectif moyen"]
+        precision:
+          value:  ",.1f"
+      chartType: "heatmap"
+      legend: true
+      x: "metric"
+      xpack: "metric"
+      xOrder: ["Résultat net part du groupe par action","Résultat net part du groupe dilué par action","Marge opérationnelle","Rentabilité Financière","Ratio d'endettement"]
+      y: "company"
+      ypack: "supersector"
+      value: "value"
+      filters:
+        "upper-right":
+          on: "supersector"
+          type: "dropdown"
+          reset: "- All sectors"
+      # target: "target"
+      # variation: "variation"
+      # reverse: true
+      # sentiment:
+      #   value:
+      #     domain: ['0.8*target','target']
+      #     range: ['negative','neutral','positive']
+      meta: []
+      units:
+        value: ' '
+        # variation: 'pt'
+    source: "Source : Rapports financiers"
+    id: 10003
+  }
+  {
+    level: 3
+    title: "Top Recruiters"
+    parent_id: 30
+    chartOptions:
+      chartType: "waterfallchart"
+      zeroBaseline: 0
+      drillLevel: "drillLevel"
+      drillGroup: "drillGroup"
+      order: "display_order"
+      value: "value"
+      # evolution: "evol"
+      label: 'label'
+      data:
+        query:
+          domain: "effectif"
+      # sublabel: 'label_sublevel'
+      # meta: 'Actuel'
+      units:
+        "value": " "
+    id: 10004
+  }
+  {
+    level: 3
+    title: "Womanization"
+    parent_id: 30
+    chartOptions:
+      data:
+        query:
+          domain: "feminisation"
+        melt:
+          id: ['company','sector']
+          value: ['women','men']
+      chartType: "stackedBarchart"
+      groups: "variable"
+      label: "company"
+      hideTotal: true
+      value: "value"
+      filters:
+        "upper-right":
+          on: "sector"
+          type: "dropdown"
+          reset: "- All sectors"
+          withSize: true
+      units:
+        value: " %"
+      # sentiment:
+      #   value:
+      #     domain: [8,18]
+      #     range: ['negative','warning','positive']
+      legend:
+        type: 'identity-card'
+        filter: 'bottom-right'
+      sort: "desc"
+      meta: [
+      ]
+      # showAverage: true
+    source: "Source : Rapports financiers"
+    id: 30002
+  }
+  {
+    level: 3
+    title: "Taxes"
+    commentary: "Taxes in 2012"
+    filters:
+      "bottom-right":
+        on: "variable"
+        type: "buttons"
+    parent_id: 30
+    chartOptions:
+      data:
+        query:
+          domain: "feminisation"
+          "Montant de l'impot": $ne: 0
+        melt:
+          id: ['company','sector']
+          value: ["Taux d'imposition","Montant de l'impot"]
+      chartType: "horizontalBarchart"
+      label: "company"
+      value: "value"
+      average:
+        data:
+          query:[
+            $match:
+              domain: "feminisation"
+              "Montant de l'impot": $ne: 0
+          ,
+            $group:
+              _id:['index']
+              "Taux d'imposition": $avg: "$Taux d'imposition"
+              "Montant de l'impot": $avg: "$Montant de l'impot"
+          ,
+            $project:
+              index: "$_id.index"
+              "Taux d'imposition": 1
+              "Montant de l'impot": 1
+          ]
+          melt:
+            id: ['index']
+            value: ["Taux d'imposition","Montant de l'impot"]
+        joins: [
+          "variable"
+        ]
+        value: "value"
+      averageText: "moyenne CAC40"
+      filters:
+        "upper-right":
+          on: "sector"
+          type: "dropdown"
+          reset: "- All sectors"
+          withSize: true
+      units:
+        value:[
+          unit: "%"
+        ,
+          unit: "M€"
+          where: variable: "Montant de l'impot"
+        ]
+      # sentiment:
+      #   value:
+      #     domain: [8,18]
+      #     range: ['negative','warning','positive']
+      legend:
+        type: 'identity-card'
+        filter: 'bottom-right'
+      sort: "desc"
+      meta: [
+      ]
+      # showAverage: true
+    source: "Source : PwC"
+    id: 4
+  }
+  {
+    level: 3
+    title: "Age of the boards"
+    # commentary: "Taxes in 2012"
+
+    parent_id: 30
+    chartOptions:
+      data:
+        query:[
+          [
+            $match:
+              domain: "board"
+          ,
+            $group:
+              _id: '$company'
+              value: $avg: "$age"
+          ,
+            $project:
+              company: $literal: "- All companies"
+              label: "$_id"
+              value: 1
+          ]
+          [
+            $match:
+              domain: "board"
+          ,
+            $project:
+              company: "$company"
+              label: "$name"
+              value: "$age"
+              position: 1
+              since: 1
+          ]
+        ]
+        multiple_queries: true
+        # melt:
+        #   id: ['company','sector']
+        #   value: ["Taux d'imposition","Montant de l'impot"]
+      chartType: "horizontalBarchart"
+      label: "label"
+      value: "value"
+      filters:
+        "upper-right":
+          on: "company"
+          type: "dropdown"
+      average:
+        data:
+          query:[
+            [
+              $match:
+                domain: "board"
+            ,
+              $group:
+                _id: ['$index']
+                value: $avg: "$age"
+            ,
+              $project:
+                company: $literal: "- All companies"
+                value: 1
+            ]
+            [
+              $match:
+                domain: "board"
+            ,
+              $group:
+                _id: '$company'
+                value: $avg: "$age"
+            ,
+              $project:
+                company: "$_id"
+                value: 1
+            ]
+          ]
+          multiple_queries: true
+        joins: [
+          "company"
+        ]
+        value: "value"
+      averageText: "moyenne CAC40"
+      units:
+        value:" "
+      # sentiment:
+      #   value:
+      #     domain: [8,18]
+      #     range: ['negative','warning','positive']
+      legend: true
+      sort: "desc"
+      meta: [
+        "since"
+        "position"
+      ]
+      # showAverage: true
+    source: "Source : Reuters, 2016"
+    id: 30000
+  }
+  {
+    level: 3
+    title: "Impact in France"
+    parent_id: 30
+    chartOptions:
+      data:
+        query:
+          domain: "feminisation"
+      chartType: "bubblechart"
+      legend: true
+      label: "company"
+      units:
+        cx: "%"
+        cy: "%"
+        r: " salariés"
+      filters:
+        "upper-right":
+          on: "sector"
+          type: "dropdown"
+          reset: "- All sectors"
+      cx: "ventes en France"
+      cy: "salariés en France"
+      r: "nb en France"
+      # color: "evolution"
+      # drill:
+      #   group: "drillGroup"
+      #   level: "drillLevel"
+      #   levelsOrder: ['main','sub']
+
+    id: 30003
+  }
+  {
+    level: 3
+    title: "Performance Evolution"
+    parent_id: 40
+    filters:
+      "bottom-right":
+        on: "metric"
+        type: "buttons"
+    chartOptions:
+      data:
+        query:
+          domain: "data_bourso"
+          metric: $in: ["Chiffre d'affaires","Résultat net","Capitaux propres","Marge opérationnelle","Rentabilité Financière"]
+          # year: $ne: "2016"
+        date:
+          selector: 'date'
+          format: '%Y-%m-%d %X'
+      chartType: "barchart"
+      filters:
+        "upper-right":
+          on: "company"
+          type: "dropdown"
+      units:
+        value: " "
+      value: "value"
+      groups: "metric"
+      label: "date"
+      legend: true
+    id: 40001
+  }
+  {
+    level: 3
+    title: "Income Statement"
+    parent_id: 40
+    chartOptions:
+      chartType: "funnelChart"
+      value: "value"
+      label: 'metric'
+      data:
+        query:
+          domain: "data_bourso"
+          metric: $in: ["Chiffre d'affaires","Produits des activités ordinaires","Résultat opérationnel","Coût de l'endettement financier net","Résultat net"]
+          year: "2015"
+          category: "Compte de résultat"
+        order:
+          by: "metric"
+          custom: ["Chiffre d'affaires","Produits des activités ordinaires","Résultat opérationnel","Coût de l'endettement financier net","Résultat net"]
+      units:
+        value: " k€"
+      filters:
+        "upper-right":
+          on: "company"
+          type: "dropdown"
+
+    highlightedKpis: [
+      name: " "
+      value: "value"
+      unit: " k€"
+      comment: "Chiffre d'affaires"
+      precision:
+        value: ',.0f'
+      data:
+        value:
+          query:
+            domain: "data_bourso"
+            metric: "Chiffre d'affaires"
+            year: "2015"
+            category: "Compte de résultat"
+          field: 'value'
+    ,
+      name: " "
+      value: "value"
+      unit: " k€"
+      comment: "Résultat net"
+      precision:
+        value: ',.0f'
+      data:
+        value:
+          query:
+            domain: "data_bourso"
+            metric: "Résultat net"
+            year: "2015"
+            category: "Compte de résultat"
+          field: 'value'
+    ]
+
+    id: 40002
+  }
+  {
+    level: 3
+    title: "Financial analysis"
+    source: "Reuters, 2016"
+    parent_id: 40
+    filters:
+      "bottom-right":
+        type: "buttons"
+        on: "breakdown"
+    chartOptions:
+      data:
+        query:
+          domain: "reuters"
+          category: $ne: "Growth Rates"
+          metric: $nin: ["Net Income/Employee (TTM)","Revenue/Employee (TTM)"]
+        postprocess:[
+          pivot:
+            index: ['company','category','metric']
+            column: 'level'
+            value: 'value'
+        ]
+      chartType: "bulletChart"
+      packs: "category"
+      meta: [""]
+      label: "metric"
+      value: "Company"
+      target: "sector"
+      comparison: "industry"
+      colorTargets: true
+      filters:
+        "upper-right":
+          type: "dropdown"
+          on: "company"
+      units:
+        value: " "
+      sentiment:
+        value:
+          domain: ['0.95*sector','1.1*sector']
+          range: ['negative','warning','positive']
+
+    # recommendation:
+    #   advert: "Reco"
+    #   content: """
+    #     Pour atteindre les objectifs de la thématique <em>travaux d'isolation</em> dans l'experience client, il convient de:
+    #     <ul>
+    #       <li>bien informer les clients sur les différentes méthodes d'isolation</li>
+    #       <li>fournir un diagnostic energetique precis</li>
+    #       <li>recontacter le client 3 mois après pour discuter avec lui des économies réalisées</li>
+    #     </ul>
+    #   """
+
+    id: 40006
+  }
+  {
+    level: 3
+    title: "Investors"
+    # commentary: "Taxes in 2012"
+
+    parent_id: 40
+    chartOptions:
+      data:
+        query:
+          domain: "actionnariat"
+        precision:
+          value: ",.1f"
+      chartType: "horizontalBarchart"
+      label: "actionnaire"
+      value: "value"
+      filters:
+        "upper-right":
+          on: "company"
+          type: "dropdown"
+      units:
+        value:" %"
+      # sentiment:
+      #   value:
+      #     domain: [8,18]
+      #     range: ['negative','warning','positive']
+      sort: "desc"
+      legende: true
+      # showAverage: true
+    source: "2016, Rapports financiers"
+    id: 40005
+  }
+]

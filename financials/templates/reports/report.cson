@@ -1,0 +1,18 @@
+name: "Sales Report"
+entityName: "{{ country }}"
+id: "{{ index }}"
+#date: 'Janvier 2016'
+date:
+  id: "date"
+  type: "buttons"
+  query:
+    domain: 'ranks'
+  fields: ['breakdown']
+background:
+  assetName: "bg-1"
+  overlay: true
+execsumTitle: "CAC 40 powered by Toucan Toco"
+# execsumNote: "* And <strong>nobody</strong> ever got fired for choosing Toucan Toco"
+
+dashboards:
+  search: "Select a company"

@@ -1,0 +1,115 @@
+entityName: "{{ zone }}"
+id: "{{ index }}"
+report: "{{ report_id }}"
+default: "{{ default }}"
+features: [[
+  "name":" Sector : "
+  "value":" {{sector}}"
+]]
+
+categories: [
+  name: "Performance"
+  kpis: [
+    name: "CAC40 Index"
+    type: "line"
+    chartOptions:
+      value: "C"
+      date: "month"
+      data:
+        query:
+          domain: 'cotation'
+          annee: 2016
+          month: $ne: "10"
+    unit: " "
+    source: "Source : ABCbourse"
+  ]
+,
+  name: "Weight in economy"
+  kpis: [
+    name: "Taxes amount"
+    type: "leaderboard"
+    chartOptions:
+      value: "Montant de l'impot"
+      label: "company"
+      data:
+        query:
+          domain: 'feminisation'
+        precision:
+          value: ",.1f"
+      units:
+        "Montant de l'impot": " M€"
+    source: "2016, Rapports financiers"
+  ,
+    name: "Sales in France"
+    type: "leaderboard"
+    chartOptions:
+      value: "ventes en France"
+      label: "company"
+      data:
+        query:
+          domain: 'feminisation'
+        precision:
+          value: ",.1f"
+      units:
+        "ventes en France": "%"
+    source: "2016, Rapports financiers"
+  ,
+    name: "Employees in France"
+    type: "leaderboard"
+    chartOptions:
+      value: "salariés en France"
+      label: "company"
+      data:
+        query:
+          domain: 'feminisation'
+        precision:
+          value: ",.1f"
+      units:
+        "salariés en France": "%"
+    source: "2016, Rapports financiers"
+  ]
+,
+  name: "Social Engagements"
+  kpis: [
+    name: "Womanization"
+    value: "{value:,.0f}"
+    unit: "%"
+    __data__:
+      value:
+        query:[
+          $match:
+            domain: "feminisation"
+        ,
+          $group:
+            _id: ["$index"]
+            women: $avg: "$women"
+        ,
+          $project:
+            women: 1
+        ]
+        field: "women"
+    source: "2016, Rapports financiers"
+  ,
+    name: "average age of the board"
+    value: "{value:,.0f}"
+    unit: " years old"
+    __data__:
+      value:
+        query:[
+          $match:
+            domain: "board"
+        ,
+          $group:
+            _id: ["$index"]
+            age: $avg: "$age"
+        ,
+          $project:
+            age: 1
+        ]
+        field: "age"
+  ,
+    type: "media-video"
+    provider: 'youtube'
+    id: "XaPq0vu0wd4"
+  ]
+]

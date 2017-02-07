@@ -1,0 +1,164 @@
+entityName: "{{ zone }}"
+entityGroup: "{{ sector }}"
+id: "{{ index }}"
+report: "{{ report_id }}"
+default: "{{ default }}"
+slug: "{{ slug }}"
+
+categories: [
+  name: "Performance"
+  kpis: [
+    type: "media-img"
+    chartOptions:
+      bgSize: 'contain'
+    src: "{{slug}}.png"
+  ,
+    name: "Company presentation"
+    type: "text-dynamic"
+    data:
+      query:
+        domain: "meta"
+        company: "{{ zone }}"
+    content: "value"
+    source: "2016, Boursorama"
+  ,
+    type: "separator"
+  ,
+    name: "Turnover"
+    type: "line"
+    chartOptions:
+      value: "value"
+      date: "year"
+      data:
+        query:[
+          $match:
+            domain: 'data_bourso'
+            metric: "Chiffre d'affaires"
+            company: "{{ zone }}"
+            year: $ne: "2016"
+        ,
+          $project:
+            value: $divide: [ "$value", 1000]
+            year: 1
+        ]
+      units:
+        value: " M€"
+    source: "2016, Rapports financiers"
+  ,
+    name: "Operating Margin"
+    type: "line"
+    chartOptions:
+      value: "value"
+      date: "year"
+      data:
+        query:
+          domain: 'data_bourso'
+          metric: "Marge opérationnelle"
+          company: "{{ zone }}"
+          year: $ne: "2016"
+        precision:
+          value: ",.1f"
+      units:
+        value: " "
+    source: "2016, Rapports financiers"
+  ,
+    name: "Financial rentability"
+    type: "line"
+    chartOptions:
+      value: "value"
+      date: "year"
+      data:
+        query:
+          domain: 'data_bourso'
+          metric: "Rentabilité Financière"
+          company: "{{ zone }}"
+          year: $ne: "2016"
+        precision:
+          value: ",.1f"
+      units:
+        value: " "
+    source: "2016, Rapports financiers"
+  ]
+,
+  name: "Gouvernance"
+  kpis: [
+    name: "Main shareholder"
+    type: "leaderboard"
+    chartOptions:
+      value: "value"
+      label: "actionnaire"
+      data:
+        query:
+          domain: 'actionnariat'
+          company: "{{ zone }}"
+        precision:
+          value: ",.1f"
+      units:
+        value: "%"
+    source: "2016, Europafinance"
+  ,
+    name: "Womanization"
+    value: "{value:,.0f}"
+    unit: "%"
+    badge: "evolution"
+    sentiment: true
+    evolution: 'difference'
+    comment: "vs {comparison:,.0f}% in average within CAC40 companies"
+    __data__:
+      value:
+        query:
+          domain: "feminisation"
+          company: "{{ zone }}"
+        field: "women"
+      comparison:
+        query:[
+          $match:
+            domain: "feminisation"
+        ,
+          $group:
+            _id: ["$index"]
+            women: $avg: "$women"
+        ,
+          $project:
+            women: 1
+        ]
+        field: "women"
+    source: "2016, Rapports financiers"
+  ,
+    name: "average age of the board"
+    value: "{value:,.0f}"
+    unit: " years old"
+    badge: "evolution"
+    sentiment: true
+    evolution: 'difference'
+    comment: "vs {comparison:,.0f} in average within CAC40 companies"
+    __data__:
+      value:
+        query:[
+          $match:
+            domain: "board"
+            company: "{{ zone }}"
+        ,
+          $group:
+            _id: ["$company"]
+            age: $avg: "$age"
+        ,
+          $project:
+            age: 1
+        ]
+        field: "age"
+      comparison:
+        query:[
+          $match:
+            domain: "board"
+        ,
+          $group:
+            _id: ["$index"]
+            age: $avg: "$age"
+        ,
+          $project:
+            age: 1
+        ]
+        field: "age"
+  ]
+]
