@@ -1,7 +1,8 @@
-report: "{{ report_id }}"
-default: '{{ default }}'
-entityName: "{{ etablissement }}"
-id: "{{ index }}"
+default: '{{default}}'
+entityName: '{{ etablissement }}'
+entityGroup: '{{ zone }}'
+report: '{{ report_id }}'
+id: '{{ index }}'
 
 categories: [
   name: "Performance"

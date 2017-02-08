@@ -1,7 +1,7 @@
-PERMISSIONS_DATA:
-  query:
-    default: 1
-    domain: 'dashboards'
+'DATA_PROVIDERS': []
+'PERMISSIONS_DATA': 'query':
+  'default': 1
+  'domain': 'dashboards'
 
 DATA_SOURCES: [{
   domain: "reports"
@@ -10,7 +10,7 @@ DATA_SOURCES: [{
 }]
 
 MONGO_INDEXES: [
-  domain
+  'domain'
   [
     'domain'
     'report'
@@ -18,7 +18,6 @@ MONGO_INDEXES: [
 ]
 
 DASHBOARDS: [ {
-  report: 'etablissement'
   query:
     domain: 'reports'
   template: 'dashboard'
@@ -26,7 +25,9 @@ DASHBOARDS: [ {
 
 REPORTS: [ {
   query:
-    default: 1
     domain: 'reports'
   template: 'report'
 } ]
+
+'MAX_SELECTABLE_DASHBOARDS': 500
+'MAX_SELECTABLE_REPORTS': 500
