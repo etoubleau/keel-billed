@@ -5,6 +5,7 @@ id: "{{ index }}"
 report: "{{ report_id }}"
 
 categories: [
+  {
     name: "Activité Globale"
     kpis: [
       name: "Part de marché"
@@ -32,7 +33,9 @@ categories: [
           field: "part_de_marche_2014"
       compute:
         badge: '(my_part_de_marche - comparison)'
-      source: "2015, source Hospidiag"
+      source: "2015, source PMSI"
+    ,
+      type:'separator'
     ,
       name: "RSA HC"
       source: "2015, source Hospidiag"
@@ -60,7 +63,7 @@ categories: [
         badge: '(RSA_HC_2015 - comparison)'
     ,
       name: "RSA Ambulatoire"
-      source: "2015, source Hospidiag"
+      source: "2015, source PMSI"
       type: 'value-dynamic'
       value: "RSA_Amb_2015"
       unit: " actes"
@@ -83,7 +86,139 @@ categories: [
           field: "RSA_Amb_2014"
       compute:
         badge: '(RSA_Amb_2015 - comparison)'
+    ,
+      name: "Chimio, radio, hémo et autres"
+      source: "2015, source PMSI"
+      type: 'value-dynamic'
+      value: "seances_2015"
+      unit: " séances"
+      badge: 'badge'
+      comment: "<%=\' \' + badge + \' \'%> séances vs 2014"
+      sentiment:
+        seances_2015:
+          domain: ['comparison']
+          range: ['negative','positive']
+      data:
+        seances_2015:
+          query:
+            domain: "my_dashboards_data"
+            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
+          field: "seances_2015"
+        comparison:
+          query:
+            domain: "my_dashboards_data"
+            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
+          field: "seances_2014"
+      compute:
+        badge: '(seances_2015 - comparison)'
     ]
-
-
+  }
+  {
+    name: "Activité Fréquente"
+    kpis: [
+      name: "Activités fréquentes - national "
+      source: "2015, source PMSI"
+      type: 'value-dynamic'
+      value: "act_freq_nat_2015"
+      unit: " actes"
+      badge: 'badge'
+      comment: "<%=\' \' + badge + \' \'%> actes vs 2014"
+      sentiment:
+        act_freq_nat_2015:
+          domain: ['comparison']
+          range: ['negative','positive']
+      data:
+        act_freq_nat_2015:
+          query:
+            domain: "my_dashboards_data"
+            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
+          field: "act_freq_nat_2015"
+        comparison:
+          query:
+            domain: "my_dashboards_data"
+            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
+          field: "act_freq_nat_2014"
+      compute:
+        badge: '(act_freq_nat_2015 - comparison)'
+    ,
+      name: 'Activités établissement fréquentes<br>médecine'
+      source: "2015, source PMSI"
+      type: 'value-dynamic'
+      value: "act_freq_med_2015"
+      unit: " actes"
+      badge: 'badge'
+      comment: "<%=\' \' + badge + \' \'%> actes vs 2014"
+      sentiment:
+        act_freq_med_2015:
+          domain: ['comparison']
+          range: ['negative','positive']
+      data:
+        act_freq_med_2015:
+          query:
+            domain: "my_dashboards_data"
+            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
+          field: "act_freq_med_2015"
+        comparison:
+          query:
+            domain: "my_dashboards_data"
+            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
+          field: "act_freq_med_2014"
+      compute:
+        badge: '(act_freq_med_2015 - comparison)'
+    ,
+      name: 'Activités établissement fréquentes<br>chirurgie'
+      source: "2015, source PMSI"
+      type: 'value-dynamic'
+      value: "act_freq_chir_2015"
+      unit: " actes"
+      badge: 'badge'
+      comment: "<%=\' \' + badge + \' \'%> actes vs 2014"
+      sentiment:
+        act_freq_chir_2015:
+          domain: ['comparison']
+          range: ['negative','positive']
+      data:
+        act_freq_chir_2015:
+          query:
+            domain: "my_dashboards_data"
+            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
+          field: "act_freq_chir_2015"
+        comparison:
+          query:
+            domain: "my_dashboards_data"
+            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
+          field: "act_freq_chir_2014"
+      compute:
+        badge: '(act_freq_chir_2015 - comparison)'
+    ]
+  }
+  {
+    name: "Finance"
+    kpis: [
+      name: "Chiffre d'affaire"
+      source: "2015, sources : Comptes financiers ou liasses fiscales, Retraitements comptables, PMSI, ARBUST, SNIIRAM"
+      type: 'value-dynamic'
+      value: "CA_2015"
+      unit: " k€"
+      badge: 'badge'
+      comment: "<%=\' \' + badge + \' \'%> vs 2014"
+      sentiment:
+        CA_2015:
+          domain: ['comparison']
+          range: ['negative','positive']
+      data:
+        CA_2015:
+          query:
+            domain: "my_dashboards_data"
+            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
+          field: "CA_2015"
+        comparison:
+          query:
+            domain: "my_dashboards_data"
+            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
+          field: "CA_2014"
+      compute:
+        badge: '(CA_2015 - comparison)'
+    ]
+  }
 ]
