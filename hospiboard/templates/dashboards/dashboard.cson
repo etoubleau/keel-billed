@@ -266,33 +266,33 @@ categories: [
               value: '.1f'
         units: value: " k€"
       source: "2015, sources : Comptes financiers ou liasses fiscales, Retraitements comptables, PMSI, ARBUST, SNIIRAM"
-    ,
-      name: "Résultat Net"
-      source: "2015, sources : Comptes financiers ou liasses fiscales, Retraitements comptables, PMSI, ARBUST, SNIIRAM"
-      type: 'value-dynamic'
-      value: "RN_2015"
-      unit: " €"
-      precision:
-          badge: '.0f'
-      badge: 'badge'
-      comment: "<%=\' \' + badge + \' \'%> vs 2014"
-      sentiment:
-        RN_2015:
-          domain: ['comparison']
-          range: ['negative','positive']
-      data:
-        RN_2015:
-          query:
-            domain: "dashboard_KPIs"
-            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
-          field: "RN_2015"
-        comparison:
-          query:
-            domain: "dashboard_KPIs"
-            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
-          field: "RN_2014"
-      compute:
-        badge: '(RN_2015 - comparison)'
+    # ,
+    #   name: "Résultat Net"
+    #   source: "2015, sources : Comptes financiers ou liasses fiscales, Retraitements comptables, PMSI, ARBUST, SNIIRAM"
+    #   type: 'value-dynamic'
+    #   value: "RN_2015"
+    #   unit: " €"
+    #   precision:
+    #       badge: '.0f'
+    #   badge: 'badge'
+    #   comment: "<%=\' \' + badge + \' \'%> vs 2014"
+    #   sentiment:
+    #     RN_2015:
+    #       domain: ['comparison']
+    #       range: ['negative','positive']
+    #   data:
+    #     RN_2015:
+    #       query:
+    #         domain: "dashboard_KPIs"
+    #         data_dashboard_name_column: "{{ my_dashboard_name_column }}"
+    #       field: "RN_2015"
+    #     comparison:
+    #       query:
+    #         domain: "dashboard_KPIs"
+    #         data_dashboard_name_column: "{{ my_dashboard_name_column }}"
+    #       field: "RN_2014"
+    #   compute:
+    #     badge: '(RN_2015 - comparison)'
     ,
       name: "Résultat Net"
       type: "line"
@@ -308,33 +308,48 @@ categories: [
               value: '.0f'
         units: value: " €"
       source: "2015, sources : Comptes financiers ou liasses fiscales, Retraitements comptables, PMSI, ARBUST, SNIIRAM"
+    # ,
+    #   name: "Dette"
+    #   source: "2015, sources : Comptes financiers ou liasses fiscales, Retraitements comptables, PMSI, ARBUST, SNIIRAM"
+    #   type: 'value-dynamic'
+    #   value: "Dette_2015"
+    #   unit: " €"
+    #   precision:
+    #       badge: '.0f'
+    #   badge: 'badge'
+    #   comment: "<%=\' \' + badge + \' \'%> vs 2014"
+    #   sentiment:
+    #     Dette_2015:
+    #       domain: ['comparison']
+    #       range: ['negative','positive']
+    #   data:
+    #     Dette_2015:
+    #       query:
+    #         domain: "dashboard_KPIs"
+    #         data_dashboard_name_column: "{{ my_dashboard_name_column }}"
+    #       field: "Dette_2015"
+    #     comparison:
+    #       query:
+    #         domain: "dashboard_KPIs"
+    #         data_dashboard_name_column: "{{ my_dashboard_name_column }}"
+    #       field: "Dette_2014"
+    #   compute:
+    #     badge: '(Dette_2015 - comparison)'
     ,
       name: "Dette"
+      type: "line"
+      chartOptions:
+        value: "value"
+        date: "date"
+        data:
+          query:
+            domain: 'dashboard_trend'
+            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
+            breakdown: "Dette"
+          precision:
+              value: '.0f'
+        units: value: " €"
       source: "2015, sources : Comptes financiers ou liasses fiscales, Retraitements comptables, PMSI, ARBUST, SNIIRAM"
-      type: 'value-dynamic'
-      value: "Dette_2015"
-      unit: " €"
-      precision:
-          badge: '.0f'
-      badge: 'badge'
-      comment: "<%=\' \' + badge + \' \'%> vs 2014"
-      sentiment:
-        Dette_2015:
-          domain: ['comparison']
-          range: ['negative','positive']
-      data:
-        Dette_2015:
-          query:
-            domain: "dashboard_KPIs"
-            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
-          field: "Dette_2015"
-        comparison:
-          query:
-            domain: "dashboard_KPIs"
-            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
-          field: "Dette_2014"
-      compute:
-        badge: '(Dette_2015 - comparison)'
       ]
   }
   {
