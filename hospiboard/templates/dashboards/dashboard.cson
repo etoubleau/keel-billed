@@ -219,6 +219,112 @@ categories: [
           field: "CA_2014"
       compute:
         badge: '(CA_2015 - comparison)'
-    ]
+
+    ,
+      name: "Résultat Net"
+      source: "2015, sources : Comptes financiers ou liasses fiscales, Retraitements comptables, PMSI, ARBUST, SNIIRAM"
+      type: 'value-dynamic'
+      value: "RN_2015"
+      unit: " €"
+      badge: 'badge'
+      comment: "<%=\' \' + badge + \' \'%> vs 2014"
+      sentiment:
+        RN_2015:
+          domain: ['comparison']
+          range: ['negative','positive']
+      data:
+        RN_2015:
+          query:
+            domain: "my_dashboards_data"
+            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
+          field: "RN_2015"
+        comparison:
+          query:
+            domain: "my_dashboards_data"
+            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
+          field: "RN_2014"
+      compute:
+        badge: '(RN_2015 - comparison)'
+    ,
+      name: "Dette"
+      source: "2015, sources : Comptes financiers ou liasses fiscales, Retraitements comptables, PMSI, ARBUST, SNIIRAM"
+      type: 'value-dynamic'
+      value: "Dette_2015"
+      unit: " €"
+      badge: 'badge'
+      comment: "<%=\' \' + badge + \' \'%> vs 2014"
+      sentiment:
+        Dette_2015:
+          domain: ['comparison']
+          range: ['negative','positive']
+      data:
+        Dette_2015:
+          query:
+            domain: "my_dashboards_data"
+            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
+          field: "Dette_2015"
+        comparison:
+          query:
+            domain: "my_dashboards_data"
+            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
+          field: "Dette_2014"
+      compute:
+        badge: '(Dette_2015 - comparison)'
+      ]
+  }
+  {
+    name: "Autres"
+    kpis: [
+      name: "Lits et places installés"
+      source: "2015, source : SAE"
+      type: 'value-dynamic'
+      value: "lits_places_2015"
+      unit: " lits/places installés"
+      badge: 'badge'
+      comment: "<%=\' \' + badge + \' \'%> vs 2014"
+      sentiment:
+        lits_places_2015:
+          domain: ['comparison']
+          range: ['negative','positive']
+      data:
+        lits_places_2015:
+          query:
+            domain: "my_dashboards_data"
+            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
+          field: "lits_places_2015"
+        comparison:
+          query:
+            domain: "my_dashboards_data"
+            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
+          field: "lits_places_2014"
+      compute:
+        badge: '(lits_places_2015 - comparison)'
+
+    ,
+      name: "ETP des personnels"
+      source: "2015, source : SAE"
+      type: 'value-dynamic'
+      value: "ETP_2015"
+      unit: " "
+      badge: 'badge'
+      comment: "<%=\' \' + badge + \' \'%> vs 2014"
+      sentiment:
+        ETP_2015:
+          domain: ['comparison']
+          range: ['negative','positive']
+      data:
+        ETP_2015:
+          query:
+            domain: "my_dashboards_data"
+            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
+          field: "ETP_2015"
+        comparison:
+          query:
+            domain: "my_dashboards_data"
+            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
+          field: "ETP_2014"
+      compute:
+        badge: '(ETP_2015 - comparison)'
+      ]
   }
 ]
