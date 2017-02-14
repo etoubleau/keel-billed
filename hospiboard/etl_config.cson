@@ -8,21 +8,16 @@ etl_config:
       type: "csv"
       file: "dashboards.csv"
   ,
-      domain: "my_dates_data"
-      type: "csv"
-      file: "my_dates_data.csv"
+      domain: "dashboard_KPIs"
+      type: "excel"
+      sheetname: 'dashboard_KPIs'
+      file: "dashboards_data.xls"
   ,
-      domain: "my_reports_data"
-      type: "csv"
-      file: "my_reports_data.csv"
-  ,
-      domain: "my_dashboards_data"
-      type: "csv"
-      file: "my_dashbaords_data.csv"
-  ,
-      domain: "slide_data"
-      type: "csv"
-      file: "slide_data.csv"
+      domain: "dashboard_trend"
+      type: "excel"
+      sheetname: 'dashboard_trend'
+      file: "dashboards_data.xls"
+
   ]
 
   DATA_PROVIDERS: []
