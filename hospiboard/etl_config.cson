@@ -33,7 +33,6 @@ etl_config:
       type: "excel"
       sheetname: 'occupation_lits'
       file: "activite.xls"
-
   ]
 
   DATA_PROVIDERS: []
