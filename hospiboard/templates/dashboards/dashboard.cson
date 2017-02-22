@@ -137,9 +137,9 @@ categories: [
     ]
   }
   {
-    name: "Activité Fréquente"
+    name: "Activités Fréquentes"
     kpis: [
-      name: "Activités fréquentes - national "
+      name: "Niveau national "
       source: "2015, source PMSI"
       type: 'value-dynamic'
       value: "act_freq_nat_2015"
@@ -166,7 +166,7 @@ categories: [
       compute:
         badge: '(act_freq_nat_2015 - comparison)'
     ,
-      name: 'Activités établissement fréquentes<br>médecine'
+      name: 'Médecine'
       source: "2015, source PMSI"
       type: 'value-dynamic'
       value: "act_freq_med_2015"
@@ -193,7 +193,7 @@ categories: [
       compute:
         badge: '(act_freq_med_2015 - comparison)'
     ,
-      name: 'Activités établissement fréquentes<br>chirurgie'
+      name: 'Chirurgie'
       source: "2015, source PMSI"
       type: 'value-dynamic'
       value: "act_freq_chir_2015"

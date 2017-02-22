@@ -37,6 +37,7 @@ slides: [
     parent_id: 10
     id: 1001
     title: "Evolution<br>part de marché"
+    commentary: "Suivi de l'évolution de la part de marché de l'établissement<br> au sein de la zone d'attractivité"
     chartOptions:
       data:
         query:
@@ -48,14 +49,96 @@ slides: [
         date:
           format: "%Y"
       chartType: "linechart"
-      filters: 'upper-middle':
-        on: 'metric'
-        type: 'buttons'
       value: "value"
       date: 'date'
       legend: true
       units:
-        value: "% dans la zone d'attractivité"
+        value: "%"
+    filters: 'bottom-right':
+      on: 'metric'
+      type: 'buttons'
 
+  }
+  {
+    level: 3
+    parent_id: 10
+    id: 1002
+    title: "Classement"
+    commentary: "Ajouter ici le nom de la zone d'attractivité"
+    chartOptions:
+      data:
+        query:
+          domain: "leaderboard"
+        precision:
+          value: '.1f'
+      chartType: "horizontalBarchart"
+      label: "etablissements"
+      value: "value"
+      sort: 'desc'
+      rank: true
+      units:
+        value: "%"
+      sparklines:
+          data:
+            query:
+              domain: "part_de_marche"
+            date:
+              selector: "date"
+              format: "%Y" # See d3 time formatting for reference
+            precision:
+              value: '.1f'
+          joins: ["etablissements", "metric"]
+          value: "value"
+          date: "date"
+          # dateFormat: "%B" # Optional display format that will override the one present in data
+          legend: "Évo. part de marché"
+          unit:
+            value: "%"
+    filters: 'upper-middle':
+      on: 'metric'
+      type: 'buttons'
+  }
+  {
+    level: 3
+    parent_id: 10
+    id: 1003
+    title: "Occupation des lits"
+    commentary: "Selectionnez dans l'onglet de configuation l'élément de comparaison<br>région, catégorie, typologie"
+    filters:
+      'bottom-right':
+        on: 'date'
+        type: 'slider'
+    chartOptions:
+      comparison: '2ème décile'
+      commonScale: true
+      target: '8ème décile'
+      # 'packs': 'group'
+      value: 'value'
+      label: 'label'
+      meta: [ '' ]
+      units:
+        value: '%'
+        '8ème décile': '%'
+        '2ème décile': '%'
+      chartType: 'bulletChart'
+      data:
+        query:
+          domain: 'occupation_lits'
+          etablissements: "<%= report.entityName %>"
+  }
+  {
+    level: 3
+    parent_id: 10
+    id: 1004
+    title: "Cartographie"
+  }
+  {
+    level: 3
+    parent_id: 10
+    id: 1005
+    title: "Présentation Indicateur"
+    chartOptions:
+      chartType: 'text'
+      src: "activite_asset_text"
   }
 ]

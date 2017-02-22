@@ -23,6 +23,16 @@ etl_config:
       type: "excel"
       sheetname: 'part_de_marche'
       file: "activite.xls"
+  ,
+      domain: "leaderboard"
+      type: "excel"
+      sheetname: 'leaderboard'
+      file: "activite.xls"
+  ,
+      domain: "occupation_lits"
+      type: "excel"
+      sheetname: 'occupation_lits'
+      file: "activite.xls"
 
   ]
 
