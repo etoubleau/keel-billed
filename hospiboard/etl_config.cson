@@ -1,8 +1,9 @@
 etl_config:
   DATA_SOURCES: [
-      domain: "sample_reports"
-      type: "csv"
-      file: "reports.csv"
+      domain: "liste_etablissements"
+      type: "excel"
+      file: "liste_etablissements.xls"
+      sheetname: 'liste_etablissements'
   ,
       domain: "sample_dashboards"
       type: "csv"
@@ -17,6 +18,11 @@ etl_config:
       type: "excel"
       sheetname: 'dashboard_trend'
       file: "dashboards_data.xls"
+  ,
+      domain: "part_de_marche"
+      type: "excel"
+      sheetname: 'part_de_marche'
+      file: "activite.xls"
 
   ]
 
@@ -25,7 +31,7 @@ etl_config:
   REPORTS: [
     query:
       #which domain contains the report I want the user to choose among?
-      domain: "sample_reports"
+      domain: "liste_etablissements"
     #which report template shall be used for those reports?
     #This file.cson shall be located inside template > reports > file.cson
     template: "report"

@@ -36,24 +36,24 @@ categories: [
     #     badge: '(my_part_de_marche - comparison)'
     #   source: "2015, source PMSI"
     # ,
-      name: "Part de marché"
-      type: "line"
-      chartOptions:
-        value: "value"
-        date: "date"
-        data:
-          query:
-            domain: 'dashboard_trend'
-            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
-            breakdown: "part_de_marche"
-          precision:
-              value: '.1f'
-        units: value: " %"
-
-      source: "2015, source PMSI"
-    ,
-      type:'separator'
-    ,
+    #   name: "Part de marché zone d'attractivité"
+    #   type: "line"
+    #   chartOptions:
+    #     value: "value"
+    #     date: "date"
+    #     data:
+    #       query:
+    #         domain: 'dashboard_trend'
+    #         data_dashboard_name_column: "{{ my_dashboard_name_column }}"
+    #         breakdown: "part_de_marche"
+    #       precision:
+    #           value: '.1f'
+    #     units: value: " %"
+    #
+    #   source: "2015, source PMSI"
+    # ,
+    #   type:'separator'
+    # ,
       name: "RSA HC"
       source: "2015, source Hospidiag"
       type: 'value-dynamic'
@@ -263,7 +263,7 @@ categories: [
             data_dashboard_name_column: "{{ my_dashboard_name_column }}"
             breakdown: "CA"
           precision:
-              value: '.1f'
+              value: ',.1f'
         units: value: " k€"
       source: "2015, sources : Comptes financiers ou liasses fiscales, Retraitements comptables, PMSI, ARBUST, SNIIRAM"
     # ,
@@ -306,7 +306,7 @@ categories: [
             breakdown: "RN"
           precision:
               value: '.0f'
-        units: value: " €"
+        units: value: " k€"
       source: "2015, sources : Comptes financiers ou liasses fiscales, Retraitements comptables, PMSI, ARBUST, SNIIRAM"
     # ,
     #   name: "Dette"
@@ -348,7 +348,7 @@ categories: [
             breakdown: "Dette"
           precision:
               value: '.0f'
-        units: value: " €"
+        units: value: " k€"
       source: "2015, sources : Comptes financiers ou liasses fiscales, Retraitements comptables, PMSI, ARBUST, SNIIRAM"
       ]
   }

@@ -9,35 +9,53 @@ slides: [
   }
   {
     level: 1
-    title: "Report dynamic slides"
+    title: "Activité"
     id: 10
+  }
+  {
+    level: 1
+    title: "Qualité"
+    id: 20
+  }
+  {
+    level: 1
+    title: "Organisation"
+    id: 30
+  }
+  {
+    level: 1
+    title: "Ressources Humaines"
+    id: 40
+  }
+  {
+    level: 1
+    title: "Finances"
+    id: 50
   }
   {
     level: 3
     parent_id: 10
-    id: 10001
-
-    title: "Report dynamic slide"
-
+    id: 1001
+    title: "Evolution<br>part de marché"
     chartOptions:
       data:
         query:
-          domain: "slide_data"
-#in my data I have a report_column_name that match each row to one of the report
-#I can use the <%= report.entityName %> to refer to the report currently
-#selecter by the user and use it to filter my data.
-#As a result I will display only the rows for which the report column name
-#corresponds to the current report.
-          report_column_name:"<%= report.entityName %>"
+          domain: "part_de_marche"
+          #label: 'Dior'
+          etablissements: "<%= report.entityName %>"
         precision:
-          my_value:',2f'
+          value: '.1f'
+        date:
+          format: "%Y"
+      chartType: "linechart"
+      filters: 'upper-middle':
+        on: 'metric'
+        type: 'buttons'
+      value: "value"
+      date: 'date'
+      legend: true
+      units:
+        value: "% dans la zone d'attractivité"
 
-      chartType: "horizontalBarchart"
-
-      value: "my_value"
-
-      label: "my_label"
-
-      sort: "desc"
   }
 ]
