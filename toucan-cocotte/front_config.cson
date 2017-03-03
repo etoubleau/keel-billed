@@ -195,14 +195,14 @@ slides: [
     title:'Game on girls!'
     commentary: "Women play more than men, and more and more"
     source:'Source : https://en.wikipedia.org/wiki/Women_and_video_games'
-    
+
     chartOptions:
       data:
         query:
           domain:'oestro_game_evolution'
         precision:
           my_value:',.0f'
-    
+
       chartType: "slopegraph"
       label: "my_label"
       meta: ["my_value"]
@@ -248,8 +248,8 @@ slides: [
     id: 10004
     title: "Hit the road"
     source:'http://www.telegraph.co.uk/news/uknews/road-and-rail-transport/11605509/Women-are-after-all-better-drivers-than-men.html'
-    commentary:"Women drive better (+ 12% on average). Let's say that again: women drive <strong>BETTER</strong>.""
-    
+    commentary:"Women drive better (+ 12% on average). Let's say that again: women drive <strong>BETTER</strong>."
+
     chartOptions:
       data:
         query:
@@ -270,5 +270,106 @@ slides: [
       meta: [
         "description"
       ]
+  }
+  {
+    level: 3
+    parent_id: 10
+    commentary: "Glass Ceilling in Computer & Information"
+    source: "Digest of education statistics: https://nces.ed.gov/programs/digest/"
+
+    id: 1000001
+
+    title: "Women's Degrees"
+
+    chartOptions:
+      data:
+        query: [
+          $match:
+            domain: "bachelors"
+            # Degree: $in: ["Average", "Computer Science"]
+            STEM: "OUI"
+
+        ]
+        precision:
+          value: ".0%"
+
+      groups: "Degree"
+      chartType: "linechart"
+      value: "value"
+      date: "Year"
+
+      legend: true
+
+
+  }
+  {
+    level: 3
+    parent_id: 10
+    commentary: "Ratio of Women in workforce on the tech giants"
+    source: "https://women-in-software.silk.co"
+    id: 1000002
+
+    title: "Tech Companies"
+
+    filters:
+      "bottom-right":
+        on: "type"
+        type: "buttons"
+    chartOptions:
+      data:
+        query: [
+          $match:
+            domain: "workforce"
+            is_value: "yes"
+            # Degree: $in: ["Average", "Computer Science"]
+
+        ]
+        precision:
+          value: ".0%"
+
+      average:
+        data:
+          query: [
+            $match:
+              domain: "workforce"
+              is_value: "yes"
+          ,
+            $group:
+              _id: "$type"
+              value: $avg: "$value"
+          ,
+            $project:
+              value: "$value"
+              type: "$_id"
+          ]
+          precision:
+            value: ".0%"
+        value: "value"
+        joins: [
+          "type"
+        ]
+      averageText: "Avg."
+      packs: "pack"
+      packsNames: true
+      chartType: "leaderboardCenteredAverage"
+      value: "value"
+      label: "companies"
+
+      legend: false
+      sorter:
+        default: "companies"
+        legend: "Sort by"
+        values: [
+          label: "Alphabetical"
+          sort:
+            by: "companies"
+            order: "asc"
+        ,
+          label: "Ratio"
+          sort:
+            by: "value"
+            order: "asc"
+        ]
+
   }
 ]

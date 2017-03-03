@@ -9,6 +9,11 @@ etl_config:
         spreadsheet_id: '1CETTP1hzjzn9giumYIBePQe6x-0dlobiOjGUCM7QGeI'
         sheetname: 'degrees'
     ,
+        domain: "workforce"
+        type: "google_spreadsheet"
+        spreadsheet_id: '1CETTP1hzjzn9giumYIBePQe6x-0dlobiOjGUCM7QGeI'
+        sheetname: 'workforce'
+    ,
         domain: "sample_reports"
         type: "csv"
         file: "reports.csv"
