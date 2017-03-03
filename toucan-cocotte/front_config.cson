@@ -26,6 +26,11 @@ slides: [
     id: 10
   }
   {
+    level: 1
+    title: "Let's talk about sex"
+    id: 50
+  }
+  {
     level: 3
     title: "Faits marquants"
     commentary: "Quelques faits marquants de l'histoire des femmes du XXe siècle"
@@ -371,5 +376,177 @@ slides: [
             order: "asc"
         ]
 
+  }
+  {
+      level: 3
+      title: "Plaisir d'offrir"
+      commentary: "Which keywords are women looking for compared to men? "
+      parent_id: 50
+      # filters:
+      #   "bottom-right":
+      #     on: "breakdown"
+      #     type: "buttons"
+      chartOptions:
+        data:
+          query:
+            domain: "categories-porn"
+          precision: value: ",.2f"
+        chartType: "horizontalBarchart"
+        # groups: "group"
+        label: "label"
+        value: "value"
+        # filters:
+        #   "upper-right":
+        #     on: "Branch level 2"
+        #     type: "dropdown"
+        #     reset: "All"
+        #     withSize: true
+        # sentiment:
+        #   value:
+        #     domain: [8,18]
+        #     range: ['negative','warning','positive']
+        units: value: " times more"
+        # legend: true
+        sort: "desc"
+        # showAverage: true
+        source: "Pornhub/insights"
+      # linkTo: [
+      #   type: 'slide'
+      #   id: 30202
+      #   legend: 'Vue performace'
+      # ,
+      #   type: 'dashboard'
+      #   id: 0
+      #   legend: 'Vers dashboard'
+      # ]
+      id: 50001
+  }
+  {
+    level: 3
+    title: "Porn internationally"
+    parent_id: 50
+    filters:
+      "bottom-right":
+        type: "buttons"
+        on: "Filter1"
+    chartOptions:
+      data:
+        # order:
+        #   by: "group"
+        #   custom: [
+        #     "Worldwide average"
+        #     "Argentina
+        #     "Brazil"
+        #     "1 fois/an"
+        #     "moins souvent"
+        #     "jamais"
+        #   ]
+        query:
+          domain: "country-porn"
+      chartType: "horizontalBarchart"
+      groups: "label"
+      hideTotal: true
+      packs: "pack"
+      sort: "desc"
+      # visualSelection: false
+      # meta: ["clients"]
+      label: "group"
+      value: "value"
+      units:
+        value: [
+          unit: "%"
+          where: Filter1: "% of female visitors"
+        ,
+          unit: " years"
+          where: Filter1: "Age"
+        ,
+          unit: " min"
+          where: Filter1: "Time spent"
+        ]
+      precision:
+        value: [
+          precision: ",.0f"
+          where: Filter1: "% of female visitors"
+        ,
+          precision: ",.0f"
+          where: Filter1: "age"
+        ,
+          precision: ",,2f"
+          where: Filter1: "Time spent"
+        ]
+      source: "Pornhub/insights"
+      unstackable: true
+      legend: true
+    id: 50002
+  }
+  {
+    level: 3
+    title: "Joie de recevoir"
+    parent_id: 50
+    commentary: "% of men / women who reported that they <i>usually</i > or <i>always</i > orgasmed during sexually intimate moments"
+    source: "Frederick, D.A., John, H.K.S., Garcia, J.R. et al. Arch Sex Behav (2017)"
+    chartOptions:
+      data:
+        query:
+          domain: "orgasm"
+      chartType: "barchart"
+      value: "value"
+      label: "group"
+      groups: "label"
+      labelsOrder:
+        custom: [
+          "Heterosexuals"
+          "Homosexuals"
+          "Bisexuals"
+        ]
+      units: value : "%"
+      highlightedKpis: [
+        name: " of women who RARELY / NEVER orgasm during (only) vaginal sex"
+        value: "value"
+        unit: "%"
+        # badge: 'evolution'
+        # comment: "vs 2015"
+        sentiment:
+          value:
+            domain: [0]
+            range: ['negative','positive']
+        precision:
+          value: ',.0f'
+        data:
+          value:
+            query:
+              domain: 'orgasm'
+            field: 'kpi'
+      ]
+    id: 50003
+  }
+  {
+    level: 3
+    title: "Top destinations"
+    parent_id: 50
+    commentary: "Our (subjective) TOP / FLOP 5 of countries to bring your lady to for a honeymoon"
+    datasets:
+      dept_data:
+        query:
+          domain: "carto-pays-nuls"
+    filters:
+      "bottom-right":
+        type: "buttons"
+        on: "Filter1"
+        datasets: ["dept_data"]
+    chartOptions:
+      chartType: "mapchart"
+      zones:
+        dataset: 'dept_data'
+        shapes: "world-topojson.json"
+        join:
+          shapes: "id"
+          data: "country_code"
+        color: "value"
+        label: "country"
+        meta: ["Why not?"]
+      tiles:{}
+      legend: true
+    id: 50004
   }
 ]
