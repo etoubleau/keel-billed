@@ -1,6 +1,13 @@
 settings:[]
 
-glossary:[]
+glossary:
+  title: 'Glossary'
+  terms: [
+    term: "NCAA"
+    meaning: "The National Collegiate Athletic Association (NCAA) is a non-profit association which regulates athletes of 1,281 institutions, conferences, organizations, and individuals. It also organizes the athletic programs of many colleges and universities in the United States and Canada, and helps more than 450,000 college student-athletes who compete annually in college sports."
+    slides:[70001]
+
+  ]
 
 #Below are the parameters of the report selector (main home page)
 home:
@@ -24,6 +31,11 @@ slides: [
     level: 1
     title: "Report dynamic slides"
     id: 10
+  }
+  {
+    level: 1
+    title: "Sports"
+    id: 70
   }
   {
     level: 3
@@ -367,6 +379,163 @@ slides: [
           sort:
             by: "value"
             order: "asc"
+        ]
+
+  }
+  {
+    level: 3
+    title: "High school inequalities"
+    parent_id: 70
+    id: 70001
+    recommendation:
+      advert: "Info"
+      content: """
+        Scholarships are in $.
+      """
+    commentary: "Women are under represented in sports, get only 46% of scholarships. Exception in Volleyball where the uniform seems to be the sport main attract."
+    source: "Datasource: https://magic.piktochart.com/output/2101560-mens-vs-womens-sports"
+
+
+    chartOptions:
+      data:
+        query:
+          domain: "sport"
+          type: $in: ["participation", "volleyball"]
+        precision:
+          value:[
+            precision: ",.0f"
+            where:
+              kpi: $in: ["NCAA scholarships", "NCAA scholarships - Volleyball"]
+          ,
+            precision: ",.0f"
+            where:
+              kpi: $ne: ["NCAA scholarships", "NCAA scholarships - Volleyball"]
+          ]
+      chartType: "barchart"
+      value: "value"
+      label: "gender"
+      filters: 'upper-right':
+        on: 'kpi'
+        type: 'dropdown'
+      # groups: "center"
+      legend: true
+      units:
+        value:[
+          unit: " $"
+          where:
+            kpi: $in: ["NCAA scholarships", "NCAA scholarships - Volleyball"]
+        ,
+          unit: " "
+          where:
+            kpi: $ne: ["NCAA scholarships", "NCAA scholarships - Volleyball"]
+        ]
+
+  }
+  {
+    level: 3
+    title: "Coverage"
+    parent_id: 70
+    id: 70002
+    # commentary: "Women are under represented in sports, get only 46% of scholarships. Exception in Volleyball where the uniform seems to be the sport main attract."
+    source: "Datasource: https://magic.piktochart.com/output/2101560-mens-vs-womens-sports"
+    chartOptions:
+      data:
+        query:
+          domain: "sport"
+          kpi: "network coverage"
+        precision:
+          value:'.0%'
+      chartType: "horizontalBarchart"
+      value: "value"
+      label: "label"
+      sort:'desc'
+      units: value: ''
+
+  }
+  {
+    level: 3
+    title: "Games & Winning prizes"
+    parent_id: 70
+    id: 70003
+    recommendation:
+      advert: "Info"
+      content: """
+        Number of goals scorred by women during the final game of the FIFA World Cup, and money prizes by gender.
+      """
+    # commentary: ""
+    source: "Datasource: https://qz.com/445818/6-charts-to-show-anyone-who-thinks-womens-soccer-is-treated-equally-to-mens/"
+    charts: [
+      {
+        data:
+          query:
+              domain: "sport"
+              kpi:"Games"
+
+        chartType: "barchart"
+        units:
+          value: " goals"
+        value: "value"
+        label:"gender"
+        size: 0.25
+        id: 0
+      }
+      {
+        data:
+          query:
+            domain: "sport"
+            kpi: "FIFA prize money"
+          precision:
+            value:'.0f'
+
+        chartType: "horizontalBarchart"
+        value: "value"
+        label: "gender"
+        packs: "label"
+        packNames: true
+
+        units:
+          "value": " M$"
+          evo:"%"
+        sort:"desc"
+        size: 0.75
+        id: 1
+      }
+    ]
+  }
+  {
+    level: 3
+    title: "Commitee and Earnings"
+    parent_id: 70
+    id: 70004
+    # commentary: "Women are under represented in sports, get only 46% of scholarships. Exception in Volleyball where the uniform seems to be the sport main attract."
+    # filters: 'bottom-right':
+    #   on: 'label'
+    #   type: 'buttons'
+    source: "Datasource: https://magic.piktochart.com/output/2101560-mens-vs-womens-sports"
+    chartOptions:
+      data:
+        query:
+          domain: "sport"
+          type: "representation"
+      chartType: "score-card"
+      packs:'label'
+
+      value: "value"
+      label: "gender"
+      sort:'desc'
+      units:
+        value:[
+          unit: " $"
+          where:
+            label: "Minimum US salary"
+        ,
+          unit: " members"
+          where:
+            label: "FIFA's executive board"
+        ,
+          unit: " M$"
+          where:
+            label: "Salary, winnings, and sponsorships"
         ]
 
   }

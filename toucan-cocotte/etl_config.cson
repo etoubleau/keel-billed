@@ -52,6 +52,11 @@ etl_config:
        domain: 'speaking_characters'
        type: 'excel'
        file: 'movies.xlsx'
+    ,
+      domain: "sport"
+      type: "google_spreadsheet"
+      spreadsheet_id: '1CETTP1hzjzn9giumYIBePQe6x-0dlobiOjGUCM7QGeI'
+      sheetname: "sport"
     ]
 
     DATA_PROVIDERS: []
