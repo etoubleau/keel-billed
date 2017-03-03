@@ -248,7 +248,7 @@ slides: [
     id: 10004
     title: "Hit the road"
     source:'http://www.telegraph.co.uk/news/uknews/road-and-rail-transport/11605509/Women-are-after-all-better-drivers-than-men.html'
-    commentary:"Women drive better (+ 12% on average). Let's say that again: women drive <strong>BETTER</strong>.""
+    commentary:"Women drive better (+ 12% on average). Let's say that again: women drive <strong>BETTER</strong>."
     
     chartOptions:
       data:
