@@ -248,7 +248,7 @@ slides: [
     commentary: "Glass Ceilling in Computer & Information"
     id: 1000001
     source: "Digest of education statistics: https://nces.ed.gov/programs/digest/"
-    title: "Women's Degrees"
+    title: "Tech Women's Education"
 
     chartOptions:
       data:
@@ -343,7 +343,7 @@ slides: [
 {
     level: 3
     title: 'Best Paid Actors 2016'
-    parent_id: 30
+    parent_id: 10
     source: 'Forbes'
     id: 3004
     filters: "bottom-right":
