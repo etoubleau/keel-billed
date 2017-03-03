@@ -101,35 +101,6 @@ slides: [
   }
   {
     level: 3
-    parent_id: 10
-    commentary: "Women's part of Tech & Science Degrees"
-    id: 1000001
-
-    title: "Women's Degrees"
-
-    chartOptions:
-      data:
-        query: [
-          $match:
-            domain: "bachelors"
-            # Degree: $in: ["Average", "Computer Science"]
-            STEM: "OUI"
-
-        ]
-        precision:
-          value: ".0%"
-
-      groups: "Degree"
-      chartType: "linechart"
-      value: "value"
-      date: "Year"
-
-      legend: true
-
-
-  }
-  {
-    level: 3
     title: "Farming...boring?"
     parent_id: 10
     source:'https://en.wikipedia.org/wiki/Women_and_video_games'
