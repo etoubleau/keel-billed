@@ -37,7 +37,13 @@ etl_config:
     domain: 'dashboards'
     type: 'csv'
     file: 'dashboards.csv'
+  ,
+    sheetname: 'salary'
+    domain: 'salary'
+    type: 'excel'
+    file: 'movies.xlsx'
   ]
+
 
   DATA_PROVIDERS: []
 

@@ -339,6 +339,28 @@ slides: [
             by: "value"
             order: "asc"
         ]
-
+}
+{
+    level: 3
+    title: 'Best Paid Actors 2016'
+    parent_id: 30
+    source: 'Forbes'
+    id: 3004
+    filters: "bottom-right":
+      on: "year"
+      type: "slider"
+    chartOptions:
+      chartType: "horizontal-barchart"
+      value: 'value'
+      label: 'actor'
+      groups: 'gender'
+      # meta: ['gender']
+      data:
+        query:
+          domain: 'salary'
+      sort: 'desc'
+      units:
+        value: 'M$'
+      legend: false
   }
 ]
