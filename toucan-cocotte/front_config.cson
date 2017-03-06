@@ -257,10 +257,10 @@ slides: [
   {
     level: 3
     parent_id: 10
-    commentary: "Glass Ceilling in Computer & Information"
+    commentary: "Glass Ceilling in Computer & Information Sciences:<br> Since 1983 it is the only <a href='https://en.wikipedia.org/wiki/Science,_technology,_engineering,_and_mathematics'>STEM</a> field where the ratio of women has consistenly decreased"
     id: 1000001
     source: "Digest of education statistics: https://nces.ed.gov/programs/digest/"
-    title: "Tech Women's Education"
+    title: "Where are the women?"
 
     chartOptions:
       data:
@@ -551,5 +551,5 @@ slides: [
       legend: true
       groupsOrder: ["male", "female"]
   }
-  
+
 ]
