@@ -532,4 +532,24 @@ slides: [
         ]
 
   }
+    {
+    level: 3
+    title: 'Disney'
+    parent_id: 70
+    source: 'IMDB and http://polygraph.cool/films/'
+    id: 3003
+    chartOptions:
+      chartType: "horizontalBarchart"
+      value: 'value'
+      label: 'movie'
+      groups: 'gender'
+      data:
+        query:
+          domain: 'disney'
+      units:
+        value: '%'
+      legend: true
+      groupsOrder: ["male", "female"]
+  }
+  
 ]
