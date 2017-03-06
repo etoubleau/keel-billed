@@ -11,16 +11,7 @@ glossary:
 
 #Below are the parameters of the report selector (main home page)
 home:
-  search:
-    #Choose the text you want to display in front of the selection
-    text: 'Dashboard of'
-    #Text to display as a placeholder before selections are made
-    placeholder: 'A Bird Species'
-    #additonal information about the reseach that is display below the search bar
-    helper: 'Please enter the first 3 letters of your report '
-
-  widget:
-    type: "list" # Can also be 'list'
+  skipToReport:'0'
 
 slides: [
   {
@@ -579,6 +570,7 @@ slides: [
       title: "Spicing things up"
       commentary: "How often are women looking for theses keywords, compared to men? "
       parent_id: 50
+      source: "pornhub.com/insights"
       # filters:
       #   "bottom-right":
       #     on: "breakdown"
@@ -622,6 +614,7 @@ slides: [
     level: 3
     title: "Sex is universal"
     parent_id: 50
+    source: "pornhub.com/insights"
     filters:
       "bottom-right":
         type: "buttons"
