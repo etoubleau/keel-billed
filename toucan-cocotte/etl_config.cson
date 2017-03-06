@@ -30,6 +30,11 @@
     type: 'excel'
     file: 'movies.xlsx'
   ,
+    sheetname: 'disney'
+    domain: 'disney'
+    type: 'excel'
+    file: 'movies.xlsx'
+  ,
     domain: 'reports'
     type: 'csv'
     file: 'reports.csv'
