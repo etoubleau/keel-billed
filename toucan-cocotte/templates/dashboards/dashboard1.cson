@@ -1,7 +1,7 @@
 entityName: "{{ dash }}"
 #For a given report if there is more than 1 dashboard which one shall be selected by default?
 #In your dashboard dataset add a 'default' column containing the value 1 if the row corresponds to the default dashboard you want to display and 0 otherwise.
-# default: "{{ my_dashboard_default_column | bool }}"
+default: true
 
 categories: [
    name: "Girls wanna have fun!"

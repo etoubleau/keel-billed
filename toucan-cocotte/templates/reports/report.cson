@@ -1,4 +1,3 @@
-
 entityName: "{{ report }}"#column of the report data containing the reports names
 id: "{{ index }}"
 date: 'March 8th 2017'
