@@ -4,16 +4,7 @@ glossary:[]
 
 #Below are the parameters of the report selector (main home page)
 home:
-  search:
-    #Choose the text you want to display in front of the selection
-    text: 'Dashboard of'
-    #Text to display as a placeholder before selections are made
-    placeholder: 'A Bird Species'
-    #additonal information about the reseach that is display below the search bar
-    helper: 'Please enter the first 3 letters of your report '
-
-  widget:
-    type: "list" # Can also be 'list'
+  skpiToReports:'0'
 
 slides: [
   {
