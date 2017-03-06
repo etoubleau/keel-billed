@@ -4,7 +4,26 @@ entityName: "{{ dash }}"
 # default: "{{ my_dashboard_default_column | bool }}"
 
 categories: [
-
+   name: "Girls wanna have fun!"
+  kpis: [
+    name: "Top searches by women on Pornhub"
+    type: "leaderboard"
+    chartOptions:
+      value: "value"
+      label: "label"
+      data:
+        query:
+          domain: "categories-porn"
+        precision: value: ",.0f"
+      units:
+        value: " "
+    source: "pornhub.com/insights"
+    slide: 50001
+  ,
+    type: "media-video"
+    provider: 'youtube'
+    id: "YEQPpzHsHjk"
+  ]
 ]
 
 #do not change those parameters!!
