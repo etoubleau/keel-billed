@@ -27,15 +27,31 @@ slides: [
     level: 0
     id: 0
   }
+
   {
     level: 1
-    title: "Report dynamic slides"
-    id: 10
+    title: "Culture"
+    id: 20
+  }
+  {
+    level: 1
+    title: "Fun facts"
+    id: 30
+  }
+  {
+    level: 1
+    title: "Women in tech"
+    id: 40
   }
   {
     level: 1
     title: "Sports"
     id: 70
+  }
+  {
+    level: 1
+    title: "Let's talk about sex"
+    id: 50
   }
   {
     level: 3
@@ -66,7 +82,7 @@ slides: [
   {
     level: 3
     title: 'Box office 2016'
-    parent_id: 10
+    parent_id: 20
     source: 'https://proquestionasker.github.io/projects/MovieDialogueInteractive/'
     filters: 'bottom-right':
       on: 'metric'
@@ -91,7 +107,7 @@ slides: [
   {
     level: 3
     title: 'Speaking Characters in Hollywood Film and TV'
-    parent_id: 10
+    parent_id: 20
     commentary: "Based on a sample of 11,306 speaking characters in major studio movies released in 2014 and TV shows released between Sep. 2014 and Aug. 2015"
     source: 'USC Annenberg.,as of Feb. 22, 2016'
     id: 3002
@@ -114,7 +130,7 @@ slides: [
   {
     level: 3
     title: "Farming...boring?"
-    parent_id: 10
+    parent_id: 20
     source:'https://en.wikipedia.org/wiki/Women_and_video_games'
     commentary:'Some commonplace are true :) Women love farming whereas men are after sports and shooting'
 
@@ -144,7 +160,7 @@ slides: [
   }
   {
     level: 3
-    parent_id: 10
+    parent_id: 20
     id: 10002
     title: "Why do you play?"
     source:'https://en.wikipedia.org/wiki/Women_and_video_games'
@@ -173,7 +189,7 @@ slides: [
   }
   {
     level: 3
-    parent_id: 10
+    parent_id: 20
     id: 10005
     title:'Game on girls!'
     commentary: "Women play more than men, and more and more"
@@ -199,7 +215,7 @@ slides: [
   {
     level: 3
     title: "Drive safe"
-    parent_id: 10
+    parent_id: 30
     commentary:"Men kill and die more on the road. Fore their own safety shouldn't they be forbiden to drive?"
     source:'Source: http://www.securite-routiere.gouv.fr/medias/les-chiffres-de-la-route/les-hommes-et-les-femmes-sur-la-route'
 
@@ -227,7 +243,7 @@ slides: [
   }
   {
     level: 3
-    parent_id: 10
+    parent_id: 30
     id: 10004
     title: "Hit the road"
     source:'http://www.telegraph.co.uk/news/uknews/road-and-rail-transport/11605509/Women-are-after-all-better-drivers-than-men.html'
@@ -256,7 +272,7 @@ slides: [
   }
   {
     level: 3
-    parent_id: 10
+    parent_id: 40
     commentary: "Glass Ceilling in Computer & Information"
     id: 1000001
     source: "Digest of education statistics: https://nces.ed.gov/programs/digest/"
@@ -285,7 +301,7 @@ slides: [
   }
   {
     level: 3
-    parent_id: 10
+    parent_id: 40
     commentary: "Ratio of Women in workforce on the tech giants"
     source: "https://women-in-software.silk.co"
     id: 1000002
@@ -355,7 +371,7 @@ slides: [
 {
     level: 3
     title: 'Best Paid Actors 2016'
-    parent_id: 10
+    parent_id: 20
     source: 'Forbes'
     id: 3004
     filters: "bottom-right":
@@ -535,7 +551,7 @@ slides: [
     {
     level: 3
     title: 'Disney'
-    parent_id: 70
+    parent_id: 20
     source: 'IMDB and http://polygraph.cool/films/'
     id: 3003
     chartOptions:
@@ -551,5 +567,181 @@ slides: [
       legend: true
       groupsOrder: ["male", "female"]
   }
-  
+  {
+      level: 3
+      title: "Spicing things up"
+      commentary: "How often are women looking for theses keywords, compared to men? "
+      parent_id: 50
+      # filters:
+      #   "bottom-right":
+      #     on: "breakdown"
+      #     type: "buttons"
+      chartOptions:
+        data:
+          query:
+            domain: "categories-porn"
+          precision: value: ",.0f"
+        chartType: "horizontalBarchart"
+        # groups: "group"
+        label: "label"
+        value: "value"
+        # filters:
+        #   "upper-right":
+        #     on: "Branch level 2"
+        #     type: "dropdown"
+        #     reset: "All"
+        #     withSize: true
+        # sentiment:
+        #   value:
+        #     domain: [8,18]
+        #     range: ['negative','warning','positive']
+        units: value: "% more"
+        # legend: true
+        sort: "desc"
+        # showAverage: true
+        source: "Pornhub/insights"
+      # linkTo: [
+      #   type: 'slide'
+      #   id: 30202
+      #   legend: 'Vue performace'
+      # ,
+      #   type: 'dashboard'
+      #   id: 0
+      #   legend: 'Vers dashboard'
+      # ]
+      id: 50001
+  }
+  {
+    level: 3
+    title: "Sex is universal"
+    parent_id: 50
+    filters:
+      "bottom-right":
+        type: "buttons"
+        on: "Filter1"
+    chartOptions:
+      data:
+        # order:
+        #   by: "group"
+        #   custom: [
+        #     "Worldwide average"
+        #     "Argentina
+        #     "Brazil"
+        #     "1 fois/an"
+        #     "moins souvent"
+        #     "jamais"
+        #   ]
+        query:
+          domain: "country-porn"
+      chartType: "horizontalBarchart"
+      groups: "label"
+      hideTotal: true
+      packs: "pack"
+      sort: "desc"
+      # visualSelection: false
+      # meta: ["clients"]
+      label: "group"
+      value: "value"
+      units:
+        value: [
+          unit: "%"
+          where: Filter1: "% of female visitors"
+        ,
+          unit: " years"
+          where: Filter1: "Age"
+        ,
+          unit: " min"
+          where: Filter1: "Time spent"
+        ]
+      precision:
+        value: [
+          precision: ",.0f"
+          where: Filter1: "% of female visitors"
+        ,
+          precision: ",.0f"
+          where: Filter1: "age"
+        ,
+          precision: ",,2f"
+          where: Filter1: "Time spent"
+        ]
+      source: "Pornhub/insights"
+      unstackable: true
+      legend: true
+    id: 50002
+  }
+  {
+    level: 3
+    title: "Breaking the record"
+    parent_id: 50
+    commentary: "% of men / women who reported that they <i>usually</i > or <i>always</i > orgasmed during sexually intimate moments"
+    source: "Frederick, D.A., John, H.K.S., Garcia, J.R. et al. Arch Sex Behav (2017)"
+    filters:
+      "bottom-right":
+        type: "buttons"
+        on: "Filter1"
+    chartOptions:
+      data:
+        query:
+          domain: "orgasm"
+      chartType: "barchart"
+      value: "value"
+      label: "group"
+      groups: "label"
+      labelsOrder:
+        custom: [
+          "Heterosexuals"
+          "Homosexuals"
+          "Bisexuals"
+        ]
+      units: value : "%"
+      highlightedKpis: [
+        name: " of women who RARELY / NEVER orgasm during (only) vaginal sex"
+        value: "value"
+        unit: "%"
+        # badge: 'evolution'
+        # comment: "vs 2015"
+        sentiment:
+          value:
+            domain: [0]
+            range: ['negative','positive']
+        precision:
+          value: ',.0f'
+        data:
+          value:
+            query:
+              domain: 'orgasm'
+            field: 'kpi'
+      ]
+    id: 50003
+  }
+  {
+    level: 3
+    title: "Promised land"
+    parent_id: 50
+    commentary: "Our (subjective) TOP / FLOP 5 of countries to bring your lady to for a honeymoon"
+    datasets:
+      dept_data:
+        query:
+          domain: "carto-pays-nuls"
+    filters:
+      "bottom-right":
+        type: "buttons"
+        on: "Filter1"
+        datasets: ["dept_data"]
+    chartOptions:
+      chartType: "mapchart"
+      zones:
+        dataset: 'dept_data'
+        shapes: "world-topojson.json"
+        join:
+          shapes: "id"
+          data: "country_code"
+        color: "value"
+        label: "country"
+        meta: ["Why not?"]
+      tiles:{}
+      legend: true
+    id: 50004
+  }
+
 ]
