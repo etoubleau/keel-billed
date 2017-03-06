@@ -113,35 +113,6 @@ slides: [
   }
   {
     level: 3
-    parent_id: 10
-    commentary: "Women's part of Tech & Science Degrees"
-    id: 1000001
-
-    title: "Women's Degrees"
-
-    chartOptions:
-      data:
-        query: [
-          $match:
-            domain: "bachelors"
-            # Degree: $in: ["Average", "Computer Science"]
-            STEM: "OUI"
-
-        ]
-        precision:
-          value: ".0%"
-
-      groups: "Degree"
-      chartType: "linechart"
-      value: "value"
-      date: "Year"
-
-      legend: true
-
-
-  }
-  {
-    level: 3
     title: "Farming...boring?"
     parent_id: 10
     source:'https://en.wikipedia.org/wiki/Women_and_video_games'
@@ -289,7 +260,7 @@ slides: [
     commentary: "Glass Ceilling in Computer & Information"
     id: 1000001
     source: "Digest of education statistics: https://nces.ed.gov/programs/digest/"
-    title: "Women's Degrees"
+    title: "Tech Women's Education"
 
     chartOptions:
       data:
@@ -380,7 +351,29 @@ slides: [
             by: "value"
             order: "asc"
         ]
-
+}
+{
+    level: 3
+    title: 'Best Paid Actors 2016'
+    parent_id: 10
+    source: 'Forbes'
+    id: 3004
+    filters: "bottom-right":
+      on: "year"
+      type: "slider"
+    chartOptions:
+      chartType: "horizontal-barchart"
+      value: 'value'
+      label: 'actor'
+      groups: 'gender'
+      # meta: ['gender']
+      data:
+        query:
+          domain: 'salary'
+      sort: 'desc'
+      units:
+        value: 'M$'
+      legend: false
   }
   {
     level: 3
