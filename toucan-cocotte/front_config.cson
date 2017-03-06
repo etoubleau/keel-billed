@@ -272,7 +272,7 @@ slides: [
   }
   {
     level: 3
-    commentary: "Glass Ceilling in Computer & Information Sciences:<br> Since 1983 it is the only <a href='https://en.wikipedia.org/wiki/Science,_technology,_engineering,_and_mathematics'>STEM</a> field where the ratio of women has consistenly decreased"
+    commentary: "Glass Ceilling in Computer & Information Sciences:<br><small> Since 1983 it is the only <a target='_blank' href='https://en.wikipedia.org/wiki/Science,_technology,_engineering,_and_mathematics'>STEM</a> field in education where the ratio of women has consistenly decreased, which accounts for the lack of women in the field today</small>"
     parent_id: 40
 
     id: 1000001
@@ -296,18 +296,24 @@ slides: [
       value: "value"
       date: "Year"
 
+
       legend: true
 
-
+      events: [
+        {
+          date: "1983"
+          name: "Where did they go?"
+        }
+      ]
   }
   {
     level: 3
     parent_id: 40
-    commentary: "Ratio of Women in workforce on the tech giants"
+    commentary: "Hard and Software companies are the less feminized companies<br> Interestingly <em>leadership roles</em> present much less inequality than other roles"
     source: "https://women-in-software.silk.co"
     id: 1000002
 
-    title: "Tech Companies"
+    title: "Women are leaders in Tech Companies"
 
     filters:
       "bottom-right":
