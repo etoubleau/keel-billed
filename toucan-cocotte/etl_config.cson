@@ -43,6 +43,27 @@
     type: 'csv'
     file: 'dashboards.csv'
   ,
+    domain: "categories-porn"
+    type: "google_spreadsheet"
+    spreadsheet_id: '1CETTP1hzjzn9giumYIBePQe6x-0dlobiOjGUCM7QGeI'
+    sheetname: "categories-porn"
+  ,
+    domain: "country-porn"
+    type: "google_spreadsheet"
+    spreadsheet_id: '1CETTP1hzjzn9giumYIBePQe6x-0dlobiOjGUCM7QGeI'
+    sheetname: "country-porn"
+  ,
+    domain: "orgasm"
+    type: "google_spreadsheet"
+    spreadsheet_id: '1CETTP1hzjzn9giumYIBePQe6x-0dlobiOjGUCM7QGeI'
+    sheetname: "orgasm"
+  ,
+    domain: "carto-pays-nuls"
+    type: "google_spreadsheet"
+    spreadsheet_id: '1CETTP1hzjzn9giumYIBePQe6x-0dlobiOjGUCM7QGeI'
+    sheetname: "carto-pays-nuls"
+
+  ,
     sheetname: 'salary'
     domain: 'salary'
     type: 'excel'
@@ -71,6 +92,10 @@
   ]
 
   DASHBOARDS: [
+    query:
+      domain: "dashboards"
+  report: "report"
+  template: "dashboard1"
   ]
 
   MONGO_INDEXES: [
