@@ -11,7 +11,7 @@ glossary:
 
 #Below are the parameters of the report selector (main home page)
 home:
-  skpiToReports:'0'
+  skipToReport:'0'
 
 slides: [
   {
