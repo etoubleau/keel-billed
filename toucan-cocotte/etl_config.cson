@@ -30,6 +30,11 @@
     type: 'excel'
     file: 'movies.xlsx'
   ,
+    sheetname: 'disney'
+    domain: 'disney'
+    type: 'excel'
+    file: 'movies.xlsx'
+  ,
     domain: 'reports'
     type: 'csv'
     file: 'reports.csv'
@@ -37,6 +42,27 @@
     domain: 'dashboards'
     type: 'csv'
     file: 'dashboards.csv'
+  ,
+    domain: "categories-porn"
+    type: "google_spreadsheet"
+    spreadsheet_id: '1CETTP1hzjzn9giumYIBePQe6x-0dlobiOjGUCM7QGeI'
+    sheetname: "categories-porn"
+  ,
+    domain: "country-porn"
+    type: "google_spreadsheet"
+    spreadsheet_id: '1CETTP1hzjzn9giumYIBePQe6x-0dlobiOjGUCM7QGeI'
+    sheetname: "country-porn"
+  ,
+    domain: "orgasm"
+    type: "google_spreadsheet"
+    spreadsheet_id: '1CETTP1hzjzn9giumYIBePQe6x-0dlobiOjGUCM7QGeI'
+    sheetname: "orgasm"
+  ,
+    domain: "carto-pays-nuls"
+    type: "google_spreadsheet"
+    spreadsheet_id: '1CETTP1hzjzn9giumYIBePQe6x-0dlobiOjGUCM7QGeI'
+    sheetname: "carto-pays-nuls"
+
   ,
     sheetname: 'salary'
     domain: 'salary'
@@ -53,19 +79,16 @@
   DATA_PROVIDERS: []
 
   REPORTS: [
-  #   query:
-  #     #which domain contains the report I want the user to choose among?
-  #     domain: "sample_reports"
-  #   #which report template shall be used for those reports?
-  #   #This file.cson shall be located inside template > reports > file.cson
-  #   template: "report"
-  # ,
     query:
       domain: "reports"
     template: "report"
   ]
 
   DASHBOARDS: [
+    query:
+      domain: "reports"
+    report: "report"
+    template: "dashboard1"
   ]
 
   MONGO_INDEXES: [
