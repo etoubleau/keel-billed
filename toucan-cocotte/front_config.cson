@@ -1,18 +1,19 @@
 settings:[]
 
-glossary:
-  title: 'Glossary'
-  terms: [
-    term: "NCAA"
-    meaning: "The National Collegiate Athletic Association (NCAA) is a non-profit association which regulates athletes of 1,281 institutions, conferences, organizations, and individuals. It also organizes the athletic programs of many colleges and universities in the United States and Canada, and helps more than 450,000 college student-athletes who compete annually in college sports."
-    slides:[70001]
+glossary:[]
 
-  ]
-
-
+#Below are the parameters of the report selector (main home page)
 home:
-  skipToReport:'0'
+  search:
+    #Choose the text you want to display in front of the selection
+    text: 'Dashboard of'
+    #Text to display as a placeholder before selections are made
+    placeholder: 'A Bird Species'
+    #additonal information about the reseach that is display below the search bar
+    helper: 'Please enter the first 3 letters of your report '
 
+  widget:
+    type: "list" # Can also be 'list'
 
 slides: [
   {
@@ -21,39 +22,13 @@ slides: [
   }
   {
     level: 1
-    title: "Fait marquants"
+    title: "Report dynamic slides"
     id: 10
-
-  }
-  {
-    level: 1
-    title: "Femme & Cinema"
-    id: 20
-  }
-  {
-    level: 1
-    title: "Femme & Voitures"
-    id: 40
-  }
-  {
-    level: 1
-    title: "Femme & tech"
-    id: 50
-  }
-  {
-    level: 1
-    title: "Femme & Sport"
-    id: 70
-  }
-  {
-    level: 1
-    title: "Sexualité"
-    id: 60
   }
   {
     level: 3
-    title: "Super Women"
-    commentary: "Découvrez les femmes qui ont marqué le monde du XX ème siècle"
+    title: "Faits marquants"
+    commentary: "Quelques faits marquants de l'histoire des femmes du XXe siècle"
     parent_id: 10
     id: 30207
     chartOptions:
@@ -78,16 +53,13 @@ slides: [
   }
   {
     level: 3
-    title: 'Box Office 2016'
-    commentary: "It's a man's man's man's world chantait James Brown ! Ca n'a pas changé. Voici la représentation des femmes dans les dialogues et les personnages des films du box office 2016"
-
-    parent_id: 20
+    title: 'Box office 2016'
+    parent_id: 10
     source: 'https://proquestionasker.github.io/projects/MovieDialogueInteractive/'
     filters: 'bottom-right':
       on: 'metric'
       type: 'buttons'
     id: 3001
-
     chartOptions:
       chartType: "stackedBarchart"
       unstackable: true
@@ -106,15 +78,10 @@ slides: [
   }
   {
     level: 3
-    title: 'Hollywood ? Not so good'
-    parent_id: 20
-
-    commentary: "Entre 2014 et 2015 on remarque que moins d'un tiers des personnages de films des plus grands studios d'Hollywood sont féminins... man's man's world."
+    title: 'Speaking Characters in Hollywood Film and TV'
+    parent_id: 10
+    commentary: "Based on a sample of 11,306 speaking characters in major studio movies released in 2014 and TV shows released between Sep. 2014 and Aug. 2015"
     source: 'USC Annenberg.,as of Feb. 22, 2016'
-
-    # commentary: "'Media is the face the US gives to the world. And if the women's part of our country isn't part of that face, then they are not getting the whole picture' - Jane Fonda"
-    # source: 'Based on a sample of 11,306 speaking characters in major studio movies released in 2014 and TV shows released between Sep. 2014 and Aug. 2015. USC Annenberg.,as of Feb. 22, 2016'
-
     id: 3002
     chartOptions:
       chartType: "stackedBarchart"
@@ -134,10 +101,39 @@ slides: [
   }
   {
     level: 3
-    title: "La ferme ou les flingues ?"
-    parent_id: 20
+    parent_id: 10
+    commentary: "Women's part of Tech & Science Degrees"
+    id: 1000001
+
+    title: "Women's Degrees"
+
+    chartOptions:
+      data:
+        query: [
+          $match:
+            domain: "bachelors"
+            # Degree: $in: ["Average", "Computer Science"]
+            STEM: "OUI"
+
+        ]
+        precision:
+          value: ".0%"
+
+      groups: "Degree"
+      chartType: "linechart"
+      value: "value"
+      date: "Year"
+
+      legend: true
+
+
+  }
+  {
+    level: 3
+    title: "Farming...boring?"
+    parent_id: 10
     source:'https://en.wikipedia.org/wiki/Women_and_video_games'
-    commentary:'Certains stéréotypes sont vrais, les femmes aiment les jeux de ferme alors que les hommes aiment tirer au pistolet'
+    commentary:'Some commonplace are true :) Women love farming whereas men are after sports and shooting'
 
     chartOptions:
       data:
@@ -165,11 +161,11 @@ slides: [
   }
   {
     level: 3
-    parent_id: 20
+    parent_id: 10
     id: 10002
-    title: "Pourquoi tu joues ?"
+    title: "Why do you play?"
     source:'https://en.wikipedia.org/wiki/Women_and_video_games'
-    commentary:"Les femmes cherchent l'achèvement alors que les hommes cherchent la compétition"
+    commentary:'Women look for completion whereas men are after competition...no kidding!'
 
     chartOptions:
       data:
@@ -194,19 +190,19 @@ slides: [
   }
   {
     level: 3
-    parent_id: 20
+    parent_id: 10
     id: 10005
-    title:'Joueuses ?'
-    commentary: "Les femmes jouent plus que les hommes, et de plus en plus"
+    title:'Game on girls!'
+    commentary: "Women play more than men, and more and more"
     source:'Source : https://en.wikipedia.org/wiki/Women_and_video_games'
-
+    
     chartOptions:
       data:
         query:
           domain:'oestro_game_evolution'
         precision:
           my_value:',.0f'
-
+    
       chartType: "slopegraph"
       label: "my_label"
       meta: ["my_value"]
@@ -219,10 +215,9 @@ slides: [
   }
   {
     level: 3
-    title: "Femme au volant"
-    parent_id: 40
-
-    commentary:"Les hommes commettent plus d'accidents graves et meurrent plus sur la route. Hommes au volant, mort au tournant !"
+    title: "Drive safe"
+    parent_id: 10
+    commentary:"Men kill and die more on the road. Fore their own safety shouldn't they be forbiden to drive?"
     source:'Source: http://www.securite-routiere.gouv.fr/medias/les-chiffres-de-la-route/les-hommes-et-les-femmes-sur-la-route'
 
     chartOptions:
@@ -249,14 +244,12 @@ slides: [
   }
   {
     level: 3
-
-    parent_id: 40
-
+    parent_id: 10
     id: 10004
-    title: "Hit the road Jack"
+    title: "Hit the road"
     source:'http://www.telegraph.co.uk/news/uknews/road-and-rail-transport/11605509/Women-are-after-all-better-drivers-than-men.html'
-    commentary:"Les femmes conduisent mieux (+ 12% en moyenne). Une nouvelle fois: les femmes conduisent <strong>MIEUX !</strong>."
-
+    commentary:"Women drive better (+ 12% on average). Let's say that again: women drive <strong>BETTER</strong>.""
+    
     chartOptions:
       data:
         query:
@@ -278,497 +271,4 @@ slides: [
         "description"
       ]
   }
-  {
-    level: 3
-
-    parent_id: 50
-
-
-    commentary: "Le plafond de verre en informatique et sciences de l'information:<br><small> Depuis 1983 c'est la seule <a target='_blank' href='https://en.wikipedia.org/wiki/Science,_technology,_engineering,_and_mathematics'>STEM</a> spécialité dans laquelle le quota de femmes est en baisse constante, ce qui explique le peu de femme dans l'univers tech aujourd'hui</small>"
-
-    id: 1000001
-    source: "Digest of education statistics: https://nces.ed.gov/programs/digest/"
-    title: "Où sont les femmes ?"
-
-    chartOptions:
-      data:
-        query: [
-          $match:
-            domain: "bachelors"
-            # Degree: $in: ["Average", "Computer Science"]
-            STEM: "OUI"
-
-        ]
-        precision:
-          value: ".0%"
-
-      groups: "Degree"
-      chartType: "linechart"
-      value: "value"
-      date: "Year"
-
-
-      legend: true
-
-      events: [
-        {
-          date: "1983"
-          name: "Where did they go?"
-        }
-      ]
-  }
-  {
-    level: 3
-
-    parent_id: 50
-    commentary: "L'équilibre homme/femme en entreprise de Hard et Software est plus bas que la moyenne.<br> Cependant<em>les rôles de leaders en entreprises tech</em> présentent moins d'inégalités"
-
-    source: "https://women-in-software.silk.co"
-    id: 1000002
-
-    title: "Les femmes Tech sont des leaders"
-
-    filters:
-      "bottom-right":
-        on: "type"
-        type: "buttons"
-    chartOptions:
-      data:
-        query: [
-          $match:
-            domain: "workforce"
-            is_value: "yes"
-            # Degree: $in: ["Average", "Computer Science"]
-
-        ]
-        precision:
-          value: ".0%"
-
-      average:
-        data:
-          query: [
-            $match:
-              domain: "workforce"
-              is_value: "yes"
-          ,
-            $group:
-              _id: "$type"
-              value: $avg: "$value"
-          ,
-            $project:
-              value: "$value"
-              type: "$_id"
-          ]
-          precision:
-            value: ".0%"
-        value: "value"
-        joins: [
-          "type"
-        ]
-      averageText: "Avg."
-      packs: "pack"
-      packsNames: true
-      chartType: "leaderboardCenteredAverage"
-      value: "value"
-      label: "companies"
-
-      legend: false
-      sorter:
-        default: "companies"
-        legend: "Sort by"
-        values: [
-          label: "Alphabetical"
-          sort:
-            by: "companies"
-            order: "asc"
-        ,
-          label: "Ratio"
-          sort:
-            by: "value"
-            order: "asc"
-        ]
-}
-{
-    level: 3
-    title: 'Les acteurs sont mieux payés'
-
-    commentary: "'Ca fait souvent mal. Votre salaire est un moyen de quantifier votre valeur. Si les hommes sont beaucoup mieux payés pour faire la même chose, on se sent mal' - Gwenyth Paltrow (Variety, October 2015)<br>'Les seuls types de films dans lesquels les femmes sont mieux payés que les hommes, c'est dans l'industrie du porno' - Salma Hayek"
-
-    parent_id: 20
-    source: 'Forbes'
-    id: 3004
-    filters: "bottom-right":
-      on: "year"
-      type: "slider"
-    chartOptions:
-      chartType: "horizontal-barchart"
-      value: 'value'
-      label: 'actor'
-      groups: 'gender'
-      # meta: ['gender']
-      data:
-        query:
-          domain: 'salary'
-      sort: 'desc'
-      units:
-        value: 'M$'
-      legend: false
-  }
-  {
-    level: 3
-    title: "Inégalités au lycée"
-    parent_id: 70
-    id: 70001
-    recommendation:
-      advert: "Info"
-      content: """
-        Scholarships are in $.
-      """
-    commentary: "Les femmes sont moins représentées en sport, à ce titre elles n'accèdent qu'à 46% des bourses d'études. A l'exception du Volleyball dans lequel l'uniforme semble être l'élément attractif."
-    source: "Datasource: https://magic.piktochart.com/output/2101560-mens-vs-womens-sports"
-
-
-    chartOptions:
-      data:
-        query:
-          domain: "sport"
-          type: $in: ["participation", "volleyball"]
-        precision:
-          value:[
-            precision: ",.0f"
-            where:
-              kpi: $in: ["NCAA scholarships", "NCAA scholarships - Volleyball"]
-          ,
-            precision: ",.0f"
-            where:
-              kpi: $ne: ["NCAA scholarships", "NCAA scholarships - Volleyball"]
-          ]
-      chartType: "barchart"
-      value: "value"
-      label: "gender"
-      filters: 'upper-right':
-        on: 'kpi'
-        type: 'dropdown'
-      # groups: "center"
-      legend: true
-      units:
-        value:[
-          unit: " $"
-          where:
-            kpi: $in: ["NCAA scholarships", "NCAA scholarships - Volleyball"]
-        ,
-          unit: " "
-          where:
-            kpi: $ne: ["NCAA scholarships", "NCAA scholarships - Volleyball"]
-        ]
-
-  }
-  {
-    level: 3
-    title: "Couverture"
-    parent_id: 70
-    id: 70002
-    # commentary: "Women are under represented in sports, get only 46% of scholarships. Exception in Volleyball where the uniform seems to be the sport main attract."
-    source: "Datasource: https://magic.piktochart.com/output/2101560-mens-vs-womens-sports"
-    chartOptions:
-      data:
-        query:
-          domain: "sport"
-          kpi: "network coverage"
-        precision:
-          value:'.0%'
-      chartType: "horizontalBarchart"
-      value: "value"
-      label: "label"
-      sort:'desc'
-      units: value: ''
-
-  }
-  {
-    level: 3
-    title: "Rémunération"
-    parent_id: 70
-    id: 70003
-    recommendation:
-      advert: "Info"
-      content: """
-        Le gouffre: nombre de buts marqués pendant la finale du FIFA World Cup, et rémunération par genre.
-      """
-    # commentary: ""
-    source: "Datasource: https://qz.com/445818/6-charts-to-show-anyone-who-thinks-womens-soccer-is-treated-equally-to-mens/"
-    charts: [
-      {
-        data:
-          query:
-              domain: "sport"
-              kpi:"Games"
-
-        chartType: "barchart"
-        units:
-          value: " goals"
-        value: "value"
-        label:"gender"
-        size: 0.25
-        id: 0
-      }
-      {
-        data:
-          query:
-            domain: "sport"
-            kpi: "FIFA prize money"
-          precision:
-            value:'.0f'
-
-        chartType: "horizontalBarchart"
-        value: "value"
-        label: "gender"
-        packs: "label"
-        packNames: true
-
-        units:
-          "value": " M$"
-          evo:"%"
-        sort:"desc"
-        size: 0.75
-        id: 1
-      }
-    ]
-  }
-  {
-    level: 3
-    title: "Comité et gains"
-    parent_id: 70
-    id: 70004
-    # commentary: "Women are under represented in sports, get only 46% of scholarships. Exception in Volleyball where the uniform seems to be the sport main attract."
-    # filters: 'bottom-right':
-    #   on: 'label'
-    #   type: 'buttons'
-    source: "Datasource: https://magic.piktochart.com/output/2101560-mens-vs-womens-sports"
-    chartOptions:
-      data:
-        query:
-          domain: "sport"
-          type: "representation"
-      chartType: "score-card"
-      packs:'label'
-
-      value: "value"
-      label: "gender"
-      sort:'desc'
-      units:
-        value:[
-          unit: " $"
-          where:
-            label: "Minimum US salary"
-        ,
-          unit: " members"
-          where:
-            label: "FIFA's executive board"
-        ,
-          unit: " M$"
-          where:
-            label: "Salary, winnings, and sponsorships"
-        ]
-
-  }
-    {
-    level: 3
-    title: 'Princesses Disney ?'
-    parent_id: 20
-    commentary: "'Comment osez-vous ? Vous tous! Debout à décider de mon avenir. Je ne suis pas un prix à gagner' - Princess Jasmine"
-    source: 'IMDB and http://polygraph.cool/films/'
-    id: 3003
-    chartOptions:
-      chartType: "horizontalBarchart"
-      value: 'value'
-      label: 'movie'
-      groups: 'gender'
-      data:
-        query:
-          domain: 'disney'
-      units:
-        value: '%'
-      legend: true
-      groupsOrder: ["male", "female"]
-  }
-  # {
-  #     level: 3
-  #     title: "Spicing things up"
-  #     commentary: "How often are women looking for theses keywords, compared to men? "
-  #     parent_id: 60
-  #     source: "pornhub.com/insights"
-  #     # filters:
-  #     #   "bottom-right":
-  #     #     on: "breakdown"
-  #     #     type: "buttons"
-  #     chartOptions:
-  #       data:
-  #         query:
-  #           domain: "categories-porn"
-  #         precision: value: ",.0f"
-  #       chartType: "horizontalBarchart"
-  #       # groups: "group"
-  #       label: "label"
-  #       value: "value"
-  #       # filters:
-  #       #   "upper-right":
-  #       #     on: "Branch level 2"
-  #       #     type: "dropdown"
-  #       #     reset: "All"
-  #       #     withSize: true
-  #       # sentiment:
-  #       #   value:
-  #       #     domain: [8,18]
-  #       #     range: ['negative','warning','positive']
-  #       units: value: "% more"
-  #       # legend: true
-  #       sort: "desc"
-  #       # showAverage: true
-  #       source: "Pornhub/insights"
-  #     # linkTo: [
-  #     #   type: 'slide'
-  #     #   id: 30202
-  #     #   legend: 'Vue performace'
-  #     # ,
-  #     #   type: 'dashboard'
-  #     #   id: 0
-  #     #   legend: 'Vers dashboard'
-  #     # ]
-  #     id: 50001
-  # }
-  {
-    level: 3
-    title: "Le sex c'est universel"
-    parent_id: 60
-    source: "pornhub.com/insights"
-    commentary: "Moyenne d'âge des visiteurs de sites pornographiques par pays"
-    filters:
-      "bottom-right":
-        type: "buttons"
-        on: "Filter1"
-    chartOptions:
-      data:
-        # order:
-        #   by: "group"
-        #   custom: [
-        #     "Worldwide average"
-        #     "Argentina
-        #     "Brazil"
-        #     "1 fois/an"
-        #     "moins souvent"
-        #     "jamais"
-        #   ]
-        query:
-          domain: "country-porn"
-      chartType: "horizontalBarchart"
-      groups: "label"
-      hideTotal: true
-      packs: "pack"
-      sort: "desc"
-      # visualSelection: false
-      # meta: ["clients"]
-      label: "group"
-      value: "value"
-      units:
-        value: [
-          unit: "%"
-          where: Filter1: "% of female visitors"
-        ,
-          unit: " years"
-          where: Filter1: "Age"
-        ,
-          unit: " min"
-          where: Filter1: "Time spent"
-        ]
-      precision:
-        value: [
-          precision: ",.0f"
-          where: Filter1: "% of female visitors"
-        ,
-          precision: ",.0f"
-          where: Filter1: "age"
-        ,
-          precision: ",,2f"
-          where: Filter1: "Time spent"
-        ]
-      source: "Pornhub/insights"
-      unstackable: true
-      legend: true
-    id: 50002
-  }
-  {
-    level: 3
-    title: "Record battu"
-    parent_id: 60
-    commentary: "% d'hommes / femmes qui rapportent avoir <i>habituellement</i > ou <i>toujours</i > un orgasme pendant leurs rapports sexuels. Contrairement à ce que l'on pense les femmes sont plus satisfaites que les femmes"
-    source: "Frederick, D.A., John, H.K.S., Garcia, J.R. et al. Arch Sex Behav (2017)"
-    filters:
-      "bottom-right":
-        type: "buttons"
-        on: "Filter1"
-    chartOptions:
-      data:
-        query:
-          domain: "orgasm"
-      chartType: "barchart"
-      value: "value"
-      label: "group"
-      groups: "label"
-      labelsOrder:
-        custom: [
-          "Heterosexuals"
-          "Homosexuals"
-          "Bisexuals"
-        ]
-      units: value : "%"
-      highlightedKpis: [
-        name: " of women who RARELY / NEVER orgasm during (only) vaginal sex"
-        value: "value"
-        unit: "%"
-        # badge: 'evolution'
-        # comment: "vs 2015"
-        sentiment:
-          value:
-            domain: [0]
-            range: ['negative','positive']
-        precision:
-          value: ',.0f'
-        data:
-          value:
-            query:
-              domain: 'orgasm'
-            field: 'kpi'
-      ]
-    id: 50003
-  }
-  # {
-  #   level: 3
-  #   title: "Le paradis"
-  #   parent_id: 60
-  #   commentary: "Our (subjective) TOP / FLOP 5 of countries to bring your lady to for a honeymoon"
-  #   datasets:
-  #     dept_data:
-  #       query:
-  #         domain: "carto-pays-nuls"
-  #   filters:
-  #     "bottom-right":
-  #       type: "buttons"
-  #       on: "Filter1"
-  #       datasets: ["dept_data"]
-  #   chartOptions:
-  #     chartType: "mapchart"
-  #     zones:
-  #       dataset: 'dept_data'
-  #       shapes: "world-topojson.json"
-  #       join:
-  #         shapes: "id"
-  #         data: "country_code"
-  #       color: "value"
-  #       label: "country"
-  #       meta: ["Why not?"]
-  #     tiles:{}
-  #     legend: true
-  #   id: 50004
-  # }
-
 ]
