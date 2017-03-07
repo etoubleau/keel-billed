@@ -19,8 +19,6 @@ slides: [
     level: 0
     id: 0
   }
-
-
   {
     level: 1
     title: "Fait marquants"
@@ -34,17 +32,12 @@ slides: [
   }
   {
     level: 1
-    title: "Femme & Sex"
-    id: 30
-  }
-  {
-    level: 1
     title: "Femme & Voitures"
     id: 40
   }
   {
     level: 1
-    title: "Femme tech"
+    title: "Femme & tech"
     id: 50
   }
   {
@@ -119,7 +112,7 @@ slides: [
     commentary: "Entre 2014 et 2015 on remarque que moins d'un tiers des personnages de films des plus grands studios d'Hollywood sont féminins... man's man's world."
     source: 'USC Annenberg.,as of Feb. 22, 2016'
 
-    commentary: "'Media is the face the US gives to the world. And if the women's part of our country isn't part of that face, then they are not getting the whole picture' - Jane Fonda"
+    # commentary: "'Media is the face the US gives to the world. And if the women's part of our country isn't part of that face, then they are not getting the whole picture' - Jane Fonda"
     # source: 'Based on a sample of 11,306 speaking characters in major studio movies released in 2014 and TV shows released between Sep. 2014 and Aug. 2015. USC Annenberg.,as of Feb. 22, 2016'
 
     id: 3002

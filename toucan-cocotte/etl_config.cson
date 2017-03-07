@@ -2,7 +2,7 @@
   DATA_SOURCES: [
     domain: "oestro"
     type: "excel"
-    file: "oestro.xlsx"
+    file: "oestro.xls"
     sheetname: null
   ,
     domain: "bachelors"
@@ -23,17 +23,17 @@
     sheetname: 'box_office'
     domain: 'box_office'
     type: 'excel'
-    file: 'movies.xlsx'
+    file: 'movies.xls'
   ,
     sheetname: 'speaking_characters'
     domain: 'speaking_characters'
     type: 'excel'
-    file: 'movies.xlsx'
+    file: 'movies.xls'
   ,
     sheetname: 'disney'
     domain: 'disney'
     type: 'excel'
-    file: 'movies.xlsx'
+    file: 'movies.xls'
   ,
     domain: 'reports'
     type: 'csv'
@@ -67,7 +67,7 @@
     sheetname: 'salary'
     domain: 'salary'
     type: 'excel'
-    file: 'movies.xlsx'
+    file: 'movies.xls'
   ,
     domain: "sport"
     type: "google_spreadsheet"
