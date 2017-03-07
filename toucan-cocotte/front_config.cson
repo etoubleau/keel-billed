@@ -23,44 +23,44 @@ slides: [
 
   {
     level: 1
-    title: "Fun Facts"
+    title: "Fait marquants"
     id: 10
 
   }
   {
     level: 1
-    title: "Women & Cinema"
+    title: "Femme & Cinema"
     id: 20
   }
   {
     level: 1
-    title: "Women & Sex"
+    title: "Femme & Sex"
     id: 30
   }
   {
     level: 1
-    title: "Women & Cars"
+    title: "Femme & Voitures"
     id: 40
   }
   {
     level: 1
-    title: "Women in tech"
+    title: "Femme tech"
     id: 50
   }
   {
     level: 1
-    title: "Women & Sports"
+    title: "Femme & Sport"
     id: 70
   }
   {
     level: 1
-    title: "Let's talk about sex"
+    title: "Sexualité"
     id: 60
   }
   {
     level: 3
-    title: "Faits marquants"
-    commentary: "Quelques faits marquants de l'histoire des femmes du XXe siècle"
+    title: "Super Women"
+    commentary: "Découvrez les femmes qui ont marqué le monde du XX ème siècle"
     parent_id: 10
     id: 30207
     chartOptions:
@@ -85,9 +85,8 @@ slides: [
   }
   {
     level: 3
-    title: 'Box office 2016'
-
-    commentary: "'An actress can only play a woman. I'm an actor, I can play anything' - Woophi Goldberg"
+    title: 'Box Office 2016'
+    commentary: "It's a man's man's man's world chantait James Brown ! Ca n'a pas changé. Voici la représentation des femmes dans les dialogues et les personnages des films du box office 2016"
 
     parent_id: 20
     source: 'https://proquestionasker.github.io/projects/MovieDialogueInteractive/'
@@ -114,10 +113,10 @@ slides: [
   }
   {
     level: 3
-    title: 'Speaking Characters in Hollywood Film and TV'
+    title: 'Hollywood ? Not so good'
     parent_id: 20
 
-    commentary: "Based on a sample of 11,306 speaking characters in major studio movies released in 2014 and TV shows released between Sep. 2014 and Aug. 2015"
+    commentary: "Entre 2014 et 2015 on remarque que moins d'un tiers des personnages de films des plus grands studios d'Hollywood sont féminins... man's man's world."
     source: 'USC Annenberg.,as of Feb. 22, 2016'
 
     commentary: "'Media is the face the US gives to the world. And if the women's part of our country isn't part of that face, then they are not getting the whole picture' - Jane Fonda"
@@ -142,10 +141,10 @@ slides: [
   }
   {
     level: 3
-    title: "Farming...boring?"
+    title: "La ferme ou les flingues ?"
     parent_id: 20
     source:'https://en.wikipedia.org/wiki/Women_and_video_games'
-    commentary:'Some commonplace are true :) Women love farming whereas men are after sports and shooting'
+    commentary:'Certains stéréotypes sont vrais, les femmes aiment les jeux de ferme alors que les hommes aiment tirer au pistolet'
 
     chartOptions:
       data:
@@ -175,9 +174,9 @@ slides: [
     level: 3
     parent_id: 20
     id: 10002
-    title: "Why do you play?"
+    title: "Pourquoi tu joues ?"
     source:'https://en.wikipedia.org/wiki/Women_and_video_games'
-    commentary:'Women look for completion whereas men are after competition...no kidding!'
+    commentary:"Les femmes cherchent l'achèvement alors que les hommes cherchent la compétition"
 
     chartOptions:
       data:
@@ -204,8 +203,8 @@ slides: [
     level: 3
     parent_id: 20
     id: 10005
-    title:'Game on girls!'
-    commentary: "Women play more than men, and more and more"
+    title:'Joueuses ?'
+    commentary: "Les femmes jouent plus que les hommes, et de plus en plus"
     source:'Source : https://en.wikipedia.org/wiki/Women_and_video_games'
 
     chartOptions:
@@ -227,10 +226,10 @@ slides: [
   }
   {
     level: 3
-    title: "Drive safe"
+    title: "Femme au volant"
     parent_id: 40
 
-    commentary:"Men kill and die more on the road. Fore their own safety shouldn't they be forbiden to drive?"
+    commentary:"Les hommes commettent plus d'accidents graves et meurrent plus sur la route. Hommes au volant, mort au tournant !"
     source:'Source: http://www.securite-routiere.gouv.fr/medias/les-chiffres-de-la-route/les-hommes-et-les-femmes-sur-la-route'
 
     chartOptions:
@@ -261,9 +260,9 @@ slides: [
     parent_id: 40
 
     id: 10004
-    title: "Hit the road"
+    title: "Hit the road Jack"
     source:'http://www.telegraph.co.uk/news/uknews/road-and-rail-transport/11605509/Women-are-after-all-better-drivers-than-men.html'
-    commentary:"Women drive better (+ 12% on average). Let's say that again: women drive <strong>BETTER</strong>."
+    commentary:"Les femmes conduisent mieux (+ 12% en moyenne). Une nouvelle fois: les femmes conduisent <strong>MIEUX !</strong>."
 
     chartOptions:
       data:
@@ -292,11 +291,11 @@ slides: [
     parent_id: 50
 
 
-    commentary: "Glass Ceilling in Computer & Information Sciences:<br><small> Since 1983 it is the only <a target='_blank' href='https://en.wikipedia.org/wiki/Science,_technology,_engineering,_and_mathematics'>STEM</a> field in education where the ratio of women has consistenly decreased, which accounts for the lack of women in the field today</small>"
+    commentary: "Le plafond de verre en informatique et sciences de l'information:<br><small> Depuis 1983 c'est la seule <a target='_blank' href='https://en.wikipedia.org/wiki/Science,_technology,_engineering,_and_mathematics'>STEM</a> spécialité dans laquelle le quota de femmes est en baisse constante, ce qui explique le peu de femme dans l'univers tech aujourd'hui</small>"
 
     id: 1000001
     source: "Digest of education statistics: https://nces.ed.gov/programs/digest/"
-    title: "Where are the women?"
+    title: "Où sont les femmes ?"
 
     chartOptions:
       data:
@@ -329,12 +328,12 @@ slides: [
     level: 3
 
     parent_id: 50
-    commentary: "Hard and Software companies are the less feminized companies<br> Interestingly <em>leadership roles</em> present much less inequality than other roles"
+    commentary: "L'équilibre homme/femme en entreprise de Hard et Software est plus bas que la moyenne.<br> Cependant<em>les rôles de leaders en entreprises tech</em> présentent moins d'inégalités"
 
     source: "https://women-in-software.silk.co"
     id: 1000002
 
-    title: "Women are leaders in Tech Companies"
+    title: "Les femmes Tech sont des leaders"
 
     filters:
       "bottom-right":
@@ -398,9 +397,9 @@ slides: [
 }
 {
     level: 3
-    title: 'Best Paid Actors 2016'
+    title: 'Les acteurs sont mieux payés'
 
-    commentary: "'It can be painful. Your salary is a way to quantify what you're worth. If men are being paid a lot more for doing the same thing, it feels shitty.' - Gwenyth Paltrow (Variety, October 2015)<br>'The only kind of movie where women make more than men is in the porno industry' - Salma Hayek"
+    commentary: "'Ca fait souvent mal. Votre salaire est un moyen de quantifier votre valeur. Si les hommes sont beaucoup mieux payés pour faire la même chose, on se sent mal' - Gwenyth Paltrow (Variety, October 2015)<br>'Les seuls types de films dans lesquels les femmes sont mieux payés que les hommes, c'est dans l'industrie du porno' - Salma Hayek"
 
     parent_id: 20
     source: 'Forbes'
@@ -424,7 +423,7 @@ slides: [
   }
   {
     level: 3
-    title: "High school inequalities"
+    title: "Inégalités au lycée"
     parent_id: 70
     id: 70001
     recommendation:
@@ -432,7 +431,7 @@ slides: [
       content: """
         Scholarships are in $.
       """
-    commentary: "Women are under represented in sports, get only 46% of scholarships. Exception in Volleyball where the uniform seems to be the sport main attract."
+    commentary: "Les femmes sont moins représentées en sport, à ce titre elles n'accèdent qu'à 46% des bourses d'études. A l'exception du Volleyball dans lequel l'uniforme semble être l'élément attractif."
     source: "Datasource: https://magic.piktochart.com/output/2101560-mens-vs-womens-sports"
 
 
@@ -473,7 +472,7 @@ slides: [
   }
   {
     level: 3
-    title: "Coverage"
+    title: "Représentation"
     parent_id: 70
     id: 70002
     # commentary: "Women are under represented in sports, get only 46% of scholarships. Exception in Volleyball where the uniform seems to be the sport main attract."
