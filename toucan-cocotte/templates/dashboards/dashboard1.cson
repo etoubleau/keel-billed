@@ -1,67 +1,182 @@
-entityName: "{{ my_dashboard_name_column }}"
-#For a given report if there is more than 1 dashboard which one shall be selected by default?
-#In your dashboard dataset add a 'default' column containing the value 1 if the row corresponds to the default dashboard you want to display and 0 otherwise.
-default: "{{ my_dashboard_default_column | bool }}"
-
-categories: [
-    name: "Dash 1 Dashboard dependent data"
-    kpis: [
-      name: "From dashboard data"
-      source: "2016, Toucan Toco"
-      type: "value"
-      #The {{}} templating notation allow you to access all the columns of the current dashboard {{the_column_name}}
-      value: "{{ value }}"
-    ,
-      name: "From other data source"
-      source: "2016, Toucan Toco"
-      
-      type: "value-dynamic"
-      
-      data: 
-        value:
-          query:
-            domain: "my_dashboards_data"
-            #Using the {{}} I can refer to the dashboard data column containing the column name and thus filter the data to display only the rows
-            #corresponding to the current dashboard
-            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
-            #Using the <%= requestersManager.id => you can access the current date selected by the user.
-            #the "id" corresponds to the name you have choser in your report template (templates > reports > my_report.cson)
-            #If you have a column containing the Period you can then filter the data to display only the data corresponding to the current Period selection.
-            report_period: "<%= requestersManager.my_date_selector %>"
-          field: "metric1"
-      
-      precision: 
-        value: ".1f"
-      
-      value: "value"
+﻿
+'default': true
+'report': '{{ report_id }}'
+'entityName': '{{ dash }}'
+'id': '{{ index }}'
+'categories': [
+  {
+    'kpis': [
+      {
+        'name': 'Productrices à Hollywood'
+        'data': 'value':
+          'query':
+            'domain': 'dash-all'
+            'ecran': 'hollywood'
+          'field': 'value'
+        'precision': 'value': '.0f'
+        'value': 'value'
+        'source': 'vs 64% pour les hommes'
+        'slide': ''
+        'type': 'value-dynamic'
+        'id': 0
+        'unit': '%'
+      }
+      {
+        'src': 'meryl.jpg'
+        'type': 'media-img'
+      }
+      {
+        'source': 'en terme de temps de dialogue pour les femmes'
+        'slide': 50001
+        'type': 'leaderboard'
+        'name': 'Flop 3 du Box Office US'
+        'chartOptions':
+          'units': 'value': ' %'
+          'data':
+            'query':
+              'domain': 'dash-all'
+              'ecran': 'flop 3'
+            'precision': 'value': ',.0f'
+          'value': 'value'
+          'label': 'label'
+      }
     ]
-  ,
-    name: "Dash 1 Report dependent data"
-    kpis: [
-      name: "From other data source"
-      source: "2016, Toucan Toco"
-      
-      type: "value-dynamic"
-      
-      data: 
-        value:
-          query:
-            domain: "my_reports_data"
-            #Using the <%= report.id => you can access all the columns in the reports data of the current report if you have given them an id.
-            #the "id" corresponds to the name you have choser in your report template (templates > reports > my_report.cson)
-            #the attribution of an id is done with the syntax : entityName = {{colum in the report data containing the entity name}}
-            my_report_name_column: "<%= report.entityName %>"
-            #same as above!
-            report_period: "<%= requestersManager.my_date_selector %>"
-          field: "metric2"
-      
-      precision: 
-        value: ".1f"
-      
-      value: "value"
+    'name': 'Sous les feux de la rampe'
+  }
+  {
+    'kpis': [
+      {
+        'name': 'Accidents de la route provoqués'
+        'data': 'value':
+          'query':
+            'domain': 'dash-all'
+            'ecran': 'route'
+          'field': 'value'
+        'precision': 'value': '.0f'
+        'value': 'value'
+        'source': 'vs 64% pour les hommes'
+        'slide': ''
+        'type': 'value-dynamic'
+        'id': 0
+        'unit': '%'
+      }
+      {
+        'name': 'Coupent la route'
+        'data': 'value':
+          'query':
+            'domain': 'dash-all'
+            'ecran': 'couper'
+          'field': 'value'
+        'precision': 'value': '.0f'
+        'value': 'value'
+        'source': 'vs 14% pour les hommes lors d\'un test d\'observation'
+        'slide': ''
+        'type': 'value-dynamic'
+        'id': 0
+        'unit': '%'
+      }
     ]
+    'name': 'Faisons taire les machos!'
+  }
+  {
+    'kpis': [
+      {
+        'src': 'equal.jpg'
+        'type': 'media-img'
+      }
+      {
+        'source': 'pornhub.com/insights'
+        'slide': 50001
+        'type': 'leaderboard'
+        'name': 'Top 3 recherches sites X'
+        'chartOptions':
+          'units': 'value': ' '
+          'data':
+            'query': 'domain': 'categories-porn'
+            'precision': 'value': ',.0f'
+          'value': 'value'
+          'label': 'label'
+      }
+      {
+        'type': 'media-video'
+        'id': 'YEQPpzHsHjk'
+        'provider': 'youtube'
+      }
+    ]
+    'name': 'Girls wanna have fun!'
+  }
+  {
+    'kpis': [
+      {
+        'source': 'En 20 ans, la parité du secteur a diminué de moitié'
+        'type': 'line'
+        'name': 'Evolution parité dans la tech'
+        'chartOptions':
+          'date': 'Year'
+          'data':
+            'query':
+              'domain': 'bachelors'
+              'Degree': 'Computer & Information Sciences'
+            'precision': 'value': ',.2%'
+            'unit': 'value': ' %'
+          'value': 'value'
+      }
+      {
+        'name': 'Moyenne des femmes managers'
+        'data': 'value':
+          'query':
+            'domain': 'dash-all'
+            'ecran': 'tech'
+          'field': 'value'
+        'precision': 'value': '.0f'
+        'value': 'value'
+        'source': 'vs 14% pour les hommes lors d\'un test d\'observation'
+        'slide': ''
+        'type': 'value-dynamic'
+        'id': 0
+        'unit': '%'
+      }
+    ]
+    'name': 'Les Femmes et la tech'
+  }
+  {
+    'kpis': [
+      {
+        'name': 'Au Comité exécutif FIFA'
+        'data': 'value':
+          'query':
+            'domain': 'dash-all'
+            'ecran': 'fifa-femmes'
+          'field': 'value'
+        'precision': 'value': '.0f'
+        'value': 'value'
+        'source': ''
+        'slide': ''
+        'type': 'value-dynamic'
+        'id': 0
+        'unit': ' femmes'
+      }
+      {
+        'type': 'media-video'
+        'id': 'NqBHQ-8Bs9Q'
+        'provider': 'youtube'
+      }
+      {
+        'name': 'Au Comité exécutif FIFA'
+        'data': 'value':
+          'query':
+            'domain': 'dash-all'
+            'ecran': 'fifa-hommes'
+          'field': 'value'
+        'precision': 'value': '.0f'
+        'value': 'value'
+        'source': ''
+        'slide': ''
+        'type': 'value-dynamic'
+        'id': 0
+        'unit': ' hommes'
+      }
+    ]
+    'name': 'Et le sport alors?'
+  }
 ]
-
-#do not change those parameters!!
-id: "{{ index }}"
-report: "{{ report_id }}"
