@@ -9,18 +9,6 @@ glossary:
 
   ]
 
-#Below are the parameters of the report selector (main home page)
-home:
-  search:
-    #Choose the text you want to display in front of the selection
-    text: 'Dashboard of'
-    #Text to display as a placeholder before selections are made
-    placeholder: 'A Bird Species'
-    #additonal information about the reseach that is display below the search bar
-    helper: 'Please enter the first 3 letters of your report '
-
-  widget:
-    type: "list" # Can also be 'list'
 
 slides: [
   {
@@ -29,12 +17,32 @@ slides: [
   }
   {
     level: 1
-    title: "Report dynamic slides"
+    title: "Faits Marquants"
     id: 10
   }
   {
     level: 1
-    title: "Sports"
+    title: "Women & Cinema"
+    id: 20
+  }
+  {
+    level: 1
+    title: "Women & Sex"
+    id: 30
+  }
+  {
+    level: 1
+    title: "Women & Cars"
+    id: 40
+  }
+  {
+    level: 1
+    title: "Women in tech"
+    id: 50
+  }
+  {
+    level: 1
+    title: "Women & Sports"
     id: 70
   }
   {
@@ -66,7 +74,7 @@ slides: [
   {
     level: 3
     title: 'Box office 2016'
-    parent_id: 10
+    parent_id: 20
     source: 'https://proquestionasker.github.io/projects/MovieDialogueInteractive/'
     filters: 'bottom-right':
       on: 'metric'
@@ -91,7 +99,7 @@ slides: [
   {
     level: 3
     title: 'Speaking Characters in Hollywood Film and TV'
-    parent_id: 10
+    parent_id: 20
     commentary: "Based on a sample of 11,306 speaking characters in major studio movies released in 2014 and TV shows released between Sep. 2014 and Aug. 2015"
     source: 'USC Annenberg.,as of Feb. 22, 2016'
     id: 3002
@@ -144,7 +152,7 @@ slides: [
   }
   {
     level: 3
-    parent_id: 10
+    parent_id: 20
     id: 10002
     title: "Why do you play?"
     source:'https://en.wikipedia.org/wiki/Women_and_video_games'
@@ -173,7 +181,7 @@ slides: [
   }
   {
     level: 3
-    parent_id: 10
+    parent_id: 20
     id: 10005
     title:'Game on girls!'
     commentary: "Women play more than men, and more and more"
@@ -199,7 +207,7 @@ slides: [
   {
     level: 3
     title: "Drive safe"
-    parent_id: 10
+    parent_id: 40
     commentary:"Men kill and die more on the road. Fore their own safety shouldn't they be forbiden to drive?"
     source:'Source: http://www.securite-routiere.gouv.fr/medias/les-chiffres-de-la-route/les-hommes-et-les-femmes-sur-la-route'
 
@@ -227,7 +235,7 @@ slides: [
   }
   {
     level: 3
-    parent_id: 10
+    parent_id: 40
     id: 10004
     title: "Hit the road"
     source:'http://www.telegraph.co.uk/news/uknews/road-and-rail-transport/11605509/Women-are-after-all-better-drivers-than-men.html'
@@ -256,7 +264,7 @@ slides: [
   }
   {
     level: 3
-    parent_id: 10
+    parent_id: 50
     commentary: "Glass Ceilling in Computer & Information"
     id: 1000001
     source: "Digest of education statistics: https://nces.ed.gov/programs/digest/"
@@ -285,7 +293,7 @@ slides: [
   }
   {
     level: 3
-    parent_id: 10
+    parent_id: 50
     commentary: "Ratio of Women in workforce on the tech giants"
     source: "https://women-in-software.silk.co"
     id: 1000002
@@ -355,7 +363,7 @@ slides: [
 {
     level: 3
     title: 'Best Paid Actors 2016'
-    parent_id: 10
+    parent_id: 20
     source: 'Forbes'
     id: 3004
     filters: "bottom-right":
