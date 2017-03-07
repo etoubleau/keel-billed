@@ -3,3 +3,5 @@ id: "{{ index }}"
 date: 'March 8th 2017'
 
 execsumNote: "* Crafted with <strong><3</strong> by the Toucan Team"#footnote
+
+execsumTitle:"Toucan Cocotte<br><strong><small>Pour explorer les données, cliquez sur le menu en haut à gauche de votre écran</strong></small>"
