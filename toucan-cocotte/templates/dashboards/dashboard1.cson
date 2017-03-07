@@ -1,12 +1,131 @@
 entityName: "{{ dash }}"
-#For a given report if there is more than 1 dashboard which one shall be selected by default?
-#In your dashboard dataset add a 'default' column containing the value 1 if the row corresponds to the default dashboard you want to display and 0 otherwise.
 default: true
+id: "{{ index }}"
+report: "{{ report_id }}"
 
 categories: [
-   name: "Girls wanna have fun!"
+  name: "Sous les feux de la rampe"
   kpis: [
-    name: "Top searches by women on Pornhub"
+    name: "Producteurs à Hollywood"
+    type: 'value-dynamic'
+    value: "value"
+    unit: "% de femmes"
+    slide: ""
+
+    # sentiment:
+    #   value:
+    #     domain: ['comparison']
+    #     range: ['negative','positive']
+    precision:
+      value: '.0f'
+    data:
+      value:
+        query:
+          domain: "dash-all"
+          ecran: "hollywood"
+
+        field: "value"
+      # comparison:
+      #   query:
+      #     domain: "dashboards"
+      #     country: "France"
+      #     default: 1
+      #   field: "target"
+    # compute:
+    #   badge: 'value - comparison'
+    source: "vs 67% pour les hommes"
+    id: 0
+  ,
+    type: "media-img"
+    src: "meryl.jpg"
+  ,
+    name: "Flop 3 du Box Office US"
+    type: "leaderboard"
+    chartOptions:
+      value: "value"
+      label: "label"
+      data:
+        query:
+          domain: "dash-all"
+          ecran: "flop 3"
+        precision: value: ",.0f"
+      units:
+        value: " %"
+    source: "en temps de dialogue pour les femmes"
+    slide: 50001
+
+  ]
+,
+  name: "Faisons taire les machos!"
+  kpis: [
+    name: "Accidents de la route provoqués"
+    type: 'value-dynamic'
+    value: "value"
+    unit: "% par les femmes"
+    slide: ""
+
+    # sentiment:
+    #   value:
+    #     domain: ['comparison']
+    #     range: ['negative','positive']
+    precision:
+      value: '.0f'
+    data:
+      value:
+        query:
+          domain: "dash-all"
+          ecran: "route"
+
+        field: "value"
+      # comparison:
+      #   query:
+      #     domain: "dashboards"
+      #     country: "France"
+      #     default: 1
+      #   field: "target"
+    # compute:
+    #   badge: 'value - comparison'
+    source: "vs 64% pour les hommes"
+    id: 0
+  ,
+    name: "Coupent la route"
+    type: 'value-dynamic'
+    value: "value"
+    unit: "% de femmes (seulement)"
+    slide: ""
+
+    # sentiment:
+    #   value:
+    #     domain: ['comparison']
+    #     range: ['negative','positive']
+    precision:
+      value: '.0f'
+    data:
+      value:
+        query:
+          domain: "dash-all"
+          ecran: "couper"
+
+        field: "value"
+      # comparison:
+      #   query:
+      #     domain: "dashboards"
+      #     country: "France"
+      #     default: 1
+      #   field: "target"
+    # compute:
+    #   badge: 'value - comparison'
+    source: "vs 14% pour les hommes lors d'un test d'observation"
+    id: 0
+  ]
+,
+  name: "Girls wanna have fun!"
+  kpis: [
+
+    type: "media-img"
+    src: "equal.jpg"
+  ,
+    name: "Top 3 recherches sur sites X"
     type: "leaderboard"
     chartOptions:
       value: "value"
@@ -24,8 +143,120 @@ categories: [
     provider: 'youtube'
     id: "YEQPpzHsHjk"
   ]
-]
 
+,
+  name: "Les Femmes et la tech"
+  kpis: [
+    name: "Evolution parité dans la tech"
+    type: "line"
+    chartOptions:
+      value: "value"
+      date: "Year"
+      data:
+        query:
+          domain: 'bachelors'
+          Degree: "Computer & Information Sciences"
+
+        unit: value: " %"
+        precision: value: ",.2%"
+    source: "En 20 ans, la parité du secteur a diminué de moitié"
+
+  ,
+    name: "Chez les managers d'entreprises tech"
+    type: 'value-dynamic'
+    value: "value"
+    unit: "% sont des femmes"
+    slide: ""
+
+    # sentiment:
+    #   value:
+    #     domain: ['comparison']
+    #     range: ['negative','positive']
+    precision:
+      value: '.0f'
+    data:
+      value:
+        query:
+          domain: "dash-all"
+          ecran: "tech"
+
+        field: "value"
+      # comparison:
+      #   query:
+      #     domain: "dashboards"
+      #     country: "France"
+      #     default: 1
+      #   field: "target"
+    # compute:
+    #   badge: 'value - comparison'
+    source: ""
+  ]
+,
+  name: "Et le sport alors?"
+  kpis: [
+    name: "Au Comité exécutif FIFA, on trouve"
+    type: 'value-dynamic'
+    value: "value"
+    unit: " femmes"
+    slide: ""
+
+    # sentiment:
+    #   value:
+    #     domain: ['comparison']
+    #     range: ['negative','positive']
+    precision:
+      value: '.0f'
+    data:
+      value:
+        query:
+          domain: "dash-all"
+          ecran: "fifa-femmes"
+
+        field: "value"
+      # comparison:
+      #   query:
+      #     domain: "dashboards"
+      #     country: "France"
+      #     default: 1
+      #   field: "target"
+    # compute:
+    #   badge: 'value - comparison'
+    source: ""
+    id: 0
+  ,
+    type: "media-video"
+    provider: 'youtube'
+    id: "NqBHQ-8Bs9Q"
+  ,
+    name: "Le même Comité rassemble..."
+    type: 'value-dynamic'
+    value: "value"
+    unit: " hommes"
+    slide: ""
+
+    # sentiment:
+    #   value:
+    #     domain: ['comparison']
+    #     range: ['negative','positive']
+    precision:
+      value: '.0f'
+    data:
+      value:
+        query:
+          domain: "dash-all"
+          ecran: "fifa-hommes"
+
+        field: "value"
+      # comparison:
+      #   query:
+      #     domain: "dashboards"
+      #     country: "France"
+      #     default: 1
+      #   field: "target"
+    # compute:
+    #   badge: 'value - comparison'
+    source: ""
+    id: 0
+  ]
+]
 #do not change those parameters!!
-id: "{{ index }}"
-report: "{{ report_id }}"

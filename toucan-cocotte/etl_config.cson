@@ -48,6 +48,11 @@
     spreadsheet_id: '1CETTP1hzjzn9giumYIBePQe6x-0dlobiOjGUCM7QGeI'
     sheetname: "categories-porn"
   ,
+    domain: "dash-all"
+    type: "google_spreadsheet"
+    spreadsheet_id: '1CETTP1hzjzn9giumYIBePQe6x-0dlobiOjGUCM7QGeI'
+    sheetname: "dash-all"
+  ,
     domain: "country-porn"
     type: "google_spreadsheet"
     spreadsheet_id: '1CETTP1hzjzn9giumYIBePQe6x-0dlobiOjGUCM7QGeI'
