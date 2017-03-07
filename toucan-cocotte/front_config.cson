@@ -73,12 +73,14 @@ slides: [
   {
     level: 3
     title: 'Box office 2016'
+    commentary: "'An actress can only play a woman. I'm an actor, I can play anything' - Woophi Goldberg"
     parent_id: 20
     source: 'https://proquestionasker.github.io/projects/MovieDialogueInteractive/'
     filters: 'bottom-right':
       on: 'metric'
       type: 'buttons'
     id: 3001
+    commentary:
     chartOptions:
       chartType: "stackedBarchart"
       unstackable: true
@@ -99,8 +101,8 @@ slides: [
     level: 3
     title: 'Speaking Characters in Hollywood Film and TV'
     parent_id: 20
-    commentary: "Based on a sample of 11,306 speaking characters in major studio movies released in 2014 and TV shows released between Sep. 2014 and Aug. 2015"
-    source: 'USC Annenberg.,as of Feb. 22, 2016'
+    commentary: "'Media is the face the US gives to the world. And if the women's part of our country isn't part of that face, then they are not getting the whole picture' - Jane Fonda"
+    source: 'Based on a sample of 11,306 speaking characters in major studio movies released in 2014 and TV shows released between Sep. 2014 and Aug. 2015. USC Annenberg.,as of Feb. 22, 2016'
     id: 3002
     chartOptions:
       chartType: "stackedBarchart"
@@ -369,6 +371,7 @@ slides: [
 {
     level: 3
     title: 'Best Paid Actors 2016'
+    commentary: "'It can be painful. Your salary is a way to quantify what you're worth. If men are being paid a lot more for doing the same thing, it feels shitty.' - Gwenyth Paltrow (Variety, October 2015)<br>'The only kind of movie where women make more than men is in the porno industry' - Salma Hayek"
     parent_id: 20
     source: 'Forbes'
     id: 3004
@@ -548,8 +551,9 @@ slides: [
   }
     {
     level: 3
-    title: 'Disney'
+    title: 'Disney Princesses?'
     parent_id: 20
+    commentary: "'How dare you? All of you! Standing around deciding my future. I am not a prize to be won' - Princess Jasmine"
     source: 'IMDB and http://polygraph.cool/films/'
     id: 3003
     chartOptions:
