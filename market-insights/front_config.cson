@@ -74,11 +74,16 @@
         'chartType': 'linechart'
         events: [
           {
-            date: "05/2015"
+            date: "05/2016"
             label: "Luxury brand"
             name: "New collection launched"
           }]
-        'data': 'query': 'domain': 'growth'
+        'data':
+          'query':
+            'domain': 'growth'
+          date:
+            selector: "date"
+            format: "%m/%Y"
         'id': 0
         'size': 0.25
       }
@@ -94,6 +99,9 @@
         'data':
           'query':
             'domain': 'growth-slave'
+          date:
+            selector: "date"
+            format: "%m/%Y"
           'precision':
             'value': ".1f"
           'order':
@@ -122,10 +130,15 @@
     'chartOptions':
       'value': 'value'
       'label': 'label'
-      'sublabel': 'label_sublevel'
-      'units': 'value': ' '
-      'chartType': 'waterfall'
-      'data': 'query': 'domain': 'top-10'
+      'groups': "groups"
+      'units': 'value': ' %'
+      'chartType': 'waterfallchart'
+      'data':
+        'query':
+          'domain': 'top-10'
+        precision:
+          value: ",.2f"
+
   }
   {
     'title': 'Top division'
@@ -145,6 +158,8 @@
       sparklines:
         orderDates: true
         value: "value"
+        units: value: "M€"
+        legend: "12 months variation"
         joins: [
           "label"
         ]
@@ -192,11 +207,7 @@
           format: '%m/%Y'
 
       chartType: "linechart"
-      filters:
-        "upper-middle":
-          on: "type"
-          type: "buttons"
-          defaultSelected: "budget"
+
       units:
         value: "%"
       events: [
@@ -215,7 +226,7 @@
       groups: "group"
       date: "date"
       legend: true
-      tickFormat: "%b"
+      # tickFormat: "%b"
   }
   {
     'title': 'Investments'
@@ -244,7 +255,7 @@
         'r': 'M€'
       'chartType': 'bubblechart'
       quadrants:
-        x: 25
+        x: 20
         y: 80
         labels: ['Perte de vitesse','Trajectoire d\'excellence','Décrochage','Zone d\'ascencion']
         sentiments: ['warning','positive','negative','warning']
@@ -295,7 +306,7 @@
       'chartType': 'horizontalBarchart'
       'data':
         'query': 'domain': 'versus'
-        'precision': 1
+        'precision': evolution: ",.2f"
   }
 ]
 'sharingOptions': true

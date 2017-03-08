@@ -14,7 +14,7 @@ categories: [
     value: "value"
     comment: "<%=\' \' + evolution + \' vs last year\'%>"
     unit: " M€"
-    slide: 30000
+    slide: 101
     badge: 'evolution'
     sentiment:
       evolution:
@@ -28,20 +28,26 @@ categories: [
         query:[
           $match:
             domain: "average"
-            type: "luxury"
+            type: "luxury-division"
         ]
         field: "value"
       comparison:
         query:[
           $match:
             domain: "average"
-            type: "luxury"
+            type: "luxury-division"
         ]
         field: "budget"
     compute:
       evolution: '(value - comparison)/comparison'
     # source: "2016, source Smart Toucan"
     id: 0
+
+  ,
+    type: "media-img"
+    src: "lawrencej"
+    chartOptions:
+      bgSize: "contain"
   ,
     name: 'Top 3 division'
     type: 'leaderboard'
@@ -54,7 +60,7 @@ categories: [
       'value': 'value'
       'label': 'label'
     source: '2016, internal source'
-    slide: 30001
+    slide: 201
 
 
   ]
@@ -67,7 +73,7 @@ categories: [
     value: "value"
     comment: "<%=\' \' + evolution + \' vs previous month\'%>"
     unit: " %"
-    slide: 30000
+    slide: 10101
     badge: 'evolution'
     sentiment:
       evolution:
@@ -81,7 +87,7 @@ categories: [
         query:[
           $match:
             domain: "average"
-            type: "value-share"
+            type: "value-share-division"
         ]
         field: "value"
       comparison:
@@ -89,7 +95,7 @@ categories: [
           $match:
             domain: "average"
 
-            type: "value-share"
+            type: "value-share-division"
         ]
         field: "budget"
     compute:
@@ -107,7 +113,7 @@ categories: [
           domain: 'budget-evolution'
           type: "value-share"
     unit: " %"
-    slide: 30000
+    slide: 10101
   ,
     type: "separator"
   ,
@@ -116,7 +122,7 @@ categories: [
     value: "value"
     comment: "<%=\' \' + evolution + \' vs previous month\'%>"
     unit: " %"
-    slide: 30000
+    slide: 35201
     badge: 'evolution'
     sentiment:
       evolution:
@@ -151,7 +157,7 @@ categories: [
     value: "value"
     comment: "<%=\' \' + evolution + \' vs previous month\'%>"
     unit: " %"
-    slide: 30000
+    slide: 10101
     badge: 'evolution'
     sentiment:
       evolution:
