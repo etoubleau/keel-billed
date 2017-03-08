@@ -1,0 +1,398 @@
+﻿
+'settings':
+  'comparison':
+    'description': "Changez la période d'analyse"
+    'values': [
+      "Semaine"
+      "Mois"
+      "Trimestre"
+      "Semestre"
+      "Année"
+    ]
+    'default': "mois"
+    'type': "radio"
+'slidePdfEnabled': true
+'dashboardPdfEnabled': true
+'defaultSettingsTab': 'data'
+'sharingOptions': true
+'offline': 'all'
+'home': 'skipToReport': 0
+glossary:
+  title: 'Glossary'
+  terms: [
+
+    'term': 'CPM'
+    'meaning': 'The Cost Per Thousand denotes the price of 1,000 advertisement impressions on one media vehicle'
+  ,
+
+    'term': 'Exposure'
+    'meaning': ' Consumers who have seen or heard a media vehicle, whether or not they paid attention to it'
+  ,
+
+    'term': 'GRP'
+    'meaning': 'The Gross Rating Point is  is a measure of the size of an advertising campaign by a specific medium or schedule. It does not measure the size of the audience reached. Rather, GRPs quantify impressions as a percentage of the target population, and this percentage may thus be greater than, or in fact much greater than, 100'
+  ,
+
+    'term': 'Coverage'
+    'meaning': 'Estimated number of customers or prospects of a brand or product reached by an advertisement or commercial. This number depends on the readership (or listenership or viewership) of the media vehicle used'
+
+]
+'comments': true
+'slides': [
+  {
+    'id': 0
+    'level': 0
+  }
+
+  {
+    'title': 'Performance'
+    'id': 20
+    'level': 1
+  }
+  {
+    'title': 'Marketing Funnel'
+    'id': 30
+    'level': 1
+  }
+  {
+    'title': 'Network Offer'
+    'id': 10
+    'level': 1
+  }
+  {
+    'datasets': 'map_agglo': 'query': 'domain': 'operational'
+    'title': 'City map ad places'
+    'level': 3
+    'parent_id': 10
+    'id': 20004
+    'chartOptions':
+      'chartType': 'mapchart'
+      'tiles': {}
+      'requesters': 'upper-right':
+        'datasets': [ 'map_agglo' ]
+        'default': 'Lyon'
+        'fields': [ 'agglomeration_commerciale' ]
+        'query': 'domain': 'operational'
+        'type': 'dropdown'
+        'id': 'agglo'
+      'markers':
+        'opacity': 0.8
+        'color': 'format_cat'
+        'longitude': 'longitude'
+        'label': 'adresse1'
+        'latitude': 'latitude'
+        'dataset': 'map_agglo'
+      'legend': true
+  }
+  {
+    'level': 3
+    'title': 'CPM vs Exposure'
+    'parent_id': 10
+    'filters': 'bottom-right':
+      'on': 'gamme'
+      'defaultSelected': 'Tous'
+      'type': 'buttons'
+      'defaultSelected': 'Paris'
+      'order': 'custom': [
+        'Tous'
+        'Europe'
+        'France'
+        'Paris'
+      ]
+    'id': 10005
+    'chartOptions':
+      'withBenchmark': false
+      'fixedScale': false
+      'label': 'nom_dataviz'
+      'cy': 'Exposure'
+      'cx': 'CPM'
+      'filters':
+        'upper-right':
+          'reset': 'Tous'
+          'on': 'type'
+          'type': 'dropdown'
+        'upper-middle':
+          'on': 'label'
+          'defaultSelected': '18-24 ans'
+          'type': 'dropdown'
+      'units':
+        'cy': ' m'
+        'cx': ' €'
+        'r': ''
+      'chartType': 'bubblechart'
+      'r': 'Number of Spaces'
+      'data':
+        'query':
+          [
+            '$match':
+             'domain': 'CPM'
+             'gamme': {$in: ['Tous', 'Paris', 'Europe', 'France']}
+         ]
+
+      'legend':
+        'cy': 'Exposure'
+        'cx': 'CPM'
+        'r': 'Number of Spaces'
+  }
+  {
+    'parent_id': 10
+    'title': 'Coverage'
+    'id': 10004
+    'filters':
+      'bottom-right':
+        'on': 'type'
+        'type': 'buttons'
+        'datasets': [1]
+        'order': 'custom': [
+          'General'
+          'Traditional'
+          'Digital']
+
+    'charts': [
+      {
+        'chartType': 'linechart'
+        'data':
+          'query':
+            'domain': 'top-main'
+          'date':
+            'selector': 'date'
+            'format':  '%d/%m/%Y'
+
+        'units':
+          'value':  '€'
+        'crossfilter':
+          'on': 'date'
+          'datasets':[1]
+        'groups': 'group'
+        'value': 'value'
+        'date': 'date'
+
+        'size': 0.3
+        'style': 'secondary'
+        'cr': 4
+        'id': 0
+      }
+      {
+        'data':
+          'query':
+            'domain': 'top-slave'
+          'date':
+            'selector': 'date'
+            'format':  '%d/%m/%Y'
+
+        'chartType': 'horizontalBarchart'
+        'filters':
+          'upper-middle':
+            'reset': 'Tous'
+            'on': 'filter 1'
+            'type': 'dropdown'
+            'datasets': [1]
+        'sort': 'desc'
+        'value': 'couverture'
+        'label': 'nom_dataviz'
+        'average': 45
+        'averageText': 'National average'
+
+        'units':
+          'couverture': '%'
+          'evol': '%'
+
+
+        'legend': false
+        'level': 3
+        'variation': 'evol'
+        'variationLegend': 'Evolution vs. Y-1'
+        'id': 1
+      }
+    ]
+  }
+
+  {
+    'parent_id': 20
+    'title': 'Budget Evolution'
+    'id': 30000
+    'chartOptions':
+      'value': 'value'
+      'label': 'label'
+      'sublabel': 'sub_level'
+      'units': 'value': ' k€'
+      'chartType': 'waterfall'
+      'data':
+        'query': 'domain': 'Budget-Evolution'
+        'precision': 0
+    'level': 3
+  }
+  {
+    'level': 3
+    'title': 'Brand Plan'
+    'charts': [
+      {
+        'value': 'value'
+        'label': 'variable'
+        'labelsOrder': [
+          '01/07/2016'
+          '01/08/2016'
+          '01/09/2016'
+          '01/10/2016'
+          '01/11/2016'
+          '01/12/2016'
+          '01/01/2017'
+          '01/02/2017'
+          '01/03/2017'
+          '01/04/2017'
+          '01/05/2017'
+          '01/06/2017'
+        ]
+        'crossfilter':
+          'on': 'variable'
+          'datasets': [1]
+        'units': 'value': ' k€'
+        'chartType': 'barchart'
+        'data':
+          'date':
+            'format': '%d/%m/%Y'
+            'selector': 'variable'
+          'query': 'domain': 'Brand-plan1'
+          'precision': 'value': ',.0f'
+        'variation': 'evol'
+        'id': 0
+        'size': 0.3
+      }
+      {
+        'sort': 'desc'
+        'id': 1
+        'value': 'value'
+        'label': 'name'
+        'meta': [ 'Budget' ]
+        'units':
+          'Budget': ' k€'
+          'value': ' k€'
+        'chartType': 'horizontalBarchart'
+        'data':
+          'date':
+            'format': '%d/%m/%Y'
+            'selector': 'variable'
+          'query': 'domain': 'Brand-plan'
+        'legend': true
+        'size': 0.7
+      }
+    ]
+    'parent_id': 20
+    'filters': 'bottom-right':
+      'on': 'Level'
+      'datasets': [
+        1
+      ]
+      'type': 'buttons'
+      'order': 'custom': [
+        'General'
+        'Traditional'
+        'Digital'
+      ]
+    'id': 30001
+  }
+  {
+    'title': 'Spendings by channel yearly'
+    'level': 3
+    'parent_id': 20
+    'filters': 'bottom-right':
+      'on': 'variable'
+      'type': 'buttons'
+    'id': 30002
+    'chartOptions':
+      'sort': 'desc'
+      'groups': 'Media'
+      'unstackable': true
+      'value': 'value'
+      'label': 'day'
+      'labelsOrder': [
+        'janv-16'
+        'févr-16'
+        'mars-16'
+        'avr-16'
+        'mai-16'
+        'juin-16'
+        'juil-16'
+        'août-16'
+        'sept-16'
+        'Oct-16'
+        'Nov-16'
+        'déc-16'
+      ]
+      'filters': 'upper-right':
+        'on': 'product'
+        'type': 'dropdown'
+      'visualSelection': true
+      'units': 'value': [
+        {
+          'where': 'variable': 'amount'
+          'unit': 'k€'
+        }
+        {
+          'where': 'variable': '% per media'
+          'unit': ' '
+        }
+      ]
+      'chartType': 'stackedBarchart'
+      'data':
+        'query':
+          'domain': 'spendings'
+      'legend': true
+  }
+  {
+    'highlightedKpis': [
+      {
+        'compute': 'evolution': '100*value/comparison '
+        'name': 'Global conversion rate'
+        'sentiment': 'evolution':
+          'domain': [ 0 ]
+          'range': [
+            'positive'
+            'negative'
+          ]
+        'badge': 'evolution'
+        'precision':
+          'evolution': '+,.0f'
+          'value': ',.0f'
+        'value': 'evolution'
+        'data':
+          'comparison':
+            'query':
+              'variable': 'Add a product'
+              'domain': 'funnel'
+              'Vehicle': 'All Products'
+            'field': 'current'
+          'value':
+            'query':
+              'variable': 'Purchase'
+              'domain': 'funnel'
+              'Vehicle': 'All Products'
+            'field': 'current'
+        'unit': '%'
+      }
+      
+    ]
+    'title': 'Marketing Funnel'
+    'level': 3
+    'parent_id': 30
+    'id': 10003
+    'chartOptions':
+      'fakeFunnel': true
+      'value': 'current'
+      'label': 'variable'
+      'filters': 'upper-right':
+        'on': 'Vehicle'
+        'type': 'dropdown'
+      'units':
+        'current': [
+          { 'unit': ' ' }
+          {
+            'where': 'variable': 'Media spent'
+            'unit': ' €'
+          }
+        ]
+        'variation': '%'
+      'chartType': 'funnelChart'
+      'data': 'query': 'domain': 'funnel'
+  }
+]

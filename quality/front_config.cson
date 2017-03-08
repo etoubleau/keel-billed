@@ -1,0 +1,283 @@
+settings:
+  comparison:
+    description: "Sur tous les écrans de comparaison, comparer avec :"
+    values: [
+      "Par défaut"
+      "Entity A"
+      "Entity B"
+      "Entity C"
+    ]
+    default: "Par défaut"
+
+glossary:
+  title: 'Glossaire'
+  terms: [
+    term: "Churn rate"
+    meaning: "the percentage of subscribers to a service who discontinue their subscriptions to that service within a given time period"
+  ,
+    term: "Activation"
+    meaning: "Number of clients who went from inactive to active within 12 months"
+  ,
+    term: "Deactivation"
+    meaning: "Number of clients who went from active to inactive within 12 months"
+  ]
+
+slidePdfEnabled: false
+dashboardPdfEnabled: false
+sharingOptions: true
+comments: true
+embedCharts: true
+offline: 'all'
+
+noDataError:
+  message: "<div class=\"error-first-word\">Désolé,</div>aucune donnée n'est disponible. Pour obtenir des données sur cet écran choisissez un autre rapport"
+  clues: ['report-selector', 'bottom-filter', 'settings', 'menu']
+
+title: 'Test'
+
+dataProviders:
+  "google-sheets": {}
+
+home:
+  skipToReport: "0"
+
+slides: [
+  {
+    level: 0
+    id: 0
+  }
+  {
+    level: 1
+    title: "Summary"
+    id: 10
+  }
+  {
+    level: 1
+    title: "Satisfaction"
+    id: 20
+  }
+
+  {
+    level: 3
+    title: "Global performance"
+    parent_id: 10
+    id: 80005
+
+    charts: [
+      {
+        data:
+          query:
+            domain: "maitre"
+
+        chartType: "linechart"
+        units:
+          value: " pts"
+          date: ""
+
+        crossfilter:
+          on: "date"
+          datasets: [1]
+
+        date: "date"
+        value: "value"
+        label: "label"
+        size: 0.25
+        style: "secondary"
+        cr: 4
+        id: 0
+      }
+      {
+        data:
+          query:
+            domain: "slave"
+
+        chartType: "horizontalBarchart"
+        # groups: "indicateur"
+        label: "label"
+        # packs: "source"
+        # packNames: true
+        # average: 80
+        # averageText: "Moyenne nationale"
+        value: "value"
+        variation: "evol"
+        variationLegend:"Evolution Y-1"
+        # filters:
+        #   "upper-middle":
+        #     on: "indicateur"
+        #     type: "dropdown"
+        #     reset: "Global"
+        #     # withSize: true
+        #     datasets: [1]
+
+
+        # sentiment:
+        #   value:
+        #     domain: [8,18]
+        #     range: ['negative','warning','positive']
+
+        units:
+          value: " pts"
+          evol: " pts"
+
+        # legend: true
+        sort: "desc"
+        # meta: [
+        #   "Nombre ECM"
+        # ]
+        source: "Mise à jour: 20/06/2016"
+        id: 1
+      }
+    ]
+  }
+  {
+    id: 10351
+    level: 3
+    parent_id: 10
+    title:"Country Overview"
+    # commentary:"Positionnement vis à vis du réseau Caisse d'Epargne - Unités : points"
+    chartOptions:
+      data:
+        order:
+          by: "kpi"
+          custom: [
+            "Synthesis"
+            "Clients"
+            "Sat."
+            "Better"
+            "Coworkers"
+          ]
+        query:
+          domain: "heatmap-summary"
+
+      chartType: "heatmap"
+      legend: true
+      x: "kpi"
+      xpack: "pack"
+      y: "label"
+      ypack: "zone"
+      value: "score"
+      target: "target"
+
+      sentiment:
+        score:
+          domain:['0.90*target',"target","1.1*target"]
+          range:['negative','warning','neutral','positive']
+
+      meta: [
+        "Complétude"]
+
+      units:
+        score: ''
+        CE:''
+        'Complétude':'%'
+  }
+  {
+    id: 31231
+    level: 3
+    parent_id: 20
+
+    filters:
+       "bottom-right":
+         on: "kpi"
+         type: "buttons"
+    # commentary:"Positionnement des établissements situation vs evo"
+    title: "Situation vs Evolution"
+    chartOptions:
+      data:
+        query:
+          domain: "satisfaction_bubble"
+          # type:"<%= report.type %>"
+          # # label:$ne:'Moyenne'
+      chartType: "bubblechart"
+      label: "label"
+      cy:"situation"
+      cx:"evolution"
+      r: "clients"
+      drill:
+        group: "drill_group"
+        level: "drill_level"
+        levelsOrder: ['main','sub']
+      quadrants:
+        xDecile:5
+        yDecile: 5
+        labels: ['Perte de vitesse','Trajectoire d\'excellence','Décrochage','Zone d\'ascension']
+        sentiments: ['warning','positive','negative','warning']
+      fixedScale: false
+      legend:
+        cy: "situation"
+        cx: "evolution"
+        r: "clients"
+      units:
+        "cx":" %"
+        "cy":" pts"
+        "r":" "
+      rRange: [25, 1000]
+
+
+  }
+  {
+    id: 10201
+    level: 3
+    parent_id: 20
+    title: "Mystery Shopping"
+    commentary:[
+      value:"Appels mystères : taux de contact in-fine "
+    ]
+    filters:
+       "bottom-right":
+         on: "breakdown"
+         type: "buttons"
+    chartOptions:
+      data:
+        query:
+          domain: "ap_myst"
+      averageText: 'Average'
+      average: [75]
+
+      chartType: "leaderboardCenteredAverage"
+      value: "value"
+      label:"label"
+      variation:"n-1"
+      variationLegend:"Evolution<br>annuelle"
+      units:
+        value: " %"
+        "n-1":""
+      sort:"desc"
+  }
+
+  {
+  "title": "Detail by motives",
+  "level": 3,
+  "parent_id": 20,
+  "id": 30302,
+  "chartOptions":
+    "chartType": "verbatim",
+    "data":
+      "query":
+        "domain": "verbatims"
+
+
+    "filters":
+      "upper-right":
+        "reset": "All",
+        "on": "Codification",
+        "withSize": true,
+        "type": "dropdown"
+
+      "upper-middle":
+        "on": "Reco",
+        "type": "buttons"
+
+
+    "categories": [
+      "Reco",
+      "Codification",
+      "Agence",
+      "Mois"
+    ],
+    "verbatimSelector": "Verbatims",
+
+  }
+
+
+]

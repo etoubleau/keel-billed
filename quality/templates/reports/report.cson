@@ -1,0 +1,12 @@
+name: ""
+entityName: "{{ country }}"
+id: "{{ index }}"
+date: 'Janvier 2016'
+
+background:
+  assetName: "bg-1"
+  overlay: false
+execsumTitle: "Quality"
+
+dashboards:
+  search: "Search by zone"

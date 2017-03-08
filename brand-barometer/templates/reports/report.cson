@@ -1,0 +1,14 @@
+﻿
+'entityName': '{{ country }}'
+'id': "{{ index }}"
+'execsumNote': '* you should start to <strong>customize</strong> it'
+'slideInfos': {}
+'dashboards':
+  # 'default': 0
+  'search': 'Search by brand'
+# 'slug': 'entity'
+'background':
+  'assetName': "bg-1"
+  'overlay': false
+'date': 'September 2016'
+'execsumTitle': 'Brand Barometer'
