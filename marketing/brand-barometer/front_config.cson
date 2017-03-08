@@ -1,0 +1,228 @@
+﻿
+glossary:
+  title: 'Glossary'
+  terms: [
+    term: "Awareness"
+    meaning: "Brand awareness is evaluated through 3 KPI’s measuring the ability of consumers to recollect your brand with reference to the Fuel stations networks  category"
+  ,
+    term: "Top of mind"
+    meaning: "Spontaneously quote your brand as the 1st that comes to their mind, when talking about the category"
+  ,
+    term: "Spontaneous awareness"
+    meaning: "Spontaneously quote your brand (1st or next), when talking about the category"
+  ,
+    term: "Aided awareness"
+    meaning: " Recognize your brand on a list as belonging to brand they know, when talking about the category"
+  ,
+    term: "Conversion"
+    meaning: "Transformation rate from aided awareness to consideration"
+  ]
+  'title': 'Glossary'
+'slides': [
+  {
+    'id': 0
+    'level': 0
+  }
+  {
+    'title': 'Awareness'
+    'id': 10
+    'level': 1
+  }
+  {
+    'title': 'Image'
+    'id': 30
+    'level': 1
+  }
+
+  {
+    'title': 'Sample'
+    'id': 20
+    'level': 1
+  }
+
+  {
+    'title': 'Wordlwide Group\'s Awareness '
+    'level': 3
+    'parent_id': 10
+    'filters': 'bottom-right':
+      'on': 'variable'
+      'type': 'buttons'
+      'order': 'custom': [
+        'Aided Awareness'
+        'spontaneous'
+        'Top of mind'
+      ]
+    'id': 34204
+    'chartOptions':
+      'peers': ' '
+      'join': 'country_code'
+      'projection': 'world'
+      'value': 'value'
+      'label': 'country'
+      'levels': 3
+      'cartoFiles': ' ': 'world-topojson.json'
+      'filters': 'upper-middle':
+        'on': 'Type'
+        'type': 'buttons'
+      'kpi': 'variable'
+      'units': 'value': '%'
+      'chartType': 'carto'
+      'data':
+        'query': 'domain': 'carto'
+        'order':
+          'by': 'variable'
+          'custom': [
+            'Aided Awareness'
+            'spontaneous'
+            'Top of mind'
+          ]
+        'precision': 'value': '.0f'
+  }
+  {
+    'title': 'Awareness decomposition'
+    'level': 3
+    'parent_id': 10
+    'source': '● : significative variation between 2013 and 2015. Red is negative, green is positive evolution.'
+    'filters': 'bottom-right':
+      'on': 'breakdown'
+      'type': 'buttons'
+    'commentary': 'Brand awareness is evaluated through 3 KPI’s measuring the ability of consumers to recollect your brand with reference to the stations networks category'
+    'id': 10101
+    'chartOptions':
+      'sort': 'desc'
+      'legendValue': '2015'
+      'groupsOrder': [
+        'Top of mind'
+        'Spontaneous awareness'
+        'Aided awareness'
+      ]
+      'unstackable': true
+      'value': 'delta'
+      'label': 'Label'
+      'variation': 'evol'
+      'groups': 'group'
+      'visualSelection': true
+      'units':
+        '2015': '%'
+        'Evol': '%'
+        'delta': '%'
+      'chartType': 'stackedBarchart'
+      'data': 'query':
+        'domain': 'decomposition'
+
+      'legend': true
+  }
+
+  {
+    'title': 'Brand Funnel'
+    'level': 3
+    'parent_id': 10
+    'commentary': 'The brand funnel consists in 4 KPI’s summarizing your brand power.  It gives precious indications on where to focus your effort to improve your market position.'
+    'id': 10103
+    'chartOptions':
+      'sort': 'desc'
+      'groupsOrder': [
+        'Aided awareness'
+        'Consideration'
+        '1st choice'
+        'Most purchased'
+      ]
+      'variation': 'evol'
+      'label': 'Label'
+      'variationLegend': 'Significative evolution vs 2013'
+      'value': '2015'
+      'groups': 'group'
+      'units':
+        '2015': '%'
+        'evol': 'pt'
+      'chartType': 'horizontalBarchart'
+      'data':
+        'query':
+          'domain': 'funnel'
+
+        'order': 'by': 'group'
+      'legend': true
+  }
+
+  {
+    'title': 'Market Performance'
+    'level': 3
+    'parent_id': 10
+    'commentary': 'It shows a brand in comparison to its competitors in correlation with aided awarness and convertion rate. It is an indication of how many customers know and consider the brand.'
+    'id': 10105
+    'chartOptions':
+      'color': 'evolution'
+      'label': 'Label'
+      'cy': 'Conversion rate'
+      'cx': 'Aided awareness'
+      'units':
+        'cy': '%'
+        'cx': '%'
+        'r': '%'
+      'chartType': 'bubblechart'
+      'r': 'Most purchased'
+      'drill':
+        'group': "drill_group"
+        'level': "drill_level"
+        'levelsOrder': ['main','sub']
+      'data':
+        'query':
+          'domain': 'bubble'
+
+        'precision':
+          'Conversion rate': '.0f'
+          'Aided awareness': '.0f'
+      'legend': true
+  }
+
+  {
+    'title': 'Profile'
+    'level': 3
+    'parent_id': 20
+    'filters': 'bottom-right':
+      'on': 'group'
+      'type': 'buttons'
+      'defaultSelected': 'by income'
+    'commentary': 'Repartition of the respondents\' socio-demographic profile'
+    'id': 20101
+    'chartOptions':
+      'sort': 'desc'
+      'value': '2015'
+      'label': 'Label'
+      'showAverage': true
+      'units': '2015': '%'
+      'chartType': 'horizontalBarchart'
+      'data': 'query':
+        'domain': 'profile'
+
+      'legend': false
+  }
+  {
+  "title": "Key image drivers",
+  "level": 3
+  "parent_id": 30
+  "id": 30001
+  "filters": 'upper-middle':
+    'on': 'brand'
+    'type': 'dropdown'
+  "chartOptions":
+
+    "value": "Value"
+    "label": "Label"
+    "variation": "evol"
+    "variationLegend": "Evolution vs last month"
+    "units":
+      "Value": "%"
+      "evol": "%"
+    "chartType": "leaderboardCenteredAverage"
+    "average": [13]
+    "averageText": "Average share of mentions",
+    "data":
+      "query":
+        "domain": "image"
+  }
+
+]
+'sharingOptions': true
+'settings': true
+'offline': 'all'

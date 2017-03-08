@@ -1,0 +1,667 @@
+settings:
+  comparison:
+    description: "Sur tous les écrans de comparaison, comparer avec :"
+    values: [
+      "Par défaut"
+      "Entity A"
+      "Entity B"
+      "Entity C"
+    ]
+    default: "Par défaut"
+
+glossary:
+  title: 'Glossaire'
+  terms: [
+    term: "Bounce rate"
+    meaning: "The percentage of visitors to a given website that leave the site after viewing only a single page"
+  ,
+    term: "Return rate"
+    meaning: "The percentage of visits from visitors who have visited the website before (returning visitors)."
+  ,
+    term: "IMPR"
+    meaning: "Impression, sometimes called a view or an ad view, is a term that refers to the point in which an ad is viewed once by a visitor, or displayed once on a web page"
+  ,
+    term: "CTR"
+    meaning: "Click-through rate is the ratio of users who click on a specific link to the number of total users who view a page, email, or advertisement"
+  ,
+    term: "CPA"
+    meaning: "Cost per acquisition is an online advertising pricing model where the advertiser pays for each specified acquisition - for example, an impression, click, form submit (e.g., contact request, newsletter sign up, registration etc.), double opt-in or sale"
+  ,
+    term: "Conversion"
+    meaning: "Number or percentage of users who take a desired action. The archetypical example of conversion rate is the percentage of website visitors who buy something on the site"
+
+
+  ]
+offline: 'all'
+home:
+  skipToReport: 0
+
+slides: [
+  {
+    level: 0
+    id: 0
+  }
+  {
+    level: 1
+    title: "Performance"
+    id: 40
+  }
+  {
+    level: 1
+    title: "Web"
+    id: 10
+  }
+  {
+    level: 1
+    title: "Mobile"
+    id: 20
+  }
+  {
+    level: 1
+    title: "Social"
+    id: 30
+  }
+
+  {
+    level: 3
+    title: "Site audience"
+    parent_id: 10
+    id: 10001
+
+    chartOptions:
+      data:
+        query:
+          domain: 'waterfall'
+      chartType: "waterfall"
+      value: "value"
+      evolution: "variation"
+      label: "label"
+      sublabel: "label_sublevel"
+      units:
+        value: "Visits"
+  }
+  {
+    level: 3
+    title: "Bounce rate<br>by domains"
+    parent_id: 10
+    id: 10002
+
+    chartOptions:
+      chartType: "bulletChart"
+      data:
+        query:
+          domain: "domains"
+      value: "2015"
+      label: "label"
+      target: "Target"
+      comparison: "2014"
+      alignTargets: true
+      meta: []
+      variation: "evolution"
+      variationLegend: "Evolution Y-1"
+      units:
+        "Visits": [
+            unit: ' visits'
+            where:
+              "breakdown": "Visits"
+          ,
+            unit: "%"
+            where:
+              "breakdown": "Bounce Rate"
+        ]
+        "target": [
+            unit: ' visits'
+            where:
+              "breakdown": "Visits"
+          ,
+            unit: "%"
+            where:
+              "breakdown": "Bounce Rate"
+        ]
+        "2014": [
+            unit: ' visits'
+            where:
+              "breakdown": "Visits"
+          ,
+            unit: "%"
+            where:
+              "breakdown": "Bounce Rate"
+        ]
+    filters:
+      "bottom-right":
+        on: "breakdown"
+        type: "buttons"
+        order:
+          custom: ['Visits','Bounce Rate']
+  }
+  {
+    level: 3
+    title: "Sources"
+    parent_id: 10
+    id: 10003
+    requesters:
+     "bottom-right":
+       query: [
+          $match:
+            domain: "aquisition-slave"
+        ,
+          $group:
+            _id: "$type"
+        ]
+       type: "buttons"
+       order:
+         custom: ['acquisitions','behaviour',"conversions"]
+       id: "type2"
+       fields: ['_id']
+       datasets: [1]
+
+
+    charts:[
+      {
+        chartType: "linechart"
+        data:
+          query:
+            domain: 'acquisition-main'
+          # date:
+          #   selector: "date"
+          #   format: "%m-%Y"
+        units:
+          value: " views"
+          date: "date"
+
+        crossfilter:
+          on: "date"
+          datasets: [1]
+        groups: "Centre"
+        date: "date"
+        value: "value"
+        size: 0.25
+        style: "secondary"
+        cr: 4
+        id: 0
+      }
+      {
+        chartType: "horizontalBarchart"
+
+        value: "value"
+        label: "label"
+        date: "date"
+        sort: "desc"
+        data:
+          query:
+            domain: 'aquisition-slave'
+            type:"<%= requestersManager.type2 %>"
+          # date:
+          #   selector: "date"
+          #   format: "%m-%Y"
+        units:
+          value: [
+            unit: " Visits"
+            where:
+              "breakdown": "Visits"
+          ,
+            unit: "%"
+            where:
+              "breakdown": "% New Visitors"
+         ]
+
+
+        packs: "group"
+        size: 0.75
+        id: 1
+
+
+        filters:
+          "upper-middle":
+            on: "breakdown"
+            type: "buttons"
+            datasets: [1]
+            order:
+              custom: ['Visits','% New Visitors']
+
+     }
+   ]
+
+  }
+
+
+  {
+    level: 3
+    title: "Traffic"
+    parent_id: 20
+    id: 10011
+    source: "Internal source"
+    # 'restrictVisibility':
+    #   'reportEntry': 'entityGroup'
+    #   'allowedReports': [
+    #     'BIC group'
+    #   ]
+
+
+    filters:
+      "bottom-right":
+        on: "type"
+        type:"buttons"
+
+    chartOptions:
+      data:
+        query:
+          domain: "worldmap"
+      chartType: "carto"
+      join: "country_code"
+      label: "country"
+      value: "value"
+
+      peers: " "
+      levels: 3
+      projection: "world"
+      kpi: "kpi"
+      cartoFiles:
+          " ": "world-topojson.json"
+      units:
+        value: [
+          unit: " "
+          where:
+            type: "unique visits"
+        ,
+          unit: "%"
+          where:
+            type: "returning rate"
+        ,
+          unit: ""
+          where:
+            type: "downloads"
+        ]
+      quantizeScale: true
+      hideScale: false
+
+
+  }
+  {
+    level: 3
+    title: "Details Downloads"
+    parent_id: 20
+    id: 20002
+
+    chartOptions:
+      data:
+        query:
+          domain: 'downloads'
+      chartType: "horizontalBarchart"
+      label: "label"
+      value: "value"
+      legend: false
+      variation: "evolution"
+      variationLegend: "Previous month"
+      sort: "desc"
+
+      sparklines:
+        prefix: "sparkline"
+        legend: "12 month trend"
+
+      units:
+        "evolution": "%"
+        value: " dl"
+
+      filters:
+        "upper-middle":
+          on: "filtre"
+          type: "dropdown"
+          withSize: true
+          reset: "Tous"
+
+  }
+  # {
+  #   level: 3
+  #   title: "My App"
+  #   parent_id: 20
+  #   id: 20001
+  #
+  #   chartOptions:
+  #     data:
+  #       query:
+  #         domain: 'my-app'
+  #     chartType: "score-card"
+  #     variation: "variation"
+  #     value: "value"
+  #     label: "label"
+  #     groups: "groups"
+  #     sort: "desc"
+  #
+  #     sparklines:
+  #         prefix: "sparkline"
+  #         legend: "Month trend"
+  #
+  #     units:
+  #       "variation": "%"
+  #       value: [
+  #         unit: " dl"
+  #         where:
+  #           label: "Downloads"
+  #       ,
+  #         unit: " visits"
+  #         where:
+  #           label: "Visits"
+  #       ,
+  #         unit: " Visitors"
+  #         where:
+  #           label: "Unique Visitors"
+  #       ,
+  #         unit: "%"
+  #         where:
+  #           label: "Returning Rate"
+  #       ,
+  #         unit: " min"
+  #         where:
+  #           label: "Time Spent"
+  #       ]
+  # }
+  #
+  # {
+  #   level: 3
+  #   title: "App Returning Rate"
+  #   parent_id: 20
+  #   id: 20003
+  #   commentary: "Répartition du traffic en terme de nombre de visites par utilisateur unique."
+  #
+  #   chartOptions:
+  #     data:
+  #       query:
+  #         domain: 'returning-rate'
+  #     chartType: "horizontalBarchart"
+  #     label: "label"
+  #     value: "value"
+  #     units:
+  #       value: "%"
+  #
+  # }
+
+  # {
+  #   level: 3
+  #   title: "Trending topics"
+  #   parent_id: 30
+  #   id: 80100
+  #   # filters:
+  #   #   "bottom-right":
+  #   #     type: "buttons"
+  #   #     on: "type"
+  #   chartOptions:
+  #     chartType: "timeline"
+  #     data:
+  #       # date:
+  #       #   selector: "start_date"
+  #       #   format: "%m/%y"
+  #       query:
+  #         domain: "timeline"
+  #     startDate: "start_date"
+  #     endDate: "end_date"
+  #     headline: "headline"
+  #     text: "text"
+  #     content: "content"
+  #     mediaType: "media_type"
+  #     mediaSource: "media_source"
+  #     caption: "caption"
+  #     meta: [
+  #       "text"
+  #     ]
+  #
+  #
+  # }
+  {
+    level: 3
+    title: "Share of fans"
+    parent_id: 30
+    id: 30002
+
+    chartOptions:
+      data:
+        query:
+          domain: 'share'
+        # date:
+        #   format: "%m-%Y"
+        #   selector: "date"
+      chartType: "linechart"
+      groups: "label"
+      value: "value"
+      legend: true
+      units:
+        "value": "Fans"
+      date: "date"
+      events: [
+       {
+         date: "juil-14"
+         label: "John Doe"
+         name: "Stop Campagne Community Management"
+       }
+     ]
+  }
+  {
+    level: 3
+    title: "Youtube Views"
+    parent_id: 30
+    id: 30003
+    commentary: "Evolution du total des vues Youtube par mois, ainsi que leur répartition par format."
+
+    charts: [
+      {
+        chartType: "linechart"
+        units:
+          value: " views"
+          date: ""
+
+        crossfilter:
+          on: "date"
+          datasets: [1]
+        groups: "Centre"
+        data:
+          query:
+            domain: 'youtube-main'
+
+        date: "date"
+        value: "value"
+        size: 0.25
+        style: "secondary"
+        cr: 4
+        id: 0
+      }
+      {
+        chartType: "horizontalBarchart"
+        value: "value"
+        label: "label"
+        date: "date"
+        sort: "desc"
+        data:
+          query:
+            domain: 'youtube-slave'
+
+        units:
+          value: " views"
+
+        packs: "group"
+        packNames: true
+        size: 0.75
+        id: 1
+      }
+    ]
+
+  }
+  {
+    level: 3
+    title: "Top pages"
+    parent_id: 40
+    id: 4001
+
+    chartOptions:
+      data:
+        query:
+          domain: 'campaign-perf'
+          type: "pages"
+      chartType: "horizontalBarchart"
+      label: "label"
+      value: "value"
+      sort: "desc"
+      variation:"evolution"
+      variationLegend: "Evolution <br> N-1"
+      units:
+        value: "clics"
+
+        evolution: "%"
+
+
+    filters:
+      "bottom-right":
+        on: "breakdown"
+        type: "buttons"
+        order:
+          custom: [
+            "Impr"
+            "Clics"
+            "Coût"
+            "Tx de conv"
+          ]
+  }
+  # {
+  #   level: 3
+  #   title: "Keywords"
+    # parent_id: 40
+    # id: 4001
+    #
+    # chartOptions:
+    #   data:
+    #     query:
+    #       domain: 'campaign-perf'
+    #       type: "keywords"
+    #   chartType: "horizontalBarchart"
+    #   label: "label"
+    #   value: "value"
+    #   sort: "desc"
+    #   variation:"evolution"
+    #   variationLegend: "Evolution <br> N-1"
+    #   units:
+    #     value: "clics"
+    #
+    #     evolution: "%"
+    #
+    #
+    # filters:
+    #   "bottom-right":
+    #     on: "breakdown"
+    #     type: "buttons"
+    #     order:
+    #       custom: [
+    #         "Impr"
+    #         "Clics"
+    #         "Coût"
+    #         "Tx de conv"
+    #       ]
+  # }
+  {
+    level: 3
+    title: "Conversions vs CPA"
+    id: 4002
+
+    parent_id: 40
+    chartOptions:
+      data:
+        query:
+          domain: 'CPA'
+        date:
+          selector: 'date'
+          format: "%d/%m/%Y"
+      chartType: "linechart"
+      value: "value"
+      groups:"label"
+      date: "date"
+      units:
+        "Conversions": " conv"
+        "CPA": " €"
+      events: [
+        {
+          date: "27/07/2015"
+          label: "Conversions"
+          name: "Boost Adwords"
+        }
+        {
+          date: "02/08/2015"
+          label: "Conversions"
+          name: "Adwords campaign<br> canceled"
+        }
+      ]
+
+      legend: true
+
+
+  }
+  {
+  'title': 'Funnel'
+  'level': 3
+  'parent_id': 40
+  'id': 10005
+  'chartOptions':
+    'fakeFunnel': true
+    'value': 'current'
+    'label': 'variable'
+    'filters': 'upper-right':
+      'on': 'Vehicle'
+      'type': 'dropdown'
+    'units':
+      'current': [
+        { 'unit': ' ' }
+        {
+          'where': 'variable': 'Media spent'
+          'unit': ' €'
+        }
+      ]
+      'variation': '%'
+    'chartType': 'funnelChart'
+    'data': 'query': 'domain': 'funnel'
+  }
+  # {
+  #   level: 3
+  #   title: "Global performance"
+  #
+  #   chartOptions:
+  #     data:
+  #       query:
+  #         domain: 'global-perf'
+  #     chartType: "score-card"
+  #     variation: "evolution"
+  #     variationLegend: "Evolution <br> N-1"
+  #     value: "value"
+  #     groups: "groups"
+  #     label: "label"
+  #     units:
+  #       value: [
+  #         unit: " €"
+  #         where:
+  #           label: "Coût"
+  #       ,
+  #         unit: " €"
+  #         where:
+  #           label: "CPC Moyen"
+  #       ,
+  #         unit: " %"
+  #         where:
+  #           label: "CTR"
+  #       ,
+  #         unit: " %"
+  #         where:
+  #           label: "Taux de Conv"
+  #       ,
+  #         unit: " €"
+  #         where:
+  #           label: "Coût / Conv"
+  #       ,
+  #         unit: " €"
+  #         where:
+  #           label: "Val de Conv"
+  #       ]
+  #       evolution: "%"
+  #
+  #   parent_id: 40
+  #   id: 4003
+  # }
+
+
+
+]

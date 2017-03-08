@@ -1,0 +1,122 @@
+﻿entityName: "{{ zone }}"
+id: "{{ index }}"
+report: "{{ report_id }}"
+# default: "{{ default }}"
+default: 1
+
+categories: [
+  name: "Spendings"
+  kpis: [
+
+    name: "Total"
+    type: 'value-dynamic'
+    value: "value"
+    comment: "<%=\' \' + evolution + \' vs budget\'%>"
+    unit: " k€"
+    slide: 30000
+    badge: 'evolution'
+    sentiment:
+      evolution:
+        domain: [0]
+        range: ['negative','positive']
+    precision:
+      value: ',.0f'
+      evolution: "+,.0%"
+    data:
+      value:
+        query:[
+          $match:
+            domain: "average"
+
+            type: "total"
+        ]
+        field: "value"
+      comparison:
+        query:[
+          $match:
+            domain: "average"
+
+            type: "total"
+        ]
+        field: "budget"
+    compute:
+      evolution: '(value - comparison)/comparison'
+    # source: "2016, source Smart Toucan"
+    id: 0
+
+  ,
+    name: "Total Budget evolution (k€)"
+    type: "line"
+    chartOptions:
+      value: "value"
+      date: "date"
+      data:
+        query:
+          domain: 'budget-evolution'
+          type: "budget"
+    unit: " M€"
+    slide: 30000
+  ,
+    type: "separator"
+
+  ,
+    name: 'Top 3 spendings'
+    type: 'leaderboard'
+    chartOptions:
+      'units': 'value': ' %'
+      'data':
+        'query':
+          'domain': 'top-network'
+          type: "top"
+      'value': 'value'
+      'label': 'label'
+    source: '2016, internal source'
+    slide: 30001
+  ]
+
+,
+  name: "Marketing funnel"
+  kpis: [
+    name: "Media leads"
+    value: "16897"
+    unit: ""
+    badge: "evolution_up"
+    badgeSentiment: "better"
+    comment: "+1,5% compared to previous month"
+    slide: 10003
+    source: ""
+    id: 0
+  ,
+    name: "Lead rate"
+    value: "3,5"
+    unit: "%"
+    badge: "evolution_up"
+    badgeSentiment: "worse"
+    comment: "- 3% compared to previous month"
+    slide: 10003
+    source: ""
+    id: 0
+
+
+  ]
+,
+  name: "TV focus"
+  kpis: [
+    name: "GRP"
+    value: "400"
+    unit: ""
+    badge: "evolution_up"
+    badgeSentiment: "better"
+    comment: "+2 pts vs objectif"
+    slide: 30001
+    source: ""
+    id: 0
+  ,
+    type: "media-video"
+    provider: 'youtube'
+    id: "3hKT31RHsC8"
+
+
+  ]
+
+]

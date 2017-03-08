@@ -1,0 +1,184 @@
+etl_config:
+    # DATA_SOURCE_DIR: "data_sources"
+  DATA_SOURCES: [
+    {
+      domain: "dashboards"
+      type: "excel"
+      file: "dashboards.xls"
+      sheetname: "Data"
+    }
+
+    {
+      'spreadsheet_id': '1ahKMNCGrRmPuBylM0lKyYzQ5Kcr4JouJ1oUOoudiYTM'
+      'sheetname': 'average'
+      'domain': 'average'
+      'type': 'google_spreadsheet'
+    }
+    {
+      'spreadsheet_id': '1zY8MGDB2yoz7GM9vnwC8faBzK05l-Ii_fTGvlcfbBt0'
+      'sheetname': 'Sheet7'
+      'domain': 'funnel'
+      'type': 'google_spreadsheet'
+    }
+    {
+      'spreadsheet_id': '1ahKMNCGrRmPuBylM0lKyYzQ5Kcr4JouJ1oUOoudiYTM'
+      'sheetname': 'budget-evolution'
+      'domain': 'budget-evolution'
+      'type': 'google_spreadsheet'
+    }
+    {
+      'spreadsheet_id': '1ahKMNCGrRmPuBylM0lKyYzQ5Kcr4JouJ1oUOoudiYTM'
+      'sheetname': 'scorecard'
+      'domain': 'scorecard'
+      'type': 'google_spreadsheet'
+    }
+    {
+      'spreadsheet_id': '1Z8tUmoAvNgYjNveRrrLPuUKNHVdTdZVCjxfRIMoaYIo'
+      'sheetname': 'waterfall'
+      'domain': 'waterfall'
+      'type': 'google_spreadsheet'
+    }
+    {
+      'spreadsheet_id': '1Z8tUmoAvNgYjNveRrrLPuUKNHVdTdZVCjxfRIMoaYIo'
+      'sheetname': 'domains'
+      'domain': 'domains'
+      'type': 'google_spreadsheet'
+    }
+    {
+      'spreadsheet_id': '1Z8tUmoAvNgYjNveRrrLPuUKNHVdTdZVCjxfRIMoaYIo'
+      'sheetname': 'acquisition-main'
+      'domain': 'acquisition-main'
+      'type': 'google_spreadsheet'
+    }
+    {
+      'spreadsheet_id': '1Z8tUmoAvNgYjNveRrrLPuUKNHVdTdZVCjxfRIMoaYIo'
+      'sheetname': 'aquisition-slave'
+      'domain': 'aquisition-slave'
+      'type': 'google_spreadsheet'
+    }
+    {
+      'spreadsheet_id': '1Z8tUmoAvNgYjNveRrrLPuUKNHVdTdZVCjxfRIMoaYIo'
+      'sheetname': 'timeline'
+      'domain': 'timeline'
+      'type': 'google_spreadsheet'
+    }
+    # {
+    #   'spreadsheet_id': '1Z8tUmoAvNgYjNveRrrLPuUKNHVdTdZVCjxfRIMoaYIo'
+    #   'sheetname': 'behavior-slave'
+    #   'domain': 'behavior-slave'
+    #   'type': 'google_spreadsheet'
+    # }
+    # {
+    #   'spreadsheet_id': '1Z8tUmoAvNgYjNveRrrLPuUKNHVdTdZVCjxfRIMoaYIo'
+    #   'sheetname': 'conversions-slave'
+    #   'domain': 'conversions-slave'
+    #   'type': 'google_spreadsheet'
+    # }
+    {
+      'spreadsheet_id': '1Z8tUmoAvNgYjNveRrrLPuUKNHVdTdZVCjxfRIMoaYIo'
+      'sheetname': 'my-app'
+      'domain': 'my-app'
+      'type': 'google_spreadsheet'
+    }
+    {
+      'spreadsheet_id': '1Z8tUmoAvNgYjNveRrrLPuUKNHVdTdZVCjxfRIMoaYIo'
+      'sheetname': 'downloads'
+      'domain': 'downloads'
+      'type': 'google_spreadsheet'
+    }
+    {
+      'spreadsheet_id': '1Z8tUmoAvNgYjNveRrrLPuUKNHVdTdZVCjxfRIMoaYIo'
+      'sheetname': 'returning-rate'
+      'domain': 'returning-rate'
+      'type': 'google_spreadsheet'
+    }
+    {
+      'spreadsheet_id': '1Z8tUmoAvNgYjNveRrrLPuUKNHVdTdZVCjxfRIMoaYIo'
+      'sheetname': 'share'
+      'domain': 'share'
+      'type': 'google_spreadsheet'
+    }
+    {
+      'spreadsheet_id': '1Z8tUmoAvNgYjNveRrrLPuUKNHVdTdZVCjxfRIMoaYIo'
+      'sheetname': 'facebook-trends'
+      'domain': 'facebook-trends'
+      'type': 'google_spreadsheet'
+    }
+    {
+      'spreadsheet_id': '1Z8tUmoAvNgYjNveRrrLPuUKNHVdTdZVCjxfRIMoaYIo'
+      'sheetname': 'youtube-main'
+      'domain': 'youtube-main'
+      'type': 'google_spreadsheet'
+    }
+    {
+      'spreadsheet_id': '1Z8tUmoAvNgYjNveRrrLPuUKNHVdTdZVCjxfRIMoaYIo'
+      'sheetname': 'youtube-slave'
+      'domain': 'youtube-slave'
+      'type': 'google_spreadsheet'
+    }
+    {
+      'spreadsheet_id': '1Z8tUmoAvNgYjNveRrrLPuUKNHVdTdZVCjxfRIMoaYIo'
+      'sheetname': 'campaign-perf'
+      'domain': 'campaign-perf'
+      'type': 'google_spreadsheet'
+    }
+    {
+      'spreadsheet_id': '1Z8tUmoAvNgYjNveRrrLPuUKNHVdTdZVCjxfRIMoaYIo'
+      'sheetname': 'CPA'
+      'domain': 'CPA'
+      'type': 'google_spreadsheet'
+    }
+    {
+      'spreadsheet_id': '1Z8tUmoAvNgYjNveRrrLPuUKNHVdTdZVCjxfRIMoaYIo'
+      'sheetname': 'global-perf'
+      'domain': 'global-perf'
+      'type': 'google_spreadsheet'
+    }
+    {
+      'spreadsheet_id': '1Z8tUmoAvNgYjNveRrrLPuUKNHVdTdZVCjxfRIMoaYIo'
+      'sheetname': 'worldmap'
+      'domain': 'worldmap'
+      'type': 'google_spreadsheet'
+    }
+  ]
+  DATA_PROVIDERS: [
+    # name: "Some cube
+    # type: "SSAS"
+    # options:
+    #   server_url: "http://some_server_url/OLAP/msmdpump.dll"
+  ]
+  REPORTS: [
+    query:
+      domain: "dashboards"
+      default: 1.0
+    template: "report"
+  ]
+  DASHBOARDS: [
+    query:
+      domain: "dashboards"
+      default: 1.0
+    report: "country"
+    template: "dashboards"
+  ,
+    query:
+      domain: "dashboards"
+    report: "country"
+    template: "dashboards-bu"
+  ]
+  MONGO_INDEXES: [
+    "domain"
+    "version"
+    [
+      "domain"
+      "subdomain"
+    ]
+    [
+      "domain"
+      "version"
+    ]
+    [
+      "domain"
+      "subdomain"
+      "version"
+    ]
+  ]

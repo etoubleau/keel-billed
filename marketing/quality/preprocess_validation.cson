@@ -1,0 +1,13 @@
+rules: [
+  # {
+  #   query:
+  #     domain: 'dashboards'
+  #     country: 'United States'
+  #   validation: [
+  #     {
+  #       type: 'rows'
+  #       expected: 6
+  #     }
+  #   ]
+  # }
+]
