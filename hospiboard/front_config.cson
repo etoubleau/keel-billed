@@ -1,4 +1,11 @@
-settings:[]
+settings:
+  comparison:
+    description: "Sur tous les écrans de comparaison, comparer avec :"
+    values: [
+      "Région"
+      "Catégorie"
+      "Typologie"
+    ]
 
 glossary:[]
 
@@ -37,12 +44,11 @@ slides: [
     parent_id: 10
     id: 1001
     title: "Evolution<br>part de marché"
-    commentary: "Suivi de l'évolution de la part de marché de l'établissement<br> au sein de la zone d'attractivité"
+    commentary: "Suivi de l'évolution de la part de marché de l'établissement au sein de la zone d'attractivité ou de la region"
     chartOptions:
       data:
         query:
           domain: "part_de_marche"
-          #label: 'Dior'
           etablissements: "<%= report.entityName %>"
         precision:
           value: '.1f'
@@ -50,13 +56,18 @@ slides: [
           format: "%Y"
       chartType: "linechart"
       value: "value"
+      groups: 'label'
       date: 'date'
       legend: true
       units:
         value: "%"
+      filters: 'upper-middle':
+        on: 'metric'
+        type: 'buttons'
     filters: 'bottom-right':
-      on: 'metric'
-      type: 'buttons'
+      on: 'zones'
+      type: 'slider'
+
 
   }
   {
@@ -64,7 +75,7 @@ slides: [
     parent_id: 10
     id: 1002
     title: "Classement"
-    commentary: "Ajouter ici le nom de la zone d'attractivité"
+    commentary: "Classement des part de marché des extablissement dans zone d'attractivité/region"
     chartOptions:
       data:
         query:
@@ -76,6 +87,10 @@ slides: [
       value: "value"
       sort: 'desc'
       rank: true
+      # legend: 'Part de marché'
+      filters: 'upper-middle':
+        on: 'metric'
+        type: 'buttons'
       units:
         value: "%"
       sparklines:
@@ -87,16 +102,16 @@ slides: [
               format: "%Y" # See d3 time formatting for reference
             precision:
               value: '.1f'
-          joins: ["etablissements", "metric"]
+          joins: ["etablissements", "metric", "zones"]
           value: "value"
           date: "date"
           # dateFormat: "%B" # Optional display format that will override the one present in data
           legend: "Évo. part de marché"
-          unit:
+          units:
             value: "%"
-    filters: 'upper-middle':
-      on: 'metric'
-      type: 'buttons'
+    filters: 'bottom-right':
+      on: 'zones'
+      type: 'slider'
   }
   {
     level: 3
@@ -140,5 +155,31 @@ slides: [
     chartOptions:
       chartType: 'text'
       src: "activite_asset_text"
+  }
+  {
+    level: 3
+    title: "Indicateurs de Qualité"
+    parent_id: 20
+    id: 2001
+
+    chartOptions:
+      chartType: "score-card"
+      value: "value"
+      label: "label"
+      packs: "packs"
+      packsOrder:
+        custom: [
+          "Conformité",
+          "Cotation",
+          "Autres"
+        ]
+      data:
+        query:
+          domain: "qualité"
+          etablissements: "<%= report.entityName %>"
+          
+    filters: 'bottom-right':
+      on: 'date'
+      type: 'slider'
   }
 ]

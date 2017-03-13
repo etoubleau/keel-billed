@@ -33,6 +33,11 @@ etl_config:
       type: "excel"
       sheetname: 'occupation_lits'
       file: "activite.xls"
+  ,
+      domain: "qualité"
+      type: "excel"
+      sheetname: 'Sheet1'
+      file: "qualité.xlsx"
   ]
 
   DATA_PROVIDERS: []
