@@ -28,6 +28,14 @@ sharingOptions: true
 comments: true
 embedCharts: true
 
+popupEmail:
+  api: "https://api-voyager.toucantoco.com/toucan-public"
+  timeout: 80
+  notification: "To continue your navigation, please provide us <br> your email so we can send you your credentials"
+  dismissEnabled: true
+  dismiss: "Enjoy anyway"
+
+
 noDataError:
   message: "<div class=\"error-first-word\">Désolé,</div>aucune donnée n'est disponible. Pour obtenir des données sur cet écran choisissez un autre rapport"
   clues: ['report-selector', 'bottom-filter', 'settings', 'menu']
