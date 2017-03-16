@@ -111,7 +111,9 @@ DASHBOARDS: [
     'domain': 'top-network'
     'type': 'google_spreadsheet'
   }
-
-
-
+  {
+    'domain': 'commentary'
+    'type': 'csv'
+    file:'commentary.csv'
+  }
 ]
