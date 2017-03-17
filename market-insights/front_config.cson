@@ -166,8 +166,7 @@
         date: "date"
         data:
           query:
-            domain: "sparklines"
-            ecran: "top-division"
+            domain: "my_sparklines"
       'filters': 'upper-middle':
         'on': 'upper'
         'type': 'buttons'
