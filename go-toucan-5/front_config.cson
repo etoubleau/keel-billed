@@ -379,6 +379,8 @@ slides: [
       showAverage: true
 
       sort: "desc"
+      packs:'pack'
+      packNames:true
 
       units:
         my_value: " kilos"
@@ -739,6 +741,9 @@ slides: [
       units:
         Pourcentage: "my_value_unit"
         evolution: "my_evolution_unit"
+
+      groups:'pack'
+      # packNames:true
 
       #Ajout de sparklines
       #Les données correspondantes doivent être identifiées via une nouvelle requête
