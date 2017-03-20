@@ -1,22 +1,13 @@
-settings:
-  comparison:
-    description: "Sur tous les écrans de comparaison, comparer avec :"
-    values: [
-      "Par défaut"
-      "Entity A"
-      "Entity B"
-      "Entity C"
-    ]
-    default: "Par défaut"
+settings: []
 
 glossary:
   title: 'Glossaire'
   terms: [
-    term: "Data"
-    meaning: "An android from the 24th century who serves on the star ship Enterprise.<br><em>Data kicked some borg ass and then fed his cat lunch.</em>"
+    term: "CAC 40"
+    meaning: "Le CAC 40 (cotation assistée en continu) est le principal indice boursier de la Bourse de Paris. Son code ISIN est FR0003500008 et son code mnémonique est PX1."
   ,
-    term: "Hipsterectomy"
-    meaning: "The removal or dismissal of what is largely accepted to be cool or trendy. The process of de-hipsterizing someone or something."
+    term: "Chiffre d'affaires"
+    meaning: "La somme des ventes de biens ou de services d'une entreprise sur un exercice comptable. Il peut inclure ou non des achats pour la revente et des sous-traitance selon le mode de comptabilisation retenu."
   ,
     term: "Graph"
     meaning: "A slang term for a sketching of what someone plans on tagging. graffiti. <br><em>NOT A CHART!</em>"
@@ -24,17 +15,9 @@ glossary:
 
 slidePdfEnabled: false
 dashboardPdfEnabled: false
-sharingOptions: true
-comments: true
-embedCharts: true
-
-popupEmail:
-  api: "https://api-voyager.toucantoco.com/toucan-public"
-  timeout: 80
-  notification: "To continue your navigation, please provide us <br> your email so we can send you your credentials"
-  dismissEnabled: true
-  dismiss: "Enjoy anyway"
-
+sharingOptions: false
+comments: false
+embedCharts: false
 
 noDataError:
   message: "<div class=\"error-first-word\">Désolé,</div>aucune donnée n'est disponible. Pour obtenir des données sur cet écran choisissez un autre rapport"
@@ -48,6 +31,15 @@ dataProviders:
 home:
   skipToReport: "0"
 
+popupEmail:
+  api: "https://api-voyager.toucantoco.com/toucan-public"
+  timeout: 80
+  notification: "To continue your navigation, please provide us <br> your email so we can send you your credentials"
+  dismissEnabled: true
+  dismiss: "Enjoy anyway"
+
+
+
 slides: [
   {
     level: 0
@@ -55,22 +47,201 @@ slides: [
   }
   {
     level: 1
-    title: "CAC40 and Economy"
+    title: "Performance du CAC40"
     id: 10
   }
   {
     level: 1
-    title: "Social engagement"
+    title: "Engagement social"
     id: 30
   }
   {
     level: 1
-    title: "By company"
+    title: "Par entreprise"
     id: 40
   }
   {
     level: 3
-    title: "Economic situation"
+    title: "Top Entreprises"
+    parent_id: 10
+    filters:
+      "bottom-right":
+        on: "metric"
+        type: "buttons"
+        default: "Chiffre d'affaires"
+        order:
+          custom: ["Chiffre d'affaires","Résultat net","Capitaux propres","Marge opérationnelle","Rentabilité Financière"]
+    chartOptions:
+      data:
+        query:[
+          [
+            $match:
+              domain: "data_bourso"
+              metric: $in: ["Chiffre d'affaires","Résultat net","Capitaux propres"]
+              year: "2016"
+          ,
+            $project:
+              metric: 1
+              value: $divide: [ "$value", 1000000]
+              company: 1
+              supersector: 1
+          ]
+          [
+            $match:
+              domain: "data_bourso"
+              metric: $in: ["Marge opérationnelle","Rentabilité Financière"]
+              year: "2016"
+          ,
+            $project:
+              metric: 1
+              value: 1
+              company: 1
+              supersector: 1
+          ]
+        ]
+        multiple_queries: true
+        precision:
+          value: ",.1f"
+      chartType: "horizontalBarchart"
+      label: "company"
+      units:
+        value:[
+          unit: "Md€"
+        ,
+          unit: " "
+          where: metric: "Marge opérationnelle"
+        ,
+          unit: " "
+          where: metric: "Rentabilité Financière"
+        ]
+      value: "value"
+      filters:
+        "upper-right":
+          on: "supersector"
+          type: "dropdown"
+          reset: "- Tous secteurs"
+          withSize: true
+      # sentiment:
+      #   value:
+      #     domain: [8,18]
+      #     range: ['negative','warning','positive']
+      sparklines:
+        data:
+          query:
+            domain: "data_bourso"
+            metric: $in: ["Chiffre d'affaires","Résultat net","Capitaux propres","Marge opérationnelle","Rentabilité Financière"]
+            year: $ne: "2017"
+        joins: ["metric","company"]
+        legend: "Évolution"
+        value: "value"
+        date: "year"
+        unit: " "
+        orderDates: true
+      legend:
+        type: 'identity-card'
+        filter: 'bottom-right'
+      sort: "desc"
+      meta: [
+      ]
+      # showAverage: true
+    source: "Source : Rapports financiers"
+    id: 10002
+  }
+
+  {
+    level: 3
+    title: "Top Secteurs"
+    commentary: "Quelle est la part de chaque secteur ou entreprise du CAC40"
+    filters:
+      "bottom-right":
+        on: "year"
+        type: "slider"
+    parent_id: 10
+    chartOptions:
+      data:
+        query:
+          domain: "data_bourso"
+          metric: $in: ["Chiffre d'affaires","Résultat net","Capitaux propres","Rentabilité Financière"]
+          year: $ne: "2017"
+        # date:
+        #   selector: "date"
+        #   format: "%Y"
+        precision:
+          value: ',.0f'
+          evolution: '+.0%'
+      chartType: "treemap"
+      value: "value"
+      color: true
+      target: "evolution"
+      sortByValues: true
+      labels: ['industry','supersector','company']
+      filters:
+        "upper-right":
+          on: "metric"
+          type: "dropdown"
+          default: "Chiffre d'affaires"
+          order:
+            custom: ["Chiffre d'affaires","Résultat net","Capitaux propres","Marge opérationnelle","Rentabilité Financière"]
+      sentiment:
+        target:
+          domain: [0]
+          range: ['negative','positive']
+      color: true
+    source: "Source : Rapports financiers"
+    id: 10001
+  }
+
+  {
+    level: 3
+    title: "Ratios Financiers"
+    # commentary: "The heatmap helps you to see what's going on instantly"
+    filters:
+      "bottom-right":
+        on: "year"
+        type: "slider"
+    parent_id: 10
+    chartOptions:
+      data:
+        query:
+          domain: "data_bourso"
+          year: $ne: "2017"
+          category: "Ratios financiers"
+          metric: $nin: ["Effectif en fin d'année","Effectif moyen"]
+        precision:
+          value:  ",.1f"
+          evolution: "+.0%"
+          target: "+.0%"
+      chartType: "heatmap"
+      legend: true
+      x: "metric"
+      xpack: "metric"
+      xOrder: ["Résultat net part du groupe par action","Résultat net part du groupe dilué par action","Marge opérationnelle","Rentabilité Financière","Ratio d'endettement"]
+      y: "company"
+      ypack: "supersector"
+      value: "value"
+      filters:
+        "upper-right":
+          on: "supersector"
+          type: "dropdown"
+          reset: "- Tous secteurs"
+          withSize: true
+      target: "evolution"
+      variation: "evolution"
+      # reverse: true
+      sentiment:
+        evolution:
+          domain: [0]
+          range: ['negative','positive']
+      meta: []
+      units:
+        value: ' '
+        # variation: 'pt'
+    source: "Source : Rapports financiers"
+    id: 10003
+  }
+  {
+    level: 3
+    title: "Contexte économique"
     parent_id: 10
     filters:
       "bottom-right":
@@ -106,203 +277,33 @@ slides: [
     source: "Source: INSEE"
     id: 10000
   }
+  # {
+  #   level: 3
+  #   title: "Top Employeurs"
+  #   parent_id: 30
+  #   chartOptions:
+  #     chartType: "waterfallchart"
+  #     zeroBaseline: 4650000
+  #     label: "label"
+  #     groups: "label_sublevel"
+  #     value: "value"
+  #     # evolution: "evol"
+  #     label: 'label'
+  #     data:
+  #       query:
+  #         domain: "effectif"
+  #       order:
+  #         by: "rank"
+  #     # sublabel: 'label_sublevel'
+  #     # meta: 'Actuel'
+  #     units:
+  #       "value": " "
+  #   id: 10004
+  # }
   {
     level: 3
-    title: "Top Sectors"
-    commentary: "What is the share of each sector or campany in the CAC40"
-    filters:
-      "bottom-right":
-        on: "year"
-        type: "slider"
-    parent_id: 10
-    chartOptions:
-      data:
-        query:
-          domain: "data_bourso"
-          metric: $in: ["Chiffre d'affaires","Résultat net","Capitaux propres","Marge opérationnelle","Rentabilité Financière"]
-          year: $ne: "2016"
-        # date:
-        #   selector: "date"
-        #   format: "%Y"
-        precision:
-          value: ',.0f'
-      chartType: "treemap"
-      value: "value"
-      color: true
-      # target: "target"
-      sortByValues: true
-      labels: ['industry','supersector','company']
-      filters:
-        "upper-right":
-          on: "metric"
-          type: "dropdown"
-          default: "Chiffre d'affaires"
-          order:
-            custom: ["Chiffre d'affaires","Résultat net","Capitaux propres","Marge opérationnelle","Rentabilité Financière"]
-     # sentiment:
-     #   target:
-     #     domain: [-5,5]
-     #     range: ['negative','warning','positive']
-      meta: []
-    source: "Source : Rapports financiers"
-    id: 10001
-  }
-
-  {
-    level: 3
-    title: "Top companies"
-    parent_id: 10
-    filters:
-      "bottom-right":
-        on: "metric"
-        type: "buttons"
-        default: "Chiffre d'affaires"
-        order:
-          custom: ["Chiffre d'affaires","Résultat net","Capitaux propres","Marge opérationnelle","Rentabilité Financière"]
-    chartOptions:
-      data:
-        query:[
-          [
-            $match:
-              domain: "data_bourso"
-              metric: $in: ["Chiffre d'affaires","Résultat net","Capitaux propres"]
-              year: "2015"
-          ,
-            $project:
-              metric: 1
-              value: $divide: [ "$value", 1000000]
-              company: 1
-          ]
-          [
-            $match:
-              domain: "data_bourso"
-              metric: $in: ["Marge opérationnelle","Rentabilité Financière"]
-              year: "2015"
-          ,
-            $project:
-              metric: 1
-              value: 1
-              company: 1
-          ]
-        ]
-        multiple_queries: true
-        precision:
-          value: ",.1f"
-      chartType: "horizontalBarchart"
-      label: "company"
-      units:
-        value:[
-          unit: "M€"
-        ,
-          unit: " "
-          where: variable: "Marge opérationnelle"
-        ,
-          unit: " "
-          where: variable: "Rentabilité Financière"
-        ]
-      value: "value"
-      filters:
-        "upper-right":
-          on: "supersector"
-          type: "dropdown"
-          reset: "- All sectors"
-          withSize: true
-      # sentiment:
-      #   value:
-      #     domain: [8,18]
-      #     range: ['negative','warning','positive']
-      sparklines:
-        data:
-          query:
-            domain: "data_bourso"
-            metric: $in: ["Chiffre d'affaires","Résultat net","Capitaux propres","Marge opérationnelle","Rentabilité Financière"]
-            year: $ne: "2016"
-        joins: ["metric","company"]
-        legend: "Évolution"
-        value: "value"
-        date: "year"
-        unit: " "
-        orderDates: true
-      legend:
-        type: 'identity-card'
-        filter: 'bottom-right'
-      sort: "desc"
-      meta: [
-      ]
-      # showAverage: true
-    source: "Source : Rapports financiers"
-    id: 10002
-  }
-  {
-    level: 3
-    title: "Financial ratios"
-    # commentary: "The heatmap helps you to see what's going on instantly"
-    filters:
-      "bottom-right":
-        on: "year"
-        type: "slider"
-    parent_id: 10
-    chartOptions:
-      data:
-        query:
-          domain: "data_bourso"
-          year: $ne: "2016"
-          category: "Ratios financiers"
-          metric: $nin: ["Effectif en fin d'année","Effectif moyen"]
-        precision:
-          value:  ",.1f"
-      chartType: "heatmap"
-      legend: true
-      x: "metric"
-      xpack: "metric"
-      xOrder: ["Résultat net part du groupe par action","Résultat net part du groupe dilué par action","Marge opérationnelle","Rentabilité Financière","Ratio d'endettement"]
-      y: "company"
-      ypack: "supersector"
-      value: "value"
-      filters:
-        "upper-right":
-          on: "supersector"
-          type: "dropdown"
-          reset: "- All sectors"
-      # target: "target"
-      # variation: "variation"
-      # reverse: true
-      # sentiment:
-      #   value:
-      #     domain: ['0.8*target','target']
-      #     range: ['negative','neutral','positive']
-      meta: []
-      units:
-        value: ' '
-        # variation: 'pt'
-    source: "Source : Rapports financiers"
-    id: 10003
-  }
-  {
-    level: 3
-    title: "Top Recruiters"
-    parent_id: 30
-    chartOptions:
-      chartType: "waterfallchart"
-      zeroBaseline: 0
-      drillLevel: "drillLevel"
-      drillGroup: "drillGroup"
-      order: "display_order"
-      value: "value"
-      # evolution: "evol"
-      label: 'label'
-      data:
-        query:
-          domain: "effectif"
-      # sublabel: 'label_sublevel'
-      # meta: 'Actuel'
-      units:
-        "value": " "
-    id: 10004
-  }
-  {
-    level: 3
-    title: "Womanization"
+    title: "Feminisation"
+    commentary: "Dans la légende, cliquez sur women afin d’obtenir un classement de la représentation des femmes pour chaque entreprise"
     parent_id: 30
     chartOptions:
       data:
@@ -320,7 +321,7 @@ slides: [
         "upper-right":
           on: "sector"
           type: "dropdown"
-          reset: "- All sectors"
+          reset: "- Tous secteurs"
           withSize: true
       units:
         value: " %"
@@ -340,7 +341,7 @@ slides: [
   }
   {
     level: 3
-    title: "Taxes"
+    title: "Imposition"
     commentary: "Taxes in 2012"
     filters:
       "bottom-right":
@@ -387,7 +388,7 @@ slides: [
         "upper-right":
           on: "sector"
           type: "dropdown"
-          reset: "- All sectors"
+          reset: "- Tous secteurs"
           withSize: true
       units:
         value:[
@@ -412,7 +413,7 @@ slides: [
   }
   {
     level: 3
-    title: "Age of the boards"
+    title: "Age du board"
     # commentary: "Taxes in 2012"
 
     parent_id: 30
@@ -507,7 +508,7 @@ slides: [
   }
   {
     level: 3
-    title: "Impact in France"
+    title: "Ventes vs Salariés en France"
     parent_id: 30
     chartOptions:
       data:
@@ -524,7 +525,7 @@ slides: [
         "upper-right":
           on: "sector"
           type: "dropdown"
-          reset: "- All sectors"
+          reset: "- Tous secteurs"
       cx: "ventes en France"
       cy: "salariés en France"
       r: "nb en France"
@@ -538,7 +539,7 @@ slides: [
   }
   {
     level: 3
-    title: "Performance Evolution"
+    title: "Evolution de la performance"
     parent_id: 40
     filters:
       "bottom-right":
@@ -549,7 +550,7 @@ slides: [
         query:
           domain: "data_bourso"
           metric: $in: ["Chiffre d'affaires","Résultat net","Capitaux propres","Marge opérationnelle","Rentabilité Financière"]
-          # year: $ne: "2016"
+          year: $ne: "2017"
         date:
           selector: 'date'
           format: '%Y-%m-%d %X'
@@ -568,7 +569,7 @@ slides: [
   }
   {
     level: 3
-    title: "Income Statement"
+    title: "Compte de résultat"
     parent_id: 40
     chartOptions:
       chartType: "funnelChart"
@@ -578,7 +579,7 @@ slides: [
         query:
           domain: "data_bourso"
           metric: $in: ["Chiffre d'affaires","Produits des activités ordinaires","Résultat opérationnel","Coût de l'endettement financier net","Résultat net"]
-          year: "2015"
+          year: "2016"
           category: "Compte de résultat"
         order:
           by: "metric"
@@ -602,7 +603,7 @@ slides: [
           query:
             domain: "data_bourso"
             metric: "Chiffre d'affaires"
-            year: "2015"
+            year: "2016"
             category: "Compte de résultat"
           field: 'value'
     ,
@@ -617,7 +618,7 @@ slides: [
           query:
             domain: "data_bourso"
             metric: "Résultat net"
-            year: "2015"
+            year: "2016"
             category: "Compte de résultat"
           field: 'value'
     ]
@@ -626,7 +627,7 @@ slides: [
   }
   {
     level: 3
-    title: "Financial analysis"
+    title: "Analyse financière"
     source: "Reuters, 2016"
     parent_id: 40
     filters:
@@ -679,7 +680,7 @@ slides: [
   }
   {
     level: 3
-    title: "Investors"
+    title: "Investisseurs"
     # commentary: "Taxes in 2012"
 
     parent_id: 40
