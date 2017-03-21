@@ -1,0 +1,16 @@
+DATA_SOURCES: [
+    spreadsheet_id: '1JlmKNEif8hSgKGEeaS9oSg2QkEZyCDHY9NI9lJ2RzHI'
+    sheetname: 'horizontal-barchart-evolutions'
+    domain: 'horizontal-barchart-evolutions'
+    type: 'google_spreadsheet'
+,
+    spreadsheet_id: '1JlmKNEif8hSgKGEeaS9oSg2QkEZyCDHY9NI9lJ2RzHI'
+    sheetname: 'horizontal-barchart-sparklines'
+    domain: 'horizontal-barchart-sparklines'
+    type: 'google_spreadsheet'
+]
+REPORTS: []
+DASHBOARDS: []
+MONGO_INDEXES: [
+	"domain"
+]

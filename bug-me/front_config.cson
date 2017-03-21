@@ -1,0 +1,185 @@
+settings:
+  comparison:
+    description: "Sur tous les écrans de comparaison, comparer avec :"
+    values: [
+      "Par défaut"
+      "Entity A"
+      "Entity B"
+      "Entity C"
+    ]
+    default: "Par défaut"
+
+glossary: [
+  term: "Data"
+  meaning: "An android from the 24th century who serves on the star ship Enterprise.<br><em>Data kicked some borg ass and then fed his cat lunch.</em>"
+,
+  term: "Hipsterectomy"
+  meaning: "The removal or dismissal of what is largely accepted to be cool or trendy. The process of de-hipsterizing someone or something."
+,
+  term: "Graph"
+  meaning: "A slang term for a sketching of what someone plans on tagging. graffiti. <br><em>NOT A CHART!</em>"
+]
+
+sharingOptions: true
+comments: true
+
+home:
+  skipToReport: 0
+
+slides: [
+  {
+    level: 0
+    id: 0
+  }
+  {
+    level: 1
+    title: "Horizontal Barchart"
+    id: 10
+  }
+  {
+    'parent_id': 10
+    'level': 3
+    'id': 10001
+    'chartOptions':
+      'sort': 'desc'
+      'sparklines':
+        'orderDates': true
+        'value': 'Value'
+        'joins': [ 'Evenements' ]
+        'date': 'Date'
+        'data': 'query': 'domain': 'horizontal-barchart-sparklines'
+        'legend': 'Évolution<br>sur 8 mois'
+        'unit': '%'
+      'sentiment': 'evolution': [
+        {
+          'where': 'pack': 'group1'
+          'sentiment':
+            'domain': [
+              0
+              0.0001
+            ]
+            'range': [
+              'positive'
+              'neutral'
+              'negative'
+            ]
+        }
+        {
+          'where': 'pack': 'group2'
+          'sentiment':
+            'domain': [
+              0
+              0.0001
+            ]
+            'range': [
+              'negative'
+              'neutral'
+              'positive'
+            ]
+        }
+        {
+          'where': 'pack': 'group3'
+          'sentiment':
+            'domain': [
+              0
+              0.0001
+            ]
+            'range': [
+              'negative'
+              'neutral'
+              'positive'
+            ]
+        }
+      ]
+      'variation': 'evolution'
+      'label': 'Evenements'
+      'variationLegend': 'Écart<br>année passée'
+      'meta': 'Effectif'
+      'value': 'Pourcentage'
+      'filters': 'upper-middle':
+        'on': 'pack'
+        'type': 'buttons'
+      'showAverage': true
+      'units':
+        'evolution': '%'
+        'Pourcentage': ' %'
+      'chartType': 'horizontal-barchart'
+      'data':
+        'precision': 'evolution': ',.1f'
+        'query': 'domain': 'horizontal-barchart-evolutions'
+    'title': 'New version'
+  }
+  {
+    'parent_id': 10
+    'level': 3
+    'id': 10002
+    'chartOptions':
+      'sort': 'desc'
+      'sparklines':
+        'orderDates': true
+        'value': 'Value'
+        'joins': [ 'Evenements' ]
+        'date': 'Date'
+        'data': 'query': 'domain': 'horizontal-barchart-sparklines'
+        'legend': 'Évolution<br>sur 8 mois'
+        'unit': '%'
+      'sentiment': 'evolution': [
+        {
+          'where': 'pack': 'group1'
+          'sentiment':
+            'domain': [
+              0
+              0.0001
+            ]
+            'range': [
+              'positive'
+              'neutral'
+              'negative'
+            ]
+        }
+        {
+          'where': 'pack': 'group2'
+          'sentiment':
+            'domain': [
+              0
+              0.0001
+            ]
+            'range': [
+              'negative'
+              'neutral'
+              'positive'
+            ]
+        }
+        {
+          'where': 'pack': 'group3'
+          'sentiment':
+            'domain': [
+              0
+              0.0001
+            ]
+            'range': [
+              'negative'
+              'neutral'
+              'positive'
+            ]
+        }
+      ]
+      'variation': 'evolution'
+      'label': 'Evenements'
+      'variationLegend': 'Écart<br>année passée'
+      'meta': 'Effectif'
+      'value': 'Pourcentage'
+      'filters': 'upper-middle':
+        'on': 'pack'
+        'type': 'buttons'
+      'showAverage': true
+      'units':
+        'evolution': '%'
+        'Pourcentage': ' %'
+      'chartType': 'horizontalBarchart'
+      'data':
+        'precision': 'evolution': ',.1f'
+        'query': 'domain': 'horizontal-barchart-evolutions'
+    'title': 'Legacy'
+  }
+]
