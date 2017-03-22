@@ -55,11 +55,12 @@ slides: [
     title: "Satisfaction"
     id: 20
   }
-  {
-    level: 1
-    title: "Connectors"
-    id: 30
-  }
+  # {
+  # Supprimé car nous n'avions plus l'accès aux bases de données
+  #   level: 1
+  #   title: "Connectors"
+  #   id: 30
+  # }
   {
     level: 2
     title: "Produits phares"
@@ -681,166 +682,7 @@ slides: [
 
     id: 32102
   }
-  {
-    level: 3
-    title: "SQL Server Analysis Services"
 
-    parent_id: 30
-    chartOptions:
-      data:
-        provider: "SSAS provider"
-        query: """select {[Measures].[Montant des factures]} on columns,
-                {[Dim Agence].[Libelle Agence].[Libelle Agence].ALLMEMBERS * [Dim Agence].[Code Agence].[Code Agence].ALLMEMBERS} on rows
-                from [CER CUBE]
-              """
-        precision:
-          "Montant des factures": ",.0f"
-      chartType: "horizontalBarchart"
-      value: "Montant des factures"
-      label: "[Dim Agence].[Libelle Agence].[Libelle Agence]"
-      groups: "center"
-      sort: "desc"
-      units:
-        "Montant des factures": "€"
-
-    id: 301
-  }
-  {
-    level: 3
-    title: "Google Sheets"
-
-    parent_id: 30
-    chartOptions:
-      data:
-        provider: "google-sheets"
-        spreadsheetId: "1Eb9vsLT-v9M9iOSHKg9TD-lqHCQhtT3gwYc7zJs4Qjs"
-        sheet: "States"
-      chartType: "horizontalBarchart"
-      value: "Value"
-      label: "State"
-      groups: ""
-      sort: "desc"
-      units:
-        Value: ""
-
-    id: 302
-  }
-  {
-    level: 3
-    title: "MySQL"
-
-    parent_id: 30
-    chartOptions:
-      data:
-        provider: "Some MySQL provider"
-        query: """SELECT employees.first_name, annual_salaries.annual_salary AS annual_salary
-                  FROM employees
-                    LEFT JOIN
-                  (SELECT emp_no, SUM(salary) AS annual_salary FROM salaries GROUP BY emp_no) AS annual_salaries
-                    ON employees.emp_no = annual_salaries.emp_no
-                  LIMIT 10;"""
-      chartType: "horizontalBarchart"
-      value: "annual_salary"
-      label: "first_name"
-      groups: "center"
-      sort: "desc"
-      units: "annual_salary": "$"
-
-    id: 303
-  }
-  {
-    level: 3
-    title: "Google Analytics"
-
-    parent_id: 30
-    chartOptions:
-      data:
-        provider: "SomeGoogleAnalyticsProvider"
-        query: """{
-                      "viewId": "ga:99476610",
-                      "dateRanges": [
-                          {"startDate": "2016-01-01", "endDate": "2016-02-01"}
-                      ],
-                      "metrics": [
-                          {"expression": "ga:pageviews"}
-                      ],
-                      "dimensions": [
-                          {"name": "ga:hostname"}
-                      ]
-                  }"""
-      chartType: "horizontalBarchart"
-      value: "metric_value"
-      label: "ga:hostname"
-      groups: "center"
-      sort: "desc"
-      units: "metric_value": " views"
-
-    id: 304
-  }
-  {
-    level: 3
-    title: "Google Big Query"
-
-    parent_id: 30
-    chartOptions:
-      data:
-        provider: "SomeGoogleBigQueryProvider"
-        query: """SELECT * FROM [carbide-parser-133123:test.ventes] LIMIT 10;"""
-      chartType: "horizontalBarchart"
-      value: "value"
-      label: "label"
-      groups: "center"
-      sort: "desc"
-      units:
-        "value": "€"
-
-    id: 305
-  }
-  {
-    level: 3
-    title: "SAP Hana"
-
-    parent_id: 30
-    chartOptions:
-      data:
-#        provider: "hana_lhoist"
-#        query: [
-#          """SELECT '0' as plant_text, '0' as company_code_text, 0 as total
-#          FROM toucan_hana
-#          LIMIT 1"""
-#        ,
-#          """SELECT company_code_text, plant_text, SUM(material) AS total
-#          FROM toucan_hana
-#          GROUP BY plant_text, company_code_text
-#          HAVING SUM(material) <> 0
-#          ORDER BY total ASC
-#          LIMIT 10"""
-#        ,
-#          """SELECT 'Total' as plant_text, 'Total' as company_code_text, SUM(total) as total FROM ( SELECT company_code_text, plant_text, SUM(material) AS total
-#          FROM toucan_hana
-#          GROUP BY plant_text, company_code_text
-#          HAVING SUM(material) <> 0
-#          ORDER BY total ASC
-#          LIMIT 10)"""
-#        ]
-#        multiple_queries: true
-#      chartType: "waterfall"
-#      value: "TOTAL"
-#      label: "COMPANY_CODE_TEXT"
-#      sublabel: "PLANT_TEXT"
-#      sort: "desc"
-#      units: "TOTAL": "€"
-        provider: "Some SapHana provider"
-        query: """SELECT NAME, GOALS FROM PYHDB_DEMO"""
-      chartType: "horizontalBarchart"
-      value: "GOALS"
-      label: "NAME"
-      sort: "desc"
-      units:
-        "GOALS": " goals"
-
-    id: 306
-  }
   {
     level: 3
     title: "Musées<br>visités"
@@ -2548,7 +2390,7 @@ slides: [
 
     parent_id: 408
     chartOptions:
-      src: "README"
+      src: "loren_text"
       chartType: "text"
 
     id: 40801
