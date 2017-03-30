@@ -87,6 +87,11 @@ DATA_SOURCES: [
     file: "funnelchart.csv"
 ,
     domain: "data_bourso"
+    type: "excel"
+    sheetname: "Feuil1"
+    file: "data_bourso_2.xlsx"
+,
+    domain: "data_bourso_old"
     type: "csv"
     file: "financial_items.csv"
 ,

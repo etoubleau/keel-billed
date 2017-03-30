@@ -118,9 +118,10 @@ def clean_dette(df):
     return df
 
 def clean_bourso(df,df_sector):
+    import ipdb; ipdb.set_trace()
     df['date'] = df['date'].apply(parse_date)
     df = df.dropna(subset=['value'])
-    df['value'] = df['value'].str.replace(',','.').str.replace(' ','').astype(float)
+    # df['value'] = df['value'].str.replace(',','.').str.replace(' ','').astype(float)
     df = pd.merge(df,df_sector,how='left',left_on='company',right_on='company')
     df['year'] = df['date'].apply(lambda x: str(x.year))
     return df

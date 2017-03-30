@@ -18,8 +18,8 @@ categories: [
       data:
         query:
           domain: 'cotation'
-          annee: 2016
-          month: $ne: "10"
+          annee: $in: [2016,2017]
+          # month: $ne: "10"
     unit: " "
     source: "Source : ABCbourse"
   ]
