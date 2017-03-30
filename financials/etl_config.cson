@@ -89,11 +89,7 @@ DATA_SOURCES: [
     domain: "data_bourso"
     type: "excel"
     sheetname: "Feuil1"
-    file: "data_bourso_2.xlsx"
-,
-    domain: "data_bourso_old"
-    type: "csv"
-    file: "financial_items.csv"
+    file: "data_bourso.xlsx"
 ,
     domain: "sectors"
     type: "csv"
@@ -104,8 +100,9 @@ DATA_SOURCES: [
     file: "actionnariat.csv"
 ,
     domain: "meta"
-    type: "csv"
-    file: "meta.csv"
+    type: "excel"
+    file: "meta.xlsx"
+    sheetname: "meta"
 # ,
 #     domain: "ga_example"
 #     type: "google_analytics"

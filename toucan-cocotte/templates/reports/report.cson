@@ -1,0 +1,9 @@
+﻿
+'entityName': '{{ report }}'
+'execsumNote': '* Crafted with <strong><3</strong> by the Toucan Team'
+'id': '{{ index }}'
+'background':
+  'assetName': 'bg-1'
+  'overlay': false
+'date': 'March 8th 2017'
+'execsumTitle': '<strong>Toucan Cocotte</strong><br>célèbre les femmes!<br><span class=\'confidential\'>Pour explorer les données, cliquez sur le menu en haut à gauche de votre écran</span>'

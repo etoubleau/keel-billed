@@ -1,0 +1,182 @@
+﻿
+'default': true
+'report': '{{ report_id }}'
+'entityName': '{{ dash }}'
+'id': '{{ index }}'
+'categories': [
+  {
+    'kpis': [
+      {
+        'name': 'Productrices à Hollywood'
+        'data': 'value':
+          'query':
+            'domain': 'dash-all'
+            'ecran': 'hollywood'
+          'field': 'value'
+        'precision': 'value': '.0f'
+        'value': 'value'
+        'source': 'vs 64% pour les hommes'
+        'slide': ''
+        'type': 'value-dynamic'
+        'id': 0
+        'unit': '%'
+      }
+      {
+        'src': 'meryl.jpg'
+        'type': 'media-img'
+      }
+      {
+        'source': 'en terme de temps de dialogue pour les femmes'
+        'slide': 50001
+        'type': 'leaderboard'
+        'name': 'Flop 3 du Box Office US'
+        'chartOptions':
+          'units': 'value': ' %'
+          'data':
+            'query':
+              'domain': 'dash-all'
+              'ecran': 'flop 3'
+            'precision': 'value': ',.0f'
+          'value': 'value'
+          'label': 'label'
+      }
+    ]
+    'name': 'Sous les feux de la rampe'
+  }
+  {
+    'kpis': [
+      {
+        'name': 'Accidents de la route provoqués'
+        'data': 'value':
+          'query':
+            'domain': 'dash-all'
+            'ecran': 'route'
+          'field': 'value'
+        'precision': 'value': '.0f'
+        'value': 'value'
+        'source': 'vs 64% pour les hommes'
+        'slide': ''
+        'type': 'value-dynamic'
+        'id': 0
+        'unit': '%'
+      }
+      {
+        'name': 'Coupent la route'
+        'data': 'value':
+          'query':
+            'domain': 'dash-all'
+            'ecran': 'couper'
+          'field': 'value'
+        'precision': 'value': '.0f'
+        'value': 'value'
+        'source': 'vs 14% pour les hommes lors d\'un test d\'observation'
+        'slide': ''
+        'type': 'value-dynamic'
+        'id': 0
+        'unit': '%'
+      }
+    ]
+    'name': 'Faisons taire les machos!'
+  }
+  {
+    'kpis': [
+      {
+        'src': 'equal.jpg'
+        'type': 'media-img'
+      }
+      {
+        'source': 'pornhub.com/insights'
+        'slide': 50001
+        'type': 'leaderboard'
+        'name': 'Top 3 recherches sites X'
+        'chartOptions':
+          'units': 'value': ' '
+          'data':
+            'query': 'domain': 'categories-porn'
+            'precision': 'value': ',.0f'
+          'value': 'value'
+          'label': 'label'
+      }
+      {
+        'type': 'media-video'
+        'id': 'YEQPpzHsHjk'
+        'provider': 'youtube'
+      }
+    ]
+    'name': 'Girls wanna have fun!'
+  }
+  {
+    'kpis': [
+      {
+        'source': 'En 20 ans, la parité du secteur a diminué de moitié'
+        'type': 'line'
+        'name': 'Evolution parité dans la tech'
+        'chartOptions':
+          'date': 'Year'
+          'data':
+            'query':
+              'domain': 'bachelors'
+              'Degree': 'Computer & Information Sciences'
+            'precision': 'value': ',.2%'
+            'unit': 'value': ' %'
+          'value': 'value'
+      }
+      {
+        'name': 'Moyenne des femmes managers'
+        'data': 'value':
+          'query':
+            'domain': 'dash-all'
+            'ecran': 'tech'
+          'field': 'value'
+        'precision': 'value': '.0f'
+        'value': 'value'
+        'source': 'vs 14% pour les hommes lors d\'un test d\'observation'
+        'slide': ''
+        'type': 'value-dynamic'
+        'id': 0
+        'unit': '%'
+      }
+    ]
+    'name': 'Les Femmes et la tech'
+  }
+  {
+    'kpis': [
+      {
+        'name': 'Au Comité exécutif FIFA'
+        'data': 'value':
+          'query':
+            'domain': 'dash-all'
+            'ecran': 'fifa-femmes'
+          'field': 'value'
+        'precision': 'value': '.0f'
+        'value': 'value'
+        'source': ''
+        'slide': ''
+        'type': 'value-dynamic'
+        'id': 0
+        'unit': ' femmes'
+      }
+      {
+        'type': 'media-video'
+        'id': 'NqBHQ-8Bs9Q'
+        'provider': 'youtube'
+      }
+      {
+        'name': 'Au Comité exécutif FIFA'
+        'data': 'value':
+          'query':
+            'domain': 'dash-all'
+            'ecran': 'fifa-hommes'
+          'field': 'value'
+        'precision': 'value': '.0f'
+        'value': 'value'
+        'source': ''
+        'slide': ''
+        'type': 'value-dynamic'
+        'id': 0
+        'unit': ' hommes'
+      }
+    ]
+    'name': 'Et le sport alors?'
+  }
+]

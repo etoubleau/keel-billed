@@ -1,0 +1,108 @@
+﻿
+'DATA_PROVIDERS': []
+'MONGO_INDEXES': [ 'domain' ]
+'DASHBOARDS': [ {
+  'report': 'report'
+  'query': 'domain': 'reports'
+  'template': 'dashboard1'
+} ]
+'REPORTS': [ {
+  'query': 'domain': 'reports'
+  'template': 'report'
+} ]
+'DATA_SOURCES': [
+  {
+    'sheetname': null
+    'domain': 'oestro'
+    'type': 'excel'
+    'file': 'oestro.xlsx'
+  }
+  {
+    'spreadsheet_id': '1CETTP1hzjzn9giumYIBePQe6x-0dlobiOjGUCM7QGeI'
+    'sheetname': 'degrees'
+    'domain': 'bachelors'
+    'type': 'google_spreadsheet'
+  }
+  {
+    'spreadsheet_id': '1CETTP1hzjzn9giumYIBePQe6x-0dlobiOjGUCM7QGeI'
+    'sheetname': 'workforce'
+    'domain': 'workforce'
+    'type': 'google_spreadsheet'
+  }
+  {
+    'sheetname': 'Feuil1'
+    'domain': 'timeline'
+    'type': 'excel'
+    'file': 'timeline.xlsx'
+  }
+  {
+    'sheetname': 'box_office'
+    'domain': 'box_office'
+    'type': 'excel'
+    'file': 'movies.xlsx'
+  }
+  {
+    'sheetname': 'speaking_characters'
+    'domain': 'speaking_characters'
+    'type': 'excel'
+    'file': 'movies.xlsx'
+  }
+  {
+    'sheetname': 'disney'
+    'domain': 'disney'
+    'type': 'excel'
+    'file': 'movies.xlsx'
+  }
+  {
+    'domain': 'reports'
+    'type': 'csv'
+    'file': 'reports.csv'
+  }
+  {
+    'domain': 'dashboards'
+    'type': 'csv'
+    'file': 'dashboards.csv'
+  }
+  {
+    'spreadsheet_id': '1CETTP1hzjzn9giumYIBePQe6x-0dlobiOjGUCM7QGeI'
+    'sheetname': 'categories-porn'
+    'domain': 'categories-porn'
+    'type': 'google_spreadsheet'
+  }
+  {
+    'spreadsheet_id': '1CETTP1hzjzn9giumYIBePQe6x-0dlobiOjGUCM7QGeI'
+    'sheetname': 'dash-all'
+    'domain': 'dash-all'
+    'type': 'google_spreadsheet'
+  }
+  {
+    'spreadsheet_id': '1CETTP1hzjzn9giumYIBePQe6x-0dlobiOjGUCM7QGeI'
+    'sheetname': 'country-porn'
+    'domain': 'country-porn'
+    'type': 'google_spreadsheet'
+  }
+  {
+    'spreadsheet_id': '1CETTP1hzjzn9giumYIBePQe6x-0dlobiOjGUCM7QGeI'
+    'sheetname': 'orgasm'
+    'domain': 'orgasm'
+    'type': 'google_spreadsheet'
+  }
+  {
+    'spreadsheet_id': '1CETTP1hzjzn9giumYIBePQe6x-0dlobiOjGUCM7QGeI'
+    'sheetname': 'carto-pays-nuls'
+    'domain': 'carto-pays-nuls'
+    'type': 'google_spreadsheet'
+  }
+  {
+    'sheetname': 'salary'
+    'domain': 'salary'
+    'type': 'excel'
+    'file': 'movies.xlsx'
+  }
+  {
+    'spreadsheet_id': '1CETTP1hzjzn9giumYIBePQe6x-0dlobiOjGUCM7QGeI'
+    'sheetname': 'sport'
+    'domain': 'sport'
+    'type': 'google_spreadsheet'
+  }
+]
