@@ -539,6 +539,46 @@ slides: [
   }
   {
     level: 3
+    title: "Part des salariés en France"
+    commentary: "Classement des groupes du CAC 40 en fonction de la part des employés en France."
+
+    parent_id: 30
+    chartOptions:
+      data:
+        query:
+          domain: 'feminisation'
+        # melt:
+        #   id: ['company','sector']
+        #   value: ["Taux d'imposition","Montant de l'impot"]
+      chartType: "horizontalBarchart"
+      label: "company"
+      value: "salariés en France"
+      average:
+        data:
+          query:[
+            $match:
+              domain: "feminisation"
+          ,
+            $group:
+              _id: null
+              value: $avg: "$salariés en France"
+          ]
+        value: "value"
+      averageText: "moyenne CAC40"
+      units:
+        "salariés en France":"%"
+      # sentiment:
+      #   value:
+      #     domain: [8,18]
+      #     range: ['negative','warning','positive']
+      legend: true
+      sort: "desc"
+      # showAverage: true
+    source: "Source : Reuters, 2016"
+    id: 300120
+  }
+  {
+    level: 3
     title: "Evolution de la performance"
     parent_id: 40
     filters:
