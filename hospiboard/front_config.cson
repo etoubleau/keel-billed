@@ -50,6 +50,7 @@ slides: [
         query:
           domain: "part_de_marche"
           etablissements: "<%= report.entityName %>"
+          # zones: "zone d'attractivité"
         precision:
           value: '.1f'
         date:
@@ -66,9 +67,8 @@ slides: [
         type: 'buttons'
     filters: 'bottom-right':
       on: 'zones'
-      type: 'slider'
-
-
+      type: 'buttons'
+      defaultSelected: "zone d'attractivité"
   }
   {
     level: 3
@@ -111,7 +111,8 @@ slides: [
             value: "%"
     filters: 'bottom-right':
       on: 'zones'
-      type: 'slider'
+      type: 'buttons'
+      defaultSelected: "zone d'attractivité"
   }
   {
     level: 3
@@ -167,19 +168,28 @@ slides: [
       value: "value"
       label: "label"
       packs: "packs"
-      packsOrder:
-        custom: [
-          "Conformité",
-          "Cotation",
-          "Autres"
-        ]
+      # packsOrder:
+      #   custom: [
+      #     "Conformité",
+      #     "Cotation",
+      #     "Autres"
+      #   ]
       data:
         query:
           domain: "qualité"
           etablissements: "<%= report.entityName %>"
-          
+
     filters: 'bottom-right':
       on: 'date'
       type: 'slider'
+  }
+  {
+    level: 3
+    parent_id: 20
+    id: 2002
+    title: "Présentation Indicateur"
+    chartOptions:
+      chartType: 'text'
+      src: "qualite_asset_text"
   }
 ]
