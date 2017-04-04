@@ -87,8 +87,9 @@ DATA_SOURCES: [
     file: "funnelchart.csv"
 ,
     domain: "data_bourso"
-    type: "csv"
-    file: "financial_items.csv"
+    type: "excel"
+    sheetname: "Feuil1"
+    file: "data_bourso.xlsx"
 ,
     domain: "sectors"
     type: "csv"
@@ -99,8 +100,9 @@ DATA_SOURCES: [
     file: "actionnariat.csv"
 ,
     domain: "meta"
-    type: "csv"
-    file: "meta.csv"
+    type: "excel"
+    file: "meta.xlsx"
+    sheetname: "meta"
 # ,
 #     domain: "ga_example"
 #     type: "google_analytics"
