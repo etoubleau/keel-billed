@@ -51,7 +51,7 @@ slides: [
   #Les niveaux 1 définissent des chapitres (qui peuvent contenir des sous-chapitres ou directement des écrans)
   #3 informations :
   # - le level (1 forcémment!),
-  # - l'id (UNIQUE! A vous de le choisir comme vousle souhaitez nous préconisons d'uiliser des 10aines)
+  # - l'id (UNIQUE! A vous de le choisir comme vous le souhaitez nous préconisons d'uiliser des 10aines)
   # - le titre : à vous de le choisir, n'est pas forcémment unique
   # Les levels 1 ont forcémment pour parent le level 0
   {
@@ -61,10 +61,10 @@ slides: [
   }
   #Les niveaux 2 définissent des sous-chapitres (qui contiennent des écrans)
   #4 informations :
-  # - le parent_id (NEW!!) : on choisit ses parents chez ToucanToco (sauf les level 1) --> à toi de rattacher un sous-chapitre à un chapitre en indiquant
-  # comme parent_id l'id du parent souhaité
+  # - le parent_id (NEW!!) : on choisit ses parents chez ToucanToco (sauf les level 1)
+  # --> à toi de rattacher un sous-chapitre à un chapitre en indiquant comme parent_id l'id du parent souhaité
 
-  #et les 3 que nous connaissons déjà
+  # et les 3 que nous connaissons déjà
   # - le level (2 forcémment!),
   # - l'id (UNIQUE! A vous de le choisir comme vousle souhaitez nous préconisons d'uiliser des 100aines)
   # - le titre : à vous de le choisir, n'est pas forcémment unique
@@ -147,7 +147,7 @@ slides: [
     #Nous retrouvons les 4 informations précédentes :
     level: 3#3 forcémment!
     parent_id: 101#on choisit ses parents chez ToucanToco --> à toi de rattacher cet écran à un sous-chapitre ou directement un chapitre en indiquant
- #comme parent_id l'id du parent souhaité
+    #comme parent_id l'id du parent souhaité
     id: 10001#UNIQUE! A vous de le choisir comme vousle souhaitez nous préconisons d'uiliser des 10aines de milliers)
     title: "Simple Barchart"#à toi de le choisir, n'est pas forcémment unique
 
@@ -193,9 +193,9 @@ slides: [
     #- Créé un chapitre de niveau 2 au sein de  'Chapitre de test'(ou un autre nom si tu n'as pas pu t'empêcher de le nommer autrement),
     # 'Je suis la cible du déplacement'
     #- Déplace moi au sein du chapitre 'Je suis la cible du déplacement'
-#--> Drop moi dans l'interface et check le résultat!Tu ne sais pas comment me dropper dans l'interface? Dis à ton GO qu'il n'a pas fait sont boulot
-#ou demande lui directement de te montrer ça.
-#--> Ok next!
+    #--> Drop moi dans l'interface et check le résultat!Tu ne sais pas comment me dropper dans l'interface? Dis à ton GO qu'il n'a pas fait sont boulot
+    #ou demande lui directement de te montrer ça.
+    #--> Ok next!
 
     level: 3
     parent_id: 101
@@ -241,8 +241,8 @@ slides: [
      # - commentaire
      # - recommendation
      # - source
-#--> Drop moi dans l'interface et check le résultat!
-#--> Ok next!
+     #--> Drop moi dans l'interface et check le résultat!
+     #--> Ok next!
 
     level: 3
     parent_id: 101
@@ -307,8 +307,8 @@ slides: [
     #- commentaire
     #- recommendation
     #- source
-#--> Drop moi dans l'interface et check le résultat!
-#--> Ok next!
+    #--> Drop moi dans l'interface et check le résultat!
+    #--> Ok next!
     level: 3
     parent_id: 101
     id: 10004
@@ -347,12 +347,11 @@ slides: [
   {
     #TO DO :
     #chercher les règles de précision dans la documentation :)
-    #- Changer la précision de la valeur des barres : afficher des kilos avec 2 chiffres après la virgule
-    #- Changer l'unité de la valeur des barres pour afficher des grammes
-    #- Changer la précision de l'effectif --> pas de chiffre après la virgule nécessaire!
+    #- Changer la précision de la valeur des barres : afficher des k euros avec 2 chiffres après la virgule
+    #- Changer l'unité de la valeur des barres pour afficher 'nbr d'interventions'
 
-#--> Drop moi dans l'interface et check le résultat!
-#--> Ok next!
+    #--> Drop moi dans l'interface et check le résultat!
+    #--> Ok next!
 
     level: 3
     parent_id: 101
@@ -366,7 +365,7 @@ slides: [
         query:
           domain: "horizontal_barchart_sparklines"
         precision:
-          my_value:',2f'
+          my_value:',1f'
 
       chartType: "horizontalBarchart"
 
@@ -383,8 +382,7 @@ slides: [
       packNames:true
 
       units:
-        my_value: " kilos"
-
+        my_value: " k€"
       meta: "Effectif"
   }
   {
@@ -438,7 +436,7 @@ slides: [
 
       units:
         value: "%"
-        evolution: "%"
+        evolution: "pts"
       legend: false
   }
   {
@@ -476,9 +474,9 @@ slides: [
       chartType: "horizontalBarchart"
 
       #les champs requis par le chart doivent lui être indiqués
-      #quel champ utiliser pour représenter les barres principales? --> le champ 'my_value'
+      #quel champ utiliser pour représenter les barres principales? --> le champs 'my_value'
       value: "my_value"
-      #quel champ utiliser pour représenter les variations? --> le champ 'my_variation'
+      #quel champ utiliser pour représenter les variations? --> le champs 'my_variation'
       variation: "my_variation"
       #quel est le champ contenant le nom rattaché aux valeurs et aux variations que je cherche à représenter?
       label:'Evenements'
@@ -486,7 +484,7 @@ slides: [
       # showAverage: true
       # sort: "desc"
       #quels sont les unités de mes champs de valeur (valeur et variation)?
-      #-->nous avons déjà regarder ce point!
+      #-->nous avons déjà vu ce point!
       units:
         my_value: " kilos"
         my_variation: " %"
@@ -513,7 +511,7 @@ slides: [
     recommendation:
       advert:'Info'
       content:'Je suis aussi du html'
-    #nouveauté : la source peut être dynamique, il faut alors fournir une requête permettant d'aller le texte à afficher, nous allonrs ici
+    #nouveauté : la source peut être dynamique, il faut alors fournir une requête permettant d'aller chercher le texte à afficher, nous allonrs ici
     #afficher une date qui peut correspondre à la dernière mise à jour par exemple
     source:
       data:
