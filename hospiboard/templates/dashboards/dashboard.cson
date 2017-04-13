@@ -55,170 +55,233 @@ categories: [
     #   type:'separator'
     # ,
       name: "RSA HC"
-      source: "2015, source Hospidiag"
+      source: "Source Hospidiag"
       type: 'value-dynamic'
-      value: "RSA_HC_2015"
+      value: "value"
       unit: " actes"
       precision:
-          badge: '.0f'
+          badge: '+.0f'
       badge: 'badge'
-      comment: "<%=\' \' + badge + \' \'%> actes vs 2014"
+      comment: "<%=\' \' + badge + \' \'%> actes vs N-1"
       sentiment:
-        RSA_HC_2015:
+        value:
           domain: ['comparison']
           range: ['negative','positive']
       data:
-        RSA_HC_2015:
+        value:
           query:
             domain: "dashboard_KPIs"
-            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
-          field: "RSA_HC_2015"
+            etablissements: "{{ my_dashboard_name_column }}"
+            date: "<%= requestersManager.date.date %>"
+            metric: 'RSA_HC'
+          field: "value"
+          date:
+            # selector: 'date'
+            format: '%d-%m-%Y'
         comparison:
           query:
             domain: "dashboard_KPIs"
-            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
-          field: "RSA_HC_2014"
+            etablissements: "{{ my_dashboard_name_column }}"
+            date: "<%= requestersManager.date.date_N1 %>"
+            metric: 'RSA_HC'
+          field: "value"
+          date:
+            # selector: 'date'
+            format: '%d-%m-%Y'
       compute:
-        badge: '(RSA_HC_2015 - comparison)'
+        badge: '(value - comparison)'
+
     ,
       name: "RSA Ambulatoire"
-      source: "2015, source PMSI"
+      source: "Source PMSI"
       type: 'value-dynamic'
-      value: "RSA_Amb_2015"
+      value: "value"
       unit: " actes"
       precision:
           badge: '.0f'
       badge: 'badge'
-      comment: "<%=\' \' + badge + \' \'%> actes vs 2014"
+      comment: "<%=\' \' + badge + \' \'%> actes vs N-1"
       sentiment:
-        RSA_Amb_2015:
+        value:
           domain: ['comparison']
           range: ['negative','positive']
       data:
-        RSA_Amb_2015:
+        value:
           query:
             domain: "dashboard_KPIs"
-            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
-          field: "RSA_Amb_2015"
+            etablissements: "{{ my_dashboard_name_column }}"
+            date: "<%= requestersManager.date.date %>"
+            metric: 'RSA_Amb'
+          field: "value"
+          date:
+            # selector: 'date'
+            format: '%d-%m-%Y'
         comparison:
           query:
             domain: "dashboard_KPIs"
-            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
-          field: "RSA_Amb_2014"
+            etablissements: "{{ my_dashboard_name_column }}"
+            date: "<%= requestersManager.date.date_N1 %>"
+            metric: 'RSA_Amb'
+          field: "value"
+          date:
+            # selector: 'date'
+            format: '%d-%m-%Y'
       compute:
-        badge: '(RSA_Amb_2015 - comparison)'
+        badge: '(value - comparison)'
+
     ,
       name: "Chimio, radio, hémo et autres"
-      source: "2015, source PMSI"
+      source: "Source PMSI"
       type: 'value-dynamic'
-      value: "seances_2015"
+      value: "value"
       unit: " séances"
       precision:
-          badge: '.0f'
+          badge: '+.0f'
       badge: 'badge'
-      comment: "<%=\' \' + badge + \' \'%> séances vs 2014"
+      comment: "<%=\' \' + badge + \' \'%> actes vs N-1"
       sentiment:
-        seances_2015:
+        value:
           domain: ['comparison']
           range: ['negative','positive']
       data:
-        seances_2015:
+        value:
           query:
             domain: "dashboard_KPIs"
-            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
-          field: "seances_2015"
+            etablissements: "{{ my_dashboard_name_column }}"
+            date: "<%= requestersManager.date.date %>"
+            metric: 'seances'
+          field: "value"
+          date:
+            # selector: 'date'
+            format: '%d-%m-%Y'
         comparison:
           query:
             domain: "dashboard_KPIs"
-            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
-          field: "seances_2014"
+            etablissements: "{{ my_dashboard_name_column }}"
+            date: "<%= requestersManager.date.date_N1 %>"
+            metric: 'seances'
+          field: "value"
+          date:
+            # selector: 'date'
+            format: '%d-%m-%Y'
       compute:
-        badge: '(seances_2015 - comparison)'
+        badge: '(value - comparison)'
     ]
   }
   {
     name: "Activités Fréquentes"
     kpis: [
       name: "Niveau national "
-      source: "2015, source PMSI"
+      source: "Source PMSI"
       type: 'value-dynamic'
-      value: "act_freq_nat_2015"
+      value: "value"
       unit: " actes"
       precision:
-          badge: '.0f'
+          badge: '+.0f'
       badge: 'badge'
-      comment: "<%=\' \' + badge + \' \'%> actes vs 2014"
+      comment: "<%=\' \' + badge + \' \'%> actes vs N-1"
       sentiment:
-        act_freq_nat_2015:
+        value:
           domain: ['comparison']
           range: ['negative','positive']
       data:
-        act_freq_nat_2015:
+        value:
           query:
             domain: "dashboard_KPIs"
-            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
-          field: "act_freq_nat_2015"
+            etablissements: "{{ my_dashboard_name_column }}"
+            date: "<%= requestersManager.date.date %>"
+            metric: 'act_freq_nat'
+          field: "value"
+          date:
+            # selector: 'date'
+            format: '%d-%m-%Y'
         comparison:
           query:
             domain: "dashboard_KPIs"
-            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
-          field: "act_freq_nat_2014"
+            etablissements: "{{ my_dashboard_name_column }}"
+            date: "<%= requestersManager.date.date_N1 %>"
+            metric: 'act_freq_nat'
+          field: "value"
+          date:
+            # selector: 'date'
+            format: '%d-%m-%Y'
       compute:
-        badge: '(act_freq_nat_2015 - comparison)'
+        badge: '(value - comparison)'
+
     ,
       name: 'Médecine'
-      source: "2015, source PMSI"
+      source: "Source PMSI"
       type: 'value-dynamic'
-      value: "act_freq_med_2015"
+      value: "value"
       unit: " actes"
       precision:
-          badge: '.0f'
+          badge: '+.0f'
       badge: 'badge'
-      comment: "<%=\' \' + badge + \' \'%> actes vs 2014"
+      comment: "<%=\' \' + badge + \' \'%> actes vs N-1"
       sentiment:
-        act_freq_med_2015:
+        value:
           domain: ['comparison']
           range: ['negative','positive']
       data:
-        act_freq_med_2015:
+        value:
           query:
             domain: "dashboard_KPIs"
-            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
-          field: "act_freq_med_2015"
+            etablissements: "{{ my_dashboard_name_column }}"
+            date: "<%= requestersManager.date.date %>"
+            metric: 'act_freq_med'
+          field: "value"
+          date:
+            # selector: 'date'
+            format: '%d-%m-%Y'
         comparison:
           query:
             domain: "dashboard_KPIs"
-            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
-          field: "act_freq_med_2014"
+            etablissements: "{{ my_dashboard_name_column }}"
+            date: "<%= requestersManager.date.date_N1 %>"
+            metric: 'act_freq_med'
+          field: "value"
+          date:
+            # selector: 'date'
+            format: '%d-%m-%Y'
       compute:
-        badge: '(act_freq_med_2015 - comparison)'
+        badge: '(value - comparison)'
     ,
       name: 'Chirurgie'
-      source: "2015, source PMSI"
+      source: "Source PMSI"
       type: 'value-dynamic'
-      value: "act_freq_chir_2015"
+      value: "value"
       unit: " actes"
       precision:
-          badge: '.0f'
+          badge: '+.0f'
       badge: 'badge'
-      comment: "<%=\' \' + badge + \' \'%> actes vs 2014"
+      comment: "<%=\' \' + badge + \' \'%> actes vs N-1"
       sentiment:
-        act_freq_chir_2015:
+        value:
           domain: ['comparison']
           range: ['negative','positive']
       data:
-        act_freq_chir_2015:
+        value:
           query:
             domain: "dashboard_KPIs"
-            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
-          field: "act_freq_chir_2015"
+            etablissements: "{{ my_dashboard_name_column }}"
+            date: "<%= requestersManager.date.date %>"
+            metric: 'act_freq_chir'
+          field: "value"
+          date:
+            # selector: 'date'
+            format: '%d-%m-%Y'
         comparison:
           query:
             domain: "dashboard_KPIs"
-            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
-          field: "act_freq_chir_2014"
+            etablissements: "{{ my_dashboard_name_column }}"
+            date: "<%= requestersManager.date.date_N1 %>"
+            metric: 'act_freq_chir'
+          field: "value"
+          date:
+            # selector: 'date'
+            format: '%d-%m-%Y'
       compute:
-        badge: '(act_freq_chir_2015 - comparison)'
+        badge: '(value - comparison)'
     ]
   }
   {
@@ -259,13 +322,14 @@ categories: [
         date: "date"
         data:
           query:
-            domain: 'dashboard_trend'
-            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
-            breakdown: "CA"
+            domain: "dashboard_KPIs"
+            etablissements: "{{ my_dashboard_name_column }}"
+            date: $lte: "<%= requestersManager.date.date %>"
+            metric: 'CA'
           precision:
               value: ',.1f'
         units: value: " k€"
-      source: "2015, sources : Comptes financiers ou liasses fiscales, Retraitements comptables, PMSI, ARBUST, SNIIRAM"
+      source: "Sources : Comptes financiers ou liasses fiscales, Retraitements comptables, PMSI, ARBUST, SNIIRAM"
     # ,
     #   name: "Résultat Net"
     #   source: "2015, sources : Comptes financiers ou liasses fiscales, Retraitements comptables, PMSI, ARBUST, SNIIRAM"
@@ -301,13 +365,13 @@ categories: [
         date: "date"
         data:
           query:
-            domain: 'dashboard_trend'
-            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
-            breakdown: "RN"
+            domain: "dashboard_KPIs"
+            etablissements: "{{ my_dashboard_name_column }}"
+            metric: 'RN'
           precision:
               value: '.0f'
         units: value: " k€"
-      source: "2015, sources : Comptes financiers ou liasses fiscales, Retraitements comptables, PMSI, ARBUST, SNIIRAM"
+      source: "Sources : Comptes financiers ou liasses fiscales, Retraitements comptables, PMSI, ARBUST, SNIIRAM"
     # ,
     #   name: "Dette"
     #   source: "2015, sources : Comptes financiers ou liasses fiscales, Retraitements comptables, PMSI, ARBUST, SNIIRAM"
@@ -343,14 +407,14 @@ categories: [
         date: "date"
         data:
           query:
-            domain: 'dashboard_trend'
-            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
-            breakdown: "Dette"
+            domain: "dashboard_KPIs"
+            etablissements: "{{ my_dashboard_name_column }}"
+            metric: 'dette'
           precision:
               value: '.0f'
         units: value: " k€"
-      source: "2015, sources : Comptes financiers ou liasses fiscales, Retraitements comptables, PMSI, ARBUST, SNIIRAM"
-      ]
+      source: "Sources : Comptes financiers ou liasses fiscales, Retraitements comptables, PMSI, ARBUST, SNIIRAM"
+    ]
   }
   {
     name: "Autres"
@@ -358,58 +422,78 @@ categories: [
       name: "Lits et places installés"
       source: "2015, source : SAE"
       type: 'value-dynamic'
-      value: "lits_places_2015"
+      value: "value"
       unit: " lits/places installés"
       precision:
-          badge: '.0f'
+          badge: '+.0f'
       badge: 'badge'
-      comment: "<%=\' \' + badge + \' \'%> vs 2014"
+      comment: "<%=\' \' + badge + \' \'%> actes vs N-1"
       sentiment:
-        lits_places_2015:
+        value:
           domain: ['comparison']
           range: ['negative','positive']
       data:
-        lits_places_2015:
+        value:
           query:
             domain: "dashboard_KPIs"
-            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
-          field: "lits_places_2015"
+            etablissements: "{{ my_dashboard_name_column }}"
+            date: "<%= requestersManager.date.date %>"
+            metric: 'lits_places'
+          field: "value"
+          date:
+            # selector: 'date'
+            format: '%d-%m-%Y'
         comparison:
           query:
             domain: "dashboard_KPIs"
-            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
-          field: "lits_places_2014"
+            etablissements: "{{ my_dashboard_name_column }}"
+            date: "<%= requestersManager.date.date_N1 %>"
+            metric: 'lits_places'
+          field: "value"
+          date:
+            # selector: 'date'
+            format: '%d-%m-%Y'
       compute:
-        badge: '(lits_places_2015 - comparison)'
+        badge: '(value - comparison)'
 
     ,
       name: "ETP des personnels"
       source: "2015, source : SAE"
       type: 'value-dynamic'
-      value: "ETP_2015"
+      value: "value"
       unit: " "
       precision:
-          ETP_2015: '.1f'
-          badge: '.2f'
+          badge: '+.2f'
+          value: '.2f'
       badge: 'badge'
-      comment: "<%=\' \' + badge + \' \'%> vs 2014"
+      comment: "<%=\' \' + badge + \' \'%> actes vs N-1"
       sentiment:
-        ETP_2015:
+        value:
           domain: ['comparison']
           range: ['negative','positive']
       data:
-        ETP_2015:
+        value:
           query:
             domain: "dashboard_KPIs"
-            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
-          field: "ETP_2015"
+            etablissements: "{{ my_dashboard_name_column }}"
+            date: "<%= requestersManager.date.date %>"
+            metric: 'ETP'
+          field: "value"
+          date:
+            # selector: 'date'
+            format: '%d-%m-%Y'
         comparison:
           query:
             domain: "dashboard_KPIs"
-            data_dashboard_name_column: "{{ my_dashboard_name_column }}"
-          field: "ETP_2014"
+            etablissements: "{{ my_dashboard_name_column }}"
+            date: "<%= requestersManager.date.date_N1 %>"
+            metric: 'ETP'
+          field: "value"
+          date:
+            # selector: 'date'
+            format: '%d-%m-%Y'
       compute:
-        badge: '(ETP_2015 - comparison)'
-      ]
+        badge: '(value - comparison)'
+    ]
   }
 ]
