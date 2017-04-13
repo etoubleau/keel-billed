@@ -131,38 +131,6 @@ DATA_SOURCES: [
 #  query: """SELECT * FROM test.ventes LIMIT 10;"""
 ]
 DATA_PROVIDERS: [
-  # name: "Some cube"
-  # type: "SSAS"
-  # options:
-  #   server_url: "http://some_server_url/OLAP/msmdpump.dll"
-# ,
-  name: 'Some MySQL provider'
-  type: 'MySQL'
-  options:
-    host: 'localhost'  # REQUIRED
-    db: 'circle_test'  # REQUIRED
-    user: 'ubuntu'  # REQUIRED
-    password: ''  # OPTIONAL
-    port: 3306  # OPTIONAL
-,
-  name: 'SomeGoogleAnalyticsProvider'
-  type: 'GoogleAnalytics'
-  options:
-    authentication_file: 'test-connector-ga-47f3cded59c8.json' # Put this file in app/parameters
-,
-  name: "SomeGoogleBigQueryProvider"
-  type: "GoogleBigQuery"
-  options:
-    project_id: "carbide-parser-133123"
-    authentication_file: "test-psa-1a4033d8f4ca.json"
-,
-  name: 'Some SapHana provider'
-  type: 'SapHana'
-  options:
-    host: 'localhost'
-    port: 30015
-    user: 'DEV_AF81GAMQVVPNWUA4MUI5C218K'
-    password: 'Gv87XkSuSz1JEHf'
 ]
 REPORTS: [
   query:
