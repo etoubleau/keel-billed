@@ -1,11 +1,31 @@
 settings:
-  comparison:
-    description: "Sur tous les écrans de comparaison, comparer avec :"
-    values: [
-      "Région"
-      "Catégorie"
-      "Typologie"
-    ]
+  # comparison:
+  #   description: "Sur tous les écrans de comparaison, comparer avec :"
+  #   values: [
+  #     "Région"
+  #     "Catégorie"
+  #     "Typologie"
+    # ]
+  requesters:[
+      id:"zones"
+      description: "Zones"
+      type:"dropdown"
+      default:"zone d'attractivité"
+      query:
+        domain:"part_de_marche"
+      fields:["zones"]
+      slides:[2001]
+    ,
+      id:"comparaison"
+      description: "Comparer avec"
+      type:"dropdown"
+      default:"région"
+      query:
+        domain:"occupation_lits"
+      fields:["comparaison"]
+      slides:[2003,2004]
+  ]
+
 
 glossary:[]
 
@@ -48,87 +68,141 @@ slides: [
     level: 3
     parent_id: 20
     id: 2001
-    title: "Evolution<br>part de marché"
-    commentary: "Suivi de l'évolution de la part de marché de l'établissement au sein de la zone d'attractivité ou de la region"
-    chartOptions:
-      data:
-        query:
-          domain: "part_de_marche"
-          etablissements: "<%= report.entityName %>"
-          # zones: "zone d'attractivité"
-        precision:
-          value: '.1f'
-        date:
-          format: "%Y"
-      chartType: "linechart"
-      value: "value"
-      groups: 'label'
-      date: 'date'
-      legend: true
-      units:
-        value: "%"
-      filters: 'upper-middle':
+    title: "Part de marché"
+    commentary: "Part de marché de l'établissement au sein de la <%= requestersManager.zones %>"
+    filters:
+      'bottom-right':
         on: 'metric'
         type: 'buttons'
-    filters: 'bottom-right':
-      on: 'zones'
-      type: 'buttons'
-      defaultSelected: "zone d'attractivité"
+        default: "Médecine"
+        datasets: [0,1]
+    charts:[
+      {
+        data:
+          query:
+            domain: "part_de_marche"
+            etablissements: "<%= report.entityName %>"
+            # metric: '<%= requestersManager.metric %>'
+            zones: '<%= requestersManager.zones %>'
+          precision:
+            value: '.1f'
+          date:
+            format: "%Y"
+        chartType: "linechart"
+        value: "value"
+        groups: 'etablissements'
+        date: 'date'
+        units:
+          value: "%"
+        crossfilter:
+          on: "date"
+          datasets: [1]
+        style: "secondary"
+        id: 0
+        size: 0.25
+      }
+      {
+        data:
+          query:
+            domain: "leaderboard"
+            zones: '<%= requestersManager.zones %>'
+          precision:
+            value: '.1f'
+            variation: '.1f'
+        chartType: "horizontal-barchart"
+        label: "etablissements"
+        value: "value"
+        sort: 'desc'
+        rank: true
+        variation: "variation"
+        variationLegend: "vs.N-1"
+        # legend: 'Part de marché'
+        # filters: 'upper-middle':
+        #   on: 'metric'
+        #   type: 'buttons'
+        units:
+          value: "%"
+          variation: ' pts'
+        id: 1
+      }
+    ]
+    # chartOptions:
+    #   data:
+    #     query:
+    #       domain: "part_de_marche"
+    #       etablissements: "<%= report.entityName %>"
+    #       # zones: "zone d'attractivité"
+    #     precision:
+    #       value: '.1f'
+    #     date:
+    #       format: "%Y"
+    #   chartType: "linechart"
+    #   value: "value"
+    #   groups: 'label'
+    #   date: 'date'
+    #   legend: true
+    #   units:
+    #     value: "%"
+    #   filters: 'upper-middle':
+    #     on: 'metric'
+    #     type: 'buttons'
+
   }
-  {
-    level: 3
-    parent_id: 20
-    id: 2002
-    title: "Classement"
-    commentary: "Classement des part de marché des extablissement dans zone d'attractivité/region"
-    chartOptions:
-      data:
-        query:
-          domain: "leaderboard"
-        precision:
-          value: '.1f'
-      chartType: "horizontalBarchart"
-      label: "etablissements"
-      value: "value"
-      sort: 'desc'
-      rank: true
-      # legend: 'Part de marché'
-      filters: 'upper-middle':
-        on: 'metric'
-        type: 'buttons'
-      units:
-        value: "%"
-      sparklines:
-          data:
-            query:
-              domain: "part_de_marche"
-            date:
-              selector: "date"
-              format: "%Y" # See d3 time formatting for reference
-            precision:
-              value: '.1f'
-          joins: ["etablissements", "metric", "zones"]
-          value: "value"
-          date: "date"
-          # dateFormat: "%B" # Optional display format that will override the one present in data
-          legend: "Évo. part de marché"
-          units:
-            value: "%"
-    filters: 'bottom-right':
-      on: 'zones'
-      type: 'buttons'
-      defaultSelected: "zone d'attractivité"
-  }
+  # {
+  #   level: 3
+  #   parent_id: 20
+  #   id: 2002
+  #   title: "Classement"
+  #   commentary: "Classement des part de marché des extablissement dans zone d'attractivité/region"
+  #   chartOptions:
+  #     data:
+  #       query:
+  #         domain: "leaderboard"
+  #       precision:
+  #         value: '.1f'
+  #     chartType: "horizontalBarchart"
+  #     label: "etablissements"
+  #     value: "value"
+  #     sort: 'desc'
+  #     rank: true
+  #     # legend: 'Part de marché'
+  #     filters: 'upper-middle':
+  #       on: 'metric'
+  #       type: 'buttons'
+  #     units:
+  #       value: "%"
+  #     sparklines:
+  #         data:
+  #           query:
+  #             domain: "part_de_marche"
+  #           date:
+  #             selector: "date"
+  #             format: "%Y" # See d3 time formatting for reference
+  #           precision:
+  #             value: '.1f'
+  #         joins: ["etablissements", "metric", "zones"]
+  #         value: "value"
+  #         date: "date"
+  #         # dateFormat: "%B" # Optional display format that will override the one present in data
+  #         legend: "Évo. part de marché"
+  #         units:
+  #           value: "%"
+  #   filters: 'bottom-right':
+  #     on: 'zones'
+  #     type: 'buttons'
+  #     defaultSelected: "zone d'attractivité"
+  # }
   {
     level: 3
     parent_id: 20
     id: 2003
     title: "Occupation des lits"
-    commentary: "Selectionnez dans l'onglet de configuation l'élément de comparaison<br>région, catégorie, typologie"
+    commentary: "Comparaison au sein de la <%= requestersManager.comparaison %><br>Selectionnez dans l'onglet de configuation l'élément de comparaison<br>région, catégorie, typologie"
     filters:
       'bottom-right':
         on: 'date'
         type: 'slider'
+        # default: "Médecine"
     chartOptions:
       comparison: '2ème décile'
       commonScale: true
@@ -146,12 +220,38 @@ slides: [
         query:
           domain: 'occupation_lits'
           etablissements: "<%= report.entityName %>"
+          comparaison: '<%= requestersManager.comparaison %>'
+          # date: '<%= requestersManager.date.date %>'
   }
   {
     level: 3
     parent_id: 20
     id: 2004
-    title: "Cartographie"
+    title: "Activité globale"
+    commentary: "Comparaison au sein de la <%= requestersManager.comparaison %><br>Selectionnez dans l'onglet de configuation l'élément de comparaison<br>région, catégorie, typologie"
+    # filters:
+    #   'bottom-right':
+    #     on: 'date'
+    #     type: 'slider'
+    chartOptions:
+      comparison: '2ème décile'
+      commonScale: true
+      target: '8ème décile'
+      # 'packs': 'group'
+      value: 'value'
+      label: 'label'
+      meta: [ '' ]
+      units:
+        value: '%'
+        '8ème décile': '%'
+        '2ème décile': '%'
+      chartType: 'bulletChart'
+      data:
+        query:
+          domain: 'activité_globale'
+          etablissements: "<%= report.entityName %>"
+          comparaison: '<%= requestersManager.comparaison %>'
+          date: '<%= requestersManager.date.date %>'
   }
   {
     level: 3

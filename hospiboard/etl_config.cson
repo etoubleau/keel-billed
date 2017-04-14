@@ -44,6 +44,11 @@ etl_config:
       sheetname: 'occupation_lits'
       file: "activite.xls"
   ,
+      domain: "activité_globale"
+      type: "excel"
+      sheetname: 'activite_globale'
+      file: "activite.xls"
+  ,
       domain: "qualité"
       type: "excel"
       sheetname: 'Sheet1'
