@@ -21,9 +21,9 @@ background:#link between the reports and the background img to display
   assetName: "bg-1"
   overlay: false
 
-execsumTitle: "Établissements de santé en France"#title
-# execsumNote: "* Crafted with <strong> <3 </strong> by the Toucan Team"#footnote
-execsumNote: "Finess: {{ finess }} - Département: {{ zone }}<br>Champ pmsi: {{ champ_pmsi}} - Catégorie: {{ cat }}<br>Taille MCO: {{ taille_MCO}}<br>Taille M: {{ taille_M}} - Taille C: {{ taille_C}} - Taille O: {{ taille_O}}"
+execsumTitle: "<b>Établissements de santé en France</b> <br><span class='id_card'> Finess: {{ finess }} - Département: {{ zone }}<br>Champ pmsi: {{ champ_pmsi}} - Catégorie: {{ cat }}<br>Taille MCO: {{ taille_MCO}}<br>Taille M: {{ taille_M}} - Taille C: {{ taille_C}} - Taille O: {{ taille_O}} </span>"#title
+execsumNote: "* Crafted with <strong> <3 </strong> by the Toucan Team"#footnote
+# execsumNote: "Finess: {{ finess }} - Département: {{ zone }}<br>Champ pmsi: {{ champ_pmsi}} - Catégorie: {{ cat }}<br>Taille MCO: {{ taille_MCO}}<br>Taille M: {{ taille_M}} - Taille C: {{ taille_C}} - Taille O: {{ taille_O}}"
 
 #parameters for the reports search bar
 search:

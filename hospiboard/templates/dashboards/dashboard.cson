@@ -5,7 +5,8 @@ features: [ [
   }
 ] ]
 
-default: '{{ my_dashboard_default_column | bool }}'
+# default: '{{ my_dashboard_default_column | bool }}'
+default: true
 entityName: "{{ my_dashboard_name_column }}"
 #do not change those parameters!!
 id: "{{ index }}"
@@ -15,7 +16,7 @@ categories: [
   {
     name: "Overview"
     kpis:[
-      
+
     ]
   }
   {
