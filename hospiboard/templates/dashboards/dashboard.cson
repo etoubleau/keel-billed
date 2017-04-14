@@ -1,3 +1,10 @@
+features: [ [
+  {
+    name: ' Finess : '
+    value: ' {{ finess }} <br>'
+  }
+] ]
+
 default: '{{ my_dashboard_default_column | bool }}'
 entityName: "{{ my_dashboard_name_column }}"
 #do not change those parameters!!
@@ -5,6 +12,12 @@ id: "{{ index }}"
 report: "{{ report_id }}"
 
 categories: [
+  {
+    name: "Overview"
+    kpis:[
+      
+    ]
+  }
   {
     name: "Activité Globale"
     kpis: [
