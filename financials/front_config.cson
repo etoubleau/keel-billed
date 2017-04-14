@@ -35,8 +35,6 @@ popupEmail:
   api: "https://api-voyager.toucantoco.com/toucan-public"
   timeout: 60
   notification: "To continue your navigation, please provide us <br> your email so we can send you your credentials"
-  dismissEnabled: true
-  dismiss: "Enjoy anyway"
 
 
 
