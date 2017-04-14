@@ -19,6 +19,11 @@ etl_config:
       sheetname: 'dashboard_KPIs'
       file: "dashboards_data.xls"
   ,
+      domain: "dashboard_leaderboard"
+      type: "excel"
+      sheetname: 'dashboard_leaderboard'
+      file: "dashboards_data.xls"
+  ,
       domain: "ID"
       type: "excel"
       sheetname: 'ID'

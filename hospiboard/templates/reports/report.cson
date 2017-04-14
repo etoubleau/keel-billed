@@ -21,12 +21,14 @@ background:#link between the reports and the background img to display
   assetName: "bg-1"
   overlay: false
 
-execsumTitle: "<b>Établissements de santé en France</b> <br><span class='id_card'> Finess: {{ finess }} - Département: {{ zone }}<br>Champ pmsi: {{ champ_pmsi}} - Catégorie: {{ cat }}<br>Taille MCO: {{ taille_MCO}}<br>Taille M: {{ taille_M}} - Taille C: {{ taille_C}} - Taille O: {{ taille_O}} </span>"#title
+# execsumTitle: "<b>Établissements de santé en France</b> <br><b>{{ my_report_name_column }}</b><br> <span class='id_card'> Finess: {{ finess }} - Département: {{ zone }}<br>Champ pmsi: {{ champ_pmsi}} - Catégorie: {{ cat }}<br>Taille MCO: {{ taille_MCO}}<br>Taille M: {{ taille_M}} - Taille C: {{ taille_C}} - Taille O: {{ taille_O}} </span>"#title
+execsumTitle: "<b>{{ my_report_name_column }}</b><br> <span class='id_card'> Finess: {{ finess }} - Département: {{ zone }}<br>Champ pmsi: {{ champ_pmsi}} - Catégorie: {{ cat }}<br>Taille MCO: {{ taille_MCO}}<br>Taille M: {{ taille_M}} - Taille C: {{ taille_C}} - Taille O: {{ taille_O}} </span>"#title
 execsumNote: "* Crafted with <strong> <3 </strong> by the Toucan Team"#footnote
 # execsumNote: "Finess: {{ finess }} - Département: {{ zone }}<br>Champ pmsi: {{ champ_pmsi}} - Catégorie: {{ cat }}<br>Taille MCO: {{ taille_MCO}}<br>Taille M: {{ taille_M}} - Taille C: {{ taille_C}} - Taille O: {{ taille_O}}"
 
 #parameters for the reports search bar
 search:
+  showSearchBar: true
   #If there is more than 1 report which report shall be selected by default?
   #In your reports dataset add a 'default' column containing the value 1 if the row corresponds to the default report you want to display and 0 otherwise.
   default: '{{ my_report_default_column | bool }}'

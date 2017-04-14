@@ -13,78 +13,51 @@ id: "{{ index }}"
 report: "{{ report_id }}"
 
 categories: [
-  {
-    name: "Overview"
-    kpis:[
-      name: "Part de marché<br>Zone d'attractivité"
-      type: 'value-dynamic'
-      value: "value"
-      precision:
-          badge: '+.2f'
-          value: '.2f'
-      unit: "%"
-      badge: 'badge'
-      comment: "<%=\' \' + badge + \' \'%> pts vs N-1"
-      sentiment:
-        value:
-          domain: ['comparison']
-          range: ['negative','positive']
-      data:
-        value:
-          query:
-            domain: "dashboard_KPIs"
-            etablissements: "{{ my_dashboard_name_column }}"
-            date: "<%= requestersManager.date.date %>"
-            metric: 'part_de_marche'
-          field: "value"
-          date:
-            # selector: 'date'
-            format: '%d-%m-%Y'
-        comparison:
-          query:
-            domain: "dashboard_KPIs"
-            etablissements: "{{ my_dashboard_name_column }}"
-            date: "<%= requestersManager.date.date_N1 %>"
-            metric: 'part_de_marche'
-          field: "value"
-          date:
-            # selector: 'date'
-            format: '%d-%m-%Y'
-      compute:
-        badge: '(value - comparison)'
-      source: "Source PMSI"
-    ]
-  }
+  # {
+  #   name: "Overview"
+  #   kpis:[
+  #     name: "Part de marché<br>Zone d'attractivité"
+  #     type: 'value-dynamic'
+  #     value: "value"
+  #     precision:
+  #         badge: '+.2f'
+  #         value: '.2f'
+  #     unit: "%"
+  #     badge: 'badge'
+  #     comment: "<%=\' \' + badge + \' \'%> pts vs N-1"
+  #     sentiment:
+  #       value:
+  #         domain: ['comparison']
+  #         range: ['negative','positive']
+  #     data:
+  #       value:
+  #         query:
+  #           domain: "dashboard_KPIs"
+  #           etablissements: "{{ my_dashboard_name_column }}"
+  #           date: "<%= requestersManager.date.date %>"
+  #           metric: 'part_de_marche'
+  #         field: "value"
+  #         date:
+  #           # selector: 'date'
+  #           format: '%d-%m-%Y'
+  #       comparison:
+  #         query:
+  #           domain: "dashboard_KPIs"
+  #           etablissements: "{{ my_dashboard_name_column }}"
+  #           date: "<%= requestersManager.date.date_N1 %>"
+  #           metric: 'part_de_marche'
+  #         field: "value"
+  #         date:
+  #           # selector: 'date'
+  #           format: '%d-%m-%Y'
+  #     compute:
+  #       badge: '(value - comparison)'
+  #     source: "Source PMSI"
+  #   ]
+  # }
   {
     name: "Activité Globale"
     kpis: [
-    #   name: "Part de marché"
-    #   type: 'value-dynamic'
-    #   value: "my_part_de_marche"
-    #   unit: "%"
-    #   badge: 'badge'
-    #   comment: "<%=\' \' + badge + \' \'%> pts vs 2014"
-    #   sentiment:
-    #     my_part_de_marche:
-    #       domain: ['comparison']
-    #       range: ['negative','positive']
-    #   precision:
-    #       my_part_de_marche: '.1f'
-    #       badge: '.2f'
-    #   data:
-    #     my_part_de_marche:
-    #       query:
-    #         domain: "dashboard_KPIs"
-    #         data_dashboard_name_column: "{{ my_dashboard_name_column }}"
-    #       field: "part_de_marche_2015"
-    #     comparison:
-    #       query:
-    #         domain: "dashboard_KPIs"
-    #         data_dashboard_name_column: "{{ my_dashboard_name_column }}"
-    #       field: "part_de_marche_2014"
-    #   compute:
-    #     badge: '(my_part_de_marche - comparison)'
-    #   source: "2015, source PMSI"
     # ,
     #   name: "Part de marché zone d'attractivité"
     #   type: "line"
@@ -104,118 +77,133 @@ categories: [
     # ,
     #   type:'separator'
     # ,
-      name: "RSA HC"
-      source: "Source Hospidiag"
-      type: 'value-dynamic'
-      value: "value"
-      unit: " actes"
-      precision:
-          badge: '+.0f'
-      badge: 'badge'
-      comment: "<%=\' \' + badge + \' \'%> actes vs N-1"
-      sentiment:
-        value:
-          domain: ['comparison']
-          range: ['negative','positive']
-      data:
-        value:
+      name: "RSA"
+      source: "Source PMSI"
+      type: 'leaderboard'
+      chartOptions:
+        value: "value"
+        label: 'label'
+        units:
+          value: " actes"
+        data:
           query:
-            domain: "dashboard_KPIs"
+            domain: "dashboard_leaderboard"
             etablissements: "{{ my_dashboard_name_column }}"
             date: "<%= requestersManager.date.date %>"
-            metric: 'RSA_HC'
-          field: "value"
+            metric: 'RSA'
           date:
             # selector: 'date'
             format: '%d-%m-%Y'
-        comparison:
-          query:
-            domain: "dashboard_KPIs"
-            etablissements: "{{ my_dashboard_name_column }}"
-            date: "<%= requestersManager.date.date_N1 %>"
-            metric: 'RSA_HC'
-          field: "value"
-          date:
-            # selector: 'date'
-            format: '%d-%m-%Y'
-      compute:
-        badge: '(value - comparison)'
 
     ,
-      name: "RSA Ambulatoire"
+      # name: "RSA Ambulatoire"
+      # source: "Source PMSI"
+      # type: 'value-dynamic'
+      # value: "value"
+      # unit: " actes"
+      # precision:
+      #     badge: '.0f'
+      # badge: 'badge'
+      # comment: "<%=\' \' + badge + \' \'%> actes vs N-1"
+      # sentiment:
+      #   value:
+      #     domain: ['comparison']
+      #     range: ['negative','positive']
+      # data:
+      #   value:
+      #     query:
+      #       domain: "dashboard_KPIs"
+      #       etablissements: "{{ my_dashboard_name_column }}"
+      #       date: "<%= requestersManager.date.date %>"
+      #       metric: 'RSA_Amb'
+      #     field: "value"
+      #     date:
+      #       # selector: 'date'
+      #       format: '%d-%m-%Y'
+      #   comparison:
+      #     query:
+      #       domain: "dashboard_KPIs"
+      #       etablissements: "{{ my_dashboard_name_column }}"
+      #       date: "<%= requestersManager.date.date_N1 %>"
+      #       metric: 'RSA_Amb'
+      #     field: "value"
+      #     date:
+      #       # selector: 'date'
+      #       format: '%d-%m-%Y'
+      # compute:
+      #   badge: '(value - comparison)'
+    # ,
+      name: "Séances"
       source: "Source PMSI"
-      type: 'value-dynamic'
-      value: "value"
-      unit: " actes"
-      precision:
-          badge: '.0f'
-      badge: 'badge'
-      comment: "<%=\' \' + badge + \' \'%> actes vs N-1"
-      sentiment:
-        value:
-          domain: ['comparison']
-          range: ['negative','positive']
-      data:
-        value:
+      type: 'leaderboard'
+      chartOptions:
+        value: "value"
+        label: 'label'
+        units:
+          value: " séances"
+        data:
           query:
-            domain: "dashboard_KPIs"
-            etablissements: "{{ my_dashboard_name_column }}"
-            date: "<%= requestersManager.date.date %>"
-            metric: 'RSA_Amb'
-          field: "value"
-          date:
-            # selector: 'date'
-            format: '%d-%m-%Y'
-        comparison:
-          query:
-            domain: "dashboard_KPIs"
-            etablissements: "{{ my_dashboard_name_column }}"
-            date: "<%= requestersManager.date.date_N1 %>"
-            metric: 'RSA_Amb'
-          field: "value"
-          date:
-            # selector: 'date'
-            format: '%d-%m-%Y'
-      compute:
-        badge: '(value - comparison)'
-
-    ,
-      name: "Chimio, radio, hémo et autres"
-      source: "Source PMSI"
-      type: 'value-dynamic'
-      value: "value"
-      unit: " séances"
-      precision:
-          badge: '+.0f'
-      badge: 'badge'
-      comment: "<%=\' \' + badge + \' \'%> actes vs N-1"
-      sentiment:
-        value:
-          domain: ['comparison']
-          range: ['negative','positive']
-      data:
-        value:
-          query:
-            domain: "dashboard_KPIs"
+            domain: "dashboard_leaderboard"
             etablissements: "{{ my_dashboard_name_column }}"
             date: "<%= requestersManager.date.date %>"
             metric: 'seances'
-          field: "value"
           date:
             # selector: 'date'
             format: '%d-%m-%Y'
-        comparison:
+      # name: "Chimio, radio, hémo et autres"
+      # source: "Source PMSI"
+      # type: 'value-dynamic'
+      # value: "value"
+      # unit: " séances"
+      # precision:
+      #     badge: '+.0f'
+      # badge: 'badge'
+      # comment: "<%=\' \' + badge + \' \'%> actes vs N-1"
+      # sentiment:
+      #   value:
+      #     domain: ['comparison']
+      #     range: ['negative','positive']
+      # data:
+      #   value:
+      #     query:
+      #       domain: "dashboard_KPIs"
+      #       etablissements: "{{ my_dashboard_name_column }}"
+      #       date: "<%= requestersManager.date.date %>"
+      #       metric: 'seances'
+      #     field: "value"
+      #     date:
+      #       # selector: 'date'
+      #       format: '%d-%m-%Y'
+      #   comparison:
+      #     query:
+      #       domain: "dashboard_KPIs"
+      #       etablissements: "{{ my_dashboard_name_column }}"
+      #       date: "<%= requestersManager.date.date_N1 %>"
+      #       metric: 'seances'
+      #     field: "value"
+      #     date:
+      #       # selector: 'date'
+      #       format: '%d-%m-%Y'
+      # compute:
+      #   badge: '(value - comparison)'
+    ,
+      name: "Autres actes"
+      source: "Source PMSI"
+      type: 'leaderboard'
+      chartOptions:
+        value: "value"
+        label: 'label'
+        units:
+          value: ""
+        data:
           query:
-            domain: "dashboard_KPIs"
+            domain: "dashboard_leaderboard"
             etablissements: "{{ my_dashboard_name_column }}"
-            date: "<%= requestersManager.date.date_N1 %>"
-            metric: 'seances'
-          field: "value"
+            date: "<%= requestersManager.date.date %>"
+            metric: 'autre'
           date:
             # selector: 'date'
             format: '%d-%m-%Y'
-      compute:
-        badge: '(value - comparison)'
     ]
   }
   {
@@ -471,41 +459,39 @@ categories: [
     kpis: [
       name: "Lits et places installés"
       source: "Source : SAE"
-      type: 'value-dynamic'
-      value: "value"
-      unit: " lits/places installés"
-      precision:
-          badge: '+.0f'
-      badge: 'badge'
-      comment: "<%=\' \' + badge + \' \'%> actes vs N-1"
-      sentiment:
-        value:
-          domain: ['comparison']
-          range: ['negative','positive']
-      data:
-        value:
+      type: 'leaderboard'
+      chartOptions:
+        value: "value"
+        label: 'label'
+        units:
+          value: ""
+        data:
           query:
-            domain: "dashboard_KPIs"
+            domain: "dashboard_leaderboard"
             etablissements: "{{ my_dashboard_name_column }}"
             date: "<%= requestersManager.date.date %>"
             metric: 'lits_places'
-          field: "value"
           date:
             # selector: 'date'
             format: '%d-%m-%Y'
-        comparison:
+    ,
+      name: "Plateaux techniques"
+      source: "Source : SAE"
+      type: 'leaderboard'
+      chartOptions:
+        value: "value"
+        label: 'label'
+        units:
+          value: ""
+        data:
           query:
-            domain: "dashboard_KPIs"
+            domain: "dashboard_leaderboard"
             etablissements: "{{ my_dashboard_name_column }}"
-            date: "<%= requestersManager.date.date_N1 %>"
-            metric: 'lits_places'
-          field: "value"
+            date: "<%= requestersManager.date.date %>"
+            metric: 'plateaux_techniques'
           date:
             # selector: 'date'
             format: '%d-%m-%Y'
-      compute:
-        badge: '(value - comparison)'
-
     ,
       name: "ETP des personnels"
       source: "Source : SAE"
@@ -544,6 +530,30 @@ categories: [
             format: '%d-%m-%Y'
       compute:
         badge: '(value - comparison)'
+    ,
+      type: 'separator'
+    ,
+      name: "Taux d'informatisation"
+      source: "Source : OSIS"
+      type: 'score-card'
+      chartOptions:
+        value: "value"
+        label: 'label'
+        limit: 3
+        units:
+          value: "%"
+        data:
+          query:
+            domain: "dashboard_leaderboard"
+            etablissements: "{{ my_dashboard_name_column }}"
+            date: "<%= requestersManager.date.date %>"
+            metric: 'numerique'
+          date:
+            # selector: 'date'
+            format: '%d-%m-%Y'
+          precision:
+              value: '.2f'
+
     ]
   }
 ]

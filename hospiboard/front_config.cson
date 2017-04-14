@@ -16,33 +16,38 @@ slides: [
   }
   {
     level: 1
-    title: "Activité"
+    title: "Carte d'identité"
     id: 10
   }
   {
     level: 1
-    title: "Qualité"
+    title: "Activité"
     id: 20
   }
   {
     level: 1
-    title: "Organisation"
+    title: "Qualité"
     id: 30
   }
   {
     level: 1
-    title: "Ressources Humaines"
+    title: "Organisation"
     id: 40
   }
   {
     level: 1
-    title: "Finances"
+    title: "Ressources Humaines"
     id: 50
   }
   {
+    level: 1
+    title: "Finances"
+    id: 60
+  }
+  {
     level: 3
-    parent_id: 10
-    id: 1001
+    parent_id: 20
+    id: 2001
     title: "Evolution<br>part de marché"
     commentary: "Suivi de l'évolution de la part de marché de l'établissement au sein de la zone d'attractivité ou de la region"
     chartOptions:
@@ -72,8 +77,8 @@ slides: [
   }
   {
     level: 3
-    parent_id: 10
-    id: 1002
+    parent_id: 20
+    id: 2002
     title: "Classement"
     commentary: "Classement des part de marché des extablissement dans zone d'attractivité/region"
     chartOptions:
@@ -116,8 +121,8 @@ slides: [
   }
   {
     level: 3
-    parent_id: 10
-    id: 1003
+    parent_id: 20
+    id: 2003
     title: "Occupation des lits"
     commentary: "Selectionnez dans l'onglet de configuation l'élément de comparaison<br>région, catégorie, typologie"
     filters:
@@ -144,14 +149,14 @@ slides: [
   }
   {
     level: 3
-    parent_id: 10
-    id: 1004
+    parent_id: 20
+    id: 2004
     title: "Cartographie"
   }
   {
     level: 3
-    parent_id: 10
-    id: 1005
+    parent_id: 20
+    id: 2005
     title: "Présentation Indicateur"
     chartOptions:
       chartType: 'text'
@@ -160,8 +165,8 @@ slides: [
   {
     level: 3
     title: "Indicateurs de Qualité"
-    parent_id: 20
-    id: 2001
+    parent_id: 30
+    id: 3001
 
     chartOptions:
       chartType: "score-card"
@@ -185,8 +190,8 @@ slides: [
   }
   {
     level: 3
-    parent_id: 20
-    id: 2002
+    parent_id: 30
+    id: 3002
     title: "Présentation Indicateur"
     chartOptions:
       chartType: 'text'
