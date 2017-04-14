@@ -16,7 +16,43 @@ categories: [
   {
     name: "Overview"
     kpis:[
-
+      name: "Part de marché<br>Zone d'attractivité"
+      type: 'value-dynamic'
+      value: "value"
+      precision:
+          badge: '+.2f'
+          value: '.2f'
+      unit: "%"
+      badge: 'badge'
+      comment: "<%=\' \' + badge + \' \'%> pts vs N-1"
+      sentiment:
+        value:
+          domain: ['comparison']
+          range: ['negative','positive']
+      data:
+        value:
+          query:
+            domain: "dashboard_KPIs"
+            etablissements: "{{ my_dashboard_name_column }}"
+            date: "<%= requestersManager.date.date %>"
+            metric: 'part_de_marche'
+          field: "value"
+          date:
+            # selector: 'date'
+            format: '%d-%m-%Y'
+        comparison:
+          query:
+            domain: "dashboard_KPIs"
+            etablissements: "{{ my_dashboard_name_column }}"
+            date: "<%= requestersManager.date.date_N1 %>"
+            metric: 'part_de_marche'
+          field: "value"
+          date:
+            # selector: 'date'
+            format: '%d-%m-%Y'
+      compute:
+        badge: '(value - comparison)'
+      source: "Source PMSI"
     ]
   }
   {
@@ -434,7 +470,7 @@ categories: [
     name: "Autres"
     kpis: [
       name: "Lits et places installés"
-      source: "2015, source : SAE"
+      source: "Source : SAE"
       type: 'value-dynamic'
       value: "value"
       unit: " lits/places installés"
@@ -472,7 +508,7 @@ categories: [
 
     ,
       name: "ETP des personnels"
-      source: "2015, source : SAE"
+      source: "Source : SAE"
       type: 'value-dynamic'
       value: "value"
       unit: " "
