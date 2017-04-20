@@ -66,6 +66,54 @@ slides: [
   }
   {
     level: 3
+    parent_id: 10
+    id: 1001
+    title: "Activité Globale - RSA"
+  }
+  {
+    level: 3
+    parent_id: 10
+    id: 1002
+    title: "Activité Globale - Nbr d'actes"
+  }
+  {
+    level: 3
+    parent_id: 10
+    id: 1003
+    title: "Finance"
+  }
+  {
+    level: 3
+    parent_id: 10
+    id: 1004
+    title: "Activité pour les interventions"
+  }
+  {
+    level: 3
+    parent_id: 10
+    id: 1005
+    title: "Groupe d'activité"
+  }
+  {
+    level: 3
+    parent_id: 10
+    id: 1006
+    title: "Lits & Places"
+  }
+  {
+    level: 3
+    parent_id: 10
+    id: 1007
+    title: "Plateau technique"
+  }
+  {
+    level: 3
+    parent_id: 10
+    id: 1008
+    title: "Hopital Numérique"
+  }
+  {
+    level: 3
     parent_id: 20
     id: 2001
     title: "Part de marché"
@@ -296,5 +344,110 @@ slides: [
     chartOptions:
       chartType: 'text'
       src: "qualite_asset_text"
+  }
+  {
+    level: 3
+    parent_id: 40
+    id: 4001
+    title: "Adéquation des durées de séjour"
+  }
+  {
+    level: 3
+    parent_id: 40
+    id: 4002
+    title: "Optimisation des dépenses"
+  }
+  {
+    level: 3
+    parent_id: 40
+    id: 4003
+    title: "Utilisation des moyens médico-techniques"
+  }
+  {
+    level: 3
+    parent_id: 40
+    id: 4004
+    title: "Organisation Médicale et Obstétrique"
+  }
+  {
+    level: 3
+    parent_id: 40
+    id: 4005
+    title: "Autre indicateurs"
+  }
+  {
+    level: 3
+    parent_id: 40
+    id: 4006
+    title: "Présentation Indicateur"
+    chartOptions:
+      chartType: 'text'
+      src: "organisation_asset_text"
+  }
+  {
+    level: 3
+    parent_id: 50
+    id: 5001
+    title: "Activité rapportées aux effectifs"
+  }
+  {
+    level: 3
+    parent_id: 50
+    id: 5002
+    title: "Structure des équipes"
+  }
+  {
+    level: 3
+    parent_id: 50
+    id: 5003
+    title: "Autre indicateurs"
+  }
+  {
+    level: 3
+    parent_id: 50
+    id: 5004
+    title: "Présentation Indicateur"
+    chartOptions:
+      chartType: 'text'
+      src: "rh_asset_text"
+  }
+  {
+    level: 3
+    parent_id: 60
+    id: 6001
+    title: "Capacité à génerer des excédents"
+  }
+  {
+    level: 3
+    parent_id: 60
+    id: 6002
+    title: "Endettement et capacité à rembourser"
+  }
+  {
+    level: 3
+    parent_id: 60
+    id: 6003
+    title: "Immobilisations"
+  }
+  {
+    level: 3
+    parent_id: 60
+    id: 6004
+    title: "Structure financière"
+  }
+  {
+    level: 3
+    parent_id: 60
+    id: 6005
+    title: "Indicateurs de recouvrement/règlement"
+  }
+  {
+    level: 3
+    parent_id: 60
+    id: 6006
+    title: "Présentation Indicateur"
+    chartOptions:
+      chartType: 'text'
+      src: "finance_asset_text"
   }
 ]
