@@ -135,7 +135,7 @@ slides: [
           custom: [
             "Total"
             "Cadres"
-            "TAM"
+            "Ouvriers"
             "Employés"
           ]
     chartOptions:
@@ -210,7 +210,7 @@ slides: [
                 'fr': 'Ancienneté'
                 'en': 'Seniority'
                 'es': 'Antigüedad'
-              'moins de 25 ans':
+              'moins de 25 ans ':
                 'fr': 'moins de 25 ans'
                 'en': 'less than 25 years old'
                 'es': 'menos de 25 años'
@@ -274,7 +274,7 @@ slides: [
                 'fr': '26 à 29 ans'
                 'en': '26 to 29 years old'
                 'es': '26 hasta 29 años'
-              '30 ans et plus':
+              '30 ans et plus ':
                 'fr': '30 ans et plus'
                 'en': '30 years old and more'
                 'es': '30 años y +'
@@ -324,6 +324,18 @@ slides: [
       zone_data:
         query:
           domain: "france_region"
+        postprocess:[
+          rename:
+            values:
+              'age moyen':
+                'fr': 'age moyen'
+                'en': 'average age'
+                'es': 'edad media'
+              'salaries':
+                'fr': 'salaries'
+                'en': 'employees'
+                'es': 'empleados'
+      ]
 
     chartOptions:
       chartType: "mapchart"
