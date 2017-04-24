@@ -1,12 +1,11 @@
 name: "Projet RH"
 entityName: "{{ report_name }}"
 id: "0"
-date: "2017"
+date: "2016"
 background:
   assetName: 'bg-1'
   overlay: false
 execsumTitle: "Suivi RH Groupe"
 
 dashboards:
-  search: "Recherchez par BU"
-
+  search: "Recherchez par zones"

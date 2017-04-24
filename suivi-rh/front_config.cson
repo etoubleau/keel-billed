@@ -11,10 +11,19 @@ settings:
 
 glossary:
   title: 'Glossaire'
+
   terms: [
-    term: "Effectifs"
-    meaning: "Effectifs inscrits sous contrats à la fin de la période"
-  ]
+      {
+        slides: [101, 102, 103, 105]
+        term: "Effectifs"
+        meaning: "Effectifs inscrits sous contrats à la fin de la période"
+      }
+      {
+        slides: [201, 202, 209, 203, 204, 205]
+        term: 'Absentéisme'
+        meaning: "L’absentéisme est le fait d’être absent du lieu de travail ou d’études (absentéisme scolaire), ou de tout lieu où la présence est obligatoire"
+      }
+    ]
 
 sharingOptions: true
 comments: true
@@ -40,7 +49,12 @@ slides: [
     level: 3
     parent_id: 10
     title: "Evolution des effectifs"
-    commentary: "Cliquez pour observer ce que contient chaque BU"
+    commentary: "Cliquez pour observer ce que contient chaque zone géographique"
+    recommendation:
+      advert: "B.I."
+      content:"""
+      Attention baisse anormale des effectifs sur la zone Asie
+      """
 
     chartOptions:
       data:
@@ -140,7 +154,7 @@ slides: [
   {
     level: 3
     title: "Répartition géographique"
-    commentary: "Répartition géographique du nombre de salariés"
+    commentary: "Cartographie des salariés par âge et densité (faire un focus sur la Normandie)"
     filters:
       "bottom-right":
         on: "kpi"
@@ -187,7 +201,7 @@ slides: [
     level: 3
     title: "Absentéisme dans le temps et par motif"
     parent_id: 20
-    commentary: "L'absentéisme est en baisse depuis 2013"
+    commentary: "Suite à l'adoption de nouvelles mesures RH en 2013, l'absentéisme global est en baisse"
     charts: [
       {
         data:
@@ -251,7 +265,8 @@ slides: [
         query:
           domain: "0_202"
 
-        precision: 1
+        precision:
+          value: '.1f'
       chartType: "barchart"
       value: "value"
       label: "label"
@@ -297,7 +312,7 @@ slides: [
     level: 3
     title: "Absentéisme par DG"
     parent_id: 20
-    commentary: "Les BU 5 et 2 ont un taux d'absentéisme supérieur à la moyenne nationale"
+    commentary: "L'Europe et l'Amerique du Sud ont un taux d'absentéisme supérieur à la moyenne nationale"
 
     chartOptions:
       data:
@@ -331,7 +346,7 @@ slides: [
         values: [
             value: 4
           ]
-      averageText: "Moyenne nationnale"
+      averageText: "Moyenne nationale"
     id: 203
   }
   {
@@ -382,7 +397,8 @@ slides: [
       data:
         query:
           domain: "0_204"
-        precision: 1
+        precision:
+          value:'.1f'
         order:
           by: "label"
           custom: [

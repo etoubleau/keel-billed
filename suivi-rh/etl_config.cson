@@ -77,7 +77,7 @@ etl_config:
     REPORTS: [
       query:
         domain: "dashboards"
-        dashboards: "All"
+        dashboards: "Tous"
       template: "report"
     ]
     DASHBOARDS: [
