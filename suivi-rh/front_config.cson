@@ -60,6 +60,58 @@ slides: [
       data:
         query:
           domain: "0_101"
+        postprocess:[
+          rename:
+            values:
+              'Amerique du Nord':
+                'fr': 'Amerique du Nord'
+                'en': 'North America'
+                'es': 'America del Norte'
+              'Europe':
+                'fr': 'Europe'
+                'en': 'Europe'
+                'es': 'Europa'
+              'Asie':
+                'fr': 'Asie'
+                'en': 'Asia'
+                'es': 'Asia'
+              'Direction générale':
+                'fr': 'Direction générale'
+                'en': 'General direction'
+                'es': 'Dirección General'
+              'Audit Interne':
+                'fr': 'Audit Interne'
+                'en': 'Internal Audit'
+                'es': 'Auditoría Interna'
+              'Ventes locales':
+                'fr': 'Ventes locales'
+                'en': 'Local sales'
+                'es': 'Auditoría Interna'
+              'Ventes Nationales':
+                'fr': 'Ventes Nationales'
+                'en': 'National sales'
+                'es': 'Ventas Locales'
+              'Autres directions':
+                'fr': 'Autres directions'
+                'en': 'Other directions'
+                'es': 'Otras Direcciones'
+              'Patrimoine':
+                'fr': 'Patrimoine'
+                'en': 'Legacy'
+                'es': 'Patrimonio'
+              'DOO':
+                'fr': 'DOO'
+                'en': 'DOO'
+                'es': 'DOO'
+              'Marketing':
+                'fr': 'Marketing'
+                'en': 'Marketing'
+                'es': 'Marketing'
+              'DRH':
+                'fr': 'DRH'
+                'en': 'RHD'
+                'es': 'DRH'
+      ]
       chartType: "waterfall"
       value: "value"
       label: "label"
@@ -90,7 +142,22 @@ slides: [
       data:
         query:
           domain: "0_102"
-
+        postprocess:[
+          rename:
+            values:
+              'Cadres':
+                'fr': 'Cadres'
+                'en': 'Executive managers'
+                'es': 'Ejecutivos'
+              'Ouvriers':
+                'fr': 'Ouvriers'
+                'en': 'Workers'
+                'es': 'Obreros'
+              'Employés':
+                'fr': 'Employés'
+                'en': 'Employees'
+                'es': 'Empleados'
+      ]
 
       chartType: "horizontalBarchart"
       sparklines:
@@ -102,17 +169,14 @@ slides: [
       variation: "evolution"
       variationLegend: "par rapport à N-1"
 
-
       units:
         value:
           breakdown:
             Total: " Salariés"
             Cadres: " Cadres"
-            TAM: " TAM"
+            Ouvriers: " Ouvriers"
             Employés: " Employés"
         evolution: " %"
-
-
 
     id: 102
   }
@@ -135,6 +199,86 @@ slides: [
       data:
         query:
           domain: "0_103"
+        postprocess:[
+          rename:
+            values:
+              'âge':
+                'fr': 'âge'
+                'en': 'age'
+                'es': 'edad'
+              'Ancienneté':
+                'fr': 'Ancienneté'
+                'en': 'Seniority'
+                'es': 'Antigüedad'
+              'moins de 25 ans':
+                'fr': 'moins de 25 ans'
+                'en': 'less than 25 years old'
+                'es': 'menos de 25 años'
+              '25 à 29 ans':
+                'fr': '25 à 29 ans'
+                'en': '25 to 29 years old'
+                'es': '25 hasta 29 años'
+              '30 à 34 ans':
+                'fr': '30 à 34 ans'
+                'en': '30 to 34 years old'
+                'es': '30 hasta 34 años'
+              '35 à 39 ans':
+                'fr': '35 à 39 ans'
+                'en': '35 to 39 years old'
+                'es': '35 hasta 39 años'
+              '40 à 44 ans':
+                'fr': '40 à 44 ans'
+                'en': '40 to 44 years old'
+                'es': '40 hasta 44 años'
+              '45 à 49 ans':
+                'fr': '45 à 49 ans'
+                'en': '45 to 49 years old'
+                'es': '45 hasta 49 años'
+              '50 à 54 ans':
+                'fr': '50 à 54 ans'
+                'en': '50 to 54 years old'
+                'es': '50 hasta 54 años'
+              '55 à 59 ans':
+                'fr': '55 à 59 ans'
+                'en': '55 to 59 years old'
+                'es': '55 hasta 59 años'
+              '60 ans et plus':
+                'fr': '60 ans et plus'
+                'en': '60 years old and more'
+                'es': '60 años y +'
+              'Moins de 2 ans':
+                'fr': 'Moins de 2 ans'
+                'en': 'Less than 2 years old'
+                'es': 'menos de 2 años'
+              '2 à 5 ans':
+                'fr': '2 à 5 ans'
+                'en': '2 to 5 years old'
+                'es': '2 hasta 5 años'
+              '6 à 10 ans':
+                'fr': '6 à 10 ans'
+                'en': '6 to 10 years old'
+                'es': '6 hasta 10 años'
+              '11 à 15 ans':
+                'fr': '11 à 15 ans'
+                'en': '11 to 15 years old'
+                'es': '11 hasta 15 años'
+              '16 à 20 ans':
+                'fr': '16 à 20 ans'
+                'en': '16 to 20 years old'
+                'es': '16 hasta 20 años'
+              '21 à 25 ans':
+                'fr': '21 à 25 ans'
+                'en': '21 to 25 years old'
+                'es': '21 hasta 25 años'
+              '26 à 29 ans':
+                'fr': '26 à 29 ans'
+                'en': '26 to 29 years old'
+                'es': '26 hasta 29 años'
+              '30 ans et plus':
+                'fr': '30 ans et plus'
+                'en': '30 years old and more'
+                'es': '30 años y +'
+      ]
       chartType: "horizontalBarchart"
       label: "label"
       value: "value"
