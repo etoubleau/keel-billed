@@ -5,13 +5,13 @@
     'level': 0
   }
   {
-    'title': 'Pool selector'
+    'title': '%%Pool selector%%'
     'id': 10
     'level': 1
   }
   {
     'parent_id': 10
-    'title': 'Talent pool map'
+    'title': '%%Talent pool map%%'
     'charts': [
       {
         'peers': ' '
@@ -42,9 +42,9 @@
         'value': 'my_count'
         'label': 'my_label'
         'meta': [
-          'International_mobility'
-          'Age'
-          'Tenure in the current position'
+          '%%International_mobility%%'
+          '%%Age%%'
+          '%%Tenure in the current position%%'
         ]
         'filters': 'upper-right':
           'reset': 'All functions'
@@ -68,9 +68,9 @@
   }
   {
     'level': 3
-    'title': 'Talent pool selector'
+    'title': '%%Talent pool selector%%'
     'parent_id': 10
-    'commentary': 'Results by tenure, function and language'
+    'commentary': '%%Results by tenure, function and language%%'
     'id': 10001
     'chartOptions':
       'sort': 'desc'
@@ -78,9 +78,9 @@
       'label': 'my_label'
       'source': 'source interne Talent'
       'meta': [
-        'International_mobility'
-        'Age'
-        'Tenure in the current position'
+        '%%International_mobility%%'
+        '%%Age%%'
+        '%%Tenure in the current position%%'
       ]
       'filters':
         'upper-right':
@@ -88,10 +88,10 @@
           'on': 'Function'
           'type': 'dropdown'
         'upper-middle':
-          'reset': 'All languages'
+          'reset': '%%All languages%%'
           'on': 'Language'
           'type': 'dropdown'
-      'units': 'my_count': ' years'
+      'units': 'my_count': ' %%years%%'
       'chartType': 'horizontalBarchart'
       'data':
         'query': 'domain': 'pool-selector'
@@ -105,3 +105,4 @@
   'message': '<div class="error-first-word">Sorry,</div> No data available for your your selection'
   'clues': [ 'report-selector' ]
 'home': 'skipToReport': '0'
+available_locales: ["en", "jp"]

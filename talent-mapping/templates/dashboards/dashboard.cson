@@ -1,4 +1,4 @@
-﻿
+%%Top 3 functions%%﻿
 'default': true
 'entityName': '{{ name }}'
 'id': '{{ index }}'
@@ -7,10 +7,10 @@
 'categories': [ {
   'kpis': [
     {
-      'comment': 'Talents represent 16% of managers'
+      'comment': '%%Talents represent 16% of managers%%'
       'slide': ''
-      'unit': ' talents'
-      'name': 'Talent pool'
+      'unit': ' %%talents%%'
+      'name': '%%Talent pool%%'
       'value': '367'
     }
     {
@@ -28,7 +28,7 @@
     {
       'slide': 10001
       'type': 'leaderboard'
-      'name': 'Top 3 countries'
+      'name': '%%Top 3 countries%%'
       'chartOptions':
         'units': 'value': ''
         'data': 'query':
@@ -38,5 +38,5 @@
         'label': 'label'
     }
   ]
-  'name': 'Global Talent Pool'
+  'name': '%%Global Talent pool%%'
 } ]
