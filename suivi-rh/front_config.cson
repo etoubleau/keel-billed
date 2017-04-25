@@ -363,8 +363,17 @@ slides: [
         data:
           query:
             domain: "0_201_0"
-          precision: 1
+          precision:
+            value:'.1f'
+          postprocess:[
+            rename:
+              values:
+                'Total':
+                  'fr': 'Total'
+                  'en': 'Total'
+                  'es': 'Total'
 
+        ]
         chartType: "linechart"
         units:
           value: " %"
@@ -385,8 +394,32 @@ slides: [
         data:
           query:
             domain: "0_201_1"
-          precision: 1
-
+          precision:
+            value: '.1f'
+          postprocess:[
+            rename:
+              values:
+                'Accident Trajet':
+                  'fr': 'Accident Trajet'
+                  'en': 'Commuting accident'
+                  'es': 'Accidente Trayecto'
+                'Maladie':
+                  'fr': 'Maladie'
+                  'en': 'Sickness'
+                  'es': 'Enfermedad'
+                'Accident Travail':
+                  'fr': 'Accident Travail'
+                  'en': 'Accident at work'
+                  'es': 'Accidente Laboral'
+                'Invalidité':
+                  'fr': 'Invalidité'
+                  'en': 'Disability'
+                  'es': 'Invalidez'
+                'Maternité':
+                  'fr': 'Maternité'
+                  'en': 'Maternity'
+                  'es': 'Maternidad'
+        ]
         chartType: "horizontalBarchart"
         value: "value"
         sort: "desc"
@@ -413,16 +446,52 @@ slides: [
           custom: [
             "Toutes CSP"
             "Cadres"
-            "TAM"
+            "Ouvriers"
             "Employés"
+            "All social professional categories"
+            "Executive managers"
+            "Workers"
+            "Employees"
+            "Todas CSP"
+            "Ejecutivos"
+            "Obreros"
+            "Empleados"
           ]
+
     chartOptions:
       data:
         query:
           domain: "0_202"
-
         precision:
           value: '.1f'
+        postprocess:[
+          rename:
+            values:
+              'Toutes CSP':
+                'fr': 'Toutes CSP'
+                'en': 'All social professional categories'
+                'es': 'Todas CSP'
+              'Maladie':
+                'fr': 'Maladie'
+                'en': 'Sickness'
+                'es': 'Enfermedad'
+              'Accident Travail':
+                'fr': 'Accident Travail'
+                'en': 'Accident at work'
+                'es': 'Accidente Laboral'
+              'Cadres':
+                'fr': 'Cadres'
+                'en': 'Executive managers'
+                'es': 'Ejecutivos'
+              'Ouvriers':
+                'fr': 'Ouvriers'
+                'en': 'Workers'
+                'es': 'Obreros'
+              'Employés':
+                'fr': 'Employés'
+                'en': 'Employees'
+                'es': 'Empleados'
+      ]
       chartType: "barchart"
       value: "value"
       label: "label"
