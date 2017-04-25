@@ -10,18 +10,18 @@ settings:[]
   #   default: "Par défaut"
 
 glossary:
-  title: 'Glossaire'
+  title: '%%Glossaire%%'
 
   terms: [
       {
         slides: [101, 102, 103, 105]
-        term: "Effectifs"
-        meaning: "Effectifs inscrits sous contrats à la fin de la période"
+        term: "%%Effectifs%%"
+        meaning: "%%Effectifs inscrits sous contrat à la fin de la période%%"
       }
       {
         slides: [201, 202, 209, 203, 204, 205]
-        term: 'Absentéisme'
-        meaning: "L’absentéisme est le fait d’être absent du lieu de travail ou d’études (absentéisme scolaire), ou de tout lieu où la présence est obligatoire"
+        term: '%%Absentéisme%%'
+        meaning: "%%L’absentéisme est le fait d’être absent du lieu de travail ou d’études (absentéisme scolaire), ou de tout lieu où la présence est obligatoire%%"
       }
     ]
 
@@ -37,23 +37,23 @@ slides: [
   }
   {
     level: 1
-    title: "Effectifs"
+    title: "%%Effectifs%%"
     id: 10
   }
   {
     level: 1
-    title: "Absentéisme"
+    title: "%%Absentéisme%%"
     id: 20
   }
   {
     level: 3
     parent_id: 10
-    title: "Evolution des effectifs"
-    commentary: "Cliquez pour observer ce que contient chaque zone géographique"
+    title: "%%Evolution des effectifs%%"
+    commentary: "%%Cliquez pour observer ce que contient chaque zone géographique%%"
     recommendation:
-      advert: "B.I."
+      advert: "++"
       content:"""
-      Attention baisse anormale des effectifs sur la zone Asie
+      %%Attention baisse anormale des effectifs sur la zone Asie%%
       """
 
     chartOptions:
@@ -123,10 +123,10 @@ slides: [
   }
   {
     level: 3
-    title: "Effectifs par entreprise"
+    title: "%%Effectifs par entreprise%%"
     parent_id: 10
-    source: "Source interne"
-    commentary: "Findus France emploie le plus de salariés"
+    source: "%%Source interne%%"
+    commentary: "%%Findus France emploie le plus de salariés%%"
     filters:
       "bottom-right":
         on: "breakdown"
@@ -162,29 +162,29 @@ slides: [
       chartType: "horizontalBarchart"
       sparklines:
         prefix: "sparkline"
-        legend: "Évolution<br>sur 3 ans"
+        legend: "%%Évolution<br>sur 3 ans%%"
         unit: " "
       label: "label"
       value: "value"
       variation: "evolution"
-      variationLegend: "par rapport à N-1"
+      variationLegend: "%%par rapport à N-1%%"
 
       units:
         value:
           breakdown:
-            Total: " Salariés"
-            Cadres: " Cadres"
-            Ouvriers: " Ouvriers"
-            Employés: " Employés"
+            Total: "%% Salariés%%"
+            Cadres: ""
+            Ouvriers: ""
+            Employés: ""
         evolution: " %"
 
     id: 102
   }
   {
     level: 3
-    title: "Répartition des effectifs"
+    title: "%%Répartition des effectifs%%"
     parent_id: 10
-    commentary: "Age: L'âge moyen est de 43 ans<br>Ancienneté: L'ancienneté moyenne est de 14 ans"
+    commentary: "%%Age: L'âge moyen est de 43 ans<br>Ancienneté: L'ancienneté moyenne est de 14 ans%%"
 
     filters:
       "bottom-right":
@@ -192,8 +192,8 @@ slides: [
         type: "buttons"
         order:
           custom: [
-            "âge"
-            "Ancienneté"
+            "%%âge%%"
+            "%%Ancienneté%%"
           ]
     chartOptions:
       data:
@@ -283,22 +283,22 @@ slides: [
       label: "label"
       value: "value"
       variation: "evolution"
-      variationLegend: "par rapport à Décembre 2014"
+      variationLegend: "%%par rapport à Décembre 2015%%"
 
 
       units:
-        value: " salariés"
+        value: "%% salariés%%"
         evolution: " %"
 
-      source: "Source interne"
+      source: "%%Source interne%%"
 
     id: 103
   }
 
   {
     level: 3
-    title: "Répartition géographique"
-    commentary: "Cartographie des salariés par âge et densité (faire un focus sur la Normandie)"
+    title: "%%Répartition géographique%%"
+    commentary: "%%Cartographie des salariés par âge et densité (faire un focus sur la Normandie)%%"
     filters:
       "bottom-right":
         on: "kpi"
@@ -355,9 +355,9 @@ slides: [
   }
   {
     level: 3
-    title: "Absentéisme dans le temps et par motif"
+    title: "%%Absentéisme dans le temps et par motif%%"
     parent_id: 20
-    commentary: "Suite à l'adoption de nouvelles mesures RH en 2013, l'absentéisme global est en baisse"
+    commentary: "%%Suite à l'adoption de nouvelles mesures RH en 2013, l'absentéisme global est en baisse%%"
     charts: [
       {
         data:
@@ -436,7 +436,7 @@ slides: [
   }
   {
     level: 3
-    title: "Absentéisme Maladie <br> & AT par CSP"
+    title: "%%Absentéisme Maladie <br> & AT par CSP%%"
     parent_id: 20
     filters:
       "bottom-right":
@@ -504,7 +504,7 @@ slides: [
   }
   {
     level: 3
-    title: "Fréquence vs Gravité"
+    title: "%%Fréquence vs Gravité%%"
     filters:
       "bottom-right":
         on: "breakdown"
@@ -681,13 +681,13 @@ slides: [
       chartType: "bubblechart"
       label: "label"
       legend:
-        cy: "Fréquence"
-        cx: "Gravité"
-        r: "salariés"
+        cy: "%%Fréquence%%"
+        cx: "%%Gravité%%"
+        r: "%%salariés%%"
       units:
-        cx: " jours"
+        cx: "%% jours%%"
         cy: " %"
-        r: " salariés"
+        r: "%% salariés%%"
 
       cy: "Fréquence"
       cx: "Gravité"
@@ -699,9 +699,9 @@ slides: [
   }
   {
     level: 3
-    title: "Absentéisme par zone"
+    title: "%%Absentéisme par zone%%"
     parent_id: 20
-    commentary: "L'Europe et l'Amerique du Sud ont un taux d'absentéisme supérieur à la moyenne nationale"
+    commentary: "%%L'Europe et l'Amerique du Sud ont un taux d'absentéisme supérieur à la moyenne nationale%%"
 
     chartOptions:
       data:
@@ -741,7 +741,7 @@ slides: [
       value: "value"
       label: "label"
       variation: "evolution"
-      variationLegend: "variation sur 1 an"
+      variationLegend: "%%variation sur 1 an%%"
       reverse: true
       # sparklines:
       #   orderDates: true
@@ -763,13 +763,13 @@ slides: [
         values: [
             value: 4
           ]
-      averageText: "Moyenne nationale"
+      averageText: "%%Moyenne nationale%%"
     id: 203
   }
   {
     level: 3
-    title: "Répartition géographique"
-    commentary: "Nb de salariés absents par cause d'absentéisme"
+    title: "%%Répartition géographique%%"
+    commentary: "%%Nb de salariés absents par cause d'absentéisme%%"
     parent_id: 20
     filters:
       "bottom-right":
@@ -823,7 +823,7 @@ slides: [
   }
   {
     level: 3
-    title: "Absentéisme Maladie <br> & AT par CSP"
+    title: "%%Absentéisme Maladie <br> & AT par CSP%%"
     parent_id: 20
     filters:
       "bottom-right":

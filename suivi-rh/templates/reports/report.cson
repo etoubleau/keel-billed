@@ -5,7 +5,7 @@ date: "2016"
 background:
   assetName: 'bg-1'
   overlay: false
-execsumTitle: "Suivi RH Groupe"
+execsumTitle: "%%Suivi RH Groupe%%"
 
 dashboards:
-  search: "Recherchez par zones"
+  search: "%%Recherchez par zones%%"
