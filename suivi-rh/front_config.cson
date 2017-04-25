@@ -514,6 +514,170 @@ slides: [
       data:
         query:
           domain: "0_209"
+        postprocess:[
+          rename:
+            columns:
+              'Fréquence':
+                'fr': 'Fréquence'
+                'en': 'Frequency'
+                'es': 'Frecuencia'
+              'Gravité':
+                'fr': 'Gravité'
+                'en': 'Severity'
+                'es': 'Gravedad'
+              'effectif':
+                'fr': 'Effectif'
+                'en': 'Headcount'
+                'es': 'Efectivo'
+
+            values:
+              'Femme':
+                'fr': 'Femme'
+                'en': 'Woman'
+                'es': 'Mujer'
+              'Homme':
+                'fr': 'Homme'
+                'en': 'Man'
+                'es': 'Hombre'
+              'moins de 25 ans':
+                'fr': 'moins de 25 ans'
+                'en': 'Less than 25 years old'
+                'es': 'menos de 25 años'
+              '25 - 29 ans':
+                'fr': '25 - 29 ans'
+                'en': '25 to 29 years old'
+                'es': '25 hasta 29 años'
+              '30 - 34 ans':
+                'fr': '30 - 34 ans'
+                'en': '30 to 34 years old'
+                'es': '30 hasta 34 años'
+              '35 - 39 ans':
+                'fr': '35 - 39 ans'
+                'en': '35 to 39 years old'
+                'es': '35 hasta 39 años'
+              '40 - 44 ans':
+                'fr': '40 - 44 ans'
+                'en': '40 to 44 years old'
+                'es': '40 hasta 44 años'
+              '45 - 49 ans':
+                'fr': '45 - 49 ans'
+                'en': '45 to 49 years old'
+                'es': '45 hasta 49 años'
+              '50 - 59 ans':
+                'fr': '50 - 59 ans'
+                'en': '50 to 59 years old'
+                'es': '50 hasta 59 años'
+              'plus de 60 ans':
+                'fr': 'plus de 60 ans'
+                'en': 'More than 60 years old'
+                'es': '60 años y +'
+              'Ouvrier':
+                'fr': 'Ouvrier'
+                'en': 'Worker'
+                'es': 'Obrero'
+              'Employé':
+                'fr': 'Employé'
+                'en': 'Employee'
+                'es': 'Empleado'
+              'Agent de maîtrise':
+                'fr': 'Agent de maîtrise'
+                'en': 'Supervisor'
+                'es': 'Supervisor'
+              'Cadre':
+                'fr': 'Cadre'
+                'en': 'Executive manager'
+                'es': 'Ejecutivo'
+              'Ouvrier F':
+                'fr': 'Ouvrier F'
+                'en': 'Worker F'
+                'es': 'Obrero F'
+              'Employée F':
+                'fr': 'Employée F'
+                'en': 'Employee F'
+                'es': 'Empleado F'
+              'Agent de maîtrise  F':
+                'fr': 'Agent de maîtrise  F'
+                'en': 'Supervisor F'
+                'es': 'Supervisor F'
+              'Cadre F':
+                'fr': 'Cadre F'
+                'en': 'Executive manager F'
+                'es': 'Ejecutivo F'
+              'Ouvrier H':
+                'fr': 'Ouvrier H'
+                'en': 'Worker H'
+                'es': 'Obrero H'
+              'Employé H':
+                'fr': 'Employé H'
+                'en': 'Employee H'
+                'es': 'Empleado H'
+              'Agent de maîtrise H':
+                'fr': 'Agent de maîtrise H'
+                'en': 'Supervisor H'
+                'es': 'Supervisor H'
+              'Cadre H':
+                'fr': 'Cadre H'
+                'en': 'Executive manager H'
+                'es': 'Ejecutivo H'
+              'moins de 30 ans F':
+                'fr': 'moins de 30 ans F'
+                'en': 'Less than 30 years old F'
+                'es': 'menos de 30 años F'
+              '30 - 39 ans F':
+                'fr': '30 - 39 ans F'
+                'en': '30 to 39 years old F'
+                'es': '30 hasta 39 años F'
+              '40 - 49 ans F':
+                'fr': '40 - 49 ans F'
+                'en': '40 to 49 years old F'
+                'es': '40 hasta 49 años F'
+              'plus de 50 ans F':
+                'fr': 'plus de 50 ans F'
+                'en': 'more than 50 years old F'
+                'es': '50 años y + F'
+              'moins de 30 ans H':
+                'fr': 'moins de 30 ans H'
+                'en': 'Less than 30 years old H'
+                'es': 'menos de 30 años H'
+              '30 - 39 ans H':
+                'fr': '30 - 39 ans H'
+                'en': '30 to 39 years old H'
+                'es': '30 hasta 39 años H'
+              '40 - 49 ans H':
+                'fr': '40 - 49 ans H'
+                'en': '40 to 49 years old H'
+                'es': '40 hasta 49 años H'
+              'plus de 50 ans H':
+                'fr': 'plus de 50 ans H'
+                'en': 'more than 50 years old H'
+                'es': '50 años y + H'
+              'GROUPE 1':
+                'fr': 'GROUPE 1'
+                'en': 'GROUP 1'
+                'es': 'GRUPO 1'
+              'sexe':
+                'fr': 'sexe'
+                'en': 'gender'
+                'es': 'sexo'
+              'age':
+                'fr': 'age'
+                'en': 'age'
+                'es': 'edad'
+              'csp':
+                'fr': 'csp'
+                'en': 'social professional category'
+                'es': 'csp'
+              'sexe+csp':
+                'fr': 'sexe+csp'
+                'en': 'gender+social professional category'
+                'es': 'sexo+csp'
+              'age+sexe':
+                'fr': 'age+sexe'
+                'en': 'age+gender'
+                'es': 'edad+sexo'
+
+
+      ]
       chartType: "bubblechart"
       label: "label"
       legend:
