@@ -31,7 +31,30 @@
         'kpi': 'my_filter'
         'hideScale': true
         'data':
-          'query': 'domain': 'carto'
+          'query':
+            'domain': 'carto'
+          postprocess:[
+            rename:
+              values:
+                "Support functions":
+                  en: 'Support functions'
+                  jp: "機能をサポートしてください"
+                "Marketing / Sales / Business dev.":
+                  en: "Marketing / Sales / Business dev."
+                  jp: "マーケティング / セールス / ビジネス開発"
+                "Operations":
+                  en: "Operations"
+                  jp: "オペレーション"
+                "Management":
+                  en: "Management"
+                  jp: "マネージメント"
+                "Purchasing/supply-chain/Logistics":
+                  en: "Purchasing/supply-chain/Logistics"
+                  jp: "/ 供給チェーン / ロジスティクスを購入します"
+                "Finance":
+                  en: "Finance"
+                  jp: "金融"
+            ]
           'precision': 'my_count': ',.0f'
         'legend': 'dimension': 'my_filter'
         'size': 0.4
@@ -57,7 +80,45 @@
         'units': 'my_count': ' year(s)'
         'chartType': 'horizontalBarchart'
         'data':
-          'query': 'domain': 'slave'
+          'query':
+            'domain': 'slave'
+          postprocess:[
+            rename:
+              values:
+                "Support functions":
+                  en: 'Support functions'
+                  jp: "機能をサポートしてください"
+                "Marketing / Sales / Business dev.":
+                  en: "Marketing / Sales / Business dev."
+                  jp: "マーケティング / セールス / ビジネス開発"
+                "Operations":
+                  en: "Operations"
+                  jp: "オペレーション"
+                "Management":
+                  en: "Management"
+                  jp: "マネージメント"
+                "Purchasing/supply-chain/Logistics":
+                  en: "Purchasing/supply-chain/Logistics"
+                  jp: "/ 供給チェーン / ロジスティクスを購入します"
+                "Finance":
+                  en: "Finance"
+                  jp: "金融"
+                "All Functions":
+                  en:  "All Functions"
+                  jp: "すべての機能"
+                "Executive":
+                  en: "Executive"
+                  jp: "エグゼクティブ"
+                "Marketing / Communication":
+                  en: "Marketing / Communication"
+                  jp: "マーケティング / コミュニケーション"
+                "Sales":
+                  en: "Sales"
+                  jp:"販売"
+                "Support":
+                  en: "Support"
+                  jp: "セールスサポート"
+            ]
           'precision': 'my_count': ',.1f'
         'legend': true
         'size': 0.5
