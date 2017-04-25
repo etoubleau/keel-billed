@@ -1,13 +1,13 @@
-settings:
-  comparison:
-    description: "Sur tous les écrans de comparaison, comparer avec :"
-    values: [
-      "Par défaut"
-      "Entity A"
-      "Entity B"
-      "Entity C"
-    ]
-    default: "Par défaut"
+settings:[]
+  # comparison:
+  #   description: "Sur tous les écrans de comparaison, comparer avec :"
+  #   values: [
+  #     "Par défaut"
+  #     "Entity A"
+  #     "Entity B"
+  #     "Entity C"
+  #   ]
+  #   default: "Par défaut"
 
 glossary:
   title: 'Glossaire'
