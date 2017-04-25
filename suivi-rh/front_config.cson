@@ -516,19 +516,19 @@ slides: [
           domain: "0_209"
         postprocess:[
           rename:
-            columns:
-              'Fréquence':
-                'fr': 'Fréquence'
-                'en': 'Frequency'
-                'es': 'Frecuencia'
-              'Gravité':
-                'fr': 'Gravité'
-                'en': 'Severity'
-                'es': 'Gravedad'
-              'effectif':
-                'fr': 'Effectif'
-                'en': 'Headcount'
-                'es': 'Efectivo'
+            # columns:
+            #   'Fréquence':
+            #     'fr': 'Fréquence'
+            #     'en': 'Frequency'
+            #     'es': 'Frecuencia'
+            #   'Gravité':
+            #     'fr': 'Gravité'
+            #     'en': 'Severity'
+            #     'es': 'Gravedad'
+            #   'effectif':
+            #     'fr': 'Effectif'
+            #     'en': 'Headcount'
+            #     'es': 'Efectivo'
 
             values:
               'Femme':
@@ -699,7 +699,7 @@ slides: [
   }
   {
     level: 3
-    title: "Absentéisme par DG"
+    title: "Absentéisme par zone"
     parent_id: 20
     commentary: "L'Europe et l'Amerique du Sud ont un taux d'absentéisme supérieur à la moyenne nationale"
 
@@ -708,6 +708,34 @@ slides: [
         query:
           domain: "0_203"
           year: 2015
+        postprocess:[
+          rename:
+            values:
+              'Amerique du Nord':
+                'fr': 'Amerique du Nord'
+                'en': 'North America'
+                'es': 'America del Norte'
+              'Europe':
+                'fr': 'Europe'
+                'en': 'Europe'
+                'es': 'Europa'
+              'Asie':
+                'fr': 'Asie'
+                'en': 'Asia'
+                'es': 'Asia'
+              'Afrique':
+                'fr': 'Afrique'
+                'en': 'Africa'
+                'es': 'Africa'
+              'Amerique du Sud':
+                'fr': 'Amerique du Sud'
+                'en': 'South America'
+                'es': 'America del Sur'
+              'Russie':
+                'fr': 'Russie'
+                'en': 'Russia'
+                'es': 'Rusia'
+      ]
       chartType: "leaderboardCenteredAverage"
       groups: "groups"
       value: "value"
@@ -758,6 +786,26 @@ slides: [
       data:
         query:
           domain: "0_rep_geo"
+        postprocess:[
+          rename:
+            values:
+              'Maladie':
+                'fr': 'Maladie'
+                'en': 'Sickness'
+                'es': 'Enfermedad'
+              'Accident Travail':
+                'fr': 'Accident Travail'
+                'en': 'Accident at work'
+                'es': 'Accidente Laboral'
+              'Invalidité':
+                'fr': 'Invalidité'
+                'en': 'Disability'
+                'es': 'Invalidez'
+              'Maternité':
+                'fr': 'Maternité'
+                'en': 'Maternity'
+                'es': 'Maternidad'
+      ]
       chartType: "carto"
       join: "CODE_DEPT"
       label: "NOM_DEPT"
@@ -788,13 +836,55 @@ slides: [
           domain: "0_204"
         precision:
           value:'.1f'
+        postprocess:[
+          rename:
+            values:
+              'Toutes tranches d\'âge':
+                'fr': 'Toutes tranches d\'âge'
+                'en': 'All age groups'
+                'es': 'Todos grupos de edad'
+              '50 ans et +':
+                'fr': '50 ans et +'
+                'en': '50 years old and more'
+                'es': '50 años y +'
+              'Toutes Directions':
+                'fr': 'Toutes Directions'
+                'en': 'All directions'
+                'es': 'Todas Direcciones'
+              'Amerique du Nord':
+                'fr': 'Amerique du Nord'
+                'en': 'North America'
+                'es': 'America del Norte'
+              'Europe':
+                'fr': 'Europe'
+                'en': 'Europe'
+                'es': 'Europa'
+              'Asie':
+                'fr': 'Asie'
+                'en': 'Asia'
+                'es': 'Asia'
+              '<30 jours':
+                'fr': '<30 jours'
+                'en': '<30 days'
+                'es': '<30 dias'
+              '>6 mois':
+                'fr': '>6 mois'
+                'en': '>6 months'
+                'es': '>6 meses'
+      ]
         order:
           by: "label"
           custom: [
-            "Toutes Directions",
-            "DEXI",
-            "DOA",
-            "DEXI & DOA",
+            "Toutes Directions"
+            "All directions"
+            "Todas Direcciones"
+            "Amerique du Nord"
+            "North America"
+            "America del Norte"
+            "Europe"
+            "Europa"
+            "Asie"
+            "Asia"
           ]
       chartType: "barchart"
       filters:
