@@ -1,4 +1,3 @@
-﻿
 'slides': [
   {
     'id': 0
@@ -166,4 +165,4 @@
   'message': '<div class="error-first-word">Sorry,</div> No data available for your your selection'
   'clues': [ 'report-selector' ]
 'home': 'skipToReport': '0'
-available_locales: ["en", "jp"]
+availableLocales: ["fr","en", "jp"]
