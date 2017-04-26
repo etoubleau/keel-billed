@@ -8,7 +8,7 @@ settings:[]
   #     "Entity C"
   #   ]
   #   default: "Par défaut"
-
+availableLocales: ["fr","en", "es"]
 glossary:
   title: '%%Glossaire%%'
 
@@ -117,8 +117,8 @@ slides: [
       label: "label"
       sublabel: "label_sublevel"
       units:
-        value: " salariés"
-      source: "Source interne"
+        value: "%% salariés%%"
+      source: "%%Source interne%%"
     id: 101
   }
   {

@@ -1,4 +1,4 @@
-entityName: "{{ dashboards }}"
+entityName: "%%{{ dashboards }}%%"
 id: "{{index}}"
 report: "0"
 default: "{{default}}"
