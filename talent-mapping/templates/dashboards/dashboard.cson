@@ -1,4 +1,3 @@
-%%Top 3 functions%%﻿
 'default': true
 'entityName': '{{ name }}'
 'id': '{{ index }}'
@@ -38,5 +37,5 @@
         'label': 'label'
     }
   ]
-  'name': '%%Global Talent pool%%'
+  'name': '%%Global Talent Pool%%'
 } ]

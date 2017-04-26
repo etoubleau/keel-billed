@@ -1,6 +1,6 @@
 ﻿
 'name': 'Talent mapping'
-'entityName': '{{ report }}'
+'entityName': '%%{{ report }}%%'
 'dashboards': 'search': 'Search by Talent Name'
 'entityGroup': '{{ group }}'
 'background':
