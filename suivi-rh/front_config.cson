@@ -284,7 +284,13 @@ slides: [
       value: "value"
       variation: "evolution"
       variationLegend: "%%par rapport à Décembre 2015%%"
-
+      events: [
+        {
+          date: "2013"
+          label: "Total"
+          name: "%%Nouvelle politique RH%%"
+        }
+      ]
 
       units:
         value: "%% salariés%%"
