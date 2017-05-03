@@ -22,7 +22,7 @@ background:#link between the reports and the background img to display
   overlay: false
 
 # execsumTitle: "<b>Établissements de santé en France</b> <br><b>{{ my_report_name_column }}</b><br> <span class='id_card'> Finess: {{ finess }} - Département: {{ zone }}<br>Champ pmsi: {{ champ_pmsi}} - Catégorie: {{ cat }}<br>Taille MCO: {{ taille_MCO}}<br>Taille M: {{ taille_M}} - Taille C: {{ taille_C}} - Taille O: {{ taille_O}} </span>"#title
-execsumTitle: "<b>{{ my_report_name_column }}</b><br> <span class='id_card'> Finess: {{ finess }}<br>Région: {{ zone }}<br>Typologie: {{ taille_MCO}} - {{ taille_M}} - {{ taille_C}} - {{ taille_O}}<br>Catégorie: {{ champ_pmsi}} - {{ cat }}</span>"#title
+execsumTitle: "<b>{{ my_report_name_column }}</b><br> <span class='id_card'> Finess: {{ finess }}<br>Région: {{ zone }}<br>Typologie: {{ taille_MCO}} - {{ taille_M}} - {{ taille_C}} - {{ taille_O}}<br>Catégorie: {{ cat }} - {{ champ_pmsi}} </span>"#title
 execsumNote: "* Crafted with <strong> <3 </strong> by the Toucan Team"#footnote
 # execsumNote: "Finess: {{ finess }} - Département: {{ zone }}<br>Champ pmsi: {{ champ_pmsi}} - Catégorie: {{ cat }}<br>Taille MCO: {{ taille_MCO}}<br>Taille M: {{ taille_M}} - Taille C: {{ taille_C}} - Taille O: {{ taille_O}}"
 

@@ -29,6 +29,36 @@ etl_config:
       sheetname: 'ID'
       file: "dashboards_data.xls"
   ,
+      domain: "Carte_identite"
+      type: "excel"
+      sheetname: 'Act. Globales'
+      file: "Carte_Identite.xlsx"
+  ,
+      domain: "Carte_identite_Act"
+      type: "excel"
+      sheetname: 'Act. Interventions'
+      file: "Carte_Identite.xlsx"
+  ,
+      domain: "Carte_identite_Finance"
+      type: "excel"
+      sheetname: 'Finance'
+      file: "Carte_Identite.xlsx"
+  ,
+      domain: "Carte_identite_Lits"
+      type: "excel"
+      sheetname: 'lits'
+      file: "Carte_Identite.xlsx"
+  ,
+      domain: "Carte_identite_Plateaux"
+      type: "excel"
+      sheetname: 'plateaux'
+      file: "Carte_Identite.xlsx"
+  ,
+      domain: "Carte_identite_Numerique"
+      type: "excel"
+      sheetname: 'Numerique'
+      file: "Carte_Identite.xlsx"
+  ,
       domain: "part_de_marche"
       type: "excel"
       sheetname: 'part_de_marche'
@@ -78,6 +108,7 @@ etl_config:
     #query
     #This file.cson shall be located inside template > dashboards > file.cson
     template: "dashboard"
+
   ]
 
   MONGO_INDEXES: [

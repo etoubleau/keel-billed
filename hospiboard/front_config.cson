@@ -69,48 +69,307 @@ slides: [
     parent_id: 10
     id: 1001
     title: "Activité Globale - RSA"
+    source: "Source PMSI"
+    commentary: "Nombre d'actes - Comparaison par années"
+    filters:
+      'bottom-right':
+        on: 'Domaine'
+        type: 'buttons'
+        defaultSelected: "Médecine"
+    chartOptions:
+
+      data:
+        query:
+          domain: 'Carte_identite'
+          etablissements: "<%= report.entityName %>"
+          metric: "RSA"
+
+      chartType: 'linechart'
+      value: 'value'
+      date:'Dates'
+      groups: "label"
+      legend:
+        type: 'identity-card'
+        filter: 'bottom-right'
+
+
   }
   {
     level: 3
     parent_id: 10
     id: 1002
-    title: "Activité Globale - Nbr d'actes"
+    title: "Activité Globale"
+    source: "Source PMSI"
+    commentary: "Nombre d'actes - Comparaison par années"
+    filters:
+      'bottom-right':
+        on: 'label'
+        type: 'buttons'
+        defaultSelected: "Séance"
+    chartOptions:
+      chartType: "stackedBarchart"
+      data:
+        data:
+          precision: 0
+          date:
+            selector:"date"
+            format:'%Y'
+        query:
+          domain: 'Carte_identite'
+          etablissements: "<%= report.entityName %>"
+          metric: "Global"
+          #subdomain: 'sales_evolution_hw'
+      value: "value"
+      date: "date"
+      label: "Dates"
+      groups: "Domaine"
+      #order: "value"
+      #sort: "desc"
+      legend:
+        type: 'identity-card'
+        filter: 'bottom-right'
+
   }
   {
     level: 3
     parent_id: 10
     id: 1003
     title: "Finance"
+
+    chartOptions:
+      chartType: "filtrable-waterfall"
+      zeroBaseline: 0
+      drillLevel: "drill_level"
+      drillGroup: "drill_group"
+      order: "display_order"
+      value: "value"
+      evolution: "Evolution"
+      #meta: "meta"
+      label: 'Label'
+
+      data:
+        # order:
+        #   by: 'index'
+        precision: 0
+        query:
+          domain: "Carte_identite_Finance"
+          date: '<%= requestersManager.date.date %>'
+      # sublabel: 'label_sublevel'
+      # meta: 'Actuel'
+      units:
+        "value": " M€"
+
+
   }
   {
     level: 3
     parent_id: 10
     id: 1004
     title: "Activité pour les interventions"
+    source: "Source PMSI"
+    commentary: "Activité pour les interventions les plus fréquentes au niveau national"
+    # filters:
+    #   'bottom-right':
+    #     on: 'Année'
+    #     type: 'slider'
+    #     defaultSelected: "2015"
+    # chartOptions:
+    #   chartType: "stackedBarchart"
+    #   data:
+    #     precision: 0
+    #     query:
+    #       domain: 'Carte_identite_Act'
+    #       etablissements: "<%= report.entityName %>"
+    #       metric: "Intervention"
+    #       #subdomain: 'sales_evolution_hw'
+    #   value: "value"
+    #   label: "Label"
+    #   order: "value"
+    #   sort: "desc"
+    #   legend:
+    #     type: 'identity-card'
+    #     filter: 'bottom-right'
+    chartOptions:
+      data:
+        query:
+          domain: 'Carte_identite_Act'
+          etablissements: "<%= report.entityName %>"
+          date: '<%= requestersManager.date.date %>'
+          metric: "Intervention"
+
+      chartType: "horizontalBarchart"
+      value: "value"
+      label: "Label"
+      variation: "Evolution"
+      variationLegend: "Écart<br>année passée"
+      units:
+        value: " "
+        Evolution: " "
+
+      sort: "desc"
+      sparklines:
+        data:
+          query:
+            domain: 'Carte_identite_Act'
+            etablissements: "<%= report.entityName %>"
+            metric: "Intervention"
+        joins: ["Label"]
+        legend: "Évolution<br>sur 4 ans"
+        value: "value"
+        date: "date"
+        Label : "Dates"
+        unit: "actes"
+        orderDates: true
+      showAverage: true
   }
   {
     level: 3
     parent_id: 10
     id: 1005
     title: "Groupe d'activité"
+    source: "Source PMSI"
+    commentary: "Activité pour les interventions les plus fréquentes au niveau national"
+    filters:
+      'bottom-right':
+        on: 'Domaine'
+        type: 'buttons'
+        defaultSelected: "Médecine"
+
+    chartOptions:
+      data:
+        query:
+          domain: 'Carte_identite_Act'
+          etablissements: "<%= report.entityName %>"
+          date: '<%= requestersManager.date.date %>'
+          metric: "Groupes"
+
+      chartType: "horizontalBarchart"
+      value: "value"
+      label: "Label"
+      variation: "Evolution"
+      variationLegend: "Écart<br>année passée"
+      units:
+        value: " "
+        Evolution: " "
+
+      sort: "desc"
+      sparklines:
+        data:
+          query:
+            domain: 'Carte_identite_Act'
+            etablissements: "<%= report.entityName %>"
+            metric: "Groupes"
+        joins: ["Label"]
+        legend: "Évolution<br>sur 4 ans"
+        value: "value"
+        date: "date"
+        Label : "Dates"
+        unit: "actes"
+        orderDates: true
+      showAverage: true
   }
   {
     level: 3
     parent_id: 10
     id: 1006
     title: "Lits & Places"
+    source: "Source SAE"
+    commentary: "Lits et places installés"
+    filters:
+      'bottom-right':
+        on: 'Domaine'
+        type: 'buttons'
+        defaultSelected: "Médecine"
+      'upper-right':
+        on: "Label"
+        type: "dropdown"
+
+    chartOptions:
+      chartType: "stackedBarchart"
+      data:
+        precision: 0
+        date:
+          selector:"date"
+          format:'%Y'
+        query:
+          domain: 'Carte_identite_Lits'
+          etablissements: "<%= report.entityName %>"
+          #subdomain: 'sales_evolution_hw'
+      value: "value"
+      date:"date"
+      label: "Dates"
+      groups: "Groupes"
+      #order: "value"
+      #sort: "desc"
+      legend:
+        type: 'identity-card'
+        filter: 'upper-right'
   }
   {
     level: 3
     parent_id: 10
     id: 1007
-    title: "Plateau technique"
+    title: "Plateaux techniques"
+    source: "Source SAE"
+    commentary: "Plateaux techniques"
+    chartOptions:
+      chartType: "score-card"
+      value: "value"
+      label: "Label"
+      #packs: "packs"
+      # packsOrder:
+      #   custom: [
+      #     "Conformité",
+      #     "Cotation",
+      #     "Autres"
+      #   ]
+      data:
+        query:
+          domain: "Carte_identite_Plateaux"
+          etablissements: "<%= report.entityName %>"
+          date: '<%= requestersManager.date.date %>'
+
+      sparklines:
+        data:
+          query:
+            domain: 'Carte_identite_Plateaux'
+            etablissements: "<%= report.entityName %>"
+        joins: ["Label"]
+        legend: "Évolution sur 4 ans"
+        value: "value"
+        date: "date"
+        Label : "Dates"
+
   }
   {
     level: 3
     parent_id: 10
     id: 1008
     title: "Hopital Numérique"
+
+    chartOptions:
+      data:
+        query:
+          domain: "Carte_identite_Numerique"
+          etablissements: "<%= report.entityName %>"
+      chartType: "heatmap"
+      legend: true
+      x: "Dates"
+      #xpack: "segment"
+      y: "Indicateur"
+      #ypack: "zone"
+      value: "value"
+      target: "Target"
+      variation: "variation"
+      reverse: true
+      sentiment:
+        value:
+          domain: ['0.8*Target','Target']
+          range: ['negative','neutral','positive']
+      meta: []
+      units:
+        value: '%'
+        variation: 'pt'
   }
   {
     level: 3
