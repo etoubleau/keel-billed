@@ -23,7 +23,7 @@ settings:
       query:
         domain:"occupation_lits"
       fields:["comparaison"]
-      slides:[2003,2004]
+      slides:[2003,2004,4001,4003]
   ]
 
 
@@ -201,7 +201,7 @@ slides: [
       value: "value"
       label: "Label"
       variation: "Evolution"
-      variationLegend: "Écart<br>année passée"
+      variationLegend: "Écart<br>année précédente"
       units:
         value: " "
         Evolution: " "
@@ -247,7 +247,7 @@ slides: [
       value: "value"
       label: "Label"
       variation: "Evolution"
-      variationLegend: "Écart<br>année passée"
+      variationLegend: "Écart<br>année précédente"
       units:
         value: " "
         Evolution: " "
@@ -422,7 +422,7 @@ slides: [
         sort: 'desc'
         rank: true
         variation: "variation"
-        variationLegend: "vs.N-1"
+        variationLegend: "Écart<br>année précédente"
         # legend: 'Part de marché'
         # filters: 'upper-middle':
         #   on: 'metric'
@@ -609,18 +609,91 @@ slides: [
     parent_id: 40
     id: 4001
     title: "Adéquation des durées de séjour"
+    # source: "Source PMSI"
+    commentary: "Hors ambulatoire<br>Comparaison au sein de la <b><%= requestersManager.comparaison %></b><br>Selectionnez dans l'onglet de configuation l'élément de comparaison<br>région, catégorie, typologie"
+    filters:
+      'bottom-right':
+        on: 'metric'
+        type: 'buttons'
+        defaultSelected: "IP-DMS Médecine"
+        order:
+          custom: [
+            "IP-DMS Médecine"
+            "IP-DMS Chirurgie"
+            "IP-DMS Obstétrique"
+          ]
+    chartOptions:
+      data:
+        query:
+          domain: 'DMS'
+          etablissements: "<%= report.entityName %>"
+          # date: '<%= requestersManager.date.dates %>'
+          comparaison: $in: ["etablissement", '<%= requestersManager.comparaison %>']
+        precision:
+          value: '.3f'
+      chartType: 'linechart'
+      value: 'value'
+      date:'date'
+      groups: "label"
+      legend:
+        type: 'identity-card'
+        filter: 'bottom-right'
   }
   {
     level: 3
     parent_id: 40
     id: 4002
     title: "Optimisation des dépenses"
+    commentary: "Il a 50% de données manquantes pour ces indicateurs, nous avons fait le choix de ne pas les représenter"
   }
   {
     level: 3
     parent_id: 40
     id: 4003
     title: "Utilisation des moyens médico-techniques"
+    commentary: "Activité pour les interventions les plus fréquentes au niveau national"
+    filters:
+      'bottom-right':
+        on: 'date'
+        type: 'slider'
+        defaultSelected: "01/01/2015"
+    chartOptions:
+      data:
+        query:
+          domain: 'technique'
+          etablissements: "<%= report.entityName %>"
+          # date: '<%= requestersManager.date.date %>'
+          comparaison: $in: ["etablissement" , '<%= requestersManager.comparaison %>']
+          # packs: "Nbr de Bio par Technicien"
+          # label: "CLINIQUE AMBULATOIRE CENDANEG"
+        precision:
+          value: '.0f'
+          evolution: '.2f'
+      chartType: "horizontal-barchart"
+      value: "value"
+      label: "label"
+      # variation: "evolution"
+      # variationLegend: "Écart<br>année précédente"
+      packs: "metric"
+      packsName: true
+      # units:
+      #   value: " "
+      #   evolution: " %"
+      # sort: "desc"
+      # sparklines:
+      #   data:
+      #     query:
+      #       domain: 'Carte_identite_Act'
+      #       etablissements: "<%= report.entityName %>"
+      #       metric: "Groupes"
+      #   joins: ["Label"]
+      #   legend: "Évolution<br>sur 4 ans"
+      #   value: "value"
+      #   date: "date"
+      #   Label : "Dates"
+      #   unit: "actes"
+      #   orderDates: true
+      # showAverage: true
   }
   {
     level: 3

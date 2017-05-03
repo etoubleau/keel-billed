@@ -83,6 +83,17 @@ etl_config:
       type: "excel"
       sheetname: 'Sheet1'
       file: "qualité.xlsx"
+  ,
+      domain: "DMS"
+      type: "excel"
+      sheetname: 'DMS'
+      file: "organisation.xlsx"
+  ,
+      domain: "technique"
+      type: "excel"
+      sheetname: 'technique'
+      file: "organisation.xlsx"
+  
   ]
 
   DATA_PROVIDERS: []
