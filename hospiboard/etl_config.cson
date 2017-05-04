@@ -93,7 +93,27 @@ etl_config:
       type: "excel"
       sheetname: 'technique'
       file: "organisation.xlsx"
-  
+  ,
+      domain: "obstetrique"
+      type: "excel"
+      sheetname: 'obstetrique'
+      file: "organisation.xlsx"
+  ,
+      domain: "ambu"
+      type: "excel"
+      sheetname: 'ambu'
+      file: "organisation.xlsx"
+  ,
+      domain: "admin"
+      type: "excel"
+      sheetname: 'admin'
+      file: "organisation.xlsx"
+  ,
+      domain: "numerique"
+      type: "excel"
+      sheetname: 'numerique'
+      file: "organisation.xlsx"
+
   ]
 
   DATA_PROVIDERS: []
