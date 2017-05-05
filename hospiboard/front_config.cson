@@ -23,7 +23,7 @@ settings:
       query:
         domain:"occupation_lits"
       fields:["comparaison"]
-      slides:[2003,2004,4001,4003,4004,4005]
+      slides:[2003,2004,4001,4003]
   ]
 
 
@@ -70,7 +70,6 @@ slides: [
     id: 1001
     title: "Activité Globale - RSA"
     source: "Source PMSI"
-    commentary: "Nombre d'actes - Comparaison par années"
     filters:
       'bottom-right':
         on: 'Domaine'
@@ -91,6 +90,8 @@ slides: [
       legend:
         type: 'identity-card'
         filter: 'bottom-right'
+      units:
+        "value": " Actes"
 
 
   }
@@ -100,12 +101,11 @@ slides: [
     id: 1002
     title: "Activité Globale"
     source: "Source PMSI"
-    commentary: "Nombre d'actes - Comparaison par années"
     filters:
       'bottom-right':
         on: 'label'
         type: 'buttons'
-        defaultSelected: "Séance"
+        defaultSelected: "Séances"
     chartOptions:
       chartType: "stackedBarchart"
       data:
@@ -118,6 +118,9 @@ slides: [
           domain: 'Carte_identite'
           etablissements: "<%= report.entityName %>"
           metric: "Global"
+        order:
+          by:"date"
+      sort: "desc"
           #subdomain: 'sales_evolution_hw'
       value: "value"
       date: "date"
@@ -128,6 +131,8 @@ slides: [
       legend:
         type: 'identity-card'
         filter: 'bottom-right'
+      units:
+        "value": " Actes"
 
   }
   {
@@ -165,7 +170,7 @@ slides: [
     level: 3
     parent_id: 10
     id: 1004
-    title: "Activité pour les interventions"
+    title: "Interventions fréquentes"
     source: "Source PMSI"
     commentary: "Activité pour les interventions les plus fréquentes au niveau national"
     # filters:
@@ -203,8 +208,8 @@ slides: [
       variation: "Evolution"
       variationLegend: "Écart<br>année précédente"
       units:
-        value: " "
-        Evolution: " "
+        value: " Actes"
+        Evolution: " %"
 
       sort: "desc"
       sparklines:
@@ -214,11 +219,10 @@ slides: [
             etablissements: "<%= report.entityName %>"
             metric: "Intervention"
         joins: ["Label"]
-        legend: "Évolution<br>sur 4 ans"
+        legend: "Évolution<br>depuis 2011"
         value: "value"
-        date: "date"
-        Label : "Dates"
-        unit: "actes"
+        date: "Dates"
+        unit : " Actes"
         orderDates: true
       showAverage: true
   }
@@ -249,8 +253,8 @@ slides: [
       variation: "Evolution"
       variationLegend: "Écart<br>année précédente"
       units:
-        value: " "
-        Evolution: " "
+        value: " Actes"
+        Evolution: " %"
 
       sort: "desc"
       sparklines:
@@ -260,11 +264,10 @@ slides: [
             etablissements: "<%= report.entityName %>"
             metric: "Groupes"
         joins: ["Label"]
-        legend: "Évolution<br>sur 4 ans"
+        legend: "Évolution depuis 2011"
         value: "value"
-        date: "date"
-        Label : "Dates"
-        unit: "actes"
+        date: "Dates"
+        unit: " Actes"
         orderDates: true
       showAverage: true
   }
@@ -287,6 +290,7 @@ slides: [
     chartOptions:
       chartType: "stackedBarchart"
       data:
+
         precision: 0
         date:
           selector:"date"
@@ -294,16 +298,21 @@ slides: [
         query:
           domain: 'Carte_identite_Lits'
           etablissements: "<%= report.entityName %>"
+        order:
+          by: "date"
+      sort: "desc"
+
           #subdomain: 'sales_evolution_hw'
       value: "value"
       date:"date"
       label: "Dates"
+
       groups: "Groupes"
-      #order: "value"
-      #sort: "desc"
       legend:
         type: 'identity-card'
         filter: 'upper-right'
+      units:
+        "value": " Actes"
   }
   {
     level: 3
@@ -311,7 +320,6 @@ slides: [
     id: 1007
     title: "Plateaux techniques"
     source: "Source SAE"
-    commentary: "Plateaux techniques"
     chartOptions:
       chartType: "score-card"
       value: "value"
@@ -328,6 +336,8 @@ slides: [
           domain: "Carte_identite_Plateaux"
           etablissements: "<%= report.entityName %>"
           date: '<%= requestersManager.date.date %>'
+      units:
+        "value": " Actes"
 
       sparklines:
         data:
@@ -335,10 +345,11 @@ slides: [
             domain: 'Carte_identite_Plateaux'
             etablissements: "<%= report.entityName %>"
         joins: ["Label"]
-        legend: "Évolution sur 4 ans"
+        legend: "Évolution depuis 2011"
         value: "value"
-        date: "date"
-        Label : "Dates"
+        date: "Dates"
+        units:
+          "value": " Actes"
 
   }
   {
@@ -352,7 +363,11 @@ slides: [
         query:
           domain: "Carte_identite_Numerique"
           etablissements: "<%= report.entityName %>"
+        order:
+          by: "Dates"
+      sort: "desc"
       chartType: "heatmap"
+
       legend: true
       x: "Dates"
       #xpack: "segment"
@@ -673,6 +688,16 @@ slides: [
       value: "value"
       groups: "label"
       date:'date'
+      units:
+        value: [
+          unit: " ICR"
+          where:
+            metric: "ICR par salle d'intervention chirurgicale"
+        ,
+          unit: " bio"
+          where:
+            metric: "Nbr de Bio par Technicien"
+        ]
       legend:
         type: 'identity-card'
         filter: 'bottom-right'
