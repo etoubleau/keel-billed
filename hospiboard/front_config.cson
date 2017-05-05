@@ -635,6 +635,8 @@ slides: [
       value: 'value'
       date:'date'
       groups: "label"
+      units:
+        value: ' jours'
       legend:
         type: 'identity-card'
         filter: 'bottom-right'
