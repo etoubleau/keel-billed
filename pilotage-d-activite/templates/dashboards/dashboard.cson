@@ -66,9 +66,18 @@
         'id': 0
         'unit': ' M€'
       }
+      # {
+      #   'src': 'images/simply.jpg'
+      #   'type': 'media-img'
+      # }
       {
-        'src': 'images/simply.jpg'
-        'type': 'media-img'
+        name: "Prospectus"
+        type: 'pdf'
+        data:
+          query:
+            domain:"pdf"
+        url: "colonne_url"
+        linkType: "asset"
       }
       {
         'comment': '<%=\' \' + evolution + \' vs 2016\'%>'

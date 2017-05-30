@@ -1,11 +1,53 @@
 ﻿entityName: "{{ zone }}"
 id: "{{ index }}"
 report: "{{ report_id }}"
-default: "{{ default }}"
+default: true
 
 
 categories: [
 
+  name: "Brand vs Market (monthly data)"
+  kpis: [
+    name: "Brand's growth"
+    value: "8.5"
+    unit: "%"
+    badge: "bullet"
+    badgeSentiment: "better"
+    comment: " + 0.3 pts compared to the market"
+    slide: 101
+    __data__:
+      value:
+        query:
+          domain: "overall_growth"
+          country: "{{ country }}"
+        field: "value"
+    source: "July 2017, panelists"
+    id: 1
+  ,
+    name: "Premium Category growth"
+    value: "6.5"
+    unit: "%"
+    badge: "bullet"
+    badgeSentiment: "better"
+    comment: " + 0.5 pts compared to the market"
+    slide: 101
+    source: "Year to date, internal source"
+    id: 33
+    source: "July 2017, panelists"
+  ,
+    name: "Basics Category growth"
+    value: "1"
+    unit: "%"
+    badge: "bullet"
+    badgeSentiment: "worse"
+    comment: " - 2 pts compared to the market"
+    slide: 101
+    source: "July 2015, internal source"
+    id: 34
+    source: "July 2017, panelists"
+
+  ]
+,
   name: "Sales"
   kpis: [
     name: "Total"
@@ -54,7 +96,6 @@ categories: [
           type: "division"
       'value': 'value'
       'label': 'label'
-    source: '2016, internal source'
     slide: 201
   ,
     name: "Luxury Brand"
@@ -90,8 +131,6 @@ categories: [
       evolution: '(value - comparison)/comparison'
     # source: "2016, source Smart Toucan"
     id: 0
-
-
   ]
 
 ,
@@ -163,7 +202,7 @@ categories: [
     name: "Leader gap"
     type: 'value-dynamic'
     value: "value"
-    comment: "<%=\' \' + evolution + \' vs previous month\'%>"
+    comment: "<%=\' \' + evolution + \' pts vs previous month\'%>"
     unit: " %"
     slide: 301
     badge: 'evolution'
@@ -173,7 +212,7 @@ categories: [
         range: ['negative','positive']
     precision:
       value: ',.0f'
-      evolution: "+,.0%"
+      evolution: "+,.2f"
     data:
       value:
         query:[
@@ -198,7 +237,7 @@ categories: [
     name: "Market average gap"
     type: 'value-dynamic'
     value: "value"
-    comment: "<%=\' \' + evolution + \' vs previous month\'%>"
+    comment: "<%=\' \' + evolution + \' pts vs previous month\'%>"
     unit: " %"
     slide: 301
     badge: 'evolution'
@@ -208,7 +247,7 @@ categories: [
         range: ['positive','negative']
     precision:
       value: ',.0f'
-      evolution: "+,.0%"
+      evolution: "+,.2f"
     data:
       value:
         query:[
@@ -255,12 +294,11 @@ categories: [
           Filtre1: "All categories"
     id: 100
   ,
-    name:"Manager's commentary"
+    name:"Marketing Product Manager Editorial"
     type:"text-dynamic"
     data:
       query:
         domain:"commentary"
     content:'commentary'
   ]
-
 ]

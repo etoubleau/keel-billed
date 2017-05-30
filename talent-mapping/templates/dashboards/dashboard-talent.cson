@@ -16,7 +16,7 @@
           'domain': 'talent'
           'type': 'synthese'
         'type': 'text-dynamic'
-        'name': 'Synthesis'
+        'name': '%%Synthesis%%'
       }
       { 'type': 'separator' }
       {
@@ -25,7 +25,7 @@
           'domain': 'talent'
           'type': 'languages'
         'type': 'text-dynamic'
-        'name': 'Languages'
+        'name': '%%Languages%%'
       }
       {
         'content': 'label'
@@ -33,12 +33,12 @@
           'domain': 'talent'
           'type': 'mobility'
         'type': 'text-dynamic'
-        'name': 'International mobility'
+        'name': '%%International mobility%%'
       }
       {
         'linkType': 'asset'
         'style': 'width': '700px'
-        'name': 'Download Full CV'
+        'name': '%%Download Full CV%%'
         'url': 'label'
         'type': 'pdf'
         'data': 'query':
@@ -46,7 +46,7 @@
           'type': 'pdf'
       }
     ]
-    'name': 'Presentation'
+    'name': '%%Presentation%%'
   }
   {
     'kpis': [
@@ -56,7 +56,7 @@
           'domain': 'talent'
           'type': 'manager comment'
         'type': 'text-dynamic'
-        'name': 'Manager\'s comment'
+        'name': '%%Manager\'s comment%%'
       }
       {
         'content': 'label'
@@ -64,10 +64,10 @@
           'domain': 'talent'
           'type': 'employee comment'
         'type': 'text-dynamic'
-        'name': 'Employee\'s comment'
+        'name': '%%Employee\'s comment%%'
       }
     ]
-    'name': 'Comments from the last Annual Appraisal Review'
+    'name': '%%Comments from the last Annual Appraisal Review%%'
   }
 ]
 'id': '{{ index }}'

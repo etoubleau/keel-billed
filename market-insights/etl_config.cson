@@ -10,27 +10,58 @@
 DASHBOARDS: [
   query:
     domain: "dashboards"
-    default: 1.0
-  report: "country"
+    type: "synthesis"
+  report: "zone"
   template: "dashboards"
 ,
   query:
     domain: "dashboards"
-  report: "country"
+    type:'division'
+  report: "zone"
   template: "dashboards-division"
+,
+  query:
+    domain: "dashboards"
+    type:'country'
+  report: "zone"
+  template: "dashboards-country"
 ]
 'REPORTS': [
   query:
     domain: "dashboards"
-    default: 1.0
   template: "report"
 ]
+# DASHBOARDS: [
+#   query:
+#     domain: "dashboards"
+#     type: "synthesis"
+#   report: "country"
+#   template: "dashboards"
+# ,
+#   query:
+#     domain: "dashboards"
+#     type:'division'
+#   report: "country"
+#   template: "dashboards-division"
+# ,
+#   query:
+#     domain: "dashboards"
+#     type:'country'
+#   report: "country"
+#   template: "dashboards-country"
+# ]
+# 'REPORTS': [
+#   query:
+#     domain: "dashboards"
+#     type: "synthesis"
+#   template: "report"
+# ]
 'DATA_SOURCES': [
   {
+    'spreadsheet_id': '1ahKMNCGrRmPuBylM0lKyYzQ5Kcr4JouJ1oUOoudiYTM'
+    'sheetname': "dashboards"
     domain: "dashboards"
-    type: "excel"
-    file: "dashboards.xls"
-    sheetname: "Data"
+    'type': 'google_spreadsheet'
   }
 
   {
@@ -109,6 +140,12 @@ DASHBOARDS: [
     'spreadsheet_id': '1ahKMNCGrRmPuBylM0lKyYzQ5Kcr4JouJ1oUOoudiYTM'
     'sheetname': 'top-network'
     'domain': 'top-network'
+    'type': 'google_spreadsheet'
+  }
+  {
+    'spreadsheet_id': '1ahKMNCGrRmPuBylM0lKyYzQ5Kcr4JouJ1oUOoudiYTM'
+    'sheetname': 'my_dates_data'
+    'domain': 'my_dates_data'
     'type': 'google_spreadsheet'
   }
   {

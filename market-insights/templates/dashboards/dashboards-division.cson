@@ -1,7 +1,7 @@
 ﻿entityName: "{{ zone }}"
 id: "{{ index }}"
 report: "{{ report_id }}"
-default: "{{ default }}"
+default: true
 
 
 categories: [
@@ -40,7 +40,7 @@ categories: [
         field: "budget"
     compute:
       evolution: '(value - comparison)/comparison'
-    # source: "2016, source Smart Toucan"
+    source: "July 2017, panelists"
     id: 0
 
   ,
@@ -59,7 +59,6 @@ categories: [
           type: "division"
       'value': 'value'
       'label': 'label'
-    source: '2016, internal source'
     slide: 201
 
 
@@ -100,7 +99,7 @@ categories: [
         field: "budget"
     compute:
       evolution: '(value - comparison)/comparison'
-    # source: "2016, source Smart Toucan"
+    source: "July 2017, panelists"
     id: 0
   ,
     name: "Value share evolution (%)"
@@ -114,6 +113,7 @@ categories: [
           type: "value-share"
     unit: " %"
     slide: 10101
+    source: "July 2017, panelists"
   ,
     type: "separator"
   ,
@@ -149,7 +149,7 @@ categories: [
         field: "budget"
     compute:
       evolution: '(value - comparison)/comparison'
-    # source: "2016, source Smart Toucan"
+    source: "July 2017, panelists"
     id: 0
   ,
     name: "Market average gap"
@@ -184,7 +184,7 @@ categories: [
         field: "budget"
     compute:
       evolution: '(value - comparison)/comparison'
-    # source: "2016, source Smart Toucan"
+    source: "July 2017, panelists"
     id: 0
 
   ]

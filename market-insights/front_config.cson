@@ -1,4 +1,16 @@
-﻿
+﻿glossary:
+  title:'Glossary'
+  terms:[
+    term:'Market Share'
+    meaning:'Market share is the percentage of a market (defined in terms of either units or revenue) accounted for by a specific entity.'
+  ,
+    term:'Brand'
+    meaning:'A brand (or marque for car model) is a name, term, design, symbol, or other feature that distinguishes one seller’s product from those of others'
+  ,
+    term:'Market'
+    meaning:'A market is one of the many varieties of systems, institutions, procedures, social relations and infrastructures whereby parties engage in exchange'
+  ]
+
 'slides': [
   {
     'id': 0
@@ -24,6 +36,15 @@
     'title': 'Sales Realized vs Target'
     'level': 3
     'parent_id': 10
+    source:'Source: panelists'
+    # recommendation:
+    #   advert: "Creation"
+    #   content: """
+    #     <div style="text-align:center">
+    #     <iframe src="https://www.youtube.com/watch?v=AD8-jMx9PL4" width="240" height="135" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+    #     </div>
+    #   """
+
     'filters': 'bottom-right':
       'on': 'breakdown'
       'type': 'buttons'
@@ -58,6 +79,7 @@
   {
     'title': 'Trends'
     'level': 3
+    source:'Source: panelists'
     'charts': [
       {
         'style': 'secondary'
@@ -122,16 +144,17 @@
   }
 
   {
-    'title': 'Value share growth'
+    'title': 'Portfolio Management'
     'level': 3
     'parent_id': 10
+    source:'Source: panelists'
     'commentary': 'This chart allows you to understand wether your value share <br> by products is increasing or decreasing'
     'id': 102
     'chartOptions':
       'value': 'value'
       'label': 'label'
       'groups': "groups"
-      'units': 'value': ' %'
+      'units': 'value': ' pts'
       'chartType': 'waterfallchart'
       'data':
         'query':
@@ -147,6 +170,8 @@
     'filters': 'bottom-right':
       'on': 'breakdown'
       'type': 'buttons'
+      order:
+        custom:['Unit Share','Units','Value Share','Value']
     'commentary': 'Ranking of division by value and value share'
     'id': 201
     'chartOptions':
@@ -158,7 +183,7 @@
       sparklines:
         orderDates: true
         value: "value"
-        units: value: "M€"
+        units:value:' '
         legend: "12 months variation"
         joins: [
           "label"
@@ -171,7 +196,24 @@
         'on': 'upper'
         'type': 'buttons'
       'units':
-        'evolution': ' points'
+        'evolution': [
+          {
+            'where': 'breakdown': 'Value'
+            'unit': ' %'
+          }
+          {
+            'where': 'breakdown': 'Value Share'
+            'unit': ' pts'
+          }
+          {
+            'where': 'breakdown': 'Units'
+            'unit': ' %'
+          }
+          {
+            'where': 'breakdown': 'Unit Share'
+            'unit': ' pts'
+          }
+        ]
         'value': [
           {
             'where': 'breakdown': 'Value'
@@ -179,6 +221,14 @@
           }
           {
             'where': 'breakdown': 'Value Share'
+            'unit': ' %'
+          }
+          {
+            'where': 'breakdown': 'Units'
+            'unit': ' kUnits'
+          }
+          {
+            'where': 'breakdown': 'Unit Share'
             'unit': ' %'
           }
         ]
@@ -234,6 +284,8 @@
     'filters': 'bottom-right':
       'on': 'type'
       'type': 'buttons'
+      order:['Total','Premium','Basics']
+      defaultSelected:'Total'
     'kpi': 'unit': ' %'
     'id': 35201
     'chartOptions':
@@ -248,18 +300,23 @@
         ]
         'group': 'drillGroup'
         'level': 'drillLevel'
+        levelsOrder:['main','sub']
       'units':
         'cy': 'M€'
         'cx': 'M€'
         'r': 'M€'
       'chartType': 'bubblechart'
       quadrants:
-        x: 20
-        y: 80
-        labels: ['Perte de vitesse','Trajectoire d\'excellence','Décrochage','Zone d\'ascencion']
+        x: .20
+        y: .80
+        labels: ['Sluggish','Excellence','Disengagement','Ramping up']
         sentiments: ['warning','positive','negative','warning']
       'r': 'Revenues'
-      'data': 'query': 'domain': 'leadership'
+      'data':
+        'query': 'domain': 'leadership'
+        precision:
+          'R&D':',.0%'
+          'Marketing':',.0%'
       'legend': true
   }
   {
@@ -271,7 +328,7 @@
       'type': 'buttons'
     'recommendation':
       'advert': 'Info'
-      'content': 'On Fragrances and Makeup a new competitor appeared that will challenge the incumbent'
+      'content': 'On th e premium market a new competitor appeared that will challenge the incumbent'
     'commentary': 'Key products\' value share compared to competition'
     'id': 301
     'chartOptions':
@@ -291,7 +348,16 @@
           'Men'
         ]
       'units':
-        'evolution': ' points'
+        'evolution': [
+          {
+            'where': 'breakdown': 'value'
+            'unit': ''
+          }
+          {
+            'where': 'breakdown': 'value share'
+            'unit': ' pts'
+          }
+        ]
         'value share': [
           {
             'where': 'breakdown': 'value'
@@ -305,11 +371,22 @@
       'chartType': 'horizontalBarchart'
       'data':
         'query': 'domain': 'versus'
-        'precision': evolution: ",.2f"
+        'precision':
+          'evolution': [
+            {
+              'where': 'breakdown': 'value'
+              'precision': ' ,.1%'
+            }
+            {
+              'where': 'breakdown': 'value share'
+              'precision': ' ,2f'
+            }
+          ]
   }
 ]
 'sharingOptions': true
 'slidePdfEnabled': true
+captureChartEnabled: true
 'offline': 'all'
 'home': 'skipToReport': 0
 'comments': true

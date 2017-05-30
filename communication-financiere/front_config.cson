@@ -20,9 +20,37 @@ glossary:
 sharingOptions: true
 embedCharts: true
 slidePdfEnabled: true
-
+captureChartEnabled: true
 sharingOptions: true
 comments: true
+tutorial:
+  slides: [
+    {
+      explanation: "Tap here to select another date (week, month,...)"
+      asset:
+        phone: "drillable-dashboard"
+        tablet: "tab"
+        desktop: "1920x1080"
+      title: "Date Selection"
+    }
+    {
+      explanation: "Expand categories by tapping them"
+      asset:
+        phone: "drillable-dashboard"
+        tablet: "tab"
+        desktop: "1920x1080"
+      title: "Drillable Dashboard"
+    }
+    {
+      explanation: "Explore menu by clicking into the hamburger"
+      asset:
+        phone: "drillable-dashboard"
+        tablet: "tab"
+        desktop: "1920x1080"
+      title: "Menu"
+    }
+  ]
+  id: 1
 
 slides: [
   {

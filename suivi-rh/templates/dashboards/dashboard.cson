@@ -1,23 +1,23 @@
-entityName: "{{ dashboards }}"
+entityName: "%%{{ dashboards }}%%"
 id: "{{index}}"
 report: "0"
 default: "{{default}}"
 
 categories: [
-  name: "Effectifs"
+  name: "%%Effectifs%%"
   kpis: [
-    name: "Effectif total"
+    name: "%%Effectif total%%"
     value: "{{effectifs}}"
-    unit: " salariés"
+    unit: "%% salariés%%"
     badge: "evolution_up"
     badgeSentiment:'better'
     comment: "+1% vs 2014"
     slide: 101
-    source: "2017, source interne"
+    source: "%%2016, source interne%%"
     id: 0
   ,
-    name: "Absentéisme"
-    source: "2017, internal source"
+    name: "%%Absentéisme%%"
+    source: "%%2016, source interne%%"
     type: "line"
     slide: 201
     unit: " %"
@@ -28,9 +28,10 @@ categories: [
       data:
         query:
           domain: "0_10"
+
       badge: "bullet"
       badgeSentiment: "better"
-      source: "source interne"
+      source: "%%source interne%%"
 
     id: 1
   ,
@@ -39,10 +40,10 @@ categories: [
     id: "92918969"
   ]
 ,
-  name: "Socio Démo"
+  name: "%%Socio Démo%%"
   kpis: [
-    name: "Répartition par contrat"
-    source: "2017, source interne"
+    name: "%%Répartition par contrat%%"
+
     type: "leaderboard"
 
     chartOptions:
@@ -52,12 +53,28 @@ categories: [
       data:
         query:
           domain: "0_11"
+        postprocess:[
+          rename:
+            values:
+              'CDI':
+                'fr': 'CDI'
+                'en': 'Permanent contract'
+                'es': 'CDI'
+              'CDD':
+                'fr': 'CDD'
+                'en': 'Fixed-term contract'
+                'es': 'CDD'
+              'Autres':
+                'fr': 'Autres'
+                'en': 'Other'
+                'es': 'Otros'
+      ]
       units:
         value:" %"
   ,
 
-    name: "Répartition par CSP"
-    source: "2017, source interne"
+    name: "%%Répartition par CSP%%"
+
     slide: 102
     type: "leaderboard"
 
@@ -68,12 +85,28 @@ categories: [
       data:
         query:
           domain: "0_12"
+        postprocess:[
+          rename:
+            values:
+              'Employé':
+                'fr': 'Employé'
+                'en': 'Employees'
+                'es': 'Empleado'
+              'Ouvrier':
+                'fr': 'Ouvrier'
+                'en': 'Worker'
+                'es': 'Obrero'
+              'Cadre':
+                'fr': 'Cadre'
+                'en': 'Executive manager'
+                'es': 'Ejecutivo'
+      ]
       units:
         value: " %"
   ,
 
-    name: "Répartition par sexe"
-    source: "2017, source interne"
+    name: "%%Répartition par sexe%%"
+
     type: "leaderboard"
 
     chartOptions:
@@ -83,12 +116,24 @@ categories: [
       data:
         query:
           domain: "0_13"
+        postprocess:[
+          rename:
+            values:
+              'Homme':
+                'fr': 'Homme'
+                'en': 'Man'
+                'es': 'Hombre'
+              'Femme':
+                'fr': 'Femme'
+                'en': 'Woman'
+                'es': 'Mujer'
+      ]
       units:
         value: " %"
   ,
 
-    name: "Temps partiel / temps plein "
-    source: "2017, source interne"
+    name: "%%Temps partiel / temps plein%%"
+
     type: "leaderboard"
 
     chartOptions:
@@ -98,6 +143,18 @@ categories: [
       data:
         query:
           domain: "0_14"
+        postprocess:[
+          rename:
+            values:
+              'Temps plein':
+                'fr': 'Temps plein'
+                'en': 'Full-time'
+                'es': 'Tiempo completo'
+              'Temps partiel':
+                'fr': 'Temps partiel'
+                'en': 'Part-time'
+                'es': 'Tiempo parcial'
+      ]
       units:
         value: " %"
   ]

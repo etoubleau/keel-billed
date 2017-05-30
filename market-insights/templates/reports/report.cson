@@ -1,14 +1,23 @@
-﻿
-'entityName': '{{ country }}'
+﻿'entityName': '{{ zone }}'
+'entityGroup': '{{ group }}'
+
 id: "{{ index }}"
-'execsumNote': '* you should start to <strong>customize</strong> it'
-'slideInfos': {}
-'dashboards':
-  # 'default': 0
-  'search': 'Search by division'
-# 'slug': 'entity'
+'execsumNote': 'made with<strong><3</strong>by Toucan Toco team'
+# 'dashboards':
+#   'search': 'Search by division'
+search:
+  'placeholder':'Search by division or country'
+
 'background':
   assetName: "bg-1"
   overlay: false
-'date': 'September 2016'
+
+date:
+  id: "my_date_selector"
+  type: "dropdown"
+  query:
+    domain: 'my_dates_data'
+  fields: ['my_periods']
+  default:'July-2017'
+
 'execsumTitle': 'Market insights'

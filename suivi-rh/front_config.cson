@@ -1,24 +1,34 @@
-settings:
-  comparison:
-    description: "Sur tous les écrans de comparaison, comparer avec :"
-    values: [
-      "Par défaut"
-      "Entity A"
-      "Entity B"
-      "Entity C"
-    ]
-    default: "Par défaut"
-
+settings:[]
+  # comparison:
+  #   description: "Sur tous les écrans de comparaison, comparer avec :"
+  #   values: [
+  #     "Par défaut"
+  #     "Entity A"
+  #     "Entity B"
+  #     "Entity C"
+  #   ]
+  #   default: "Par défaut"
+availableLocales: ["fr","en", "es"]
 glossary:
-  title: 'Glossaire'
+  title: '%%Glossaire%%'
+
   terms: [
-    term: "Effectifs"
-    meaning: "Effectifs inscrits sous contrats à la fin de la période"
-  ]
+      {
+        slides: [101, 102, 103, 105]
+        term: "%%Effectifs%%"
+        meaning: "%%Effectifs inscrits sous contrat à la fin de la période%%"
+      }
+      {
+        slides: [201, 202, 209, 203, 204, 205]
+        term: '%%Absentéisme%%'
+        meaning: "%%L’absentéisme est le fait d’être absent du lieu de travail ou d’études (absentéisme scolaire), ou de tout lieu où la présence est obligatoire%%"
+      }
+    ]
 
 sharingOptions: true
 comments: true
 slidePdfEnabled: true
+captureChartEnabled: true
 
 slides: [
   {
@@ -27,39 +37,96 @@ slides: [
   }
   {
     level: 1
-    title: "Effectifs"
+    title: "%%Effectifs%%"
     id: 10
   }
   {
     level: 1
-    title: "Absentéisme"
+    title: "%%Absentéisme%%"
     id: 20
   }
   {
     level: 3
     parent_id: 10
-    title: "Evolution des effectifs"
-    commentary: "Cliquez pour observer ce que contient chaque BU"
+    title: "%%Evolution des effectifs%%"
+    commentary: "%%Cliquez pour observer ce que contient chaque zone géographique%%"
+    recommendation:
+      advert: "++"
+      content:"""
+      %%Attention baisse anormale des effectifs sur la zone Asie%%
+      """
 
     chartOptions:
       data:
         query:
           domain: "0_101"
+        postprocess:[
+          rename:
+            values:
+              'Amerique du Nord':
+                'fr': 'Amerique du Nord'
+                'en': 'North America'
+                'es': 'America del Norte'
+              'Europe':
+                'fr': 'Europe'
+                'en': 'Europe'
+                'es': 'Europa'
+              'Asie':
+                'fr': 'Asie'
+                'en': 'Asia'
+                'es': 'Asia'
+              'Direction générale':
+                'fr': 'Direction générale'
+                'en': 'General direction'
+                'es': 'Dirección General'
+              'Audit Interne':
+                'fr': 'Audit Interne'
+                'en': 'Internal Audit'
+                'es': 'Auditoría Interna'
+              'Ventes locales':
+                'fr': 'Ventes locales'
+                'en': 'Local sales'
+                'es': 'Auditoría Interna'
+              'Ventes Nationales':
+                'fr': 'Ventes Nationales'
+                'en': 'National sales'
+                'es': 'Ventas Locales'
+              'Autres directions':
+                'fr': 'Autres directions'
+                'en': 'Other directions'
+                'es': 'Otras Direcciones'
+              'Patrimoine':
+                'fr': 'Patrimoine'
+                'en': 'Legacy'
+                'es': 'Patrimonio'
+              'DOO':
+                'fr': 'DOO'
+                'en': 'DOO'
+                'es': 'DOO'
+              'Marketing':
+                'fr': 'Marketing'
+                'en': 'Marketing'
+                'es': 'Marketing'
+              'DRH':
+                'fr': 'DRH'
+                'en': 'RHD'
+                'es': 'DRH'
+      ]
       chartType: "waterfall"
       value: "value"
       label: "label"
       sublabel: "label_sublevel"
       units:
-        value: " salariés"
-      source: "Source interne"
+        value: "%% salariés%%"
+      source: "%%Source interne%%"
     id: 101
   }
   {
     level: 3
-    title: "Effectifs par entreprise"
+    title: "%%Effectifs par entreprise%%"
     parent_id: 10
-    source: "Source interne"
-    commentary: "Findus France emploie le plus de salariés"
+    source: "%%Source interne%%"
+    commentary: "%%Findus France emploie le plus de salariés%%"
     filters:
       "bottom-right":
         on: "breakdown"
@@ -68,44 +135,56 @@ slides: [
           custom: [
             "Total"
             "Cadres"
-            "TAM"
+            "Ouvriers"
             "Employés"
           ]
     chartOptions:
       data:
         query:
           domain: "0_102"
-
+        postprocess:[
+          rename:
+            values:
+              'Cadres':
+                'fr': 'Cadres'
+                'en': 'Executive managers'
+                'es': 'Ejecutivos'
+              'Ouvriers':
+                'fr': 'Ouvriers'
+                'en': 'Workers'
+                'es': 'Obreros'
+              'Employés':
+                'fr': 'Employés'
+                'en': 'Employees'
+                'es': 'Empleados'
+      ]
 
       chartType: "horizontalBarchart"
       sparklines:
         prefix: "sparkline"
-        legend: "Évolution<br>sur 3 ans"
+        legend: "%%Évolution<br>sur 3 ans%%"
         unit: " "
       label: "label"
       value: "value"
       variation: "evolution"
-      variationLegend: "par rapport à N-1"
-
+      variationLegend: "%%par rapport à N-1%%"
 
       units:
         value:
           breakdown:
-            Total: " Salariés"
-            Cadres: " Cadres"
-            TAM: " TAM"
-            Employés: " Employés"
+            Total: "%% Salariés%%"
+            Cadres: ""
+            Ouvriers: ""
+            Employés: ""
         evolution: " %"
-
-
 
     id: 102
   }
   {
     level: 3
-    title: "Répartition des effectifs"
+    title: "%%Répartition des effectifs%%"
     parent_id: 10
-    commentary: "Age: L'âge moyen est de 43 ans<br>Ancienneté: L'ancienneté moyenne est de 14 ans"
+    commentary: "%%Age: L'âge moyen est de 43 ans<br>Ancienneté: L'ancienneté moyenne est de 14 ans%%"
 
     filters:
       "bottom-right":
@@ -113,33 +192,112 @@ slides: [
         type: "buttons"
         order:
           custom: [
-            "âge"
-            "Ancienneté"
+            "%%âge%%"
+            "%%Ancienneté%%"
           ]
     chartOptions:
       data:
         query:
           domain: "0_103"
+        postprocess:[
+          rename:
+            values:
+              'âge':
+                'fr': 'âge'
+                'en': 'age'
+                'es': 'edad'
+              'Ancienneté':
+                'fr': 'Ancienneté'
+                'en': 'Seniority'
+                'es': 'Antigüedad'
+              'moins de 25 ans ':
+                'fr': 'moins de 25 ans'
+                'en': 'less than 25 years old'
+                'es': 'menos de 25 años'
+              '25 à 29 ans':
+                'fr': '25 à 29 ans'
+                'en': '25 to 29 years old'
+                'es': '25 hasta 29 años'
+              '30 à 34 ans':
+                'fr': '30 à 34 ans'
+                'en': '30 to 34 years old'
+                'es': '30 hasta 34 años'
+              '35 à 39 ans':
+                'fr': '35 à 39 ans'
+                'en': '35 to 39 years old'
+                'es': '35 hasta 39 años'
+              '40 à 44 ans':
+                'fr': '40 à 44 ans'
+                'en': '40 to 44 years old'
+                'es': '40 hasta 44 años'
+              '45 à 49 ans':
+                'fr': '45 à 49 ans'
+                'en': '45 to 49 years old'
+                'es': '45 hasta 49 años'
+              '50 à 54 ans':
+                'fr': '50 à 54 ans'
+                'en': '50 to 54 years old'
+                'es': '50 hasta 54 años'
+              '55 à 59 ans':
+                'fr': '55 à 59 ans'
+                'en': '55 to 59 years old'
+                'es': '55 hasta 59 años'
+              '60 ans et plus':
+                'fr': '60 ans et plus'
+                'en': '60 years old and more'
+                'es': '60 años y +'
+              'Moins de 2 ans':
+                'fr': 'Moins de 2 ans'
+                'en': 'Less than 2 years old'
+                'es': 'menos de 2 años'
+              '2 à 5 ans':
+                'fr': '2 à 5 ans'
+                'en': '2 to 5 years old'
+                'es': '2 hasta 5 años'
+              '6 à 10 ans':
+                'fr': '6 à 10 ans'
+                'en': '6 to 10 years old'
+                'es': '6 hasta 10 años'
+              '11 à 15 ans':
+                'fr': '11 à 15 ans'
+                'en': '11 to 15 years old'
+                'es': '11 hasta 15 años'
+              '16 à 20 ans':
+                'fr': '16 à 20 ans'
+                'en': '16 to 20 years old'
+                'es': '16 hasta 20 años'
+              '21 à 25 ans':
+                'fr': '21 à 25 ans'
+                'en': '21 to 25 years old'
+                'es': '21 hasta 25 años'
+              '26 à 29 ans':
+                'fr': '26 à 29 ans'
+                'en': '26 to 29 years old'
+                'es': '26 hasta 29 años'
+              '30 ans et plus ':
+                'fr': '30 ans et plus'
+                'en': '30 years old and more'
+                'es': '30 años y +'
+      ]
       chartType: "horizontalBarchart"
       label: "label"
       value: "value"
       variation: "evolution"
-      variationLegend: "par rapport à Décembre 2014"
-
+      variationLegend: "%%par rapport à Décembre 2015%%"
 
       units:
-        value: " salariés"
+        value: "%% salariés%%"
         evolution: " %"
 
-      source: "Source interne"
+      source: "%%Source interne%%"
 
     id: 103
   }
 
   {
     level: 3
-    title: "Répartition géographique"
-    commentary: "Répartition géographique du nombre de salariés"
+    title: "%%Répartition géographique%%"
+    commentary: "%%Cartographie des salariés par âge et densité (faire un focus sur la Normandie)%%"
     filters:
       "bottom-right":
         on: "kpi"
@@ -165,6 +323,18 @@ slides: [
       zone_data:
         query:
           domain: "france_region"
+        postprocess:[
+          rename:
+            values:
+              'age moyen':
+                'fr': 'age moyen'
+                'en': 'average age'
+                'es': 'edad media'
+              'salaries':
+                'fr': 'salaries'
+                'en': 'employees'
+                'es': 'empleados'
+      ]
 
     chartOptions:
       chartType: "mapchart"
@@ -184,16 +354,25 @@ slides: [
   }
   {
     level: 3
-    title: "Absentéisme dans le temps et par motif"
+    title: "%%Absentéisme dans le temps et par motif%%"
     parent_id: 20
-    commentary: "L'absentéisme est en baisse depuis 2013"
+    commentary: "%%Suite à l'adoption de nouvelles mesures RH en 2013, l'absentéisme global est en baisse%%"
     charts: [
       {
         data:
           query:
             domain: "0_201_0"
-          precision: 1
+          precision:
+            value:'.1f'
+          postprocess:[
+            rename:
+              values:
+                'Total':
+                  'fr': 'Total'
+                  'en': 'Total'
+                  'es': 'Total'
 
+        ]
         chartType: "linechart"
         units:
           value: " %"
@@ -203,6 +382,12 @@ slides: [
           on: "date"
           datasets: [1]
         groups: "label"
+        events:[
+          date: 2013
+          label: "Total"
+          name: "%%Nouvelle politique RH%%"
+        ]
+
         date: "date"
         value: "value"
         size: 0.25
@@ -214,8 +399,32 @@ slides: [
         data:
           query:
             domain: "0_201_1"
-          precision: 1
-
+          precision:
+            value: '.1f'
+          postprocess:[
+            rename:
+              values:
+                'Accident Trajet':
+                  'fr': 'Accident Trajet'
+                  'en': 'Commuting accident'
+                  'es': 'Accidente Trayecto'
+                'Maladie':
+                  'fr': 'Maladie'
+                  'en': 'Sickness'
+                  'es': 'Enfermedad'
+                'Accident Travail':
+                  'fr': 'Accident Travail'
+                  'en': 'Accident at work'
+                  'es': 'Accidente Laboral'
+                'Invalidité':
+                  'fr': 'Invalidité'
+                  'en': 'Disability'
+                  'es': 'Invalidez'
+                'Maternité':
+                  'fr': 'Maternité'
+                  'en': 'Maternity'
+                  'es': 'Maternidad'
+        ]
         chartType: "horizontalBarchart"
         value: "value"
         sort: "desc"
@@ -232,7 +441,7 @@ slides: [
   }
   {
     level: 3
-    title: "Absentéisme Maladie <br> & AT par CSP"
+    title: "%%Absentéisme Maladie <br> & AT par CSP%%"
     parent_id: 20
     filters:
       "bottom-right":
@@ -242,15 +451,52 @@ slides: [
           custom: [
             "Toutes CSP"
             "Cadres"
-            "TAM"
+            "Ouvriers"
             "Employés"
+            "All social professional categories"
+            "Executive managers"
+            "Workers"
+            "Employees"
+            "Todas CSP"
+            "Ejecutivos"
+            "Obreros"
+            "Empleados"
           ]
+
     chartOptions:
       data:
         query:
           domain: "0_202"
-
-        precision: 1
+        precision:
+          value: '.1f'
+        postprocess:[
+          rename:
+            values:
+              'Toutes CSP':
+                'fr': 'Toutes CSP'
+                'en': 'All social professional categories'
+                'es': 'Todas CSP'
+              'Maladie':
+                'fr': 'Maladie'
+                'en': 'Sickness'
+                'es': 'Enfermedad'
+              'Accident Travail':
+                'fr': 'Accident Travail'
+                'en': 'Accident at work'
+                'es': 'Accidente Laboral'
+              'Cadres':
+                'fr': 'Cadres'
+                'en': 'Executive managers'
+                'es': 'Ejecutivos'
+              'Ouvriers':
+                'fr': 'Ouvriers'
+                'en': 'Workers'
+                'es': 'Obreros'
+              'Employés':
+                'fr': 'Employés'
+                'en': 'Employees'
+                'es': 'Empleados'
+      ]
       chartType: "barchart"
       value: "value"
       label: "label"
@@ -263,7 +509,7 @@ slides: [
   }
   {
     level: 3
-    title: "Fréquence vs Gravité"
+    title: "%%Fréquence vs Gravité%%"
     filters:
       "bottom-right":
         on: "breakdown"
@@ -273,16 +519,180 @@ slides: [
       data:
         query:
           domain: "0_209"
+        postprocess:[
+          rename:
+            # columns:
+            #   'Fréquence':
+            #     'fr': 'Fréquence'
+            #     'en': 'Frequency'
+            #     'es': 'Frecuencia'
+            #   'Gravité':
+            #     'fr': 'Gravité'
+            #     'en': 'Severity'
+            #     'es': 'Gravedad'
+            #   'effectif':
+            #     'fr': 'Effectif'
+            #     'en': 'Headcount'
+            #     'es': 'Efectivo'
+
+            values:
+              'Femme':
+                'fr': 'Femme'
+                'en': 'Woman'
+                'es': 'Mujer'
+              'Homme':
+                'fr': 'Homme'
+                'en': 'Man'
+                'es': 'Hombre'
+              'moins de 25 ans':
+                'fr': 'moins de 25 ans'
+                'en': 'Less than 25 years old'
+                'es': 'menos de 25 años'
+              '25 - 29 ans':
+                'fr': '25 - 29 ans'
+                'en': '25 to 29 years old'
+                'es': '25 hasta 29 años'
+              '30 - 34 ans':
+                'fr': '30 - 34 ans'
+                'en': '30 to 34 years old'
+                'es': '30 hasta 34 años'
+              '35 - 39 ans':
+                'fr': '35 - 39 ans'
+                'en': '35 to 39 years old'
+                'es': '35 hasta 39 años'
+              '40 - 44 ans':
+                'fr': '40 - 44 ans'
+                'en': '40 to 44 years old'
+                'es': '40 hasta 44 años'
+              '45 - 49 ans':
+                'fr': '45 - 49 ans'
+                'en': '45 to 49 years old'
+                'es': '45 hasta 49 años'
+              '50 - 59 ans':
+                'fr': '50 - 59 ans'
+                'en': '50 to 59 years old'
+                'es': '50 hasta 59 años'
+              'plus de 60 ans':
+                'fr': 'plus de 60 ans'
+                'en': 'More than 60 years old'
+                'es': '60 años y +'
+              'Ouvrier':
+                'fr': 'Ouvrier'
+                'en': 'Worker'
+                'es': 'Obrero'
+              'Employé':
+                'fr': 'Employé'
+                'en': 'Employee'
+                'es': 'Empleado'
+              'Agent de maîtrise':
+                'fr': 'Agent de maîtrise'
+                'en': 'Supervisor'
+                'es': 'Supervisor'
+              'Cadre':
+                'fr': 'Cadre'
+                'en': 'Executive manager'
+                'es': 'Ejecutivo'
+              'Ouvrier F':
+                'fr': 'Ouvrier F'
+                'en': 'Worker F'
+                'es': 'Obrero F'
+              'Employée F':
+                'fr': 'Employée F'
+                'en': 'Employee F'
+                'es': 'Empleado F'
+              'Agent de maîtrise  F':
+                'fr': 'Agent de maîtrise  F'
+                'en': 'Supervisor F'
+                'es': 'Supervisor F'
+              'Cadre F':
+                'fr': 'Cadre F'
+                'en': 'Executive manager F'
+                'es': 'Ejecutivo F'
+              'Ouvrier H':
+                'fr': 'Ouvrier H'
+                'en': 'Worker H'
+                'es': 'Obrero H'
+              'Employé H':
+                'fr': 'Employé H'
+                'en': 'Employee H'
+                'es': 'Empleado H'
+              'Agent de maîtrise H':
+                'fr': 'Agent de maîtrise H'
+                'en': 'Supervisor H'
+                'es': 'Supervisor H'
+              'Cadre H':
+                'fr': 'Cadre H'
+                'en': 'Executive manager H'
+                'es': 'Ejecutivo H'
+              'moins de 30 ans F':
+                'fr': 'moins de 30 ans F'
+                'en': 'Less than 30 years old F'
+                'es': 'menos de 30 años F'
+              '30 - 39 ans F':
+                'fr': '30 - 39 ans F'
+                'en': '30 to 39 years old F'
+                'es': '30 hasta 39 años F'
+              '40 - 49 ans F':
+                'fr': '40 - 49 ans F'
+                'en': '40 to 49 years old F'
+                'es': '40 hasta 49 años F'
+              'plus de 50 ans F':
+                'fr': 'plus de 50 ans F'
+                'en': 'more than 50 years old F'
+                'es': '50 años y + F'
+              'moins de 30 ans H':
+                'fr': 'moins de 30 ans H'
+                'en': 'Less than 30 years old H'
+                'es': 'menos de 30 años H'
+              '30 - 39 ans H':
+                'fr': '30 - 39 ans H'
+                'en': '30 to 39 years old H'
+                'es': '30 hasta 39 años H'
+              '40 - 49 ans H':
+                'fr': '40 - 49 ans H'
+                'en': '40 to 49 years old H'
+                'es': '40 hasta 49 años H'
+              'plus de 50 ans H':
+                'fr': 'plus de 50 ans H'
+                'en': 'more than 50 years old H'
+                'es': '50 años y + H'
+              'GROUPE 1':
+                'fr': 'GROUPE 1'
+                'en': 'GROUP 1'
+                'es': 'GRUPO 1'
+              'sexe':
+                'fr': 'sexe'
+                'en': 'gender'
+                'es': 'sexo'
+              'age':
+                'fr': 'age'
+                'en': 'age'
+                'es': 'edad'
+              'csp':
+                'fr': 'csp'
+                'en': 'social professional category'
+                'es': 'csp'
+              'sexe+csp':
+                'fr': 'sexe+csp'
+                'en': 'gender+social professional category'
+                'es': 'sexo+csp'
+              'age+sexe':
+                'fr': 'age+sexe'
+                'en': 'age+gender'
+                'es': 'edad+sexo'
+
+
+      ]
       chartType: "bubblechart"
       label: "label"
       legend:
-        cy: "Fréquence"
-        cx: "Gravité"
-        r: "salariés"
+        cy: "%%Fréquence%%"
+        cx: "%%Gravité%%"
+        r: "%%salariés%%"
       units:
-        cx: " jours"
+        cx: "%% jours%%"
         cy: " %"
-        r: " salariés"
+        r: "%% salariés%%"
 
       cy: "Fréquence"
       cx: "Gravité"
@@ -294,21 +704,49 @@ slides: [
   }
   {
     level: 3
-    title: "Absentéisme par DG"
+    title: "%%Absentéisme par zone%%"
     parent_id: 20
-    commentary: "Les BU 5 et 2 ont un taux d'absentéisme supérieur à la moyenne nationale"
+    commentary: "%%L'Europe et l'Amerique du Sud ont un taux d'absentéisme supérieur à la moyenne nationale%%"
 
     chartOptions:
       data:
         query:
           domain: "0_203"
           year: 2015
+        postprocess:[
+          rename:
+            values:
+              'Amerique du Nord':
+                'fr': 'Amerique du Nord'
+                'en': 'North America'
+                'es': 'America del Norte'
+              'Europe':
+                'fr': 'Europe'
+                'en': 'Europe'
+                'es': 'Europa'
+              'Asie':
+                'fr': 'Asie'
+                'en': 'Asia'
+                'es': 'Asia'
+              'Afrique':
+                'fr': 'Afrique'
+                'en': 'Africa'
+                'es': 'Africa'
+              'Amerique du Sud':
+                'fr': 'Amerique du Sud'
+                'en': 'South America'
+                'es': 'America del Sur'
+              'Russie':
+                'fr': 'Russie'
+                'en': 'Russia'
+                'es': 'Rusia'
+      ]
       chartType: "leaderboardCenteredAverage"
       groups: "groups"
       value: "value"
       label: "label"
       variation: "evolution"
-      variationLegend: "variation sur 1 an"
+      variationLegend: "%%variation sur 1 an%%"
       reverse: true
       # sparklines:
       #   orderDates: true
@@ -330,13 +768,13 @@ slides: [
         values: [
             value: 4
           ]
-      averageText: "Moyenne nationnale"
+      averageText: "%%Moyenne nationale%%"
     id: 203
   }
   {
     level: 3
-    title: "Répartition géographique"
-    commentary: "Nb de salariés absents par cause d'absentéisme"
+    title: "%%Répartition géographique%%"
+    commentary: "%%Nb de salariés absents par cause d'absentéisme%%"
     parent_id: 20
     filters:
       "bottom-right":
@@ -353,6 +791,26 @@ slides: [
       data:
         query:
           domain: "0_rep_geo"
+        postprocess:[
+          rename:
+            values:
+              'Maladie':
+                'fr': 'Maladie'
+                'en': 'Sickness'
+                'es': 'Enfermedad'
+              'Accident Travail':
+                'fr': 'Accident Travail'
+                'en': 'Accident at work'
+                'es': 'Accidente Laboral'
+              'Invalidité':
+                'fr': 'Invalidité'
+                'en': 'Disability'
+                'es': 'Invalidez'
+              'Maternité':
+                'fr': 'Maternité'
+                'en': 'Maternity'
+                'es': 'Maternidad'
+      ]
       chartType: "carto"
       join: "CODE_DEPT"
       label: "NOM_DEPT"
@@ -370,7 +828,7 @@ slides: [
   }
   {
     level: 3
-    title: "Absentéisme Maladie <br> & AT par CSP"
+    title: "%%Absentéisme Maladie <br> & AT par CSP%%"
     parent_id: 20
     filters:
       "bottom-right":
@@ -381,14 +839,57 @@ slides: [
       data:
         query:
           domain: "0_204"
-        precision: 1
+        precision:
+          value:'.1f'
+        postprocess:[
+          rename:
+            values:
+              'Toutes tranches d\'âge':
+                'fr': 'Toutes tranches d\'âge'
+                'en': 'All age groups'
+                'es': 'Todos grupos de edad'
+              '50 ans et +':
+                'fr': '50 ans et +'
+                'en': '50 years old and more'
+                'es': '50 años y +'
+              'Toutes Directions':
+                'fr': 'Toutes Directions'
+                'en': 'All directions'
+                'es': 'Todas Direcciones'
+              'Amerique du Nord':
+                'fr': 'Amerique du Nord'
+                'en': 'North America'
+                'es': 'America del Norte'
+              'Europe':
+                'fr': 'Europe'
+                'en': 'Europe'
+                'es': 'Europa'
+              'Asie':
+                'fr': 'Asie'
+                'en': 'Asia'
+                'es': 'Asia'
+              '<30 jours':
+                'fr': '<30 jours'
+                'en': '<30 days'
+                'es': '<30 dias'
+              '>6 mois':
+                'fr': '>6 mois'
+                'en': '>6 months'
+                'es': '>6 meses'
+      ]
         order:
           by: "label"
           custom: [
-            "Toutes Directions",
-            "DEXI",
-            "DOA",
-            "DEXI & DOA",
+            "Toutes Directions"
+            "All directions"
+            "Todas Direcciones"
+            "Amerique du Nord"
+            "North America"
+            "America del Norte"
+            "Europe"
+            "Europa"
+            "Asie"
+            "Asia"
           ]
       chartType: "barchart"
       filters:

@@ -152,9 +152,18 @@
               'value': ',.1f'
       }
       { 'type': 'separator' }
+      # {
+      #   'src': 'images/simply.jpg'
+      #   'type': 'media-img'
+      # }
       {
-        'src': 'images/simply.jpg'
-        'type': 'media-img'
+        name: "Prospectus"
+        type: 'pdf'
+        data:
+          query:
+            domain:"pdf"
+        url: "colonne_url"
+        linkType: "asset"
       }
     ]
     'name': 'Indicateurs d\'exploitation'

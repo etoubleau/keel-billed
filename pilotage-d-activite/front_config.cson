@@ -8,6 +8,7 @@
     'Entity C'
   ]
   'description': 'Sur tous les écrans de comparaison, comparer avec :'
+captureChartEnabled: true
 'glossary':
   'terms': [
     {
@@ -334,6 +335,11 @@
         'date': ' '
         'Value': ' %'
       'chartType': 'linechart'
+      filters:
+        "upper-right":
+            on: "Label"
+            type: "dropdown"
+            reset: "Tous"
       'data':
         'date':
           'selector': 'Date'
@@ -344,6 +350,63 @@
           'fr': 'CA Août 2014'
           'en': 'CA Août 2014' } ]
       'legend': true
+  }
+  {
+    'level': 3
+    'title': 'Performance Rayons'
+    'parent_id': 101
+    'source': 'Source: données fictives'
+    'id': 10111
+    charts: [
+      {
+        data:
+          query:
+            domain: 'ca_magasin'
+            level_1: 'CA'
+          date:
+            selector: "DATE_JOUR"
+            format: "%Y-%m-%d"
+          precision:
+            "value": [
+              precision: ",.0f"
+            ]
+        chartType: "linechart"
+        units:
+          value: " €"
+          date: ""
+        crossfilter:
+          on: "DATE_JOUR"
+          datasets: [1]
+
+        date: "DATE_JOUR"
+        value: "value"
+        size: 0.3
+        style: "secondary "
+        id: 0
+      }
+      {
+        data:
+          query:
+            domain: "ventes_rayon_day"
+            level_2: "CA"
+          precision:
+            "value": [
+              precision: ",.0f"
+            ]
+          date:
+            selector: "DATE_JOUR"
+            format: "%Y-%m-%d"
+        chartType: "horizontalBarchart"
+        label: "LIB_RAYON"
+        time: "DATE_JOUR"
+        value: "value"
+        units:
+          value: " €"
+        size: 0.7
+        sort: 'desc'
+        id: 1
+      }
+    ]
   }
   {
     'level': 3
@@ -376,8 +439,8 @@
         'cx': 'vs m-1'
         'r': 'realise'
       'quadrants':
-        'y': 0
-        'x': 0
+        'y': -15
+        'x': 17
         'labels': [
           'Perte de vitesse'
           'Trajectoire d\'excellence'
@@ -400,6 +463,9 @@
       'on': 'Breakdown'
       'type': 'buttons'
     'id': 10202
+    'tutorial':
+      'content': 'Cliquez sur les boutons en bas à droite pour faire varier les axes d\'analyse'
+      'id': 'bottom_right'
     'chartOptions':
       'packs': 'Pack'
       'average': ' '
@@ -432,9 +498,6 @@
           ]
         'precision': 'Value': '.0f'
       'legend': false
-      'tutorial':
-        'content': 'Cliquez sur les boutons en bas à droite pour faire varier les axes d\'analyse'
-        'id': 'bottom_right'
   }
   {
     'level': 3
@@ -496,7 +559,7 @@
     'level': 3
     'title': 'Ecart sur objectif'
     'parent_id': 102
-    'source': 'Source Société Atac, source société atac, CA du mois / objectif, non comparable'
+    'source': 'Source Société Atac, source société Atac, CA du mois / objectif, non comparable'
     'id': 10205
     'chartOptions':
       'target': 'Objectifs Août 2015'
@@ -510,18 +573,18 @@
       'value': 'Août 2015'
       'label': 'Label'
       'packNames': true
-      'meta': [ 'progression' ]
+      'meta': [ 'Progression' ]
       'colorTargets': true
       'units':
         'Août 2015': ' K€'
-        'progression': '% par rapport à l\'objectif'
+        'Progression': ' par rapport à l\'objectif'
         'Objectifs Août 2015': ' K€'
       'chartType': 'bulletChart'
       'data':
         'query': 'domain': 'target_metrics'
         'precision':
           'Août 2015': '.0f'
-          'progression': '.0f'
+          'Progression': '.1%'
           'Objectifs Août 2015': '.0f'
         'order':
           'by': 'Label'
@@ -628,7 +691,7 @@
     title: "CA par région"
     id: 253
     parent_id: 25
-    commentary: 'Quelles sont mes zones de forte activité ?<br><i>Cliquez sur la carte de la Normandie pour plus de détail sur cette région</i>'
+    commentary: 'Quelles sont mes zones de forte activité ?<br><i>Double cliquez sur la carte de la Normandie pour plus de détail sur cette région</i>'
 
     # filters:
     #   "bottom-right":
@@ -651,8 +714,13 @@
       zone_data:
         query:
           domain: "<%= drill.data_file %>"
+        precision:
+          value:'.2f'
+        units:
+          value: ' M€'
     chartOptions:
       chartType: "mapchart"
+
       zones:
         drill: true
         label: "ZONE_NAME"
@@ -662,6 +730,7 @@
           shapes: "id"
           data: "id"
         color: "value"
+        # reverseScale: true
       legend:true
   }
   {

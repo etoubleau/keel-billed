@@ -59,6 +59,12 @@
   }
   {
     'spreadsheet_id': '1fX0iwx9ilDS8UDTLxnWdhcJZMywk9kLdGvPTxzjfz1A'
+    'sheetname': 'pdf'
+    'domain': 'pdf'
+    'type': 'google_spreadsheet'
+  }
+  {
+    'spreadsheet_id': '1fX0iwx9ilDS8UDTLxnWdhcJZMywk9kLdGvPTxzjfz1A'
     'sheetname': 'heatmap_home'
     'domain': 'heatmap_home'
     'type': 'google_spreadsheet'
@@ -115,6 +121,18 @@
     'spreadsheet_id': '1fX0iwx9ilDS8UDTLxnWdhcJZMywk9kLdGvPTxzjfz1A'
     'sheetname': 'carto2'
     'domain': 'carto2'
+    'type': 'google_spreadsheet'
+  }
+  {
+    'spreadsheet_id': '1fX0iwx9ilDS8UDTLxnWdhcJZMywk9kLdGvPTxzjfz1A'
+    'sheetname': 'ca_magasin'
+    'domain': 'ca_magasin'
+    'type': 'google_spreadsheet'
+  }
+  {
+    'spreadsheet_id': '1fX0iwx9ilDS8UDTLxnWdhcJZMywk9kLdGvPTxzjfz1A'
+    'sheetname': 'ventes_rayon_day'
+    'domain': 'ventes_rayon_day'
     'type': 'google_spreadsheet'
   }
     domain: "france_regions"
