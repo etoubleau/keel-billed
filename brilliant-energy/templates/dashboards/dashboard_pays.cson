@@ -1,0 +1,282 @@
+
+default: true
+entityName: '{{ report }}'
+report: '{{ report_id }}'
+entityGroup: '{{ techno_zone }}'
+id: '{{ index }}'
+execsumTitle: 'Rapport National'
+categories: [
+  {
+    name: "Overview National"
+    kpis: [
+      {
+        name: "CA cumulé réalisé 2016"
+        type: 'value-dynamic'
+        slide: 1001
+        value: "CA"
+        badge: "evol"
+        comment: "<%= evol %>% vs l'année N-1"
+        sentiment:
+          evol:
+            domain:[0]
+            range:['negative','positive']
+        data:
+          CA:
+            query:
+              domain: "data_kpis_pays"
+              pays: "<%= report.entityName%>"
+              kpi: $in: [
+                "CA cumulé réalisé 2016",
+              ]
+            field: "value"
+          evol:
+            query:
+              domain: "data_kpis_pays"
+              pays: "<%= report.entityName%>"
+              kpi: $in: [
+                "CA cumulé réalisé 2016",
+              ]
+            field: "evol"
+        precision:
+          CA: ",.0f"
+          evol: "+0.0f"
+        unit: "k€"
+
+      }
+      {
+        type: "media-img"
+        src: "maison.jpg"
+      }
+      {
+        name: "Flash Report"
+        type: "text-dynamic"
+        data:
+          query:
+            domain: "data_executive_comments"
+            report: "<%= report.entityName %>"
+        content: "comments"
+
+      }
+      {
+        type: "separator"
+      }
+      {
+        name: "KPIs Production"
+        type: 'score-card'
+        slide: 1002
+        chartOptions:
+          value: "value"
+          variation: "evol"
+          label: "kpi"
+          limit: 6
+          sentiment:
+            evol:
+              domain:[0]
+              range:['negative','positive']
+          data:
+            query:
+              domain: "data_kpis_pays"
+              pays: "<%= report.entityName%>"
+              kpi: $in: [
+                "Production cumulée Réalisé 2016",
+                "Capacité totale installée 2016"
+              ]
+            precision:
+              value: "precision"
+          units:
+            value: "unit"
+            evol: "evol_unit"
+
+      }
+      {
+        type: "separator"
+      }
+      {
+        name: "Turnover Personnel"
+        type: 'value-dynamic'
+        value: "my_value"
+        badge: 'my_comparison'
+        source: "Données à fiabiliser"
+        slide: 1006
+        precision:
+          my_value: '.1%'
+          my_comparison: '.1f'
+        # sentiment:
+        #   my_comparison:
+        #     domain: [0]
+        #     range: ['positive','negative']
+        units:
+          my_comparison: " pt"
+        data:
+          my_value:
+            query:
+              domain: "data_kpis_pays"
+              pays: "<%= report.entityName %>"
+              kpi: $in: ["Turnover"]
+            field: "value"
+          my_comparison:
+            query:
+              domain: "data_kpis_pays"
+              pays: "<%= report.entityName %>"
+              kpi: $in: ["Turnover"]
+            field: "evol"
+        comment: "Evolution vs Année N-1"
+      }
+      {
+        name: "Turnover Projets"
+        type: 'value-dynamic'
+        value: "my_value"
+        badge: 'my_evol'
+        source: "Données à fiabiliser"
+        slide: 1009
+        precision:
+          my_value: '.1%'
+          my_evol: '.0f'
+        sentiment:
+          my_evol:
+            domain: [0]
+            range: ['negative','positive']
+        data:
+          my_value:
+            query:
+              domain: "data_kpis_pays"
+              pays: "<%= report.entityName %>"
+              kpi: $in: ["Taux Projets Abandonnés"]
+            field: "value"
+          my_evol:
+            query:
+              domain: "data_kpis_pays"
+              pays: "<%= report.entityName %>"
+              kpi: $in: ["Taux Projets Abandonnés"]
+            field: "evol"
+        comment: "Taux de projets abandonnés"
+      }
+      {
+        name: "Avancement des projets clés"
+        type: 'heatmap'
+        #source: ""
+        slide: 1008
+        chartOptions:
+          x: "Phase"
+          xOrder: ["Prospection", "Dev A", "Dev B", "Authorized", "Construction", "Abandoned"]
+          y: "Parks"
+          value: "NB de jours passés"
+          target: "Délai souhaité"
+          sentiment:
+            sentiment:
+              domain: [-0.5,0.5, 10000]
+              range: ["warning", "neutral", "positive", "negative"]
+          data:
+            query: [
+              $match:
+                domain: "data_pipeline_projets_2016"
+            ,
+              $sort: "Gross capacity (MW)": -1
+            ,
+              $limit: 18
+            ,
+              $match:
+                "NB de jours passés": $nin: [null]
+            ]
+      }
+    ]
+  }
+  {
+    name: "Benchmark"
+    kpis: [
+      {
+        name: "<span class='text-top-color'>Top 3 EOLIEN performances</span>"
+        type: "leaderboard"
+        source: "Facteur de charge cumulé (Déc 2016)"
+        slide: 10011
+        chartOptions:
+          value: "facteur_de_charge"
+          label: "report"
+          #domain: [0, 250]
+          sort: "desc"
+          data:
+            query:
+              domain: "data_reports"
+              type: "CENTRALE"
+              techno: "EOLIEN"
+            precision:
+              facteur_de_charge: ".1%"
+              evol_fc: "0f"
+          units:
+            evol_fc: "pt"
+          variation: "evol_fc"
+
+      }
+      {
+        name: "<span class='text-top-color'>Top 3 SOLAIRE performances</span>"
+        type: "leaderboard"
+        source: "Facteur de charge cumulé (Déc 2016)"
+        slide: 10011
+        chartOptions:
+          value: "facteur_de_charge"
+          label: "report"
+          #domain: [0, 250]
+          sort: "desc"
+          data:
+            query:
+              domain: "data_reports"
+              type: "CENTRALE"
+              techno: "SOLAIRE"
+            precision:
+              facteur_de_charge: ".1%"
+              evol_fc: "0f"
+          units:
+            evol_fc: "pt"
+          variation: "evol_fc"
+
+      }
+      {
+        type: "separator"
+      }
+      {
+        name: "<span class='text-flop-color'>Flop 3 EOLIEN performances</span>"
+        type: "leaderboard"
+        source: "Facteur de charge cumulé (Déc 2016)"
+        slide: 10011
+        chartOptions:
+          value: "facteur_de_charge"
+          label: "report"
+          #domain: [0, 250]
+          sort: "asc"
+          data:
+            query:
+              domain: "data_reports"
+              type: "CENTRALE"
+              techno: "EOLIEN"
+            precision:
+              facteur_de_charge: ".1%"
+              evol_fc: "0f"
+          units:
+            evol_fc: "pt"
+          variation: "evol_fc"
+      }
+      {
+        name: "<span class='text-flop-color'>Flop 3 SOLAIRE performances</span>"
+        type: "leaderboard"
+        source: "Facteur de charge cumulé (Déc 2016)"
+        slide: 10011
+        chartOptions:
+          value: "facteur_de_charge"
+          label: "report"
+          #domain: [0, 250]
+          sort: "asc"
+          data:
+            query:
+              domain: "data_reports"
+              type: "CENTRALE"
+              techno: "SOLAIRE"
+            precision:
+              facteur_de_charge: ".1%"
+              evol_fc: "0f"
+          units:
+            evol_fc: "pt"
+          variation: "evol_fc"
+      }
+    ]
+  }
+]

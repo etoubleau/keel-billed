@@ -1,0 +1,145 @@
+
+default: true
+entityName: '{{ report }}'
+report: '{{ report_id }}'
+entityGroup: '{{ techno_zone }}'
+id: '{{ index }}'
+execsumTitle: 'Rapport au niveau de la Centrale'
+categories: [
+  {
+    name: "Overview de la Centrale"
+    kpis: [
+      {
+        name: "Faits marquants"
+        type: "text-dynamic"
+        data:
+          query:
+            domain: "executive_comments"
+            Centrale: "<%= report.entityName %>"
+        content: "Comment"
+
+      }
+      {
+        type: "separator"
+      }
+      {
+        name: "Production"
+        type: 'value-dynamic'
+        value: "my_value"
+        unit: " MWH"
+        badge: 'my_comparison'
+        slide: 1003
+        precision:
+          my_value: ',.0f'
+          my_comparison: ',.0f'
+        sentiment:
+          my_comparison:
+            domain: [0]
+            range: ['negative','positive']
+        data:
+          my_value:
+            query:
+              domain: "data_reports"
+              report: "<%= report.entityName %>"
+            field: "PROD  cumulé Réalisé 2016 (MWH)"
+          my_comparison:
+            query:
+              domain: "data_reports"
+              report: "<%= report.entityName %>"
+            field: "ECART PROD REEL vs R2 cumulé"
+        comment: "Ecart vs R2 : <%= my_comparison %> MWH"
+        source: "Valeur cumulée en décembre 2016"
+      }
+      {
+        name: "CA"
+        type: 'value-dynamic'
+        value: "my_value"
+        unit: " k€"
+        badge: 'my_comparison'
+        slide: 1003
+        precision:
+          my_value: ',.0f'
+          my_comparison: ',.0f'
+        sentiment:
+          my_comparison:
+            domain: [0]
+            range: ['negative','positive']
+        data:
+          my_value:
+            query:
+              domain: "data_reports"
+              report: "<%= report.entityName %>"
+            field: "CA cumulé réalisé 2016 (K€)"
+          my_comparison:
+            query:
+              domain: "data_reports"
+              report: "<%= report.entityName %>"
+            field: "ECART CA REEL vs R2 cumulé"
+        comment: "Ecart vs R2 : <%= my_comparison %> k€"
+        source: "Valeur cumulée en décembre 2016"
+      }
+    ]
+  }
+  {
+    name: "Benchmark"
+    kpis: [
+      {
+        name: "Disponibilité"
+        type: "bullet"
+        source: "Disponibilité cumulée (Déc 2016)"
+        slide: 1004
+        chartOptions:
+          comparison: "Année N-1"
+          data:
+            query:
+              domain: "data_reports"
+              report: "<%= report.entityName %>"
+            precision:
+              "Réalisée": ".1%"
+              "Année N-1": ".1%"
+              "Théorique": ".1%"
+            postprocess: [
+              rename:
+                columns:
+                  "Disponibilité Réalisée":
+                    fr: "Réalisée"
+                    en: "Réalisée"
+                  dispo_n_1:
+                    fr: "Année N-1"
+                    en: "Année N-1"
+                  dispo_target:
+                    fr: "Théorique"
+                    en: "Théorique"
+            ]
+          sentiment: "Réalisée":
+            domain: [
+              "Année N-1"
+            ]
+            range: [
+              "negative"
+              "positive"
+            ]
+          target: "Théorique"
+          value: "Réalisée"
+      }
+      {
+        name: "Facteur de charge"
+        type: "line"
+        source: "Facteur de charge cumulé (Déc 2016)"
+        slide: 1003
+        chartOptions:
+          date: "mois"
+          value: "facteur_de_charge"
+          data:
+            query:
+              domain: "data_centrales_evolution"
+              Centrale: "<%= report.entityName %>"
+            precision:
+              facteur_de_charge: ".1%"
+            date:
+              selector: "mois"
+              format: "%m"
+      }
+    ]
+  }
+]

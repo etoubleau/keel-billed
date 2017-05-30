@@ -1,0 +1,44 @@
+etl_config:
+  DATA_SOURCES: [
+    domain: "data"
+    type: "excel"
+    file: "edf-en_pilotage-bu.xlsx"
+    sheetname: null
+  ,
+    domain:"executive"
+    type: "excel"
+    file: "executive_comments.xlsx"
+    sheetname: null
+  ]
+  REPORTS: [
+    query:
+      domain: "data_reports"
+      type: $in: ["PAYS", "CENTRALE"]
+    #   type: "country"
+    template: "report_country"
+    # query:
+    #   domain: "data_reports"
+    #   type: "centrale"
+    # template: "report_centrale"
+  ]
+  DASHBOARDS: [
+    query:
+      domain: "data_reports"
+      type: "CENTRALE"
+    report: "report"
+    template: "dashboard_centrale"
+  ,
+    query:
+      domain: "data_reports"
+      type: "PAYS"
+    report: "report"
+    template: "dashboard_pays"
+  ]
+  MAX_SELECTABLE_DASHBOARDS: 500
+  MONGO_INDEXES: [
+    "domain"
+    [
+      "domain"
+      "subdomain"
+    ]
+  ]
