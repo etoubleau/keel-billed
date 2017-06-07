@@ -1,0 +1,209 @@
+(dp1
+Vdefault
+p2
+V{{ my_dashboard_default_column | bool }}
+p3
+sVreport
+p4
+V{{ report_id }}
+p5
+sVentityName
+p6
+V{{ my_dashboard_name_column }}
+p7
+sVid
+p8
+V{{ index }}
+p9
+sVcategories
+p10
+(lp11
+(dp12
+Vkpis
+p13
+(lp14
+(dp15
+Vsource
+p16
+V2016, Toucan Toco
+p17
+sVtype
+p18
+Vvalue
+p19
+sVname
+p20
+VFrom dashboard data
+p21
+sVvalue
+p22
+V{{ value }}
+p23
+sa(dp24
+Vname
+p25
+VFrom other data source
+p26
+sVdata
+p27
+(dp28
+Vvalue
+p29
+(dp30
+Vquery
+p31
+(dp32
+Vdomain
+p33
+Vmy_dashboards_data
+p34
+sVdata_dashboard_name_column
+p35
+V{{ my_dashboard_name_column }}
+p36
+sVreport_period
+p37
+V<%= requestersManager.my_date_selector %>
+p38
+ssVfield
+p39
+Vmetric1
+p40
+sssVprecision
+p41
+(dp42
+Vvalue
+p43
+V.1f
+p44
+ssVvalue
+p45
+Vvalue
+p46
+sVsource
+p47
+V2016, Toucan Toco
+p48
+sVtype
+p49
+Vvalue-dynamic
+p50
+sasVname
+p51
+VDash 2,3,4 Dashboard dependent data
+p52
+sa(dp53
+Vkpis
+p54
+(lp55
+(dp56
+Vname
+p57
+VFrom other data source
+p58
+sVdata
+p59
+(dp60
+Vvalue
+p61
+(dp62
+Vquery
+p63
+(dp64
+Vdomain
+p65
+Vmy_reports_data
+p66
+sVmy_report_name_column
+p67
+V<%= report.entityName %>
+p68
+sVreport_period
+p69
+V<%= requestersManager.my_date_selector %>
+p70
+ssVfield
+p71
+Vmetric2
+p72
+sssVprecision
+p73
+(dp74
+Vvalue
+p75
+V.1f
+p76
+ssVvalue
+p77
+Vvalue
+p78
+sVsource
+p79
+V2016, Toucan Toco
+p80
+sVtype
+p81
+Vvalue-dynamic
+p82
+sasVname
+p83
+VDash 2,3,4 Report dependent data
+p84
+sa(dp85
+Vkpis
+p86
+(lp87
+(dp88
+Vname
+p89
+VFrom other data source
+p90
+sVdata
+p91
+(dp92
+Vvalue
+p93
+(dp94
+Vquery
+p95
+(dp96
+Vdomain
+p97
+Vmy_reports_data
+p98
+sVmy_report_name_column
+p99
+V<%= report.entityName %>
+p100
+sVreport_period
+p101
+V<%= requestersManager.my_date_selector %>
+p102
+ssVfield
+p103
+Vmetric2
+p104
+sssVprecision
+p105
+(dp106
+Vvalue
+p107
+V.1f
+p108
+ssVvalue
+p109
+Vvalue
+p110
+sVsource
+p111
+V2016, Toucan Toco
+p112
+sVtype
+p113
+Vvalue-dynamic
+p114
+sasVname
+p115
+VThis is specific to dash 2,3 and 4!
+p116
+sas.

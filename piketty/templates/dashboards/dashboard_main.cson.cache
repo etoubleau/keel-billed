@@ -1,0 +1,151 @@
+(dp1
+Vdefault
+p2
+I01
+sVreport
+p3
+V{{ report_id }}
+p4
+sVentityName
+p5
+V{{ my_dashboard_name_column }}
+p6
+sVid
+p7
+V{{ index }}
+p8
+sVcategories
+p9
+(lp10
+(dp11
+Vkpis
+p12
+(lp13
+(dp14
+Vsource
+p15
+V2016, Toucan Toco
+p16
+sVtype
+p17
+Vvalue
+p18
+sVname
+p19
+VFrom dashboard data
+p20
+sVvalue
+p21
+V{{ value }}
+p22
+sa(dp23
+Vname
+p24
+VFrom other data source
+p25
+sVdata
+p26
+(dp27
+Vvalue
+p28
+(dp29
+Vquery
+p30
+(dp31
+Vdomain
+p32
+Vmy_dashboards_data
+p33
+sVdata_dashboard_name_column
+p34
+V{{ my_dashboard_name_column }}
+p35
+sVreport_period
+p36
+V<%= requestersManager.my_date_selector %>
+p37
+ssVfield
+p38
+Vmetric1
+p39
+sssVprecision
+p40
+(dp41
+Vvalue
+p42
+V.1f
+p43
+ssVvalue
+p44
+Vvalue
+p45
+sVsource
+p46
+V2016, Toucan Toco
+p47
+sVtype
+p48
+Vvalue-dynamic
+p49
+sasVname
+p50
+VDash 1 Dashboard dependent data
+p51
+sa(dp52
+Vkpis
+p53
+(lp54
+(dp55
+Vname
+p56
+VFrom other data source
+p57
+sVdata
+p58
+(dp59
+Vvalue
+p60
+(dp61
+Vquery
+p62
+(dp63
+Vdomain
+p64
+Vmy_reports_data
+p65
+sVmy_report_name_column
+p66
+V<%= report.entityName %>
+p67
+sVreport_period
+p68
+V<%= requestersManager.my_date_selector %>
+p69
+ssVfield
+p70
+Vmetric2
+p71
+sssVprecision
+p72
+(dp73
+Vvalue
+p74
+V.1f
+p75
+ssVvalue
+p76
+Vvalue
+p77
+sVsource
+p78
+V2016, Toucan Toco
+p79
+sVtype
+p80
+Vvalue-dynamic
+p81
+sasVname
+p82
+VDash 1 Report dependent data
+p83
+sas.
