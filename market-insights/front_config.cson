@@ -387,7 +387,7 @@
 'sharingOptions': true
 'slidePdfEnabled': true
 captureChartEnabled: true
-'offline': 'all'
+'offline': true
 'home': 'skipToReport': 0
 'comments': true
 'settings': 'comparison':
