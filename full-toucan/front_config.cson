@@ -387,6 +387,40 @@ slides: [
   }
   {
     level: 3
+    title: "With dynamic events"
+
+    parent_id: 202
+    datasets:
+      my_events_data:
+        query:
+          domain:'my_events'
+
+    chartOptions:
+      data:
+        query:
+          domain: "<%= report.id %>_32104"
+        date:
+          selector: 'date'
+          format: '%m-%y'
+
+      chartType: "linechart"
+      units:
+        value: "M d'unités"
+        date: "'s sales"
+      events:
+        dataset: 'my_events_data' # id of the dataset
+        date: 'date'
+        label: "label" # column in the dataset that match the values of the linechart series
+        name: 'comment'
+      value: "value"
+      groups: "center"
+      date: "date"
+      legend: true
+
+    id: 3210499
+  }
+  {
+    level: 3
     title: "Business Cycles"
     parent_id: 202
     filters:

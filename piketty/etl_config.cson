@@ -1,0 +1,103 @@
+etl_config:
+    DATA_SOURCES: [
+        domain: "sample_reports"
+        type: "csv"
+        file: "reports.csv"
+    ,
+        domain: "sample_dashboards"
+        type: "csv"
+        file: "dashboards.csv"
+    ,
+        domain: "my_dates_data"
+        type: "csv"
+        file: "my_dates_data.csv"
+    ,
+        domain: "my_reports_data"
+        type: "csv"
+        file: "my_reports_data.csv"
+    ,
+        domain: "my_dashboards_data"
+        type: "csv"
+        file: "my_dashboards_data.csv"
+    ,
+        domain: "slide_data"
+        type: "csv"
+        file: "slide_data.csv"
+    ,
+        domain: "growth-vs-return"
+        type: "HttpAPI"
+        name: "openDataSoft"
+        method: "GET"
+        url: "records/1.0/search/"
+        params:
+          dataset: 'return-to-capital-and-growth-rate-of-the-world-0-2200@public'
+        filter: ".records[].fields"
+    ,
+        domain: "concentration-of-wealth"
+        type: "HttpAPI"
+        name: "openDataSoft"
+        method: "GET"
+        url: "records/1.0/search/"
+        params:
+          dataset: 'concentration-of-wealth-in-europe-and-in-the-usa-1810-2010@public'
+          rows:21
+        filter: ".records[].fields"
+    ,
+        domain: "world-output-distribution"
+        type: "HttpAPI"
+        name: "openDataSoft"
+        method: "GET"
+        url: "records/1.0/search/"
+        params:
+          dataset: 'world-output-distribution1870-2100-estimate@public'
+          rows:24
+        filter: ".records[].fields"
+    ,
+        domain: "private-capital-vs-national-income"
+        type: "HttpAPI"
+        name: "openDataSoft"
+        method: "GET"
+        url: "records/1.0/search/"
+        params:
+          dataset: 'private-capitalnational-income-ratios-in-rich-countries-1970-2010@public'
+          rows:41
+        filter: ".records[].fields"
+    ,
+        domain: "employment-by-sector"
+        type: "HttpAPI"
+        name: "openDataSoft"
+        method: "GET"
+        url: "records/1.0/search/"
+        params:
+          dataset:'employment-by-sector-in-france-and-the-united-states-1800-2012@public'
+        filter: ".records[].fields"
+    ]
+    
+    DATA_PROVIDERS: [
+      name: 'openDataSoft'
+      type: 'HttpAPI'
+      options:
+        baseroute: 'https://data.opendatasoft.com/api/'
+    ]
+    
+    REPORTS: [
+      query:
+        domain: "sample_reports"
+      template: "report"
+    ]
+    
+    DASHBOARDS: [
+      #usual data query that should return the elements for which you want a synthesis 
+      query:
+        #which domain contains the dashboards I want to apply the below template?
+        domain: "sample_dashboards"
+      report: "my_report_name_column"#column that contain the dashboard corresponding report name
+      #file_name.cson which contain the template to use for the elements of the query
+      #This file.cson shall be located inside template > dashboards > file.cson
+      template: "dashboard1"
+    ]
+
+    MAX_SELECTABLE_DASHBOARDS: 500 
+    MONGO_INDEXES: [
+      "domain"
+    ]

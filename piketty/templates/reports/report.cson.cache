@@ -1,0 +1,32 @@
+(dp1
+Vname
+p2
+VToucan Toco's report
+p3
+sVentityName
+p4
+V{{ my_report_name_column }}
+p5
+sVexecsumNote
+p6
+V* Crafted with <strong><3</strong> by the Toucan Team
+p7
+sVid
+p8
+V{{ index }}
+p9
+sVbackground
+p10
+(dp11
+VassetName
+p12
+Vmy_background_img
+p13
+sVoverlay
+p14
+I01
+ssVexecsumTitle
+p15
+VPiketty visualized
+p16
+s.

@@ -784,3 +784,4 @@ slides: [
         order: custom: ["Installée", "En construction"]
   }
 ]
+offline: true

@@ -819,3 +819,4 @@ captureChartEnabled: true
 'comments': true
 'sharingOptions': true
 'slidePdfEnabled': true
+offline: true

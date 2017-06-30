@@ -207,6 +207,10 @@ DATA_SOURCES: [
     domain: "barlines_lines"
     type: "csv"
     file: "barlines_lines.csv"
+,
+    domain: "my_events"
+    type: "csv"
+    file: "my_events.csv"
 ]
 DATA_PROVIDERS: [
   # name: "Some cube"

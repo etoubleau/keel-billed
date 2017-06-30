@@ -27,7 +27,7 @@ tutorial:
   slides: [
     {
       explanation: "Tap here to select another date (week, month,...)"
-      asset:
+      assets:
         phone: "drillable-dashboard"
         tablet: "tab"
         desktop: "1920x1080"
@@ -35,7 +35,7 @@ tutorial:
     }
     {
       explanation: "Expand categories by tapping them"
-      asset:
+      assets:
         phone: "drillable-dashboard"
         tablet: "tab"
         desktop: "1920x1080"
@@ -43,14 +43,14 @@ tutorial:
     }
     {
       explanation: "Explore menu by clicking into the hamburger"
-      asset:
+      assets:
         phone: "drillable-dashboard"
         tablet: "tab"
         desktop: "1920x1080"
       title: "Menu"
     }
   ]
-  id: 1
+  version: 1
 
 slides: [
   {
@@ -421,3 +421,4 @@ slides: [
   }
 
 ]
+offline: true

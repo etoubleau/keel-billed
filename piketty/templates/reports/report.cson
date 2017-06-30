@@ -1,0 +1,12 @@
+name: "Toucan Toco's report"
+entityName: "{{ my_report_name_column }}"#column of the report data containing the reports names
+
+background:
+  assetName: "my_background_img"
+  overlay: true
+
+execsumTitle: "Piketty visualized"#dynamic title
+execsumNote: "* Crafted with <strong><3</strong> by the Toucan Team"#footnote
+
+#do not change this parameter!!
+id: "{{ index }}"
