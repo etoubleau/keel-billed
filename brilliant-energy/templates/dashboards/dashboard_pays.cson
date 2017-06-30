@@ -1,282 +1,283 @@
-
 default: true
-entityName: '{{ report }}'
-report: '{{ report_id }}'
-entityGroup: '{{ techno_zone }}'
-id: '{{ index }}'
-execsumTitle: 'Rapport National'
+entityName: "{{ report }}"
+entityGroup: "{{ techno_zone }}"
+id: "{{ index }}"
+report: "{{ report_id }}"
+execsumTitle: "Rapport National"
 categories: [
   {
-    name: "Overview National"
     kpis: [
       {
-        name: "CA cumulé réalisé 2016"
-        type: 'value-dynamic'
-        slide: 1001
-        value: "CA"
-        badge: "evol"
         comment: "<%= evol %>% vs l'année N-1"
+        name: "CA cumulé réalisé 2017"
         sentiment:
           evol:
-            domain:[0]
-            range:['negative','positive']
-        data:
-          CA:
-            query:
-              domain: "data_kpis_pays"
-              pays: "<%= report.entityName%>"
-              kpi: $in: [
-                "CA cumulé réalisé 2016",
-              ]
-            field: "value"
-          evol:
-            query:
-              domain: "data_kpis_pays"
-              pays: "<%= report.entityName%>"
-              kpi: $in: [
-                "CA cumulé réalisé 2016",
-              ]
-            field: "evol"
+            domain: [
+              0
+            ]
+            range: [
+              "negative"
+              "positive"
+            ]
+        badge: "evol"
         precision:
           CA: ",.0f"
           evol: "+0.0f"
+        value: "CA"
+        slide: 1001
+        type: "value-dynamic"
+        data:
+          CA:
+            query:
+              pays: "<%= report.entityName%>"
+              domain: "data_kpis_pays"
+              kpi:
+                $in: [
+                  "CA cumulé réalisé 2016"
+                ]
+            field: "value"
+          evol:
+            query:
+              pays: "<%= report.entityName%>"
+              domain: "data_kpis_pays"
+              kpi:
+                $in: [
+                  "CA cumulé réalisé 2016"
+                ]
+            field: "evol"
         unit: "k€"
-
       }
       {
-        type: "media-img"
-        src: "maison.jpg"
+        type: "media-video"
+        provider: "youtube"
+        id: "v6ZNDQ80ELE"
       }
       {
-        name: "Flash Report"
-        type: "text-dynamic"
+        content: "comments"
         data:
           query:
-            domain: "data_executive_comments"
             report: "<%= report.entityName %>"
-        content: "comments"
-
+            domain: "data_executive_comments"
+        type: "text-dynamic"
+        name: "Flash Report"
       }
       {
         type: "separator"
       }
       {
+        type: "score-card"
         name: "KPIs Production"
-        type: 'score-card'
-        slide: 1002
         chartOptions:
-          value: "value"
+          sentiment:
+            evol:
+              domain: [
+                0
+              ]
+              range: [
+                "negative"
+                "positive"
+              ]
           variation: "evol"
           label: "kpi"
           limit: 6
-          sentiment:
-            evol:
-              domain:[0]
-              range:['negative','positive']
+          value: "value"
+          units:
+            evol: "evol_unit"
+            value: "unit"
           data:
             query:
-              domain: "data_kpis_pays"
               pays: "<%= report.entityName%>"
-              kpi: $in: [
-                "Production cumulée Réalisé 2016",
-                "Capacité totale installée 2016"
-              ]
+              domain: "data_kpis_pays"
+              kpi:
+                $in: [
+                  "Production cumulée Réalisé 2017"
+                  "Capacité totale installée 2017"
+                ]
             precision:
               value: "precision"
-          units:
-            value: "unit"
-            evol: "evol_unit"
-
       }
       {
         type: "separator"
       }
       {
-        name: "Turnover Personnel"
-        type: 'value-dynamic'
-        value: "my_value"
-        badge: 'my_comparison'
-        source: "Données à fiabiliser"
-        slide: 1006
-        precision:
-          my_value: '.1%'
-          my_comparison: '.1f'
-        # sentiment:
-        #   my_comparison:
-        #     domain: [0]
-        #     range: ['positive','negative']
-        units:
-          my_comparison: " pt"
-        data:
-          my_value:
-            query:
-              domain: "data_kpis_pays"
-              pays: "<%= report.entityName %>"
-              kpi: $in: ["Turnover"]
-            field: "value"
-          my_comparison:
-            query:
-              domain: "data_kpis_pays"
-              pays: "<%= report.entityName %>"
-              kpi: $in: ["Turnover"]
-            field: "evol"
-        comment: "Evolution vs Année N-1"
-      }
-      {
+        comment: "Taux de projets abandonnés"
         name: "Turnover Projets"
-        type: 'value-dynamic'
-        value: "my_value"
-        badge: 'my_evol'
-        source: "Données à fiabiliser"
-        slide: 1009
-        precision:
-          my_value: '.1%'
-          my_evol: '.0f'
         sentiment:
           my_evol:
-            domain: [0]
-            range: ['negative','positive']
+            domain: [
+              0
+            ]
+            range: [
+              "negative"
+              "positive"
+            ]
+        badge: "my_evol"
+        precision:
+          my_value: ".1%"
+          my_evol: ".0f"
+        value: "my_value"
+        source: "Données à fiabiliser"
+        type: "value-dynamic"
         data:
           my_value:
             query:
-              domain: "data_kpis_pays"
               pays: "<%= report.entityName %>"
-              kpi: $in: ["Taux Projets Abandonnés"]
+              domain: "data_kpis_pays"
+              kpi:
+                $in: [
+                  "Taux Projets Abandonnés"
+                ]
             field: "value"
           my_evol:
             query:
-              domain: "data_kpis_pays"
               pays: "<%= report.entityName %>"
-              kpi: $in: ["Taux Projets Abandonnés"]
+              domain: "data_kpis_pays"
+              kpi:
+                $in: [
+                  "Taux Projets Abandonnés"
+                ]
             field: "evol"
-        comment: "Taux de projets abandonnés"
       }
       {
-        name: "Avancement des projets clés"
-        type: 'heatmap'
-        #source: ""
         slide: 1008
+        type: "heatmap"
+        name: "Avancement des projets clés"
         chartOptions:
-          x: "Phase"
-          xOrder: ["Prospection", "Dev A", "Dev B", "Authorized", "Construction", "Abandoned"]
-          y: "Parks"
-          value: "NB de jours passés"
           target: "Délai souhaité"
           sentiment:
             sentiment:
-              domain: [-0.5,0.5, 10000]
-              range: ["warning", "neutral", "positive", "negative"]
+              domain: [
+                -0.5
+                0.5
+                10000
+              ]
+              range: [
+                "warning"
+                "neutral"
+                "positive"
+                "negative"
+              ]
+          value: "NB de jours passés"
+          xOrder: [
+            "Prospection"
+            "Developpement"
+            "Autorisation"
+            "Construction"
+          ]
+          y: "Parks"
+          x: "Phase"
           data:
             query: [
-              $match:
-                domain: "data_pipeline_projets_2016"
-            ,
-              $sort: "Gross capacity (MW)": -1
-            ,
-              $limit: 18
-            ,
-              $match:
-                "NB de jours passés": $nin: [null]
+              {
+                $match:
+                  domain: "data_pipeline_projets_2016"
+                  Parks: $in: ['Rang', 'Rives', 'Aibre', 'Chaffois', 'Grosbois']
+              }
+              {
+                $sort:
+                  "Gross capacity (MW)": -1
+              }
+              {
+                $limit: 20
+              }
+              {
+                $match:
+                  "NB de jours passés":
+                    $nin: [
+                      null
+                    ]
+              }
             ]
       }
     ]
+    name: "Overview National"
   }
   {
-    name: "Benchmark"
     kpis: [
       {
-        name: "<span class='text-top-color'>Top 3 EOLIEN performances</span>"
+        source: "Facteur de charge cumulé (Mai 2017)"
         type: "leaderboard"
-        source: "Facteur de charge cumulé (Déc 2016)"
-        slide: 10011
+        name: "<span class='text-top-color'>Top 3 EOLIEN performances</span>"
         chartOptions:
-          value: "facteur_de_charge"
-          label: "report"
-          #domain: [0, 250]
           sort: "desc"
+          variation: "evol_fc"
+          label: "report"
+          value: "facteur_de_charge"
+          units:
+            evol_fc: " pt"
           data:
             query:
               domain: "data_reports"
-              type: "CENTRALE"
               techno: "EOLIEN"
+              type: "CENTRALE"
             precision:
-              facteur_de_charge: ".1%"
               evol_fc: "0f"
-          units:
-            evol_fc: "pt"
-          variation: "evol_fc"
-
+              facteur_de_charge: ".1%"
       }
       {
-        name: "<span class='text-top-color'>Top 3 SOLAIRE performances</span>"
+        source: "Facteur de charge cumulé (Mai 2017)"
         type: "leaderboard"
-        source: "Facteur de charge cumulé (Déc 2016)"
-        slide: 10011
+        name: "<span class='text-top-color'>Top 3 SOLAIRE performances</span>"
         chartOptions:
-          value: "facteur_de_charge"
-          label: "report"
-          #domain: [0, 250]
           sort: "desc"
+          variation: "evol_fc"
+          label: "report"
+          value: "facteur_de_charge"
+          units:
+            evol_fc: " pt"
           data:
             query:
               domain: "data_reports"
-              type: "CENTRALE"
               techno: "SOLAIRE"
+              type: "CENTRALE"
             precision:
-              facteur_de_charge: ".1%"
               evol_fc: "0f"
-          units:
-            evol_fc: "pt"
-          variation: "evol_fc"
-
+              facteur_de_charge: ".1%"
       }
       {
         type: "separator"
       }
       {
-        name: "<span class='text-flop-color'>Flop 3 EOLIEN performances</span>"
+        source: "Facteur de charge cumulé (Mai 2017)"
         type: "leaderboard"
-        source: "Facteur de charge cumulé (Déc 2016)"
-        slide: 10011
+        name: "<span class='text-flop-color'>Flop 3 EOLIEN performances</span>"
         chartOptions:
-          value: "facteur_de_charge"
-          label: "report"
-          #domain: [0, 250]
           sort: "asc"
+          variation: "evol_fc"
+          label: "report"
+          value: "facteur_de_charge"
+          units:
+            evol_fc: " pt"
           data:
             query:
               domain: "data_reports"
-              type: "CENTRALE"
               techno: "EOLIEN"
+              type: "CENTRALE"
             precision:
-              facteur_de_charge: ".1%"
               evol_fc: "0f"
-          units:
-            evol_fc: "pt"
-          variation: "evol_fc"
+              facteur_de_charge: ".1%"
       }
       {
-        name: "<span class='text-flop-color'>Flop 3 SOLAIRE performances</span>"
+        source: "Facteur de charge cumulé (Mai 2017)"
         type: "leaderboard"
-        source: "Facteur de charge cumulé (Déc 2016)"
-        slide: 10011
+        name: "<span class='text-flop-color'>Flop 3 SOLAIRE performances</span>"
         chartOptions:
-          value: "facteur_de_charge"
-          label: "report"
-          #domain: [0, 250]
           sort: "asc"
+          variation: "evol_fc"
+          label: "report"
+          value: "facteur_de_charge"
+          units:
+            evol_fc: " pt"
           data:
             query:
               domain: "data_reports"
-              type: "CENTRALE"
               techno: "SOLAIRE"
+              type: "CENTRALE"
             precision:
-              facteur_de_charge: ".1%"
               evol_fc: "0f"
-          units:
-            evol_fc: "pt"
-          variation: "evol_fc"
+              facteur_de_charge: ".1%"
       }
     ]
+    name: "Benchmark"
   }
 ]

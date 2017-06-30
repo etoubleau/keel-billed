@@ -1,18 +1,5 @@
 settings: true
-sharingOptions: true
-slidePdfEnabled: true
-  # comparison:
-  #   description: "Sur tous les écrans de comparaison, comparer avec :"
-  #   values: [
-  #     "Par défaut"
-  #     "Entity A"
-  #     "Entity B"
-  #     "Entity C"
-  #   ]
-  #   default: "Par défaut"
-
 glossary:
-  title: "Glossaire"
   terms: [
     {
       term: "Capacité installée"
@@ -20,8 +7,7 @@ glossary:
     }
     {
       term: "Facteur de charge"
-      meaning: "Rapport entre la production réalisée" +
-        "et l'énergie qui aurait été produite en puissance nominale"
+      meaning: "Rapport entre la production réaliséeet l'énergie qui aurait été produite en puissance nominale"
     }
     {
       term: "Disponibilité théorique"
@@ -31,729 +17,474 @@ glossary:
       term: "Disponibilité réalisée"
       meaning: "Sur une période donnée : la fraction du temps passé en production"
     }
-]
-
-sharingOptions: true
+  ]
+  title: "Glossaire"
+embedCharts: true
 comments: true
-
-home:
-  skipToReport: 0
-
 slides: [
   {
-    level: 0
     id: 0
+    level: 0
   }
   {
     level: 1
-    title: "Production"
     id: 10
+    title: "Production"
   }
   {
     level: 1
-    title: "Développement"
-    id: 20
-    restrictVisibility:
-      reportEntry: "entityType"
-      allowedReports: ["PAYS"]
-  }
-  {
-    level: 1
-    title: "RH"
     id: 30
     restrictVisibility:
       reportEntry: "entityType"
-      allowedReports: ["PAYS"]
-  }
-  {
-    level: 3
-    id: 1002
-    parent_id: 10
-    title: "Analyse de la performance des centrales"
-    recommendation:
-      advert: "INFO"
-      content: "Pour voir les détails choisissez " +
-        "la centrale souhaitée en haut à droite"
-    restrictVisibility:
-      reportEntry: "entityType"
-      allowedReports: ["PAYS"]
-    filters:
-      "bottom-right":
-        on: "techno"
-        type: "buttons"
-        order:
-          custom: [
-            "TOTAL (TOUTES TECHNOS)",
-            "EOLIEN",
-            "SOLAIRE"
-          ]
-    chartOptions:
-      data:
-        query:
-          domain: "data_bubble_performance"
-        precision:
-          "Facteur de charge": ".0%"
-          "Disponibilité": ".0%"
-          "Capacité installée": ".1f"
-        postprocess: [
-          rename:
-            columns:
-              "perf":
-                fr: "Performance"
-                en: "Performance"
-              "facteur_de_charge":
-                fr: "Facteur de charge"
-                en: "Facteur de charge"
-              "dispo_realisee":
-                fr: "Disponibilité"
-                en: "Disponibilité"
-          ]
-      chartType: "bubblechart"
-      label: "centrale"
-      cx: "Facteur de charge"
-      cy: "Disponibilité"
-      r: "Capacité installée"
-      chartCtrl: {}
-      units:
-        "r": " MW"
-      drill:
-        levelsOrder: [ "main", "sub" ]
-        group: "region"
-        level: "drillLevel"
-      xDomain: [0.06, 0.49]
-      yDomain: [0.89, 1]
-      #rDomain: [0, 80]
-      quadrants:
-        x: 0.22
-        y: 0.94
-        labels: ['','Q2;','Q3','']
-        sentiments: ['neutral','positive','negative','warning']
-  }
-  {
-    title: "Suivi des performances"
-
-    source: "Facteur de charge cumulé (Déc 2016)"
-    id: 10011
-    parent_id: 10
-    restrictVisibility:
-      reportEntry: "entityType"
-      allowedReports: ["PAYS"]
-
-
-    filters:
-      "bottom-right":
-        type: "buttons"
-        on: "Techno"
-        datasets: [0,1]
-    charts: [
-      {
-        chartType: "linechart"
-        value: "Disponibilité"
-        date: "mois"
-        size: 0.4
-        data:
-          query:
-            domain: "data_centrales_evolution"
-            Centrale: $in: ["Moyenne EOLIEN", "Moyenne SOLAIRE"]
-            dispo_dyn_fake: $nin: [null, 0]
-          date:
-            selector: "mois"
-            format: "%m"
-          precision:
-            "Disponibilité": ".1%"
-          #   "Disponibilité": ".0%"
-          postprocess: [
-            rename:
-              columns:
-                dispo_dyn_fake:
-                  fr: "Disponibilité"
-                  en: "Disponibilité"
-
-          ]
-        legend: true
-        crossfilter:
-          on: "mois"
-          datasets: [1]
-        id: 0
-      }
-      {
-        chartType: "leaderboardCenteredAverage"
-        value: "Disponibilité"
-        label: "Centrale"
-        average:
-          values: [
-            value: 0.97
-          ]
-          precision: ".1%"
-        #domain: [0, 250]
-        sorter:
-          default: "Disponibilité"
-          legend: "Ordonner par"
-          values: [
-            label: "Disponibilité"
-            sort:
-              by: "Disponibilité"
-              order: "desc"
-          ]
-        data:
-          query:
-            domain: "data_centrales_evolution"
-            Techno: $nin: ["TOUTES"]
-            dispo_dyn_fake: $nin: [null, 0]
-          date:
-            selector: "mois"
-            format: "%m"
-          precision:
-            "Disponibilité": ".1%"
-          #   "Disponibilité": ".0%"
-          postprocess: [
-            rename:
-              columns:
-                dispo_dyn_fake:
-                  fr: "Disponibilité"
-                  en: "Disponibilité"
-          ]
-        id: 1
-      }
-    ]
-  }
-  {
-    level: 3
-    title: "CA <br>vs<br>Estimation R2"
-    id: 1001
-    parent_id: 10
-    restrictVisibility:
-      reportEntry: "entityType"
-      allowedReports: ["PAYS"]
-
-    filters:
-      "bottom-right":
-        on: "techno"
-        type: "buttons"
-    chartOptions:
-      data:
-        query:
-          domain: "data_waterfall-CA-vs-R2"
-          pays: "France"
-        precision:
-          value: ".1f"
-      units:
-        value: " M€"
-      meta: "meta_MW"
-      chartType:"waterfallchart"
-      label: "label"
-      groups: "drill-group"
-      groupsOrder: [
-        "Total (toutes technos)"
-        "EOLIEN"
-        "SOLAIRE"
+      allowedReports: [
+        "PAYS"
       ]
-      type: "drill-level"
-
-      value: "value"
-
-      chartCtrl: {}
-      #zeroBaseline: 85
+    title: "Consommation"
+  }
+  {
+    level: 1
+    id: 20
+    restrictVisibility:
+      reportEntry: "entityType"
+      allowedReports: [
+        "PAYS"
+      ]
+    title: "Développement"
+  }
+  {
+    level: 1
+    id: 403
+    title: "Satisfaction Client"
   }
   {
     level: 3
     title: "Budget <br>vs<br>Réalisé"
-    id: 10010
-    parent_id: 10
     restrictVisibility:
       reportEntry: "entityType"
-      allowedReports: ["PAYS"]
-
+      allowedReports: [
+        "PAYS"
+      ]
+    parent_id: 10
     filters:
       "bottom-right":
         on: "techno"
         type: "buttons"
+    id: 10010
     chartOptions:
+      type: "drill-level"
+      value: "value"
+      label: "label"
+      chartCtrl: {}
+      groups: "drill-group"
+      units:
+        value: " M€"
+      chartType: "waterfallchart"
       data:
         query:
           domain: "data_waterfall-budget"
         precision:
           value: ".1f"
-      units:
-        value: " M€"
-      chartType:"waterfallchart"
-      label: "label"
-      groups: "drill-group"
-      # groupsOrder: [
-      #   "Total (toutes technos)"
-      #   "EOLIEN"
-      #   "SOLAIRE"
-      # ]
-      type: "drill-level"
-
-      value: "value"
-
-      chartCtrl: {}
-      #zeroBaseline: 85
   }
   {
+    highlightedKpis: [
+      {
+        comment: "Moyenne de la disponibilité réalisée sur l'année"
+        name: "Disponibilité cumulée"
+        sentiment:
+          dispo:
+            domain: [
+              0.95
+            ]
+            range: [
+              "negative"
+              "positive"
+            ]
+        precision:
+          dispo: ".1%"
+        value: "dispo"
+        data:
+          dispo:
+            query:
+              report: "<%= report.entityName %>"
+              domain: "data_reports"
+            precision:
+              "Disponibilité Réalisée": ".1%"
+            field: "Disponibilité Réalisée"
+      }
+    ]
     level: 3
-    id: 1003
-    parent_id: 10
     title: "Evolution des indicateurs par Centrale"
-    commentary: "Comment ont évolué mes indicateurs cette année ?"
-    recommendation:
-      advert: "INFO"
-      content: "L'indicateur peut être modifié à l'aide des boutons en bas de l'écran"
     restrictVisibility:
       reportEntry: "entityType"
-      allowedReports: ["CENTRALE"]
-    highlightedKpis: [
-      name: "Disponibilité cumulée"
-      value: "dispo" #reference where the value to be shown was stored
-      #badge: 'dispo' #reference of the value used to select the badge. Can also take the static value "bullet"
-      comment: "Moyenne de la disponibilité réalisée sur l\'année"
-      sentiment: #select color of KPI and badge, see the docs on sentiment
-        dispo:
-          domain: [0.95]
-          range: ['negative','positive']
-      precision:
-        dispo: ".1%"
-      data:
-        dispo:
-          query:
-            domain: "data_reports"
-            report: "<%= report.entityName %>"
-          precision:
-            "Disponibilité Réalisée" : ".1%"
-          field: "Disponibilité Réalisée"
-    ]
+      allowedReports: [
+        "CENTRALE"
+      ]
+    parent_id: 10
     filters:
       "bottom-right":
         on: "variable"
         type: "buttons"
+    recommendation:
+      advert: "INFO"
+      content: "L'indicateur peut être modifié à l'aide des boutons en bas de l'écran"
+    commentary: "Comment ont évolué mes indicateurs cette année ?"
+    id: 1003
     chartOptions:
-      data:
-        query:
-          domain: "data_centrales_evolution"
-          Centrale: "<%= report.entityName %>"
-        precision:
-          value: [
-            precision: ".1f"
-            where:
-              variable: "Prix MWh (€)"
-          ,
-            precision: ".1%"
-            where:
-              variable: "Facteur de charge"
-          ]
-        date:
-          selector: "mois"
-          format: "%m"
-        # precision:
-        #   "Facteur de charge": ".0%"
-        # #   "Disponibilité": ".0%"
-        postprocess: [
-          melt:
-            id: ["mois"]
-            value: ["Production (MWH)", "CA (k€)", "Facteur de charge",
-              "Prix MWh (€)"]
-        ]
-      units:
-        value: [
-          unit: " MHW"
-          where:
-            variable: "Production (MWH)"
-        ,
-          unit: " k€"
-          where:
-            variable: "CA (k€)"
-        ,
-          unit: " €"
-          where:
-            variable: "Prix MWh (€)"
-        ]
-
+      value: "value"
       events: [
         {
           date: "8"
           name: "Pic de production d'août"
         }
-      ,
         {
           date: "11"
           name: "Pic de production de novembre"
         }
       ]
-
-      chartType: "linechart"
-      value: "value"
+      units:
+        value: [
+          {
+            where:
+              variable: "Production (MWH)"
+            unit: " MHW"
+          }
+          {
+            where:
+              variable: "CA (k€)"
+            unit: " k€"
+          }
+          {
+            where:
+              variable: "Prix MWh (€)"
+            unit: " €"
+          }
+        ]
       date: "mois"
+      chartType: "linechart"
+      data:
+        date:
+          selector: "mois"
+          format: "%m"
+        query:
+          domain: "data_centrales_evolution"
+          Centrale: "<%= report.entityName %>"
+        precision:
+          value: [
+            {
+              where:
+                variable: "Prix MWh (€)"
+              precision: ".1f"
+            }
+            {
+              where:
+                variable: "Facteur de charge"
+              precision: ".1%"
+            }
+          ]
+        postprocess: [
+          {
+            melt:
+              id: [
+                "mois"
+              ]
+              value: [
+                "Production (MWH)"
+                "CA (k€)"
+                "Facteur de charge"
+                "Prix MWh (€)"
+              ]
+          }
+        ]
       legend: true
   }
   {
     level: 3
-    id: 1004
-    parent_id: 10
     title: "Disponibilité au long de l'année"
-    commentary: 'Quand la <b><em><span class="legend-text-line">' +
-     ' Disponibilité</span></em></b> dépasse les seuils définis ?'
-    recommendation:
-      advert: "ATTENTION !"
-      content: "La Disponibilité ici est une simple remise en échelle de " +
-        "du Facteur de charge (données non réalistes)"
     restrictVisibility:
       reportEntry: "entityType"
-      allowedReports: ["CENTRALE"]
-    # filters:
-    #   "bottom-right":
-    #     on: "variable"
-    #     type: "buttons"
-
+      allowedReports: [
+        "CENTRALE"
+      ]
+    parent_id: 10
+    recommendation:
+      advert: "ATTENTION !"
+      content: "La Disponibilité ici est une simple remise en échelle de du Facteur de charge (données non réalistes)"
+    commentary: "Quand la <b><em><span class=\"legend-text-line\"> Disponibilité</span></em></b> dépasse les seuils définis ?"
+    id: 1004
     chartOptions:
+      sentimentZones: [
+        {
+          domain: [
+            0
+            0.95
+          ]
+          sentiment: "negative"
+          label:
+            text: "En dessous du seuil minimal de disponibilité"
+            position: "top"
+        }
+        {
+          domain: [
+            0.99
+            1
+          ]
+          sentiment: "positive"
+          label:
+            text: "Haute disponibilité"
+            position: "top"
+        }
+      ]
+      value: "Disponibilité"
+      groups: "Centrale"
+      date: "mois"
+      chartType: "linechart"
       data:
+        date:
+          selector: "mois"
+          format: "%m"
         query:
           domain: "data_centrales_evolution"
           Centrale:
             $in: [
-              "<%= report.entityName %>",
+              "<%= report.entityName %>"
               "Moyenne <%= report.entityTechno %>"
             ]
-        date:
-          selector: "mois"
-          format: "%m"
         precision:
           "Disponibilité": ".0%"
-        #   "Disponibilité": ".0%"
         postprocess: [
-          rename:
-            columns:
-              dispo_dyn_fake:
-                fr: "Disponibilité"
-                en: "Disponibilité"
+          {
+            rename:
+              columns:
+                dispo_dyn_fake:
+                  fr: "Disponibilité"
+                  en: "Disponibilité"
+          }
         ]
-      groups: "Centrale"
-      sentimentZones: [
-        domain: [0, 0.95] #you can also use 'Infinity'
-        label:
-          text: 'En dessous du seuil minimal de disponibilité'
-          position: 'top' # or top = where I want to display the legend
-        sentiment: 'negative' # or any sentiment that have color: positive, warning or neutral
-      ,
-        domain: [0.99, 1] #you can also use 'Infinity'
-        label:
-          text: 'Haute disponibilité'
-          position: 'top' # or top = where I want to display the legend
-        sentiment: 'positive' # or any sentiment that have color: positive, warning or neutral
+      legend: true
+  }
+  {
+    title: "Consommation"
+    level: 3
+    restrictVisibility:
+      reportEntry: "entityType"
+      allowedReports: [
+        "PAYS"
       ]
-      #zeroBaseline: 0.93
-      # xTicksLimit: 12
-      # hideXTickLimits:true
-      chartType: "linechart"
-      value: "Disponibilité"
-      date: "mois"
-      legend: true
-  }
-  {
-    title: "Repartition du Turnover"
-
-    level: 3
-    id: 1006
     parent_id: 30
-    restrictVisibility:
-      reportEntry: "entityType"
-      allowedReports: ["PAYS"]
     filters:
       "bottom-right":
-        on: "type_filtre"
+        on: "dimension"
         type: "buttons"
-    chartOptions:
-      data:
-        query:
-          domain: "data_effectifs"
-        precision:
-          Turnover_100: ".1f"
-          "Total ETP": ".1f"
-      chartType: "horizontalBarchart"
-      value: "Turnover_100"
-      label: "label"
-      units:
-        Turnover_100: "%"
-      # packs: "pack"
-      # packNames: true
-      #sort: "desc"
-      # average: 2
-      legend: true
-      meta: ["Total ETP"]
-      rank: false
-      # sparklines:
-      #   data:
-      #     file:
-      #       name: "leaderboard_sparklines"
-      #   joins: ["label"]
-      #   value: "Value"
-      #   date: "Date"
-      #   legend: "Legend<br>sparkline"
-      #   unit:
-      #     Value: "%"
-      showAverage: true
-      average:
-        data:
-          query:
-            domain: "data_kpis_pays"
-            kpi: $in: ["Turnover_100"]
-          precision:
-            value: ".1f"
-        value: "value"
-      #hideAverageBox: true
-
-      # sorter:
-      #   default: "value"
-      #   legend: "Sort by"
-      #   values: [
-      #     label: "label"
-      #     sort:
-      #       by: "label"
-      #       order: "asc"
-      #  ]
-  }
-  {
-    title: "Repartition des effectifs"
-
-    level: 3
+        order:
+          custom: [
+            "Volume"
+            "Performance"
+          ]
     id: 1007
-    parent_id: 30
-    restrictVisibility:
-      reportEntry: "entityType"
-      allowedReports: ["PAYS"]
-    filters:
-      "bottom-right":
-        on: "type_filtre"
-        type: "buttons"
     chartOptions:
+      sort: "desc"
+      groupsOrder: [
+        "Pétrole"
+        "Gaz"
+        "Électricité"
+        "Autres"
+      ]
+      value: "value"
+      label: "entityName"
+      groups: "energy"
+      units:
+        value: [
+          {
+            where:
+              dimension: "Volume"
+            unit: " GWh"
+          }
+          {
+            where:
+              dimension: "Performance"
+            unit: " kWh/m²"
+          }
+        ]
+      chartType: "stackedBarchart"
       data:
         query:
-          domain: "data_effectifs"
+          domain: "tertiaire"
+          measure: "Consommation"
         precision:
           valeur_ETP: ".1f"
-      chartType: "horizontalBarchart"
-      value: "valeur_ETP"
-      units:
-        valeur_ETP: " ETP"
-      label: "label"
-      #average: 0.5
-      # packs: "pack"
-      # packNames: true
-      sort: "desc"
-      # average: 2
-      rank: false
-      # sparklines:
-      #   data:
-      #     file:
-      #       name: "leaderboard_sparklines"
-      #   joins: ["label"]
-      #   value: "Value"
-      #   date: "Date"
-      #   legend: "Legend<br>sparkline"
-      #   unit:
-      #     Value: "%"
-      #showAverage: true
-      # sorter:
-      #   default: "value"
-      #   legend: "Sort by"
-      #   values: [
-      #     label: "label"
-      #     sort:
-      #       by: "label"
-      #       order: "asc"
-      #  ]
+      legend: true
   }
   {
-    title: "Pipeline Overview"
-
+    highlightedKpis: [
+      {
+        comment: "dans le pipeline"
+        name: "Projets"
+        badge: "bullet"
+        precision:
+          projets: ".0f"
+        value: "projets"
+        data:
+          projets:
+            query:
+              kpi:
+                $in: [
+                  "Projets Pipe"
+                ]
+              domain: "data_kpis_pays"
+            field: "value"
+      }
+      {
+        name: "Abandonnés"
+        sentiment:
+          evol:
+            domain: [
+              0
+            ]
+            range: [
+              "negative"
+              "positive"
+            ]
+        badge: "evol"
+        precision:
+          projets: ".0f"
+        value: "abandon"
+        data:
+          abandon:
+            query:
+              kpi:
+                $in: [
+                  "Projets Abandonnés"
+                ]
+              domain: "data_kpis_pays"
+            field: "value"
+          evol:
+            query:
+              kpi:
+                $in: [
+                  "Projets Abandonnés"
+                ]
+              domain: "data_kpis_pays"
+            field: "evol"
+      }
+    ]
+    title: "Pipeline des Projets"
     level: 3
-    id: 1009
-    parent_id: 20
     restrictVisibility:
       reportEntry: "entityType"
-      allowedReports: ["PAYS"]
-    filters:
-      "bottom-right":
-        on: "type_filtre"
-        type: "buttons"
-    chartOptions:
-      data:
-        query:
-          domain: "data_pipeline_overview"
-        precision:
-          count: [
-            precision: ".0f"
-            where:
-              pres_filtre: "NB"
-          ,
-            precision: ".1%"
-            where:
-              pres_filtre: "%"
-          ]
-      chartType: "barchart"
-      value: "count"
-      label: "status"
-      filters:
-        "upper-middle":
-          on: "pres_filtre"
-          type: "buttons"
-      groups: "groupe"
-      legend: true
-      labelsOrder: [
-        "Prospection",
-        "Dev Phase A",
-        "Dev Phase B",
-        "Authorized",
-        "Construction",
-        "Abandoned"
+      allowedReports: [
+        "PAYS"
       ]
-
-  }
-  {
-    title: 'Pipeline des Projets'
-    level: 3
-    id: 1008
     parent_id: 20
     recommendation:
       advert: "INFO Données"
-      content: "Les valeurs affichées correspondent au " +
-        "nombre de jours passés dans la phase du projet " +
-        "de la colonne correspodante."
-    restrictVisibility:
-      reportEntry: "entityType"
-      allowedReports: ["PAYS"]
+      content: """Les valeurs affichées correspondent au nombre de jours passés dans la phase du projet de la colonne correspodante.
+        <hr>
+        <div style='text-align:center'>
+        <iframe src='https://www.youtube.com/embed/v6ZNDQ80ELE' width='240' height='135' frameborder='0' webkitallowfullscreen mozallowfullscreen allowfullscreen>
+        ok</iframe>
+        </div>
+      """
+    id: 1008
     chartOptions:
+      target: "Délai souhaité"
+      sentiment:
+        sentiment:
+          domain: [
+            -0.5
+            0.5
+            10000
+          ]
+          range: [
+            "warning"
+            "neutral"
+            "positive"
+            "negative"
+          ]
+      value: "NB de jours passés"
+      y: "Parks"
+      meta: [
+        "Status"
+        "Gross capacity (MW)"
+        "Construction starting date"
+        "Commissioning date"
+        "Date de dépôt de PC"
+      ]
       filters:
         "upper-right":
           on: "Region"
-          type: "dropdown"
           defaultSelected: "Nord"
+          type: "dropdown"
         "upper-middle":
           on: "Techno"
-          type: "dropdown"
           defaultSelected: "Wind"
+          type: "dropdown"
+      chartType: "heatmap"
+      units:
+        "NB de jours passés": " jours"
+      x: "Phase"
       data:
         query:
           domain: "data_pipeline_projets_2016"
-      chartType: "heatmap"
-      x: "Phase"
-      y: "Parks"
-
-      value: "NB de jours passés"
-      target: "Délai souhaité"
-      units:
-        "NB de jours passés": " jours"
       legend: true
       xOrder: [
-        "Prospection",
-        "Dev A",
-        "Dev B",
-        "Authorized",
-        "Construction",
-        "Abandoned"
+        "Prospection"
+        "Developpement"
+        "Autorisation"
+        "Construction"
       ]
-      # xpack: "Phase"
-      # xPackOrder: [
-      #   "Prospection",
-      #   "Dev A",
-      #   "Dev B",
-      #   "Authorized",
-      #   "Construction",
-      #   "Abandoned"
-      # ]
-
-      meta: [
-        "Status",
-        "Gross capacity (MW)"
-        "Construction starting date",
-        "Commissioning date",
-        "Date de dépôt de PC"
-      ]
-      sentiment:
-        sentiment:
-          domain: [-0.5,0.5, 10000]
-          range: ["warning", "neutral", "positive", "negative"]
-    highlightedKpis: [
-      name: "Projets"
-      value: "projets" #reference where the value to be shown was stored
-      badge: "bullet"
-      #badge: 'dispo' #reference of the value used to select the badge. Can also take the static value "bullet"
-      comment: "dans le pipeline"
-      # sentiment: #select color of KPI and badge, see the docs on sentiment
-      #   dispo:
-      #     domain: [0.95]
-      #     range: ['negative','positive']
-      precision:
-        projets: ".0f"
-      data:
-        projets:
-          query:
-            domain: "data_kpis_pays"
-            kpi: $in: ["Projets Pipe"]
-          field: "value"
-    ,
-      name: "Abandonnés"
-      value: "abandon" #reference where the value to be shown was stored
-      badge: "evol"
-      #comment: ""
-      sentiment: #select color of KPI and badge, see the docs on sentiment
-        evol:
-          domain: [0]
-          range: ['negative','positive']
-      precision:
-        projets: ".0f"
-      data:
-        abandon:
-          query:
-            domain: "data_kpis_pays"
-            kpi: $in: ["Projets Abandonnés"]
-          field: "value"
-        evol:
-          query:
-            domain: "data_kpis_pays"
-            kpi: $in: ["Projets Abandonnés"]
-          field: "evol"
-    ]
   }
   {
-    level: 3
-    id: 1005
-    parent_id: 20
-    title: "Distribution Géographique des Capactités"
-    commentary: ''
-    restrictVisibility:
-      reportEntry: "entityType"
-      allowedReports: ["PAYS"]
-
     datasets:
       dept_data:
-        precision:
-          "Capacité dépt. (MW)": ".1f"
+        units:
+          "Capacité dépt. (MW)": " MW"
         query:
           domain: "data_capacite_dept"
+        precision:
+          "Capacité dépt. (MW)": ".1f"
         id: "dept_data"
       centrales_data:
-        precision:
-          "Capacité (MW)": ".1f"
+        units:
+          "Capacité (MW)": " MW"
         query:
           domain: "data_capacite_centrale_geo"
+        precision:
+          "Capacité (MW)": ".1f"
         id: "centrales_data"
-    # filters:
-    #   "bottom-right":
-    #     on: "variable"
-    #     type: "buttons"
+    level: 3
+    title: "Distribution Géographique des Capacités"
+    restrictVisibility:
+      reportEntry: "entityType"
+      allowedReports: [
+        "PAYS"
+      ]
+    parent_id: 20
+    filters:
+      "bottom-right":
+        on: "type"
+        datasets: [
+          "centrales_data"
+          "dept_data"
+        ]
+        type: "buttons"
+        order:
+          custom: [
+            "Installée"
+            "En construction"
+          ]
+    commentary: ""
+    id: 1005
     chartOptions:
-      chartType: "mapchart"
-      # peers: " "
-      # join: "Dept"
-      # projection: "world"
       autoSelect: false
-      #style: "secondary",
-      # value: "capacity"
-      # label: "Dept"
-      legend: true
-      levels: 4
-
+      markers:
+        color: "Techno"
+        longitude: "long"
+        label: "Park"
+        meta: [
+          "Capacité (MW)"
+        ]
+        latitude: "lat"
+        dataset: "centrales_data"
       zones:
         join:
           shapes: "CODE_DEPT"
@@ -761,27 +492,52 @@ slides: [
         color: "Capacité dépt. (MW)"
         label: "NOM_DEPT"
         shapes: "depts-details-topojson.json"
-        meta: ["Département", "Capacité dépt. (MW)"]
-        dataset: "dept_data"
-
-      markers:
-        color: "Techno"
-        longitude: "long"
-        latitude: "lat"
-        label: "Park"
         meta: [
-          "Techno",
-          "Capacité (MW)"
+          "Département"
         ]
-
-        dataset: "centrales_data"
-
-    filters:
-      "bottom-right":
-        on: "type"
-        type: "buttons"
-        datasets: ["centrales_data", "dept_data"]
-        order: custom: ["Installée", "En construction"]
+        dataset: "dept_data"
+      levels: 4
+      units:
+        "Capacité dépt. (MW)": " MW"
+      chartType: "mapchart"
+      legend: true
+  }
+  {
+    parent_id: 403
+    level: 3
+    id: 40302
+    chartOptions:
+      sort: "desc"
+      value: "Pourcentage"
+      label: "Evenements"
+      variationLegend: "Écart<br>année passée"
+      meta: "Effectif"
+      variation: "evolution"
+      sparklines:
+        orderDates: true
+        value: "Value"
+        joins: [
+          "Evenements"
+        ]
+        date: "Date"
+        data:
+          query:
+            domain: "horizontal_barchart_sparklines"
+        legend: "Évolution<br>sur 8 mois"
+        unit: "%"
+      showAverage: true
+      units:
+        evolution: "%"
+        Pourcentage: " %"
+      chartType: "horizontalBarchart"
+      data:
+        query:
+          domain: "horizontal_barchart_evolution"
+    title: "Évènement Client"
   }
 ]
-offline: true
+captureChartEnabled: true
+slidePdfEnabled: true
+sharingOptions: true
+home:
+  skipToReport: 0

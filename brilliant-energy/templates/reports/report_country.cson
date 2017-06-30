@@ -1,23 +1,17 @@
+search:
+  default: "{{ default_col | bool }}"
+  # searchRemoteCall: true
+  # showSearchBar: true
+  placeholder: "Selectionnez un rapport"
+execsumNote: ""
+slideInfos: {}
 entityName: "{{ report }}"
-entityGroup: "{{ techno_zone }}"
-entityTechno: "{{ techno }}"
 entityType: "{{ type }}"
-
+entityTechno: "{{ techno }}"
 id: "{{ index }}"
-date: "Décembre 2016"
 background:
   id: 1
   overlay: false
-execsumTitle: "Flash Report"
-execsumNote: ""
-
-search:
-  placeholder: "Selectionnez un rapport"
-  default: '{{ default_col | bool }}'
-  showSearchBar: true #(1)
-  searchRemoteCall: true #(2)
-# dashboards:
-#   default: 0
-#   search: "Recherchez dans les dashboards..."
-
-slideInfos: {}
+date: "Mai 2017"
+execsumTitle: "Brillant Energy"
+entityGroup: "{{ techno_zone }}"

@@ -1,44 +1,50 @@
-etl_config:
-  DATA_SOURCES: [
-    domain: "data"
-    type: "excel"
-    file: "edf-en_pilotage-bu.xlsx"
-    sheetname: null
-  ,
-    domain:"executive"
-    type: "excel"
-    file: "executive_comments.xlsx"
-    sheetname: null
+MAX_SELECTABLE_DASHBOARDS: 500
+MONGO_INDEXES: [
+  "domain"
+  [
+    "domain"
+    "subdomain"
   ]
-  REPORTS: [
-    query:
-      domain: "data_reports"
-      type: $in: ["PAYS", "CENTRALE"]
-    #   type: "country"
-    template: "report_country"
-    # query:
-    #   domain: "data_reports"
-    #   type: "centrale"
-    # template: "report_centrale"
-  ]
-  DASHBOARDS: [
+]
+DASHBOARDS: [
+  {
+    report: "report"
     query:
       domain: "data_reports"
       type: "CENTRALE"
-    report: "report"
     template: "dashboard_centrale"
-  ,
+  }
+  {
+    report: "report"
     query:
       domain: "data_reports"
       type: "PAYS"
-    report: "report"
     template: "dashboard_pays"
-  ]
-  MAX_SELECTABLE_DASHBOARDS: 500
-  MONGO_INDEXES: [
-    "domain"
-    [
-      "domain"
-      "subdomain"
-    ]
-  ]
+  }
+]
+REPORTS: [
+  {
+    query:
+      domain: "data_reports"
+      type:
+        $in: [
+          "PAYS"
+          "CENTRALE"
+        ]
+    template: "report_country"
+  }
+]
+DATA_SOURCES: [
+  {
+    sheetname: null
+    domain: "data"
+    type: "excel"
+    file: "edf-en_pilotage-bu.xlsx"
+  }
+  {
+    sheetname: null
+    domain: "executive"
+    type: "excel"
+    file: "executive_comments.xlsx"
+  }
+]
