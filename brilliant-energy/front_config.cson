@@ -539,5 +539,6 @@ slides: [
 captureChartEnabled: true
 slidePdfEnabled: true
 sharingOptions: true
+offline:true
 home:
   skipToReport: 0
