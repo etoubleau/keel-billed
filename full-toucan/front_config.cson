@@ -23,7 +23,7 @@ glossary:
   ]
 
 slidePdfEnabled: true
-dashboardPdfEnabled: false
+dashboardPdfEnabled: true
 captureChartEnabled: true
 sharingOptions: true
 comments: true
@@ -38,9 +38,6 @@ title: 'Test'
 dataProviders:
   "google-sheets": {}
 
-home:
-  skipToReport: "0"
-
 slides: [
   {
     level: 0
@@ -48,7 +45,7 @@ slides: [
   }
   {
     level: 1
-    title: "Ventes Globales"
+    title: "%%Ventes Globales%%"
     id: 10
   }
   {
@@ -56,12 +53,11 @@ slides: [
     title: "Satisfaction"
     id: 20
   }
-  # {
-  # Supprimé car nous n'avions plus l'accès aux bases de données
-  #   level: 1
-  #   title: "Connectors"
-  #   id: 30
-  # }
+  {
+    level: 1
+    title: "Connectors"
+    id: 30
+  }
   {
     level: 2
     title: "Produits phares"
@@ -198,7 +194,6 @@ slides: [
 
     id: 30202
   }
-
   {
     level: 3
     title: "Notation<br>par segments"
@@ -307,7 +302,7 @@ slides: [
           {
             date: "2014-08"
             label: "cote.nacre"
-            domain: "Ouverture de Leroy Merlin"
+            name: "Ouverture de Leroy Merlin"
           }
         ]
         legend: true
@@ -338,7 +333,6 @@ slides: [
         units:
           nb: " visites"
 
-        # visualSelection: false
         legend: true
         selection:
           label: "poi_id"
@@ -352,6 +346,11 @@ slides: [
   {
     level: 3
     title: "Historical<br>Sales"
+
+    kpi:
+      unit: " unit"
+      badge:
+        comment: "my label"
 
     parent_id: 202
     chartOptions:
@@ -384,40 +383,6 @@ slides: [
       legend: true
 
     id: 32104
-  }
-  {
-    level: 3
-    title: "With dynamic events"
-
-    parent_id: 202
-    datasets:
-      my_events_data:
-        query:
-          domain:'my_events'
-
-    chartOptions:
-      data:
-        query:
-          domain: "<%= report.id %>_32104"
-        date:
-          selector: 'date'
-          format: '%m-%y'
-
-      chartType: "linechart"
-      units:
-        value: "M d'unités"
-        date: "'s sales"
-      events:
-        dataset: 'my_events_data' # id of the dataset
-        date: 'date'
-        label: "label" # column in the dataset that match the values of the linechart series
-        name: 'comment'
-      value: "value"
-      groups: "center"
-      date: "date"
-      legend: true
-
-    id: 3210499
   }
   {
     level: 3
@@ -584,6 +549,12 @@ slides: [
   {
     level: 3
     title: "Découpage<br>Par Catégorie"
+
+    kpi:
+      unit: "k €"
+      badge:
+        comment: "CA Jaude"
+
     parent_id: 200
 
     filters:
@@ -699,6 +670,11 @@ slides: [
     level: 3
     title: "Conversion"
 
+    kpi:
+      unit: "%"
+      badge:
+        comment: " Accueil"
+
     parent_id: 200
     chartOptions:
       data:
@@ -717,10 +693,193 @@ slides: [
 
     id: 32102
   }
+  {
+    level: 3
+    title: "SQL Server Analysis Services"
 
+    parent_id: 30
+    chartOptions:
+      data:
+        provider: "SSAS provider"
+        query: """select {[Measures].[Montant des factures]} on columns,
+                {[Dim Agence].[Libelle Agence].[Libelle Agence].ALLMEMBERS * [Dim Agence].[Code Agence].[Code Agence].ALLMEMBERS} on rows
+                from [CER CUBE]
+              """
+        precision:
+          "Montant des factures": ",.0f"
+      chartType: "horizontalBarchart"
+      value: "Montant des factures"
+      label: "[Dim Agence].[Libelle Agence].[Libelle Agence]"
+      groups: "center"
+      sort: "desc"
+      units:
+        "Montant des factures": "€"
+
+    id: 301
+  }
+  {
+    level: 3
+    title: "Google Sheets"
+
+
+    parent_id: 30
+    chartOptions:
+      data:
+        provider: "google-sheets"
+        spreadsheetId: "1Eb9vsLT-v9M9iOSHKg9TD-lqHCQhtT3gwYc7zJs4Qjs"
+        sheet: "States"
+      chartType: "horizontalBarchart"
+      value: "Value"
+      label: "State"
+      groups: ""
+      sort: "desc"
+      units:
+        Value: ""
+
+    id: 302
+  }
+  {
+    level: 3
+    title: "MySQL"
+
+
+    parent_id: 30
+    chartOptions:
+      data:
+        provider: "Some MySQL provider"
+        query: """SELECT employees.first_name, annual_salaries.annual_salary AS annual_salary
+                  FROM employees
+                    LEFT JOIN
+                  (SELECT emp_no, SUM(salary) AS annual_salary FROM salaries GROUP BY emp_no) AS annual_salaries
+                    ON employees.emp_no = annual_salaries.emp_no
+                  LIMIT 10;"""
+      chartType: "horizontalBarchart"
+      value: "annual_salary"
+      label: "first_name"
+      groups: "center"
+      sort: "desc"
+      units: "annual_salary": "$"
+
+    id: 303
+  }
+  {
+    level: 3
+    title: "Google Analytics"
+
+
+    parent_id: 30
+    chartOptions:
+      data:
+        provider: "SomeGoogleAnalyticsProvider"
+        query: """{
+                      "viewId": "ga:99476610",
+                      "dateRanges": [
+                          {"startDate": "2016-01-01", "endDate": "2016-02-01"}
+                      ],
+                      "metrics": [
+                          {"expression": "ga:pageviews"}
+                      ],
+                      "dimensions": [
+                          {"name": "ga:hostname"}
+                      ]
+                  }"""
+      chartType: "horizontalBarchart"
+      value: "metric_value"
+      label: "ga:hostname"
+      groups: "center"
+      sort: "desc"
+      units: "metric_value": " views"
+
+    id: 304
+  }
+  {
+    level: 3
+    title: "Google Big Query"
+
+
+    parent_id: 30
+    chartOptions:
+      data:
+        provider: "SomeGoogleBigQueryProvider"
+        query: """SELECT * FROM [carbide-parser-133123:test.ventes] LIMIT 10;"""
+      chartType: "horizontalBarchart"
+      value: "value"
+      label: "label"
+      groups: "center"
+      sort: "desc"
+      units:
+        "value": "€"
+
+    id: 305
+  }
+  {
+    level: 3
+    title: "SAP Hana"
+
+    parent_id: 30
+    chartOptions:
+      data:
+#        provider: "hana_lhoist"
+#        query: [
+#          """SELECT '0' as plant_text, '0' as company_code_text, 0 as total
+#          FROM toucan_hana
+#          LIMIT 1"""
+#        ,
+#          """SELECT company_code_text, plant_text, SUM(material) AS total
+#          FROM toucan_hana
+#          GROUP BY plant_text, company_code_text
+#          HAVING SUM(material) <> 0
+#          ORDER BY total ASC
+#          LIMIT 10"""
+#        ,
+#          """SELECT 'Total' as plant_text, 'Total' as company_code_text, SUM(total) as total FROM ( SELECT company_code_text, plant_text, SUM(material) AS total
+#          FROM toucan_hana
+#          GROUP BY plant_text, company_code_text
+#          HAVING SUM(material) <> 0
+#          ORDER BY total ASC
+#          LIMIT 10)"""
+#        ]
+#        multiple_queries: true
+#      chartType: "waterfall"
+#      value: "TOTAL"
+#      label: "COMPANY_CODE_TEXT"
+#      sublabel: "PLANT_TEXT"
+#      sort: "desc"
+#      units: "TOTAL": "€"
+        provider: "Some SapHana provider"
+        query: """SELECT NAME, GOALS FROM PYHDB_DEMO"""
+      chartType: "horizontalBarchart"
+      value: "GOALS"
+      label: "NAME"
+      sort: "desc"
+      units:
+        "GOALS": " goals"
+
+    id: 306
+  }
+  # {
+  #   level: 3
+  #   title: "Http API"
+  #   id: 307
+
+  #   parent_id: 30
+  #   chartOptions:
+  #     data:
+  #       query:
+  #         domain: "books"
+      
+  #     chartType: "horizontalBarchart"
+  #     value: "nombre_de_reservations"
+  #     label: "titre"
+  # }
   {
     level: 3
     title: "Musées<br>visités"
+
+    kpi:
+      unit: ""
+      badge:
+        comment: " en moyenne"
 
     parent_id: 200
     chartOptions:
@@ -738,7 +897,12 @@ slides: [
   }
   {
     level: 3
-    title: "Clients par<br>departements"
+    title: "Ventes par<br>departements"
+
+    kpi:
+      unit: "M€"
+      badge:
+        comment: "Cantal"
 
     filters:
       "bottom-right":
@@ -775,6 +939,30 @@ slides: [
   }
   {
     level: 3
+    title: "Données communes"
+    parent_id: 204
+    chartOptions:
+      data:
+        query:
+          domain: "popu_insee"
+      chartType: "carto"
+      join: "CODGEO"
+      label: "LIBGEO"
+      value: "P12_POP"
+      peers: " "
+      levels: 4
+      projection: "departement"
+      dropdownWithoutPeers: true
+      removeEmptyShape: true
+      cartoFiles:
+        " ": "commune_topojson.json"
+
+      units:
+        "P12_POP": "hab"
+    id: 342011
+  }
+  {
+    level: 3
     title: "World Map"
     parent_id: 204
     chartOptions:
@@ -788,6 +976,7 @@ slides: [
       peers: " "
       levels: 4
       projection: "world"
+      kpi: "kpi"
       cartoFiles:
         " ": "world-topojson.json"
 
@@ -811,6 +1000,7 @@ slides: [
         peers: " "
         levels: 4
         projection: "world"
+        kpi: "kpi"
         cartoFiles:
           " ": "world-topojson.json"
         crossfilter:
@@ -841,6 +1031,11 @@ slides: [
   {
     level: 3
     title: "Trafic<br>geolocalisé"
+
+    kpi:
+      unit: "k visits"
+      badge:
+        comment: "1er étage"
 
     filters:
       "bottom-right":
@@ -918,26 +1113,19 @@ slides: [
   {
     level: 3
     title: "Heatmap"
-    commentary: [
-      value: "The heatmap helps you to see what's going on instantly - Amount filter"
-      where:
-        selected: "Amount"
-      ,
-        value: "This is a comment specific for the volume filter"
-        where:
-          selected: "Volume"
-      ]
-    filters:
+    requesters:
       "bottom-right":
-        on: "breakdown"
-        type: "buttons"
+        id: 'toto'
+        type: 'buttons'
+        values: ['Amount','Motus','Variable','Volume']
 
     parent_id: 206
     chartOptions:
       data:
         query:
           domain: "heatmap"
-      chartType: "heatmap"
+          breakdown: "<%=requestersManager.toto %>"
+      chartType: "new-heatmap"
       legend: true
       x: "voiture"
       xpack: "segment"
@@ -961,6 +1149,9 @@ slides: [
     level: 3
     title: "Contribution<br>à la satisfaction"
 
+    kpi:
+      unit: " %"
+
     filters:
       "bottom-right":
         on: "type"
@@ -970,7 +1161,7 @@ slides: [
     chartOptions:
       data:
         query:
-          domain: "0_35201"
+          domain: "<%= report.id %>_35201"
       chartType: "bubblechart"
       legend: true
       label: "label"
@@ -1054,7 +1245,7 @@ slides: [
     chartOptions:
       data:
         query:
-          domain: "0_36200"
+          domain: "<%= report.id %>_36200"
       chartType: "bubblechart"
       label: "label"
       legend:
@@ -1087,7 +1278,7 @@ slides: [
     chartOptions:
       data:
         query:
-          domain: "0_36202"
+          domain: "<%= report.id %>_36202"
       chartType: "forceDirectedChart"
       label: "comportement"
       value: "pourcentage"
@@ -1148,11 +1339,16 @@ slides: [
     level: 3
     title: "Free cash flow"
 
+    kpi:
+      unit: " M€"
+      badge:
+        comment: "Juin 2014"
+
     parent_id: 207
     chartOptions:
       data:
         query:
-          domain: "0_37100"
+          domain: "<%= report.id %>_37100"
       chartType: "waterfall"
       value: "2013"
       label: "label"
@@ -1172,39 +1368,40 @@ slides: [
         on: "variable"
         datasets:[1]
         type: "buttons"
-    datasets:
-      bars_data:
-        query:[
-          $match:
-            domain: "dynamic_barlinechart"
-        ]
-        postprocess: [
-          melt:
-            id: ['Vehicle','year','day']
-            value: ['<%= requestersManager.metric_bar %>']
-        ]
-        precision:
-          value: ",.0f"
-        date:
-          selector:"day"
-          format:"%m/%d"
-      lines_data:
-        query:[
-          $match:
-            domain: "dynamic_barlinechart"
-        ]
-        postprocess: [
-          melt:
-            id: ['Vehicle','year','day']
-            value: ["<%= requestersManager.metric_line %>"]
-        ]
-        precision:
-          value: ",.0f"
-        date:
-          selector:"day"
-          format:"%m/%d"
     chartOptions:
-      chartType: "new-barlinechart"
+      data:
+        query:[
+          $match:
+            domain: "dynamic_barlinechart"
+        ]
+        postprocess: [
+          melt:
+            id: ['Vehicle','year','day']
+            value: ['<%= requestersManager.metric_bar %>',"<%= requestersManager.metric_line %>"]
+        ,
+          query: 'value > 7500'
+        ]
+
+
+
+        precision:
+          value: ",.1%"
+        date:
+          selector:"day"
+          format:"%m/%d"
+
+      chartType: "barlinechart"
+      kpi:
+        variable: [
+          {
+            type: "line"
+            label: "<%= requestersManager.metric_line %>"
+          }
+          {
+            type: "bar"
+            label: "<%= requestersManager.metric_bar %>"
+          }
+        ]
       units:
         value: " "
       requesters:
@@ -1234,59 +1431,30 @@ slides: [
               value: ['VehicleSessions','Media spent','FinalizedConfigurations','Total leads','Retail Commercial Offers','Total orders']
           ]
           fields: ['variable']
-
-      bars: dataset: 'bars_data'
-
-      label: "day"
       value: "value"
-      groups: "variable"
-      lines:
-        dataset: "lines_data"
-        x: 'day'
-        y: 'value'
-        serie: "variable"
+      date:"day"
       legend: 'minimal'
   }
   {
     level: 3
     title: "Resultat Op.<br>et marge"
 
+    kpi:
+      unit: "%"
+      badge:
+        comment: "Marge opé."
+
     parent_id: 207
     filters:
       "bottom-right":
         on: "Activité"
         type: "buttons"
-    datasets:
-      bars_data:
-        query:
-          domain: "0_37101"
-          kpi: 'Marge'
-        precision:
-          value:[
-            precision: ",.0f"
-            where:
-              kpi: "CA"
-          ,
-            precision: ".2f"
-            where:
-              kpi: "Marge"
-          ]
-      lines_data:
-        query:
-          domain: "0_37101"
-          kpi: 'CA'
-        precision:
-          value:[
-            precision: ",.0f"
-            where:
-              kpi: "CA"
-          ,
-            precision: ".2f"
-            where:
-              kpi: "Marge"
-          ]
+
     chartOptions:
-      chartType: "new-barlinechart"
+      data:
+        query:
+          domain: "<%= report.id %>_37101"
+      chartType: "barlinechart"
       units:
         CA: " M€"
         Marge: "%"
@@ -1294,20 +1462,20 @@ slides: [
         "Var CA"
         "Var Marge"
       ]
-      bars:
-        dataset: 'bars_data'
-        domain: [0,5.5]
-      label: "date"
-      value: 'value'
-      groups: 'Activité'
-      lines:
-        dataset: 'lines_data'
-        x: 'date'
-        y: 'value'
-        serie: 'Activité'
-        domain: [0,1980]
-
-      zeroBaseline: 0
+      date: "date"
+      kpi:
+        kpi: [
+          {
+            type: "line"
+            label: "Marge"
+          }
+          {
+            type: "bar"
+            label: "CA"
+          }
+        ]
+      value: "value"
+      label: "label"
       legend: 'minimal'
 
     id: 37101
@@ -1315,6 +1483,11 @@ slides: [
   {
     level: 3
     title: "Repartition<br>par branche"
+
+    kpi:
+      unit: " Milliards €"
+      badge:
+        comment: "C.A. S1 2014"
 
     filters:
       "bottom-right":
@@ -1449,68 +1622,6 @@ slides: [
     level: 1
     title: "Charts"
     id: 40
-  }
-  {
-    level: 2
-    title: "Linechart"
-    parent_id: 40
-    id: 410
-  }
-  {
-    level: 3
-    title: "Simple linechart"
-    parent_id: 410
-    id: 41010
-
-    chartOptions:
-      chartType: "linechart"
-      data:
-        query:
-          domain: "0_32106"
-          breakdown: "Detrended"
-        date:
-          selector: 'index'
-          format: '%Y-%m-%d'
-      units:
-        "value": ""
-      value: "value"
-      date: "index"
-      legend: true
-
-  }
-  {
-    level: 3
-    title: "Linechart with sentimentZone"
-    parent_id: 410
-    id: 41011
-
-    chartOptions:
-      sentimentZones: [
-        {
-          domain: [
-            -200
-            200
-          ]
-          sentiment: 'positive'
-          label:
-            text: 'Sentiment Zone description here'
-            position: 'top'
-        }
-      ]
-      chartType: "linechart"
-      data:
-        query:
-          domain: "0_32106"
-          breakdown: "Detrended"
-        date:
-          selector: 'index'
-          format: '%Y-%m-%d'
-
-      units:
-        "value": ""
-      value: "value"
-      date: "index"
-      legend: true
   }
   {
     level: 2
@@ -1700,7 +1811,7 @@ slides: [
       label: "label"
 
       average:
-        data: query: domain: "horizontal_barchart_groups_avg"
+        data: file: name: "horizontal_barchart_groups_avg"
         joins: [
           "cat"
           "type"
@@ -1718,6 +1829,278 @@ slides: [
           type: "dropdown"
 
     id: 40306
+  }
+  {
+    level: 2
+    title: "New horizontal barchart"
+    parent_id: 40
+    id: 410
+  }
+  {
+    level: 3
+    title: "With groups"
+    parent_id: 410
+
+    chartOptions:
+
+      data:
+        query:
+          domain: "horizontal_barchart_groups"
+        order:
+          by: "label"
+        highlighted: [
+          label: "ILE DE FRANCE"
+          type: "3 mois glissants"
+        ,
+          label: "BORDEAUX"
+          type: "Mois en cours"
+        ]
+
+      chartType: "horizontal-barchart"
+      groups: "cat"
+      value: "value"
+      label: "label"
+      legend: true
+
+      units:
+        value: "%"
+    filters:
+      "bottom-right":
+        on: "type"
+        type: "buttons"
+        order:
+          custom:[
+            "3 mois glissants"
+            "Mois en cours"
+            "12 mois glissants"]
+
+    id: 41001
+  }
+  {
+    level: 3
+    title: "With ordinal scaled sparklines"
+
+    parent_id: 410
+    chartOptions:
+      data:
+        query:
+          domain: "horizontal_barchart_evolution"
+
+      chartType: "horizontal-barchart"
+      value: "Pourcentage"
+      variation: "evolution"
+      variationLegend: "Écart<br>année passée"
+      label: "Evenements"
+      units:
+        Pourcentage: " %"
+        evolution: "%"
+
+      sort: "desc"
+      sparklines:
+        data:
+          query:
+            domain: "horizontal_barchart_sparklines"
+        joins: ["Evenements"]
+        legend: "Évolution<br>sur 8 mois"
+        value: "Value"
+        date: "Date"
+        unit: "%"
+        orderDates: true
+      showAverage: true
+      meta: "Effectif"
+
+    id: 41002
+  }
+  {
+    level: 3
+    title: "With date scaled sparklines"
+
+    parent_id: 410
+    chartOptions:
+      data:
+        query:
+          domain: "horizontal_barchart_evolution"
+      chartType: "horizontal-barchart"
+      value: "Pourcentage"
+      variation: "evolution"
+      variationLegend: "Écart<br>année passée"
+      label: "Evenements"
+      units:
+        Pourcentage: " %"
+        evolution: "%"
+
+      sort: "desc"
+      sparklines:
+        data:
+          query:
+            domain: "horizontal_barchart_sparklines"
+          date:
+            selector: "Date"
+            format: "%m"
+        joins: ["Evenements"]
+        legend: "Évolution<br>sur 8 mois"
+        value: "Value"
+        date: "Date"
+        dateFormat: "%B %Y"
+        unit: "%"
+      showAverage: true
+      meta: "Effectif"
+
+    id: 41003
+  }
+  {
+    level: 3
+    title: "With legacy sparklines"
+
+    parent_id: 410
+    chartOptions:
+      data:
+        query:
+          domain: "horizontal_barchart_legacy_sparklines"
+
+      chartType: "horizontal-barchart"
+      value: "Pourcentage"
+      variation: "evolution"
+      variationLegend: "Écart<br>année passée"
+      label: "Evenements"
+      units:
+        Pourcentage: " %"
+        evolution: "%"
+
+      sort: "desc"
+      sparklines:
+        prefix: "sparkline"
+        legend: "Évolution<br>sur 8 mois"
+        unit: "%"
+      showAverage: true
+      meta: "Effectif"
+
+    id: 41004
+  }
+  {
+    level: 3
+    title: "With average"
+    parent_id: 410
+
+    chartOptions:
+
+      data:
+        query:
+          domain: "horizontal_barchart_simple"
+
+      chartType: "horizontal-barchart"
+      groups: "cat"
+      value: "value"
+      label: "label"
+
+      average: 85
+
+      units:
+        value: "%"
+
+    id: 41005
+  }
+  {
+    level: 3
+    title: "With average and filters"
+    parent_id: 410
+
+    filters:
+      "bottom-right":
+        on: "type"
+        type: "buttons"
+        order:
+          custom:[
+            "3 mois glissants"
+            "Mois en cours"
+            "12 mois glissants"]
+
+    chartOptions:
+      data:
+        query:
+          domain: "horizontal_barchart_groups"
+
+      chartType: "horizontal-barchart"
+      value: "value"
+      label: "label"
+
+      average:
+        data: file: name: "horizontal_barchart_groups_avg"
+        joins: [
+          "cat"
+          "type"
+        ]
+        value: "value"
+
+      averageText: "France"
+
+      units:
+        value: "%"
+
+      filters:
+        "upper-right":
+          on: "cat"
+          type: "dropdown"
+
+    id: 41006
+  }
+  {
+    level: 3
+    title: "With new chart, filters, evolution, and sparklines"
+
+    parent_id: 410
+    chartOptions:
+      data:
+        query:
+          domain: "horizontal_barchart_evolution"
+        precision:
+          evolution: ",.1f"
+      chartType: "horizontal-barchart"
+      value: "Pourcentage"
+      variation: "evolution"
+      variationLegend: "Écart<br>année passée"
+      sentiment:
+        evolution: [
+          sentiment:
+            domain: [0, 0.0001]
+            range: ['positive', 'neutral', 'negative']
+          where:
+            pack: 'group1'
+        ,
+          sentiment:
+            domain: [0, 0.0001]
+            range: ['negative', 'neutral', 'positive']
+          where:
+            pack: 'group2'
+        ,
+          sentiment:
+            domain: [0, 0.0001]
+            range: ['negative', 'neutral', 'positive']
+          where:
+            pack: 'group3'
+        ]
+      label: "Evenements"
+      units:
+        Pourcentage: " %"
+        evolution: "%"
+      sort: "desc"
+      sparklines:
+        data:
+          query:
+            domain: "horizontal_barchart_sparklines"
+        joins: ["Evenements"]
+        legend: "Évolution<br>sur 8 mois"
+        value: "Value"
+        date: "Date"
+        unit: "%"
+        orderDates: true
+      showAverage: true
+      meta: "Effectif"
+      filters:
+        "upper-middle":
+          on: "pack"
+          type: "buttons"
+    id: 41007
   }
   {
     level: 2
@@ -1837,6 +2220,43 @@ slides: [
     id: 40202
   }
   {
+    chartOptions:
+      average:
+        precision: 0
+        values: [
+          value: 86
+        ]
+      chartType: 'leaderboardCenteredAverage'
+      data:
+        query: domain: 'leaderboard_centered_avg'
+        order: by: 'value'
+      label: 'label'
+      showAverage: true
+      sorter:
+        legend: 'Trier par'
+        values: [
+          label: 'A-Z'
+          sort: by: 'label'
+        ,
+          label: 'Perf.'
+          sort: by: 'value'
+        ,
+          label: 'Evol.'
+          sort: by: 'variation'
+        ]
+      units: value: '%'
+      value: 'value'
+      variation: 'evol'
+      variationLegend: 'Évolution<br> annuelle'
+    filters: 'bottom-right':
+      on: 'date'
+      type: 'slider'
+    id: 40203
+    level: 3
+    parent_id: 402
+    title: 'With sorter'
+  }
+  {
     level: 2
     title: "Bullet charts"
     parent_id: 40
@@ -1922,8 +2342,8 @@ slides: [
           date:
             selector: "date"
             format: "%Y-%m"
-          query:
-            domain: "bullet_chart_sparklines"
+          file:
+            name: "bullet_chart_sparklines"
         value: "value"
         date: "date"
         joins: [
@@ -1958,12 +2378,9 @@ slides: [
       label: 'label'
 
       data:
-        # order:
-        #   by: 'index'
         query:
           domain: "waterfall_new"
-      # sublabel: 'label_sublevel'
-      # meta: 'Actuel'
+
       units:
         "value": " M€"
 
@@ -1988,8 +2405,6 @@ slides: [
       data:
         query:
           domain: "waterfall_new_categorized"
-      # sublabel: 'label_sublevel'
-      # meta: 'Actuel'
       units:
         "value": " M€"
 
@@ -2156,13 +2571,43 @@ slides: [
           data: "CODE_DEPT"
         color: "value"
 
-      tiles: {}
-
       zoom:
         scale: 1415
         translate: [455, 1794]
 
     id: 40601
+  }
+  {
+    level: 3
+    title: "Zones only with reversed scale"
+    filters:
+      "bottom-right":
+        on: "breakdown"
+        type: "buttons"
+        datasets: ['dept_data']
+    parent_id: 406
+
+    datasets:
+      dept_data:
+        query:
+          domain: "<%= report.id %>_34201"
+
+    chartOptions:
+      chartType: "mapchart"
+      zones:
+        dataset: 'dept_data'
+        shapes: "depts-details-topojson.json"
+        join:
+          shapes: "CODE_DEPT"
+          data: "CODE_DEPT"
+        color: "value"
+        reverseScale:true
+
+      zoom:
+        scale: 1415
+        translate: [455, 1794]
+
+    id: 4060101
   }
   {
     level: 3
@@ -2212,6 +2657,10 @@ slides: [
         longitude: 'longitude'
         label: 'name'
         color: "country"
+        size:
+          selector: 'population'
+          maxSize: 12
+          minSize: 5
       tiles: {}
 
     id: 40603
@@ -2347,6 +2796,50 @@ slides: [
     id: 40607
   }
   {
+    level: 3
+    title: "Zones drill"
+    filters:
+      "bottom-right":
+        on: "breakdown"
+        type: "buttons"
+        datasets: ['zone_data']
+    parent_id: 406
+
+    drill:
+      template:
+        id: '<%= id %>'
+        level: '<%= level %>'
+        topojson: '<%= level %>_<%= id %>.topojson.json'
+        data_file: "<%= level %>_<%= id %>"
+        label: "<%= ZONE_NAME %>"
+      default:
+        id: 'france'
+        topojson: "france_regions.topojson.json"
+        level: 'france'
+        label: "France"
+        data_file: "france_regions"
+
+    datasets:
+      zone_data:
+        query:
+          domain: "<%= drill.data_file %>"
+
+    chartOptions:
+      chartType: "mapchart"
+      zones:
+        drill: true
+        drillMaxDepth: 1
+        label: "ZONE_NAME"
+        dataset: 'zone_data'
+        shapes: "<%= drill.topojson %>"
+        join:
+          shapes: "id"
+          data: "id"
+        color: "value"
+
+    id: 40608
+  }
+  {
     level: 2
     title: "Vertical barchart"
     parent_id: 40
@@ -2414,6 +2907,34 @@ slides: [
     id: 40703
   }
   {
+    level: 3
+    title: "With heatbar"
+
+    parent_id: 407
+    chartOptions:
+      data:
+        query:
+          domain: "<%= report.id %>_32101"
+      chartType: "barchart"
+      value: "NB visit"
+      label: "NB store"
+      # groups: "center"
+      units:
+        "NB visit": "% of visitors"
+      legend: true
+      sentiment:
+        "NB visit":
+          domain: [15]
+          range: ['negative', 'positive']
+          labels: ['pas bien', 'bien']
+      filters:
+        "upper-middle":
+          type: "buttons"
+          on: "center"
+
+    id: 40704
+  }
+  {
     level: 2
     title: "Text slide"
     parent_id: 40
@@ -2425,7 +2946,7 @@ slides: [
 
     parent_id: 408
     chartOptions:
-      src: "loren_text"
+      src: "README"
       chartType: "text"
 
     id: 40801
@@ -2443,8 +2964,14 @@ slides: [
     parent_id: 409
 
     datasets:
-      bars_data: query: domain: 'barlines_bars'
-      lines_data: query: domain: 'barlines_lines'
+      bars_data:
+        query: domain: 'barlines_bars'
+        precision:
+          value: ".1f"
+      lines_data:
+        query: domain: 'barlines_lines'
+        precision:
+          value: ".1f"
 
     chartOptions:
       chartType: 'new-barlinechart'
@@ -2466,54 +2993,116 @@ slides: [
     id: 40901
   }
   {
-    level: 1
-    title: "Extras"
-    id: 50
+    level: 3
+    title: "Bar and lines with different scales"
+
+    parent_id: 409
+
+    datasets:
+      bars_data:
+        query: domain: 'barlines_bars'
+        precision:
+          value: ".1f"
+      lines_data:
+        query: domain: 'barlines_lines_diff_scale'
+        precision:
+          value: ".1f"
+
+    chartOptions:
+      chartType: 'new-barlinechart'
+      commonScale: false
+
+      bars:
+        dataset: 'bars_data'
+      label: 'year'
+      value: 'value'
+      groups: 'serie'
+
+
+      lines:
+        dataset: 'lines_data'
+        x: 'year'
+        y: 'value'
+        serie: 'serie'
+
+      legend: true
+
+    id: 40902
   }
   {
     level: 3
-    title: "Highlighted KPIs"
-    parent_id: 50
-    id: 50001
+    title: "Bar and lines with filter"
 
+    parent_id: 409
+
+    datasets:
+      bars_data:
+        query: domain: 'barlines_bars_filter'
+        precision:
+          value: ".1f"
+      lines_data:
+        query: domain: 'barlines_lines'
+        precision:
+          value: ".1f"
+    filters:
+      'bottom-right':
+        on: 'breakdown'
+        type: 'buttons'
+        datasets: ['bars_data']
+
+    chartOptions:
+      chartType: 'new-barlinechart'
+
+      bars:
+        dataset: 'bars_data'
+      label: 'year'
+      value: 'value'
+      groups: 'serie'
+
+      lines:
+        dataset: 'lines_data'
+        x: 'year'
+        y: 'value'
+        serie: 'serie'
+
+      legend: true
+
+    id: 40903
+  }
+  {
+    level: 2
+    title: "Bubblechart"
+    parent_id: 40
+    id: 411
+  }
+  {
+    level: 3
+    title: "With bisector"
+    parent_id: 411
+    filters:
+      "bottom-right":
+        on: "type"
+        type: "buttons"
     chartOptions:
       data:
         query:
-          domain: "0_32101"
-      chartType: "barchart"
-      value: "NB visit"
-      label: "NB store"
-      groups: "center"
+          domain: "bubble_bissector"
+      chartType: "bubblechart"
+      legend: true
+      label: "label"
+      bissector:
+        y: 1
+        labels: ['Perte de vitesse','Trajectoire d\'excellence']
+        sentiments: ['negative','positive']
       units:
-        "NB visit": "% of visitors"
+        cx: "%"
+        cy: "%"
+        r: " répondants"
 
-    highlightedKpis: [
-      name: " Average evolution"
-      value: "avgValue"
-      badge: 'avgValue'
-      comment: "vs 2016"
-      sentiment:
-        avgValue:
-          domain: [0]
-          range: ['negative','positive']
-      precision:
-        avgValue: ',.1%'
-      data:
-        avgValue:
-          query: [
-              $match:
-                domain: "0_32101"
-            ,
-              $group:
-                _id: null
-                value:
-                  $avg: "$Increase"
-            ,
-              $project:
-                _id: 0
-                value: 1
-          ]
-          field: 'value'
-    ]
+      cx: "Satisfaction"
+      cy: "Contribution"
+      r: "effectif"
+
+    id: 41100
   }
 ]

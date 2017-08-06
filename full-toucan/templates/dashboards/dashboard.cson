@@ -6,11 +6,38 @@ default: "{{ default }}"
 categories: [
   name: "Performance"
   kpis: [
-    name: "☭ Courage"
+    name: "Synthese"
+    type: 'new-heatmap'
+    source: "2015, source Smart Toucan"
+    linkTo:
+      type: 'slide'
+      id: 30202
+      filters:
+        breakdown: 'Sales'
+    chartOptions:
+      value: "value"
+      y: "pays"
+      yLabelWidth: 300
+      x: "voiture"
+      yOrder: ['China']
+      xOrder: ['Scenic']
+      sentiment:
+        value:
+          domain: ['target']
+          range: ['negative','positive']
+      data:
+        query:
+          domain: "heatmap_home"
+          "breakdown": "Volume"
+    id: 100
+  ,
+    name: "Metric"
     type: 'value-dynamic'
     value: "value"
     unit: "%"
-    slide: 32204
+    linkTo:
+      type: 'external'
+      url: 'http://google.com'
     badge: 'badge'
     sentiment:
       value:
@@ -36,8 +63,11 @@ categories: [
     source: "2015, source Smart Toucan"
     id: 0
   ,
-    name: "★★ ⛷ 😍 Classement traffic"
+    name: "Classement traffic"
     type: "leaderboard"
+    linkTo:
+      type: 'dashboard'
+      id: 1
     chartOptions:
       value: "value"
       label: "Retailer name"
@@ -48,7 +78,6 @@ categories: [
       units:
         value: " €"
     source: "2015, source Smart Toucan"
-    slide: 100
   ,
     type: "media-img"
     src: "toucan.jpg"
@@ -56,8 +85,12 @@ categories: [
 ,
   name: "Evolution"
   kpis: [
-    name: "Traffic"
+    name: "Traffic {{zone}}"
     type: "line"
+    linkTo:
+      type: 'dashboard'
+      where:
+        entityName: 'Sud-est'
     chartOptions:
       value: "value"
       date: "month"
@@ -113,8 +146,8 @@ categories: [
         evolution: 'pt'
         variation: '%'
       data:
-        file:
-          name: "scorecard_home"
+        query:
+          domain: "scorecard_home"
         precision: 0
   ,
     name: "Skincare"
@@ -134,8 +167,8 @@ categories: [
         evolution: 'pt'
         variation: '%'
       data:
-        file:
-          name: "scorecard_home"
+        query:
+          domain: "scorecard_home"
         precision: 0
     unit: "%"
   ]
@@ -144,19 +177,20 @@ categories: [
   kpis: [
     name: "Long free text"
     type: "text-dynamic"
-    data: file: name: "free_text_home"
+    data:
+      query:
+        domain: "free_text_home"
     content: "content"
     source: "2015, source Smart Toucan"
   ,
-    name: "Votre Business Case"
-    type: "text-dynamic"
+    name: "Pdf from external website"
+    type: "pdf"
     data:
-      file:
-        name: "free_pdf_home"
-        type: "pdf"
-        object_name: "<%= report.entityName %>"
-    style:
-      width: '700px'
-    content: "content"
+      query:
+        domain: "free_pdf_home"
+        type: "external"
+    url: "content"
+    linkType: "external"
+    source: "Smart Toucan <%= Date %>"
   ]
 ]

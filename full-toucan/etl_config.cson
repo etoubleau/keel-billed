@@ -3,6 +3,33 @@ DATA_SOURCES: [
     type: "excel"
     file: "data-market-breakdown.xls"
     sheetname: "Data"
+    validation:[
+      type: "data_type"
+      expected:
+        "breakdown": "string"
+        "pays": "string"
+        "part": "number"
+        "clients": "number"
+    ,
+      type: "rows"
+      expected: 170
+    ,
+      type: "columns"
+      expected: ["breakdown", "part", "pays"]
+    ,
+      type: "no_duplicates",
+      params:
+        columns: "all"
+    ,
+      type: "not_null"
+      params:
+        columns: ["pays", "part"]
+    ,
+      type: "pattern"
+      expected: "[0-9]+"
+      params:
+        columns: ["part"]
+    ]
 ,
     domain: "dashboards"
     type: "excel"
@@ -22,6 +49,12 @@ DATA_SOURCES: [
     domain: "lines1"
     type: "csv"
     file: "lines_1.csv"
+    validation:[
+      type: "data_type"
+      expected:
+        "breakdown": "string"
+        "value": "number"
+    ]
 ,
     domain: "lines2"
     type: "csv"
@@ -35,127 +68,190 @@ DATA_SOURCES: [
     type: "csv"
     file: "funnelchart.csv"
 ,
-# 01/2017 - added by Margot when doing the full-toucan review
-    domain: "heatmap"
+    domain: "free_text_home"
     type: "csv"
-    file: "heatmap.csv"
+    file: "free_text_home.csv"
 ,
-    domain: "0_35201"
+    domain: "free_pdf_home"
     type: "csv"
-    file: "0_35201.csv"
+    file: "free_pdf_home.csv"
+,
+    domain: "scorecard_home"
+    type: "csv"
+    file: "scorecard_home.csv"
+,
+    domain: "bubble_bissector"
+    type: "csv"
+    file: "bubble_bissector.csv"
+,
+    domain: "heatmap_home"
+    type: "csv"
+    file: "heatmap_home.csv"
+,
+    domain: "leaderboard_centered_avg"
+    type: "csv"
+    file: "leaderboard_centered_avg.csv"
 ,
     domain: "slave_heatmap"
     type: "csv"
     file: "slave_heatmap.csv"
 ,
+    domain: "heatmap"
+    type: "csv"
+    file: "heatmap.csv"
+,
+    domain: "books"
+    type: "HttpAPI"
+    name: "Some API provider"
+    method: "GET"
+    url: "records/1.0/search/"
+    params:
+      dataset: 'les-1000-titres-les-plus-reserves-dans-les-bibliotheques-de-pret'
+      facet: 'auteur'
+    filter: ".records[].fields"
+# ,
+#     domain: "ga_example"
+#     type: "google_analytics"
+#     name: "SomeGoogleAnalyticsProvider"
+#     report_request: """{
+#                   "viewId": "ga:99476610",
+#                   "dateRanges": [
+#                       {"startDate": "2016-01-01", "endDate": "2016-02-01"}
+#                   ],
+#                   "metrics": [
+#                       {"expression": "ga:pageviews"}
+#                   ],
+#                   "dimensions": [
+#                       {"name": "ga:hostname"}
+#                   ]
+#               }"""
+#    ,
+    # domain: 'db_test'
+    # type: 'external_database'
+    # name: 'Some MySQL provider'
+    # table: 'City'
+#,
+#  domain: "gbq_ventes"
+#  type: "google_bigquery"
+#  name: "SomeGoogleBigQueryProvider"
+#  query: """SELECT * FROM test.ventes LIMIT 10;"""
+  ,
     domain: "0_36200"
     type: "csv"
     file: "0_36200.csv"
-,
+  ,
     domain: "0_36202"
     type: "csv"
     file: "0_36202.csv"
-,
+  ,
     domain: "0_37100"
     type: "csv"
     file: "0_37100.csv"
-,
+  ,
     domain: "0_37101"
     type: "csv"
     file: "0_37101.csv"
-,
+  ,
     domain: "0_32106"
     type: "csv"
     file: "0_32106.csv"
-,
+  ,
     domain: "0_32101"
     type: "csv"
     file: "0_32101.csv"
-,
+  ,
     domain: "0_30201"
     type: "csv"
     file: "0_30201.csv"
-,
+  ,
     domain: "0_30202"
     type: "csv"
     file: "0_30202.csv"
-,
+  ,
     domain: "0_30203"
     type: "csv"
     file: "0_30203.csv"
-,
+  ,
     domain: "0_32205_0"
     type: "csv"
     file: "0_32205_0.csv"
-,
+  ,
     domain: "0_32205_1"
     type: "csv"
     file: "0_32205_1.csv"
-,
+  ,
     domain: "0_32206_0"
     type: "csv"
     file: "0_32206_0.csv"
-,
+  ,
     domain: "0_32206_1"
     type: "csv"
     file: "0_32206_1.csv"
-,
+  ,
     domain: "0_32104"
     type: "csv"
     file: "0_32104.csv"
-,
+  ,
     domain: "0_32105"
     type: "csv"
     file: "0_32105.csv"
-,
+  ,
     domain: "0_32106"
     type: "csv"
     file: "0_32106.csv"
-,
+  ,
     domain: "0_32107"
     type: "csv"
     file: "0_32107.csv"
-,
+  ,
     domain: "0_30204"
     type: "csv"
     file: "0_30204.csv"
-,
+  ,
     domain: "0_32100"
     type: "csv"
     file: "0_32100.csv"
-,
+  ,
     domain: "0_32102"
     type: "csv"
     file: "0_32102.csv"
-,
+  ,
     domain: "0_34201"
     type: "csv"
     file: "0_34201.csv"
-,
+  ,
     domain: "0_34204"
     type: "csv"
     file: "0_34204.csv"
-,
+  ,
     domain: "0_34200"
     type: "csv"
     file: "0_34200.csv"
-,
+  ,
     domain: "treemap"
     type: "csv"
     file: "treemap.csv"
-,
+  ,
     domain: "0_37102"
     type: "csv"
     file: "0_37102.csv"
-,
+  ,
     domain: "0_30205"
     type: "csv"
     file: "0_30205.csv"
-,
+  ,
     domain: "0_40206"
     type: "csv"
     file: "0_40206.csv"
-,
+  ,
+    domain: "0_201_1"
+    type: "csv"
+    file: "0_201_1.csv"
+  ,
+    domain: "0_201_1_avg"
+    type: "csv"
+    file: "0_201_1_avg.csv"
+  ,
     domain: "timeline"
     type: "csv"
     file: "timeline.csv"
@@ -175,18 +271,10 @@ DATA_SOURCES: [
     domain: "horizontal_barchart_legacy_sparklines"
     type: "csv"
     file: "horizontal_barchart_legacy_sparklines.csv"
-,
-    domain: "horizontal_barchart_simple"
-    type: "csv"
-    file: "horizontal_barchart_simple.csv"
-,
-    domain: "0_201_1"
-    type: "csv"
-    file: "0_201_1.csv"
-,
-    domain: "0_201_1_avg"
-    type: "csv"
-    file: "0_201_1_avg.csv"
+# ,
+#     domain: "horizontal_barchart_simple"
+#     type: "csv"
+#     file: "horizontal_barchart_simple.csv"
 ,
     domain: "waterfall_new"
     type: "csv"
@@ -200,6 +288,14 @@ DATA_SOURCES: [
     type: "csv"
     file: "cities_data.csv"
 ,
+    domain: "france_regions"
+    type: "csv"
+    file: "france_regions.csv"
+,
+    domain: "france_regions"
+    type: "csv"
+    file: "france_regions.csv"
+,
     domain: "barlines_bars"
     type: "csv"
     file: "barlines_bars.csv"
@@ -208,9 +304,9 @@ DATA_SOURCES: [
     type: "csv"
     file: "barlines_lines.csv"
 ,
-    domain: "my_events"
+    domain: "barlines_bars_filter"
     type: "csv"
-    file: "my_events.csv"
+    file: "barlines_bars_filter.csv"
 ]
 DATA_PROVIDERS: [
   # name: "Some cube"
@@ -218,33 +314,41 @@ DATA_PROVIDERS: [
   # options:
   #   server_url: "http://some_server_url/OLAP/msmdpump.dll"
 # ,
-  name: 'Some MySQL provider'
-  type: 'MySQL'
-  options:
-    host: 'localhost'  # REQUIRED
-    db: 'circle_test'  # REQUIRED
-    user: 'ubuntu'  # REQUIRED
-    password: ''  # OPTIONAL
-    port: 3306  # OPTIONAL
-,
+#   name: 'Some MySQL provider'
+#   type: 'MySQL'
+#   options:
+#     host: 'localhost'  # REQUIRED
+#     db: 'circle_test'  # REQUIRED
+#     user: 'ubuntu'  # REQUIRED
+#     password: ''  # OPTIONAL
+#     port: 3306  # OPTIONAL
+# ,
   name: 'SomeGoogleAnalyticsProvider'
   type: 'GoogleAnalytics'
   options:
     authentication_file: 'test-connector-ga-47f3cded59c8.json' # Put this file in app/parameters
+# ,
+#   name: "SomeGoogleBigQueryProvider"
+#   type: "GoogleBigQuery"
+#   options:
+#     project_id: "carbide-parser-133123"
+#     authentication_file: "test-psa-1a4033d8f4ca.json"
+# ,
+#   name: 'Some SapHana provider'
+#   type: 'SapHana'
+#   options:
+#     host: 'localhost'
+#     port: 30015
+#     user: 'DEV_AF81GAMQVVPNWUA4MUI5C218K'
+#     password: 'Gv87XkSuSz1JEHf'
 ,
-  name: "SomeGoogleBigQueryProvider"
-  type: "GoogleBigQuery"
+  name: 'Some API provider'
+  type: 'HttpAPI'
   options:
-    project_id: "carbide-parser-133123"
-    authentication_file: "test-psa-1a4033d8f4ca.json"
-,
-  name: 'Some SapHana provider'
-  type: 'SapHana'
-  options:
-    host: 'localhost'
-    port: 30015
-    user: 'DEV_AF81GAMQVVPNWUA4MUI5C218K'
-    password: 'Gv87XkSuSz1JEHf'
+    baseroute: 'https://opendata.paris.fr/api/'
+    # auth:
+    #   type: 'basic'
+    #   args: ['username', 'password']
 ]
 REPORTS: [
   query:
@@ -262,6 +366,9 @@ PERMISSIONS_DATA:
   query:
     domain: "dashboards"
     default: 1.0
+NOTIFICATIONS_DATA:
+  query:
+    domain: "domain"
 MAX_SELECTABLE_REPORTS: 500
 MAX_SELECTABLE_DASHBOARDS: 500
 MONGO_INDEXES: [
