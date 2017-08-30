@@ -18,6 +18,7 @@ dashboardPdfEnabled: false
 sharingOptions: false
 comments: false
 embedCharts: false
+customHTML: '<script src="//load.sumome.com/" data-sumo-site-id="33492059cba654fc28fb91b574e8e7484ba6a685e20d96cf3dcd8cf0ae942382" async="async"></script>'
 
 noDataError:
   message: "<div class=\"error-first-word\">Désolé,</div>aucune donnée n'est disponible. Pour obtenir des données sur cet écran choisissez un autre rapport"

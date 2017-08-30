@@ -6,6 +6,7 @@
     'meaning': 'The National Collegiate Athletic Association (NCAA) is a non-profit association which regulates athletes of 1,281 institutions, conferences, organizations, and individuals. It also organizes the athletic programs of many colleges and universities in the United States and Canada, and helps more than 450,000 college student-athletes who compete annually in college sports.'
   } ]
   'title': 'Glossary'
+'customHTML': '<script src="//load.sumome.com/" data-sumo-site-id="33492059cba654fc28fb91b574e8e7484ba6a685e20d96cf3dcd8cf0ae942382" async="async"></script>'
 'home': 'skipToReport': '0'
 'slides': [
   {
