@@ -32,13 +32,6 @@ dataProviders:
 home:
   skipToReport: "0"
 
-popupEmail:
-  api: "https://api-voyager.toucantoco.com/toucan-public"
-  timeout: 30
-  notification: "Pour recevoir vos identifiants de connexion, merci de renseigner vos informations"
-
-
-
 slides: [
   {
     level: 0
