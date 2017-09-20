@@ -4,128 +4,186 @@ entityName: "{{ my_dashboard_name_column }}"
 default: true
 
 categories: [
-    name: "Growth vs return on the long term"
+    name: "Piketty annonce une société de rentier"
+    kpis: [
+      type:'media-video'
+      provider:'youtube'
+      id:'D1fKqi6Jh9E'
+    ,
+      type: "line"
+      slide:10001
+      
+      name: "...caractérisée par de forts rendements..."
+      source:'Source: API openDataSoft /Licence: https://www.quandl.com/about/terms'
+      
+      chartOptions:
+        value: "Rendement après impôts"
+        date: "date"
+        data:
+          query:
+            domain: 'growth-vs-return'
+            date: $ne: '2200-12-31'
+          date:
+            selector: 'date'
+            format: '%Y-%m-%d'
+          precision:
+            "Rendement après impôts": ',.1f'
+        units:
+          "Rendement après impôts": " %"
+    ,
+      type: "line"
+      slide:10001
+      
+      name: "...et une faible croissance"
+      source:'Source: API openDataSoft /Licence: https://www.quandl.com/about/terms'
+      
+      chartOptions:
+        value: "Croissance"
+        date: "date"
+        data:
+          query:
+            domain: 'growth-vs-return'
+            date: $ne: '2200-12-31'
+          date:
+            selector: 'date'
+            format: '%Y-%m-%d'
+          precision:
+            "Croissance": ',.1f'
+        units:
+          "Croissance": " %"
+    ]
+  ,
+    name: "Ce qui..."
     kpis: [
       type: "line"
-      slide:10001
+      slide:10002
       
-      name: "World Return after taxes"
-      source:'Source: API openDataSoft<br>Licence: https://www.quandl.com/about/terms'
+      name: "... renforce la part du capital dans le revenu national ..."
+      source:'Source: API openDataSoft /Licence: https://www.quandl.com/about/terms'
       
       chartOptions:
-        value: "r_after_taxes"
-        date: "date"
+        value: "value"
+        date: "year"
         data:
           query:
-            domain: 'growth-vs-return'
-            date: $ne: '2200-12-31'
+            domain: "labor-vs-capital"
+            variable: 'Part du Capital dans le Revenu National'
+            value:$ne:null
           date:
-            selector: 'date'
+            selector: 'year'
             format: '%Y-%m-%d'
-          precision:
-            r_after_taxes: ',.1f'
-        units:
-          r_after_taxes: " %"
-    ,
-      type: "line"
-      slide:10001
-      
-      name: "World Growth"
-      source:'Source: API openDataSoft<br>Licence: https://www.quandl.com/about/terms'
-      
-      chartOptions:
-        value: "g"
-        date: "date"
-        data:
-          query:
-            domain: 'growth-vs-return'
-            date: $ne: '2200-12-31'
-          date:
-            selector: 'date'
-            format: '%Y-%m-%d'
-          precision:
-            g: ',.1f'
-        units:
-          g: " %"
-    ,
-      type: "score-card"
-      name: "Focus on 2012"
-      slide: 10001
-      
-      chartOptions:
-        data:
-          query:
-            domain: "growth-vs-return"
-            date: '2012-12-31'
-          postprocess:[
-            melt:
-              id: ['date']
-              value: ['r_before_taxes','r_after_taxes','g']
-          ]
           precision:
             value: ',.1f'
+        units:
+          value: " %"
+    ,
+      type: "line"
+      slide:10002
+      
+      name: "... et diminue la part du travail"
+      source:'Source: API openDataSoft /Licence: https://www.quandl.com/about/terms'
+      
+      chartOptions:
+        value: "value"
+        date: "year"
+        data:
+          query:
+            domain: "labor-vs-capital"
+            variable: 'Part du Travail dans le Revenu National'
+            value:$ne:null
+          date:
+            selector: 'year'
+            format: '%Y-%m-%d'
+          precision:
+            value: ',.1f'
+        units:
+          value: " %"
+    ]
+  ,
+    name: "Conséquence 1 : une accélération de l'accumulation de la part du revenu perçu par les plus riches"
+    kpis: [
+      type: "line"
+      slide:10002
+      
+      name: "... déjà commencé en France..."
+      source:'Source: API openDataSoft /Licence: https://www.quandl.com/about/terms'
+      
+      chartOptions:
+        value: "value"
+        date: "date"
+        source:'Top 1% des revenus les plus élevés'
+        data:
+          query:
+            domain: 'concentration-of-wealth'
+            zone:"France"
+            type:'Top 1%'
+          date:
+            selector: 'date'
+            format: '%Y-%m-%d'
+          precision:
+            value: ',.1f'
+        units:
+          value: " %"
+    ,
+      type: "line"
+      slide:10002
+      
+      name: "...et aux Etats Unis"
+      source:'Source: API openDataSoft /Licence: https://www.quandl.com/about/terms'
+      
+      chartOptions:
+        value: "value"
+        date: "date"
+        source:'Top 1% des revenus les plus élevés'
+        data:
+          query:
+            domain: 'concentration-of-wealth'
+            zone:"Etats Unis"
+            type:'Top 1%'
+          date:
+            selector: 'date'
+            format: '%Y-%m-%d'
+          precision:
+            value: ',.1f'
+        units:
+          value: " %"
+    ]
+  ,
+    name: "Conséquence 2 : un plus faible rôle de l'Etat?"
+    kpis: [
+      type: 'new-heatmap'
+      slide:10004
+      name: "Entre 1970 et 2010 le capital privé représente une part croissance du revenu national"
+      source:'Source: API openDataSoft /Licence: https://www.quandl.com/about/terms'
 
-        value: "value"
-        label:'variable'
+      chartOptions:
+        data:
+          query:[
+            $match:
+              domain:'private-capital-vs-national-income'
+              variable:$in:['France','Europe','Etats Unis','Japon']
+              year: $in: ['1970-12-31','1985-12-31','2010-12-31']
+          ,
+            $sort:
+              year:1
+          ]
         
-        limit: 3
-        units:
-          value: " %"
+        value: "value"
+        x: "variable"
+        y: "date_year"
+      
+        sentiment:
+          value:
+            domain: [300,450]
+            range: ['positive','warning','negative']
     ]
   ,
-    name: "Concentration of wealth"
-    kpis: [
-      type: "line"
-      slide:10002
-      
-      name: "Top 1% in France"
-      source:'Source: API openDataSoft<br>Licence: https://www.quandl.com/about/terms'
-      
-      chartOptions:
-        value: "value"
-        date: "date"
-        data:
-          query:
-            domain: 'concentration-of-wealth'
-            zone:"france"
-            type:'top_1'
-          date:
-            selector: 'date'
-            format: '%Y-%m-%d'
-          precision:
-            value: ',.1f'
-        units:
-          value: " %"
-    ,
-      type: "line"
-      slide:10002
-      
-      name: "Top 1% in the US"
-      source:'Source: API openDataSoft<br>Licence: https://www.quandl.com/about/terms'
-      
-      chartOptions:
-        value: "value"
-        date: "date"
-        data:
-          query:
-            domain: 'concentration-of-wealth'
-            zone:"us"
-            type:'top_1'
-          date:
-            selector: 'date'
-            format: '%Y-%m-%d'
-          precision:
-            value: ',.1f'
-        units:
-          value: " %"
-    ]
-  ,
-    name: "World output distribution"
+    name: "Et dans le même temps la part de l'Europe dans le production de richesse mondiale dégringole"
     kpis: [
       type: "leaderboard"
       slide:10003
-      name: "In 2010"
-      source:'Source: API openDataSoft<br>Licence: https://www.quandl.com/about/terms'
+      name: "PIB régionaux en % du PIB mondial en 2010"
+      # source:'Source: API openDataSoft /Licence: https://www.quandl.com/about/terms'
 
       chartOptions:
         value: "value"
@@ -145,8 +203,8 @@ categories: [
     ,
       type: "leaderboard"
       slide:10003
-      name: "In 2100"
-      source:'Source: API openDataSoft<br>Licence: https://www.quandl.com/about/terms'
+      name: "PIB régionaux en % du PIB mondial en 2100"
+      # source:'Source: API openDataSoft /Licence: https://www.quandl.com/about/terms'
 
       chartOptions:
         value: "value"
@@ -163,35 +221,6 @@ categories: [
             value: ".1f"
         units:
           value: " %"
-    ]
-  ,
-    name: "Private capital vs National income"
-    kpis: [
-      type: 'new-heatmap'
-      slide:10004
-      name: "Focus 1970 vs 2010"
-      source:'Source: API openDataSoft<br>Licence: https://www.quandl.com/about/terms'
-
-      chartOptions:
-        data:
-          query:[
-            $match:
-              domain:'private-capital-vs-national-income'
-              year: $in: ['1970-12-31','1985-12-31','2010-12-31']
-          ,
-            $sort:
-              year:1
-          ]
-        
-        value: "value"
-        x: "variable"
-        y: "year"
-      
-        sentiment:
-          value:
-            domain: [300,450]
-            range: ['positive','warning','negative']
-        
     ]
 ]
 

@@ -71,6 +71,16 @@ etl_config:
         params:
           dataset:'employment-by-sector-in-france-and-the-united-states-1800-2012@public'
         filter: ".records[].fields"
+    ,
+        domain: "labor-vs-capital"
+        type: "HttpAPI"
+        name: "openDataSoft"
+        method: "GET"
+        url: "records/1.0/search/"
+        params:
+          dataset:'structure-of-national-income-in-france-1896-2008-capital-labor-shares-in-nationa@public'
+          rows:80
+        filter: ".records[].fields"
     ]
     
     DATA_PROVIDERS: [

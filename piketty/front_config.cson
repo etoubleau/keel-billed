@@ -9,16 +9,23 @@ slides: [
   }
   {
     level: 1
-    title: "Piketty visualized"
+    title: "Plus de vizs!"
     id: 10
   }
   {
     level: 3
     id:10001 
     parent_id:10 
-    title: "Growth vs return"
+    title: "Vers une société de rentiers?"
+    commentary:"Pour Piketty la 2ème moitié du XX siècle est une anomalie en terme de croissance.<br>Ce qui nous attend : une société à fort rendement et faible croissance."
     source:'Source: API openDataSoft<br>Licence: https://www.quandl.com/about/terms'
-
+    
+    filters:
+      'bottom-right':
+        on:'date_filter'
+        type:'buttons'
+        default:'Avant 1913'
+    
     chartOptions:
       data:
         query:
@@ -30,22 +37,70 @@ slides: [
           r: ",.2f"
       chartType: "bubblechart"
       legend: true
-      
-      label: "date"
-      cx: "r_after_taxes"
-      cy: "g"
-      r: "r_before_taxes"
+      xDomain: [0,6]
+      yDomain: [0,5]
+
+      label: "date_year"
+      cx: "Rendement après impôts"
+      cy: "Croissance"
+      r: "Rendement avant impôts"
       
       units:
-        cx: ""
-        cy: ""
-        r: ""
+        cx: " %"
+        cy: " %"
+        r: " %"
+      
+      quadrants:
+          x: 2.5
+          y: 1.8
+          labels: ["Société Start-up!","Société Google!","Société slow motion :)",'Société de rentiers']
+          sentiments: ['positive','neutral','positive','warning']
+  }
+  {
+    level: 3
+    parent_id: 10
+    id: 10004
+    title: "Où revenu du capital > revenu du travail"
+    commentary:"Après la deuxième guerre mondiale le revenu du capital est à un plus bas historique mais croit fortement depuis."
+
+    chartOptions:
+      data:
+        query:
+          domain: "labor-vs-capital"
+          variable: $in: ['Part du Travail dans le Revenu National','Part du Capital dans le Revenu National']
+          value:$ne:null
+        date:
+          selector: 'year'
+          format: '%Y-%m-%d'
+        precision:
+          value:',.0f'
+
+      chartType: "linechart"
+      units:
+        value: " %"
+
+      events: [
+        {
+          'year_text': "1945-12-31",
+          name: "Plus bas historique post 2ème guerre mondiale",
+          variable: "Part du Travail dans le Revenu National"
+        }
+      ]
+
+      value: "value"
+      groups: "variable"
+      date: "year"
+      legend: true
   }
   {
     level: 3
     parent_id: 10
     id: 10002
-    title: "Concentration of wealth"
+    title: "Des riches qui gagnent de plus en plus!"
+    commentary: """
+      Part du revenu national reçu par les X% de la population avec le niveau de revenu le plus élevé.<br>
+      Depuis les années 1980 la part détenue par les plus riches repart à la hausse.
+      """
     source:'Source: API openDataSoft<br>Licence: https://www.quandl.com/about/terms'
 
     filters:
@@ -75,59 +130,13 @@ slides: [
   }
   {
     level: 3
-    parent_id: 10
-    id: 10003
-    title: 'World Output Distribution'
-    source:'Source: API openDataSoft<br>Licence: https://www.quandl.com/about/terms'
-    
-    filters:
-      'bottom-right':
-        type:'slider'
-        on:'date'
-    
-    chartOptions:
-      filters:
-        'upper-middle':
-          type:'buttons'
-          on:'type_value'
-          defaultSelected:'value'
-      data:
-        query:
-          domain:'world-output-distribution'
-        
-        precision:
-          value:[
-            precision:',.1f'
-            where:
-              type_value:'%'
-          ,
-            precision:',.0f'
-            where:
-              type_value:'value'
-          ]
-    
-      chartType: "waterfallchart"
-      value: 'value'
-      label: 'variable'
-      groups: 'region'
-      type: 'type'
-      
-      units:
-        value:[
-          unit:' %'
-          where:
-            type_value:'%'
-        ,
-          unit:' $bn'
-          where:
-            type_value:'value'
-        ]
-   }
-  {
-    level: 3
     parent_id:10
-    id:10004
-    title:'Private capital vs National income'
+    id:10003
+    title:"...diminuant le rôle de l'Etat"
+    commentary:"""
+      Scroll vers le bas pour voir l'évolution du ration Capital Privé / Revenu National jusqu'en 2010<br>
+      Un ratio <span style='color:#34b364 !important'>faible</span> = rôle important de l'état, un ratio <span style='color:#EC1B2F !important'>élevé</span> = rôle faible de l'état
+      """
     source:'Source: API openDataSoft<br>Licence: https://www.quandl.com/about/terms'
     
     chartOptions:
@@ -140,7 +149,7 @@ slides: [
             year:1
         ]
       chartType: "new-heatmap"
-      y:'year'
+      y:'date_year'
       x:'variable'
       value:'value'
       
@@ -151,59 +160,32 @@ slides: [
   }
   {
     level: 3
-    parent_id: 10
+    parent_id:10
     id:10005
-    title: "Employment by sector"
+
+    title: "Alors que l'Europe dégringole"
+    commentary: "... Ou l'Afrique occupe enfin le rôle qui lui revient dans l'économie mondiale (question de point de vue!)<br><em>Part de chaque région dans la production de richesse mondiale</em>"
     source:'Source: API openDataSoft<br>Licence: https://www.quandl.com/about/terms'
 
-    charts: [
-      {
-        data:
-          query:
-            domain: "employment-by-sector"
-            sector:'services'
-          date:
-            selector: 'year'
-            format: '%Y-%m-%d'
-          precision:
-            value:',.1f'
+    chartOptions:
+      chartType: 'slopegraph'
+      data:
+        query:[
+          $match:
+            domain:'world-output-distribution'
+            date_year: $in: ['2010','2100']
+            type:'parent'
+            type_value:'%'
+        ,
+          $sort:
+            date:1
+        ]
 
-        chartType: "linechart"
-        units:
-          value: " %"
+      units:
+        value:' %'
 
-        value: "value"
-        groups: "country"
-        date: "year"
-        legend: true
-
-        crossfilter:
-          on: "year"
-          datasets: [1]
-        id: 0
-      }
-      {
-        chartType: 'stackedBarchart'
-        data:
-          query:
-            domain:'employment-by-sector'
-          precision:
-            value:',.1f'
-          date:
-            selector: 'year'
-            format: '%Y-%m-%d'
-        
-        value:'value'
-        label:'country'
-        groups:'sector'
-
-        units:
-          value: " %"
-        
-        hideTotal:true
-        legend: true
-        id: 1
-      }
-    ]
+      value:'value'
+      label:'region'
+      date:'date_year'
   }
 ]
