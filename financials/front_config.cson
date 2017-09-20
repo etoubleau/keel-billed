@@ -1,43 +1,39 @@
 settings: []
-
 glossary:
-  title: 'Glossaire'
+  title: "Glossaire"
   terms: [
-    term: "CAC 40"
-    meaning: "Le CAC 40 (cotation assistée en continu) est le principal indice boursier de la Bourse de Paris. Son code ISIN est FR0003500008 et son code mnémonique est PX1."
-  ,
-    term: "Chiffre d'affaires"
-    meaning: "La somme des ventes de biens ou de services d'une entreprise sur un exercice comptable. Il peut inclure ou non des achats pour la revente et des sous-traitance selon le mode de comptabilisation retenu."
-  ,
-    term: "Graph"
-    meaning: "A slang term for a sketching of what someone plans on tagging. graffiti. <br><em>NOT A CHART!</em>"
+    {
+      term: "CAC 40"
+      meaning: "Le CAC 40 (cotation assistée en continu) est le principal indice boursier de la Bourse de Paris. Son code ISIN est FR0003500008 et son code mnémonique est PX1."
+    }
+    {
+      term: "Chiffre d'affaires"
+      meaning: "La somme des ventes de biens ou de services d'une entreprise sur un exercice comptable. Il peut inclure ou non des achats pour la revente et des sous-traitance selon le mode de comptabilisation retenu."
+    }
+    {
+      term: "Graph"
+      meaning: "A slang term for a sketching of what someone plans on tagging. graffiti. <br><em>NOT A CHART!</em>"
+    }
   ]
-
 slidePdfEnabled: false
 dashboardPdfEnabled: false
 sharingOptions: false
 comments: false
 embedCharts: false
-
+customHTML: "<script type=\"text/javascript\">var s=document.createElement('script');s.setAttribute('data-sumo-site-id','33492059cba654fc28fb91b574e8e7484ba6a685e20d96cf3dcd8cf0ae942382');s.setAttribute('src','//load.sumome.com/');s.setAttribute('async',true);document.head.appendChild(s)</script>"
 noDataError:
   message: "<div class=\"error-first-word\">Désolé,</div>aucune donnée n'est disponible. Pour obtenir des données sur cet écran choisissez un autre rapport"
-  clues: ['report-selector', 'bottom-filter', 'settings', 'menu']
-
-title: 'Test'
-
+  clues: [
+    "report-selector"
+    "bottom-filter"
+    "settings"
+    "menu"
+  ]
+title: "Test"
 dataProviders:
   "google-sheets": {}
-
 home:
   skipToReport: "0"
-
-popupEmail:
-  api: "https://api-voyager.toucantoco.com/toucan-public"
-  timeout: 30
-  notification: "Pour recevoir vos identifiants de connexion, merci de renseigner vos informations"
-
-
-
 slides: [
   {
     level: 0
@@ -68,33 +64,58 @@ slides: [
         type: "buttons"
         default: "Chiffre d'affaires"
         order:
-          custom: ["Chiffre d'affaires","Résultat net","Capitaux propres","Marge opérationnelle","Rentabilité Financière"]
+          custom: [
+            "Chiffre d'affaires"
+            "Résultat net"
+            "Capitaux propres"
+            "Marge opérationnelle"
+            "Rentabilité Financière"
+          ]
     chartOptions:
       data:
-        query:[
+        query: [
           [
-            $match:
-              domain: "data_bourso"
-              metric: $in: ["Chiffre d'affaires","Résultat net","Capitaux propres"]
-              year: "2016"
-          ,
-            $project:
-              metric: 1
-              value: $divide: [ "$value", 1000000]
-              company: 1
-              supersector: 1
+            {
+              $match:
+                domain: "data_bourso"
+                metric:
+                  $in: [
+                    "Chiffre d'affaires"
+                    "Résultat net"
+                    "Capitaux propres"
+                  ]
+                year: "2016"
+            }
+            {
+              $project:
+                metric: 1
+                value:
+                  $divide: [
+                    "$value"
+                    1000000
+                  ]
+                company: 1
+                supersector: 1
+            }
           ]
           [
-            $match:
-              domain: "data_bourso"
-              metric: $in: ["Marge opérationnelle","Rentabilité Financière"]
-              year: "2016"
-          ,
-            $project:
-              metric: 1
-              value: 1
-              company: 1
-              supersector: 1
+            {
+              $match:
+                domain: "data_bourso"
+                metric:
+                  $in: [
+                    "Marge opérationnelle"
+                    "Rentabilité Financière"
+                  ]
+                year: "2016"
+            }
+            {
+              $project:
+                metric: 1
+                value: 1
+                company: 1
+                supersector: 1
+            }
           ]
         ]
         multiple_queries: true
@@ -103,14 +124,20 @@ slides: [
       chartType: "horizontalBarchart"
       label: "company"
       units:
-        value:[
-          unit: "Md€"
-        ,
-          unit: " "
-          where: metric: "Marge opérationnelle"
-        ,
-          unit: " "
-          where: metric: "Rentabilité Financière"
+        value: [
+          {
+            unit: "Md€"
+          }
+          {
+            unit: " "
+            where:
+              metric: "Marge opérationnelle"
+          }
+          {
+            unit: " "
+            where:
+              metric: "Rentabilité Financière"
+          }
         ]
       value: "value"
       filters:
@@ -119,33 +146,37 @@ slides: [
           type: "dropdown"
           reset: "- Tous secteurs"
           withSize: true
-      # sentiment:
-      #   value:
-      #     domain: [8,18]
-      #     range: ['negative','warning','positive']
       sparklines:
         data:
           query:
             domain: "data_bourso"
-            metric: $in: ["Chiffre d'affaires","Résultat net","Capitaux propres","Marge opérationnelle","Rentabilité Financière"]
-            year: $ne: "2017"
-        joins: ["metric","company"]
+            metric:
+              $in: [
+                "Chiffre d'affaires"
+                "Résultat net"
+                "Capitaux propres"
+                "Marge opérationnelle"
+                "Rentabilité Financière"
+              ]
+            year:
+              $ne: "2017"
+        joins: [
+          "metric"
+          "company"
+        ]
         legend: "Évolution"
         value: "value"
         date: "year"
         unit: " "
         orderDates: true
       legend:
-        type: 'identity-card'
-        filter: 'bottom-right'
+        type: "identity-card"
+        filter: "bottom-right"
       sort: "desc"
-      meta: [
-      ]
-      # showAverage: true
+      meta: []
     source: "Source : Rapports financiers"
     id: 10002
   }
-
   {
     level: 3
     title: "Top Secteurs"
@@ -159,40 +190,56 @@ slides: [
       data:
         query:
           domain: "data_bourso"
-          metric: $in: ["Chiffre d'affaires","Résultat net","Capitaux propres","Rentabilité Financière"]
-          year: $ne: "2017"
-        # date:
-        #   selector: "date"
-        #   format: "%Y"
+          metric:
+            $in: [
+              "Chiffre d'affaires"
+              "Résultat net"
+              "Capitaux propres"
+              "Rentabilité Financière"
+            ]
+          year:
+            $ne: "2017"
         precision:
-          value: ',.0f'
-          evolution: '+.0%'
+          value: ",.0f"
+          evolution: "+.0%"
       chartType: "treemap"
       value: "value"
       color: true
       target: "evolution"
       sortByValues: true
-      labels: ['industry','supersector','company']
+      labels: [
+        "industry"
+        "supersector"
+        "company"
+      ]
       filters:
         "upper-right":
           on: "metric"
           type: "dropdown"
           default: "Chiffre d'affaires"
           order:
-            custom: ["Chiffre d'affaires","Résultat net","Capitaux propres","Marge opérationnelle","Rentabilité Financière"]
+            custom: [
+              "Chiffre d'affaires"
+              "Résultat net"
+              "Capitaux propres"
+              "Marge opérationnelle"
+              "Rentabilité Financière"
+            ]
       sentiment:
         target:
-          domain: [0]
-          range: ['negative','positive']
-      color: true
+          domain: [
+            0
+          ]
+          range: [
+            "negative"
+            "positive"
+          ]
     source: "Source : Rapports financiers"
     id: 10001
   }
-
   {
     level: 3
     title: "Ratios Financiers"
-    # commentary: "The heatmap helps you to see what's going on instantly"
     filters:
       "bottom-right":
         on: "year"
@@ -202,18 +249,29 @@ slides: [
       data:
         query:
           domain: "data_bourso"
-          year: $ne: "2017"
+          year:
+            $ne: "2017"
           category: "Ratios financiers"
-          metric: $nin: ["Effectif en fin d'année","Effectif moyen"]
+          metric:
+            $nin: [
+              "Effectif en fin d'année"
+              "Effectif moyen"
+            ]
         precision:
-          value:  ",.1f"
+          value: ",.1f"
           evolution: "+.0%"
           target: "+.0%"
       chartType: "heatmap"
       legend: true
       x: "metric"
       xpack: "metric"
-      xOrder: ["Résultat net part du groupe par action","Résultat net part du groupe dilué par action","Marge opérationnelle","Rentabilité Financière","Ratio d'endettement"]
+      xOrder: [
+        "Résultat net part du groupe par action"
+        "Résultat net part du groupe dilué par action"
+        "Marge opérationnelle"
+        "Rentabilité Financière"
+        "Ratio d'endettement"
+      ]
       y: "company"
       ypack: "supersector"
       value: "value"
@@ -225,15 +283,18 @@ slides: [
           withSize: true
       target: "evolution"
       variation: "evolution"
-      # reverse: true
       sentiment:
         evolution:
-          domain: [0]
-          range: ['negative','positive']
+          domain: [
+            0
+          ]
+          range: [
+            "negative"
+            "positive"
+          ]
       meta: []
       units:
-        value: ' '
-        # variation: 'pt'
+        value: " "
     source: "Source : Rapports financiers"
     id: 10003
   }
@@ -249,25 +310,14 @@ slides: [
       data:
         query:
           domain: "economy"
-          annee: $gte: 2000
+          annee:
+            $gte: 2000
         date:
-          selector: 'date'
-          format: '%m/%Y'
+          selector: "date"
+          format: "%m/%Y"
       chartType: "linechart"
       units:
         value: " "
-      # events: [
-      #   {
-      #     date: "11-12"
-      #     label: "Chaussures de ville"
-      #     name: "Nouvelle collection"
-      #   }
-      #   {
-      #     date: "02-14"
-      #     label: "Baskets"
-      #     name: "Soldes d'hiver"
-      #   }
-      # ]
       value: "value"
       groups: "breakdown"
       date: "date"
@@ -275,29 +325,6 @@ slides: [
     source: "Source: INSEE"
     id: 10000
   }
-  # {
-  #   level: 3
-  #   title: "Top Employeurs"
-  #   parent_id: 30
-  #   chartOptions:
-  #     chartType: "waterfallchart"
-  #     zeroBaseline: 4650000
-  #     label: "label"
-  #     groups: "label_sublevel"
-  #     value: "value"
-  #     # evolution: "evol"
-  #     label: 'label'
-  #     data:
-  #       query:
-  #         domain: "effectif"
-  #       order:
-  #         by: "rank"
-  #     # sublabel: 'label_sublevel'
-  #     # meta: 'Actuel'
-  #     units:
-  #       "value": " "
-  #   id: 10004
-  # }
   {
     level: 3
     title: "Feminisation"
@@ -308,8 +335,14 @@ slides: [
         query:
           domain: "feminisation"
         melt:
-          id: ['company','sector']
-          value: ['women','men']
+          id: [
+            "company"
+            "sector"
+          ]
+          value: [
+            "women"
+            "men"
+          ]
       chartType: "stackedBarchart"
       groups: "variable"
       label: "company"
@@ -323,17 +356,11 @@ slides: [
           withSize: true
       units:
         value: " %"
-      # sentiment:
-      #   value:
-      #     domain: [8,18]
-      #     range: ['negative','warning','positive']
       legend:
-        type: 'identity-card'
-        filter: 'bottom-right'
+        type: "identity-card"
+        filter: "bottom-right"
       sort: "desc"
-      meta: [
-      ]
-      # showAverage: true
+      meta: []
     source: "Source : Rapports financiers"
     id: 30002
   }
@@ -350,33 +377,54 @@ slides: [
       data:
         query:
           domain: "feminisation"
-          "Montant de l'impot": $ne: 0
+          "Montant de l'impot":
+            $ne: 0
         melt:
-          id: ['company','sector']
-          value: ["Taux d'imposition","Montant de l'impot"]
+          id: [
+            "company"
+            "sector"
+          ]
+          value: [
+            "Taux d'imposition"
+            "Montant de l'impot"
+          ]
       chartType: "horizontalBarchart"
       label: "company"
       value: "value"
       average:
         data:
-          query:[
-            $match:
-              domain: "feminisation"
-              "Montant de l'impot": $ne: 0
-          ,
-            $group:
-              _id:['index']
-              "Taux d'imposition": $avg: "$Taux d'imposition"
-              "Montant de l'impot": $avg: "$Montant de l'impot"
-          ,
-            $project:
-              index: "$_id.index"
-              "Taux d'imposition": 1
-              "Montant de l'impot": 1
+          query: [
+            {
+              $match:
+                domain: "feminisation"
+                "Montant de l'impot":
+                  $ne: 0
+            }
+            {
+              $group:
+                _id: [
+                  "index"
+                ]
+                "Taux d'imposition":
+                  $avg: "$Taux d'imposition"
+                "Montant de l'impot":
+                  $avg: "$Montant de l'impot"
+            }
+            {
+              $project:
+                index: "$_id.index"
+                "Taux d'imposition": 1
+                "Montant de l'impot": 1
+            }
           ]
           melt:
-            id: ['index']
-            value: ["Taux d'imposition","Montant de l'impot"]
+            id: [
+              "index"
+            ]
+            value: [
+              "Taux d'imposition"
+              "Montant de l'impot"
+            ]
         joins: [
           "variable"
         ]
@@ -389,64 +437,66 @@ slides: [
           reset: "- Tous secteurs"
           withSize: true
       units:
-        value:[
-          unit: "%"
-        ,
-          unit: "M€"
-          where: variable: "Montant de l'impot"
+        value: [
+          {
+            unit: "%"
+          }
+          {
+            unit: "M€"
+            where:
+              variable: "Montant de l'impot"
+          }
         ]
-      # sentiment:
-      #   value:
-      #     domain: [8,18]
-      #     range: ['negative','warning','positive']
       legend:
-        type: 'identity-card'
-        filter: 'bottom-right'
+        type: "identity-card"
+        filter: "bottom-right"
       sort: "desc"
-      meta: [
-      ]
-      # showAverage: true
+      meta: []
     source: "Source : PwC"
     id: 4
   }
   {
     level: 3
     title: "Age du board"
-    # commentary: "Taxes in 2012"
-
     parent_id: 30
     chartOptions:
       data:
-        query:[
+        query: [
           [
-            $match:
-              domain: "board"
-          ,
-            $group:
-              _id: '$company'
-              value: $avg: "$age"
-          ,
-            $project:
-              company: $literal: "- All companies"
-              label: "$_id"
-              value: 1
+            {
+              $match:
+                domain: "board"
+            }
+            {
+              $group:
+                _id: "$company"
+                value:
+                  $avg: "$age"
+            }
+            {
+              $project:
+                company:
+                  $literal: "- All companies"
+                label: "$_id"
+                value: 1
+            }
           ]
           [
-            $match:
-              domain: "board"
-          ,
-            $project:
-              company: "$company"
-              label: "$name"
-              value: "$age"
-              position: 1
-              since: 1
+            {
+              $match:
+                domain: "board"
+            }
+            {
+              $project:
+                company: "$company"
+                label: "$name"
+                value: "$age"
+                position: 1
+                since: 1
+            }
           ]
         ]
         multiple_queries: true
-        # melt:
-        #   id: ['company','sector']
-        #   value: ["Taux d'imposition","Montant de l'impot"]
       chartType: "horizontalBarchart"
       label: "label"
       value: "value"
@@ -456,30 +506,43 @@ slides: [
           type: "dropdown"
       average:
         data:
-          query:[
+          query: [
             [
-              $match:
-                domain: "board"
-            ,
-              $group:
-                _id: ['$index']
-                value: $avg: "$age"
-            ,
-              $project:
-                company: $literal: "- All companies"
-                value: 1
+              {
+                $match:
+                  domain: "board"
+              }
+              {
+                $group:
+                  _id: [
+                    "$index"
+                  ]
+                  value:
+                    $avg: "$age"
+              }
+              {
+                $project:
+                  company:
+                    $literal: "- All companies"
+                  value: 1
+              }
             ]
             [
-              $match:
-                domain: "board"
-            ,
-              $group:
-                _id: '$company'
-                value: $avg: "$age"
-            ,
-              $project:
-                company: "$_id"
-                value: 1
+              {
+                $match:
+                  domain: "board"
+              }
+              {
+                $group:
+                  _id: "$company"
+                  value:
+                    $avg: "$age"
+              }
+              {
+                $project:
+                  company: "$_id"
+                  value: 1
+              }
             ]
           ]
           multiple_queries: true
@@ -489,18 +552,13 @@ slides: [
         value: "value"
       averageText: "moyenne CAC40"
       units:
-        value:" "
-      # sentiment:
-      #   value:
-      #     domain: [8,18]
-      #     range: ['negative','warning','positive']
+        value: " "
       legend: true
       sort: "desc"
       meta: [
         "since"
         "position"
       ]
-      # showAverage: true
     source: "Source : Reuters, 2016"
     id: 30000
   }
@@ -527,51 +585,40 @@ slides: [
       cx: "ventes en France"
       cy: "salariés en France"
       r: "nb en France"
-      # color: "evolution"
-      # drill:
-      #   group: "drillGroup"
-      #   level: "drillLevel"
-      #   levelsOrder: ['main','sub']
-
     id: 30003
   }
   {
     level: 3
     title: "Part des salariés en France"
     commentary: "Classement des groupes du CAC 40 en fonction de la part des employés en France."
-
     parent_id: 30
     chartOptions:
       data:
         query:
-          domain: 'feminisation'
-        # melt:
-        #   id: ['company','sector']
-        #   value: ["Taux d'imposition","Montant de l'impot"]
+          domain: "feminisation"
       chartType: "horizontalBarchart"
       label: "company"
       value: "salariés en France"
       average:
         data:
-          query:[
-            $match:
-              domain: "feminisation"
-          ,
-            $group:
-              _id: null
-              value: $avg: "$salariés en France"
+          query: [
+            {
+              $match:
+                domain: "feminisation"
+            }
+            {
+              $group:
+                _id: null
+                value:
+                  $avg: "$salariés en France"
+            }
           ]
         value: "value"
       averageText: "moyenne CAC40"
       units:
-        "salariés en France":"%"
-      # sentiment:
-      #   value:
-      #     domain: [8,18]
-      #     range: ['negative','warning','positive']
+        "salariés en France": "%"
       legend: true
       sort: "desc"
-      # showAverage: true
     source: "Source : Reuters, 2016"
     id: 300120
   }
@@ -587,11 +634,19 @@ slides: [
       data:
         query:
           domain: "data_bourso"
-          metric: $in: ["Chiffre d'affaires","Résultat net","Capitaux propres","Marge opérationnelle","Rentabilité Financière"]
-          year: $ne: "2017"
+          metric:
+            $in: [
+              "Chiffre d'affaires"
+              "Résultat net"
+              "Capitaux propres"
+              "Marge opérationnelle"
+              "Rentabilité Financière"
+            ]
+          year:
+            $ne: "2017"
         date:
-          selector: 'date'
-          format: '%Y-%m-%d %X'
+          selector: "date"
+          format: "%Y-%m-%d %X"
       chartType: "barchart"
       filters:
         "upper-right":
@@ -612,55 +667,69 @@ slides: [
     chartOptions:
       chartType: "funnelChart"
       value: "value"
-      label: 'metric'
+      label: "metric"
       data:
         query:
           domain: "data_bourso"
-          metric: $in: ["Chiffre d'affaires","Produits des activités ordinaires","Résultat opérationnel","Coût de l'endettement financier net","Résultat net"]
+          metric:
+            $in: [
+              "Chiffre d'affaires"
+              "Produits des activités ordinaires"
+              "Résultat opérationnel"
+              "Coût de l'endettement financier net"
+              "Résultat net"
+            ]
           year: "2016"
           category: "Compte de résultat"
         order:
           by: "metric"
-          custom: ["Chiffre d'affaires","Produits des activités ordinaires","Résultat opérationnel","Coût de l'endettement financier net","Résultat net"]
+          custom: [
+            "Chiffre d'affaires"
+            "Produits des activités ordinaires"
+            "Résultat opérationnel"
+            "Coût de l'endettement financier net"
+            "Résultat net"
+          ]
       units:
         value: " k€"
       filters:
         "upper-right":
           on: "company"
           type: "dropdown"
-
     highlightedKpis: [
-      name: " "
-      value: "value"
-      unit: " k€"
-      comment: "Chiffre d'affaires"
-      precision:
-        value: ',.0f'
-      data:
-        value:
-          query:
-            domain: "data_bourso"
-            metric: "Chiffre d'affaires"
-            year: "2016"
-            category: "Compte de résultat"
-          field: 'value'
-    ,
-      name: " "
-      value: "value"
-      unit: " k€"
-      comment: "Résultat net"
-      precision:
-        value: ',.0f'
-      data:
-        value:
-          query:
-            domain: "data_bourso"
-            metric: "Résultat net"
-            year: "2016"
-            category: "Compte de résultat"
-          field: 'value'
+      {
+        name: " "
+        value: "value"
+        unit: " k€"
+        comment: "Chiffre d'affaires"
+        precision:
+          value: ",.0f"
+        data:
+          value:
+            query:
+              domain: "data_bourso"
+              metric: "Chiffre d'affaires"
+              year: "2016"
+              category: "Compte de résultat"
+            field: "value"
+      }
+      {
+        name: " "
+        value: "value"
+        unit: " k€"
+        comment: "Résultat net"
+        precision:
+          value: ",.0f"
+        data:
+          value:
+            query:
+              domain: "data_bourso"
+              metric: "Résultat net"
+              year: "2016"
+              category: "Compte de résultat"
+            field: "value"
+      }
     ]
-
     id: 40002
   }
   {
@@ -676,17 +745,30 @@ slides: [
       data:
         query:
           domain: "reuters"
-          category: $ne: "Growth Rates"
-          metric: $nin: ["Net Income/Employee (TTM)","Revenue/Employee (TTM)"]
-        postprocess:[
-          pivot:
-            index: ['company','category','metric']
-            column: 'level'
-            value: 'value'
+          category:
+            $ne: "Growth Rates"
+          metric:
+            $nin: [
+              "Net Income/Employee (TTM)"
+              "Revenue/Employee (TTM)"
+            ]
+        postprocess: [
+          {
+            pivot:
+              index: [
+                "company"
+                "category"
+                "metric"
+              ]
+              column: "level"
+              value: "value"
+          }
         ]
       chartType: "bulletChart"
       packs: "category"
-      meta: [""]
+      meta: [
+        ""
+      ]
       label: "metric"
       value: "Company"
       target: "sector"
@@ -700,27 +782,20 @@ slides: [
         value: " "
       sentiment:
         value:
-          domain: ['0.95*sector','1.1*sector']
-          range: ['negative','warning','positive']
-
-    # recommendation:
-    #   advert: "Reco"
-    #   content: """
-    #     Pour atteindre les objectifs de la thématique <em>travaux d'isolation</em> dans l'experience client, il convient de:
-    #     <ul>
-    #       <li>bien informer les clients sur les différentes méthodes d'isolation</li>
-    #       <li>fournir un diagnostic energetique precis</li>
-    #       <li>recontacter le client 3 mois après pour discuter avec lui des économies réalisées</li>
-    #     </ul>
-    #   """
-
+          domain: [
+            "0.95*sector"
+            "1.1*sector"
+          ]
+          range: [
+            "negative"
+            "warning"
+            "positive"
+          ]
     id: 40006
   }
   {
     level: 3
     title: "Investisseurs"
-    # commentary: "Taxes in 2012"
-
     parent_id: 40
     chartOptions:
       data:
@@ -736,14 +811,9 @@ slides: [
           on: "company"
           type: "dropdown"
       units:
-        value:" %"
-      # sentiment:
-      #   value:
-      #     domain: [8,18]
-      #     range: ['negative','warning','positive']
+        value: " %"
       sort: "desc"
       legend: true
-      # showAverage: true
     source: "2016, Rapports financiers"
     id: 40005
   }
