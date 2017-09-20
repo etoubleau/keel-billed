@@ -229,7 +229,7 @@ categories: [
   kpis: [
     name:'2016 Top 5 movies bench'
     type:'heatmap'
-    
+
     chartOptions:
       data:
         query:[

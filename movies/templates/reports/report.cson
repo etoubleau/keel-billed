@@ -7,6 +7,14 @@ director_name: "{{ director_name }}"
 genre_type: "{{ genre_type }}"
 movie_title: "{{ movie_title }}"
 
+date:
+  id: "date"
+  type: "dropdown"
+  query:
+    domain: 'date_requester'
+  fields: ['date']
+  showInHeader:true
+
 #date: 'Janvier 2016'
 background:
   assetName: "bg-1"

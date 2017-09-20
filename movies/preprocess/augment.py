@@ -96,7 +96,7 @@ time_director_agg = {
      'Sport': 'sum',
      'Thriller': 'sum',
      'War': 'sum',
-     'Western': 'sum'  
+     'Western': 'sum'
 }
 
 
@@ -142,7 +142,7 @@ actor_director_agg = {
      'Thriller': 'sum',
      'War': 'sum',
      'Western': 'sum'
-    
+
 }
 
 actor_agg = {
@@ -229,7 +229,7 @@ time_actor_agg = {
      'Sport': 'sum',
      'Thriller': 'sum',
      'War': 'sum',
-     'Western': 'sum'  
+     'Western': 'sum'
 }
 
 country_agg = {
@@ -346,7 +346,7 @@ def augment(dfs):
     df['color_count'] = df['color'] == 'Color'
     df['black_white'] = df['color'] == ' Black and White'
 
-    df['profitability'] = df['gross'] / df['budget'] 
+    df['profitability'] = df['gross'] / df['budget']
     df['gross'] = df['gross'] / 1000000
     df['budget'] = df['budget'] / 1000000
 
@@ -358,7 +358,7 @@ def augment(dfs):
         df[genre] = df['genres'].map(lambda x : genre in x)
 
     #split by actor
-    TO_MELT = ['actor_2_name','actor_3_name','actor_1_name'] 
+    TO_MELT = ['actor_2_name','actor_3_name','actor_1_name']
     actor_detail = pd.melt(
         df.copy(),
         id_vars = [c for c in df.columns if c not in TO_MELT],
@@ -392,7 +392,7 @@ def augment(dfs):
     #countries
     dfs['main_country'] = df.groupby('country').agg(country_agg).reset_index()
     add_profitability(dfs['main_country'])
-    
+
     dfs['time_country'] = df.groupby(['country','title_year']).agg(time_country_agg).reset_index()
     add_profitability(dfs['time_country'])
     temp = dfs['time_country'].copy()
@@ -401,13 +401,15 @@ def augment(dfs):
     temp = temp[['title_year', 'country','previous_gross']]
     dfs['time_country'] = pd.merge(temp, dfs['time_country'], on=['title_year','country'], how='outer')
     dfs['time_country']['gross_variation'] = dfs['time_country']['gross'] / dfs['time_country']['previous_gross']
-    
+
+    dfs['date_requester'] = pd.DataFrame(dfs['time_country']['title_year'].unique(), columns=['date'])
+
     dfs['theme_country'] = theme_detail.groupby(['country','genre_type']).agg(theme_country_agg).reset_index()
     dfs['theme_country']['genre_proportion'] = dfs['theme_country']['genre_present'] / dfs['theme_country']['movie_title']
 
     #Add reports with directors, actors and countries
 
-    TO_MELT = ['actor_2_name','actor_3_name','actor_1_name'] 
+    TO_MELT = ['actor_2_name','actor_3_name','actor_1_name']
     reports = pd.DataFrame({
                              'unique_id':['Synthesis'],
                              'actor':['Synthesis'],
