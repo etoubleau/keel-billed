@@ -5,6 +5,11 @@ etl_config:
     file:'my_excel_source.xls'
     sheetname:'barchart'
   ,
+    domain:'barchart_missing_values'
+    type:'excel'
+    file:'my_excel_source.xls'
+    sheetname:'barchart_missing_values'
+  ,
     domain:'barchart_full_features'
     type:'excel'
     file:'my_excel_source.xls'
