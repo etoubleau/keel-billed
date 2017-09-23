@@ -155,7 +155,7 @@ def augment(dfs):
     dfs['labor-vs-capital'] = prepare_labor(dfs['labor-vs-capital'])
 
     # Add domain to each dataframe
-    for domain, df in dfs.iteritems():
+    for domain, df in dfs.items():
         df['domain'] = domain
 
     # Example calcuation that will only be done if the data or function code has changed
