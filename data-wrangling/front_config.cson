@@ -1,59 +1,11 @@
-#les settings peuvent activer certaines options
-#nous ne nous en servons pas pour l'instant --> []
 settings:[]
-
-#Comment paramétrer un glossaire?
-glossary:
-  #Nom à afficher pour le glossaire
-  title: 'Glossaire'
-  #liste des termes à afficher
-  terms: [
-    #1er terme
-    term: "Data"
-    #et sa définition
-    meaning: "An android from the 24th century who serves on the star ship Enterprise.<br><em>Data kicked some borg ass and then fed his cat lunch.</em>"
-    #pas de 'slides' --> cette définition sera affichée dans le glossaire de tous les écrans
-  ,
-    term: "Hipsterectomy"
-    meaning: "The removal or dismissal of what is largely accepted to be cool or trendy. The process of de-hipsterizing someone or something."
-    #cet écran ne sera disponible que pour l'écran 10001
-    slides:[10001]
-  ,
-    term: "Graph"
-    meaning: "A slang term for a sketching of what someone plans on tagging. graffiti. <br><em>NOT A CHART!</em>"
-  ]
-
-###
-
-Les slides correspondent aux écrans visibles dans les différents 'chapitres' de l'application
-Les slides correspondent à une liste de configuration
-Chaque élément de la liste est entre bracket : {ma configuration}
-ou plutôt :
-[
-  {
-    ma configuration 1
-  }
-  {
-    ma configuration 2
-  }
-]
-
-###
+glossary:[]
 
 slides: [
-#Le niveau 0 correspond au squelette de l'application
-#Tous les autres éléments viennent s'y rattacher
-#2 informations : le level et l'id (qui doit être UNIQUE)
   {
     level: 0
     id: 0
   }
-  #Les niveaux 1 définissent des chapitres (qui peuvent contenir des sous-chapitres ou directement des écrans)
-  #3 informations :
-  # - le level (1 forcémment!),
-  # - l'id (UNIQUE! A vous de le choisir comme vous le souhaitez nous préconisons d'uiliser des 10aines)
-  # - le titre : à vous de le choisir, n'est pas forcémment unique
-  # Les levels 1 ont forcémment pour parent le level 0
   {
     level: 1
     id: 10
@@ -69,19 +21,25 @@ slides: [
     level: 2
     id: 102
     parent_id:10
-    title: "Arithmetics"
+    title: "Renaming"
   }
   {
     level: 2
     id: 103
     parent_id:10
-    title: "Grouping"
+    title: "Arithmetics"
   }
   {
     level: 2
     id: 104
     parent_id:10
-    title: "Pivoting"
+    title: "Grouping"
+  }
+  {
+    level: 2
+    id: 105
+    parent_id:10
+    title: "Melting and Pivoting"
   }
   #Here is a simple barchart. Go take a look at it.
   #We're going to see how to filter the data using some of mongo operator
@@ -149,6 +107,8 @@ slides: [
       units:
         "my_value": "unite"
   }
+
+  ######TO DO : Try to remove the upper-middle filter and filter the data directly in the query on the 'yeaaah' value
 
   #Let's remove the bottom filter and display only the data corresponding to 'metric1' using the $match operator.
   #Not useful for the moment but will see how operators can be chained to performe complex transformations.
@@ -223,8 +183,9 @@ slides: [
         "my_value": "unite"
   }
 
-  #Ok now let's say that we would like to display only the years post 2015 (included).
-  #How would we do that?
+  ######TO DO : Display the year STRICTLY prior to 2016 (ie not including 2016)
+
+  #When you now the data at hand this is similar to specifying a list of accepted values
 
   {
     level: 3
@@ -261,6 +222,8 @@ slides: [
       units:
         "my_value": "unite"
   }
+
+  ######TO DO : how would you filter for data that are not in the list [2015,2016], check the mongo documentation!
 
   #Missing values are tricky.
   #They sometimes mean just that, that we have no values for them.
@@ -351,8 +314,8 @@ slides: [
         "my_value": "unite"
   }
 
-    #Sometimes the label in the data are not clean and rather than changing it directly (which is generally the best option!)
-    #you prefer to change it directly in the configuration.
+    #Sometimes the label in the data are not clean and rather than changing it in the data(which is generally the best option!)
+    #You prefer to change it directly in the configuration.
     #You would use another postprocess operation to do that : rename.
     #As an example let's say we want to replace "yeaaah" and "yooo", the stupid values in our uppper-right filter by meaningful names.
     #Let's do that!
@@ -468,23 +431,23 @@ slides: [
 
   {
     level: 3
-    parent_id: 101
-    id: 10008
+    parent_id: 103
+    id: 10301
     title: "Division"
 
     filters:
       'bottom-right':
-        on:'unambiguous filter column name'#I have changed the name of that column below. So I have to change it there also.
+        on:'bottom_filter'
         type:'buttons'
 
     chartOptions:
       data:
         query:[
           $match:
-            domain: "barchart_missing"
-          ,
-            $addFields:
-              new_value:$divide:['$my_value',100]
+            domain: "barchart"
+        ,
+          $addFields:#This is new
+            new_value:$divide:['$my_value',100]#Here is the division: we create a new column 'new_value' that is the product of the division of 'my_value' by 100
         ]
 
         precision:
@@ -503,5 +466,307 @@ slides: [
 
       units:
         "new_value": "unite"
+  }
+
+    ######TO DO : You want to divide all values by 100 but round them up to the lowest integer values, this is called ceiling, check the mongo doc!
+
+    #Multiplication, sum, substraction, etc. can also be performed the same way
+    #See mongo arithmetic operators documentation for exhaustive reference https://docs.mongodb.com/manual/reference/operator/aggregation-arithmetic/
+    #Note that the second argument doesn't have to be a hard coded value, it can be a value
+  {
+    level: 3
+    parent_id: 103
+    id: 10302
+    title: "Multiplication of 2 columns"
+
+    filters:
+      'bottom-right':
+        on:'bottom_filter'
+        type:'buttons'
+
+    chartOptions:
+      data:
+        query:[
+          $match:
+            domain: "barchart"
+        ,
+          $addFields:
+            new_value:$multiply:['$my_value','$my_value']#This has changed, we use the multiply operator and the seond argument is a column not a hard coded value
+        ]
+
+        precision:
+          "new_value": "my_precision"
+
+      chartType: "barchart"
+
+      filters:
+        "upper-middle":
+          on: "middle_filter"
+          type: "buttons"
+
+      value: "new_value"
+      label: "my_date"
+      groups: "my_serie"
+
+      units:
+        "new_value": "unite"
+  }
+    #More often than not it makes sense to display total / subtotal values that are not present in the data.
+    #As always it is better to directly add the total values in the data for maintainability purposes.
+    #But when it is not possible mongo can help us add total / subtotal
+    #Let's say that I'm not interested in the individual values of A and B but only in A + B
+  {
+    level: 3
+    parent_id: 103
+    id: 10303
+    title: "Grouping and projecting"
+
+    chartOptions:
+      data:
+        query:[
+          $match:
+            domain: "barchart"
+            bottom_filter:'metric1'#For simplification purposes we do not use filter here and instead filter the data in the query
+            middle_filter:'yeaaah'#For simplification purposes we do not use filter here and instead filter the data in the query
+        ,
+          $group:
+            _id:#Name of all the colums I want to group by. Here for each date I wan to sum up everything there is
+              my_date:'$my_date'
+
+            my_value:$sum:'$my_value'#After grouping I indicate how to aggregate data, here I simply add the data using the $sum operator
+                                    #I could have created another column but rather than that I juste replace the my_value data with the subtotal data
+        ,
+          $project:#When you project you have to specify all the column that you want to keep.
+                    #A column that is not projeted will not appear at the end of your data query
+            my_date:"$_id.my_date"
+            my_value:1#using 1 is just saying that you want to keep this column, it is equivalent to subtotal:'$subtotal'
+            #Now at this stage you should notice that my data has no label to display...
+            #How can I add one?
+            my_serie:'$literal':'subtotal'#This is a new operator! $literal allow you to fill a column with text, here 'subtotal'
+                                          #my_serie will be used by the chart and 'subtotal displayed as our label'
+        ]
+
+        precision:
+          "my_value": "my_precision"
+
+      chartType: "barchart"
+
+      value: "my_value"
+      label: "my_date"
+      groups: "my_serie"
+
+      legend:true
+      units:
+        "new_value": "unite"
+  }
+
+    ######TO DO : Change the label of the "subtotal' bars, try to call them "Total". Carefull there is more than one change to be made!
+
+    #More often than not it makes sense to display total / subtotal values that are not present in the data.
+    #As always it is better to directly add the total values in the data for maintainability purposes.
+    #But when it is not possible mongo can help us add total / subtotal
+    #Let's say that I'm not interested in the individual values of A and B but only in A + B
+  {
+    level: 3
+    parent_id: 103
+    id: 10304
+    title: "Grouping and addFields"
+
+    chartOptions:
+      data:
+        query:[
+          $match:
+            domain: "barchart"
+            bottom_filter:'metric1'
+            middle_filter:'yeaaah'
+        ,
+          $group:
+            _id:
+              my_date:'$my_date'
+
+            my_value:$sum:'$my_value'
+        ,
+          $addFields:#This is new rather than specifiying all the columns you want to keep you just say which column you want to add
+                      #Before adding fields you have to columns= _id and subtotal.
+                      #What you want is to extract 'my_date' and 'my_serie' that are for the moment included in _id
+                      #addFields is particularly useful when you have tons of columns and don't want to individually project all of them
+                      #in order to keep them. With $addFields they will be kept by default
+            my_date:"$_id.my_date"
+            my_serie:'$literal':'subtotal'
+        ]
+
+        precision:
+          "my_value": "my_precision"
+
+      chartType: "barchart"
+
+      value: "my_value"
+      label: "my_date"
+      groups: "my_serie"
+
+      legend:true
+      units:
+        "new_value": "unite"
+  }
+    #Now, this is ok but you probably want to display a subtotal while at the same time keeping the individual values A and B
+    #In order to do that we are going to use multiple queries
+    #Mutliple queries allow you to specify as many queries as you want that will be concatenaded together
+    #Basically they will be stacked on top of one another using common column names as keys
+  {
+    level: 3
+    parent_id: 103
+    id: 10305
+    title: "Multiple queries"
+
+    chartOptions:
+      data:
+        multiple_queries:true#This is new! I tell Toucan that I'm using more than query just below
+        query:[
+          [#This is new: each query has to be included in a []
+          #This query is the base query that just pick up the values for A and B
+          #Again we filter the data directly in the query rather than use user filters for simplicity
+            $match:
+              domain: "barchart"
+              bottom_filter:'metric1'
+              middle_filter:'yeaaah'
+          ]
+          [#This is new: each query has to be included in a []
+          #The rest of this query is indentical to the one used in 10304 : it computes subtotals
+            $match:
+              domain: "barchart"
+              bottom_filter:'metric1'
+              middle_filter:'yeaaah'
+          ,
+            $group:
+              _id:
+                my_date:'$my_date'
+
+              my_value:$sum:'$my_value'
+          ,
+            $addFields:
+              my_date:"$_id.my_date"
+              my_serie:'$literal':'subtotal'
+          ]
+        ]
+        precision:
+          "my_value": "my_precision"
+
+      chartType: "barchart"
+
+      value: "my_value"
+      label: "my_date"
+      groups: "my_serie"
+
+      legend:true
+      units:
+        "new_value": "unite"
+  }
+
+    ######TO DO : Create a slide that display 3 columns: A*A and B*B and the difference between A and B (A - B)
+
+    #Sometimes your data is not in a Toucan friendly format
+    #Best solution: reshape the data!!
+    #If it is not possible you can do ti directly in the configuration.
+    #Let's take filters.
+
+    #Your data could look someting like this
+    ##########Inital DATA#########
+    #events   |Y2017      |Y2018
+    #Triathlon|880 people |976 people
+    #Opera    |8 people   |6 people
+    #An you wish to draw an horizontal barchart that use the column 'events' as label and give the user a filter to switch to display
+    #the attendance in 2017 or 2018
+
+    #Well you can't do this directly since Toucan filters takes only 1 column that should contain the values of the filter
+    #In fact your data should look something like this
+    #######Transformed DATA#########
+    #events   |my_filter |my_value
+    #Triathlon|Y2017     |880 people
+    #Opera    |Y2017     |8 people
+    #Triathlon|y2018     |976 people
+    #Opera    |y2018     |6 people
+
+    #Well the operation that takes you from Inital to transformed data is call a melt
+    #Let's see how to do that in Toucan
+
+  {
+    level: 3
+    parent_id: 104
+    id: 10401
+    title: "Melting"
+
+    filters:
+      'bottom-right':
+        on:'variable'#See below, this is an output of the melt operation
+        type:'buttons'
+    chartOptions:
+      data:
+        query:
+          domain: "melting_simple"#Go check out what the data looks like. It's looks a lot like the Initial data schema just above
+
+        postprocess:[#Remeber the postprocess step we use for renaming? We'll just use another postprocess tool here
+          melt:
+            id:['events']#The columns you want to keep just the way they are
+            value:['Y2017','Y2018']#The columns you want to melt together, this will create 2 columns
+                    #variable containing the name of the melted columns
+                    #value containing the values of the melted columns
+        ]
+
+      chartType: "horizontal-barchart"#Just for change let's use an hb
+
+      value: "value"#Output of the melt operation
+      label: "events"#This column has not changed since it was in the id parameters of the melt operation
+
+      sort:'desc'
+  }
+  ######TO DO : use the rename postprocess step to rename value and variable to my_value and my_variable
+
+    #Let's take another look at a common transformation
+
+    #Your data could look someting like this
+    ##########Inital DATA#########
+    #events   |my_label       |my_value
+    #Triathlon|attendance     |88
+    #Opera    |attendance     |8
+    #Triathlon|popularity     |97
+    #Opera    |popularity     |6
+    #Triathlon|profitability  |9,8
+    #Opera    |profitability  |6,1
+
+    #An you wish to draw a bubble chart
+    #Looking at the documentation https://docs.toucantoco.com/concepteur/chart-config/charts-configuration/bubblechart.html#bubblechart
+    #you see that the data should have this shape
+
+    #######Transformed DATA#########
+    #events   |attendance|popularity|profitability
+    #Triathlon|88        |97        |9,8
+    #Opera    |8         |6         |6,1
+
+    #This operation, which is a kind of the reverse of melt, is called pivot
+    #Let's see how to do that in Toucan
+
+  {
+    level: 3
+    parent_id: 104
+    id: 10402
+    title: "Pivoting"
+
+    chartOptions:
+      data:
+        query:
+          domain: "pivoting_simple"#Go check out what the data looks like. It's looks a lot like the Initial data schema just above
+
+        postprocess:[
+          pivot:
+            index:['events']#The column(s) you want to keep just the way they are
+            column:'my_label'#The column which values will be turned into columns
+            value:'my_value'#The column which values will be used to fill the columns created by the previous step
+        ]
+
+      chartType: "bubblechart"
+      label: "events"#This column has not changed since it was in the id parameters of the melt operation
+      cx:'attendance'#column created by the pivot
+      cy:'popularity'#column created by the pivot
+      r:'profitability'#column created by the pivot
   }
 ]

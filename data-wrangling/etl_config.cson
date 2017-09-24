@@ -5,6 +5,16 @@ etl_config:
     file:'my_excel_source.xls'
     sheetname:'barchart'
   ,
+    domain:'melting_simple'
+    type:'excel'
+    file:'my_excel_source.xls'
+    sheetname:'melting_simple'
+  ,
+    domain:'pivoting_simple'
+    type:'excel'
+    file:'my_excel_source.xls'
+    sheetname:'pivoting_simple'
+  ,
     domain:'barchart_missing_values'
     type:'excel'
     file:'my_excel_source.xls'
