@@ -1,0 +1,83 @@
+﻿# This is an example of report template
+# Customize it!
+
+entityName: "{{ ENTITY_NAME }}"
+# entityID: "{{ CATE }}"
+# entityGroup: " {{ TYPE }}"
+LEVEL: "{{ type }}"
+ENTITY_ID: "{{ ENTITY_ID }}"
+ENTITY_COLUMN_ID: "{{ ENTITY_COLUMN_ID }}"
+THEME: "{{ THEME }}"
+
+
+UNIVERS: "{{ UNIVERS }}"
+ID_UNIVERS: "{{ ID_UNIVERS }}"
+
+DEPARTEMENT: "{{ DEPARTEMENT }}"
+ID_DEPARTEMENT: "{{ ID_DEPARTEMENT }}"
+
+RAYON: "{{ RAYON }}"
+ID_RAYON: "{{ ID_RAYON }}"
+
+id: "{{ index }}"
+
+# year: "2017"
+# month: "08"
+# year_month: "201708"
+
+# date:
+#   id: 'date'
+#   type: 'buttons'
+#   query: [
+#     $match:
+#       domain: 'application_dates'
+#       default_date: 1
+#   ]
+#   showInHeader: true
+#   # values: [
+#   #   string_date: 'Juillet 2017'
+#   #   year_month: 'Y201707'
+#   #   year: 'Y2017'
+#   #   month: 'M07'
+#   # ,
+#     # string_date: 'Juillet 2017'
+#     # year_month: 'Y201707'
+#     # year: 'Y2017'
+#     # month: 'M07'
+#   # ]
+#   completeObjectMode: true
+#   fields: ['string_date', 'year_month', 'year', 'month', 'first_of_month', 'last_of_month']
+#   # default: 'semaine'
+background:
+  id: "1"
+  overlay: true
+
+search:
+  hierarchy: true
+  options: [
+    default: 'ALL'
+    key: 'THEME'
+    placeholder: 'Séléction Thème'
+  ,
+    default: 'ALL'
+    key: 'UNIVERS'
+    placeholder: 'Sélection Univers'
+  ,
+    default: 'ALL'
+    key: 'DEPARTEMENT'
+    placeholder: 'Sélection Département'
+  ,
+    default: 'ALL'
+    key: 'RAYON'
+    placeholder: 'Sélection Rayon'
+  ]
+  # placeholder: 'Search countries & brands'
+  showSearchBar: true
+# execsumTitle: "PANEL.Bio <strong>{{ entityName }}</strong>"
+# execsumNote: "* Powered by <strong>Toucan Toco</strong> *!"
+
+# dashboards:
+#   default: 0
+#   search: "Recherchez dans les dashboards..."
+
+slideInfos: {}

@@ -1,0 +1,69 @@
+﻿home:
+  skipToReport: 0
+
+settings: []
+glossary: []
+
+slides: [
+  {
+    level: 0
+    id: 0
+  }
+  {
+    level: 1
+    title: 'Report dynamic slides'
+    id: 10
+  }
+  {
+    level: 3
+    parent_id: 10
+    id: 10001
+    title: 'Top reseaux'
+    recommendation:
+      advert: 'Vue détaillée'
+      content: "<a href='panel.bio'>Panel Bio</a>"
+    chartOptions:
+      # Chart groupé par univers
+      # chartType: 'horizontal-barchart'
+      # units:
+      #   value: " €"
+      # data:
+      #   query:[
+      #     $match:
+      #       domain: "panel_periode_365"
+      #   ,
+      #     $group:
+      #       _id:
+      #         univers: "$univers_label"
+      #       value: $sum: "$achat_prix_total_ttc"
+      #   ,
+      #     $project:
+      #       univers: "$_id.univers"
+      #       value_euros: $divide: ["$value", 100]
+      #   ]
+      # value: "value_euros"
+      # label: "univers"
+
+      chartType: 'horizontal-barchart'
+      units:
+        value: " €"
+      data:
+        query:[
+          $match:
+            domain: "panel_periode_365"
+            "<%= report.ENTITY_COLUMN_ID %>": "<%= report.ENTITY_ID %>"
+        ,
+          $group:
+            _id:
+              reseau: "$reseau_label"
+            value: $sum: "$achat_prix_total_ttc"
+        ,
+          $project:
+            reseau: "$_id.reseau"
+            value_euros: $divide: ["$value", 100]
+        ]
+      value: "value_euros"
+      label: "reseau"
+      sort: "desc"
+  }
+]
