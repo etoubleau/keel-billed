@@ -11,13 +11,33 @@ slides: [
   }
   {
     level: 1
-    title: 'Report dynamic slides'
+    title: 'Catégories'
     id: 10
   }
   {
+    level: 1
+    title: 'Réseaux'
+    id: 20
+  }
+  {
+    level: 1
+    title: 'Marques'
+    id: 30
+  }
+  {
+    level: 1
+    title: 'Produits'
+    id: 40
+  }
+  {
+    level: 1
+    title: 'Attributs'
+    id: 50
+  }
+  {
     level: 3
-    parent_id: 10
-    id: 10001
+    parent_id: 20
+    id: 20001
     title: 'Top reseaux'
     recommendation:
       advert: 'Vue détaillée'
