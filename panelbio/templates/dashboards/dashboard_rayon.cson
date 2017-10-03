@@ -8,9 +8,8 @@ categories: [
     kpis: [
       {
         type: "text"
-        name: "Top departement"
+        name: "Top produits"
         value: ""
-        slide: 10001
       }
       {
         type: "text"
@@ -23,6 +22,21 @@ categories: [
         name: "Top réseaux"
         value: ""
         slide: 20001
+      }
+    ]
+  }
+  {
+    name: "Infos rayon"
+    kpis: [
+      {
+        type: "text"
+        name: "Progression du rayon"
+        value: ""
+      }
+      {
+        type: "text"
+        name: "Poids du rayon"
+        value: ""
       }
     ]
   }
