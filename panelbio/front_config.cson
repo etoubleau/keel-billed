@@ -21,7 +21,7 @@ slides: [
     title: 'Top reseaux'
     recommendation:
       advert: 'Vue détaillée'
-      content: "<a href='panel.bio'>Panel Bio</a>"
+      content: "<a href='https://www.panel.bio'>Panel Bio</a>"
     chartOptions:
       # Chart groupé par univers
       # chartType: 'horizontal-barchart'
