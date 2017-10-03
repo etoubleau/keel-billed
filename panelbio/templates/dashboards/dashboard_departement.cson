@@ -1,184 +1,29 @@
 ﻿report: "{{ report_id }}"
-
 default: true
 entityName: "{{ ENTITY_NAME }}"
 id: "{{ index }}"
 categories: [
   {
-    kpis: [
-      {
-        autoHeight: true
-        name: "Classement"
-        source: "2015, source Smart Toucan"
-        slide: 100
-        type: "leaderboard"
-        chartOptions:
-          units:
-            value: " €"
-          limit: 5
-          data:
-            query: [
-              {
-                $match:
-                  domain: "panel"
-              }
-              {
-                $group:
-                  _id:
-                    univers: "$univers_label"
-                  value:
-                    $sum: "$achat_prix_total_ttc"
-              }
-              {
-                $project:
-                  univers: "$_id.univers"
-                  value_euros:
-                    $divide: [
-                      "$value"
-                      100
-                    ]
-              }
-            ]
-          value: "value_euros"
-          label: "univers"
-      }
-    ]
-    name: "top"
-  }
-  {
-    kpis: [
-      {
-        compute:
-          badge: "value - comparison"
-        name: "Metric"
-        sentiment:
-          value:
-            domain: [
-              "comparison"
-            ]
-            range: [
-              "negative"
-              "positive"
-            ]
-        type: "value-dynamic"
-        precision:
-          value: ".1f"
-        value: "value"
-        data:
-          comparison:
-            query:
-              default: 1
-              country: "France"
-              domain: "dashboards"
-            field: "target"
-          value:
-            query:
-              breakdown: "<%= requestersManager.date %>"
-              pays: "France"
-              domain: "ranks"
-            field: "pib"
-        source: "2015, source Smart Toucan"
-        slide: 32204
-        badge: "badge"
-        unit: "%"
-      }
-      {
-        src: "toucan.jpg"
-        type: "media-img"
-      }
-    ]
-    name: "Performance"
-  }
-  {
-    kpis: [
-      {
-        source: "2015, source Smart Toucan"
-        chartOptions:
-          date: "month"
-          data:
-            query:
-              breakdown: "<%= requestersManager.date %>"
-              domain: "lines1"
-          value: "value"
-        type: "line"
-        name: "Traffic"
-        unit: " p/h"
-      }
-      {
-        bgSize: "contain"
-        src: "logo_balu"
-        type: "media-img"
-        chartOptions:
-          bgSize: "contain"
-      }
-    ]
-    name: "Evolution"
-  }
-  {
+    name: "Tops"
     kpis: [
       {
         type: "text"
-        name: "TEST script"
-        value: "<a target='_blank' href='toto'>lien</a>undefined"
-        asset: "testaaa"
+        name: "Top rayons"
+        value: ""
+        slide: 10001
+      }
+      {
+        type: "text"
+        name: "Top marques"
+        value: ""
+        slide: 30002
+      }
+      {
+        type: "text"
+        name: "Top réseaux"
+        value: ""
+        slide: 20001
       }
     ]
-    name: "TEST iframe"
-  }
-  {
-    kpis: [
-      {
-        src: "crea-home.jpg"
-        type: "media-img"
-      }
-      {
-        type: "media-video"
-        id: "50352359"
-        provider: "vimeo"
-      }
-      {
-        content: "mon_contenu"
-        type: "text-dynamic"
-        data:
-          query:
-            domain: "mon_texte"
-        name: "Long free text"
-        source: "2015, source Smart Toucan"
-      }
-    ]
-    name: "Contenu"
-  }
-  {
-    kpis: [
-      {
-        slide: 100
-        type: "score-card"
-        name: "Cosmetics"
-        chartOptions:
-          sentiment:
-            my_evolution:
-              domain: [
-                0
-              ]
-              range: [
-                "negative"
-                "positive"
-              ]
-          value: "my_value"
-          label: "my_label"
-          limit: 6
-          variation: "my_evolution"
-          units:
-            my_evolution: "my_unit"
-            my_value: "my_unit"
-          data:
-            query:
-              domain: "my_scorecard"
-            precision:
-              my_evolution: ",.0f"
-              my_value: ",.0f"
-      }
-    ]
-    name: "Score cards"
   }
 ]
