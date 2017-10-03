@@ -3,7 +3,7 @@
 
 entityName: "{{ ENTITY_NAME }}"
 # entityID: "{{ CATE }}"
-# entityGroup: " {{ TYPE }}"
+entityGroup: " {{ type }}"
 LEVEL: "{{ type }}"
 ENTITY_ID: "{{ ENTITY_ID }}"
 ENTITY_COLUMN_ID: "{{ ENTITY_COLUMN_ID }}"
@@ -53,28 +53,29 @@ background:
   overlay: true
 
 search:
-  hierarchy: true
-  options: [
-    default: 'ALL'
-    key: 'THEME'
-    placeholder: 'Séléction Thème'
-  ,
-    default: 'ALL'
-    key: 'UNIVERS'
-    placeholder: 'Sélection Univers'
-  ,
-    default: 'ALL'
-    key: 'DEPARTEMENT'
-    placeholder: 'Sélection Département'
-  ,
-    default: 'ALL'
-    key: 'RAYON'
-    placeholder: 'Sélection Rayon'
-  ]
-  # placeholder: 'Search countries & brands'
-  showSearchBar: true
+  # hierarchy: true
+  # options: [
+  # #   default: 'ALL'
+  # #   key: 'THEME'
+  # #   placeholder: 'Séléction Thème'
+  # # ,
+  #   default: 'ALL'
+  #   key: 'UNIVERS'
+  #   placeholder: 'Sélection Univers'
+  # ,
+  #   default: 'ALL'
+  #   key: 'DEPARTEMENT'
+  #   placeholder: 'Sélection Département'
+  # ,
+  #   default: 'ALL'
+  #   key: 'RAYON'
+  #   placeholder: 'Sélection Rayon'
+  # ]
+  placeholder: 'Sélection Univers / Département / Rayon'
+  # showSearchBar: true
 # execsumTitle: "PANEL.Bio <strong>{{ entityName }}</strong>"
-# execsumNote: "* Powered by <strong>Toucan Toco</strong> *!"
+execsumTitle: '&nbsp;'
+execsumNote: "* Powered by <strong>Toucan Toco</strong> *!"
 
 # dashboards:
 #   default: 0
