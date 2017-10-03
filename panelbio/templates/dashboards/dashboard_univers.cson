@@ -1,6 +1,7 @@
 ﻿report: "{{ report_id }}"
-default: "{{ default }}"
-entityName: "{{ zone }}"
+
+default: true
+entityName: "{{ ENTITY_NAME }}"
 id: "{{ index }}"
 categories: [
   {
