@@ -1,7 +1,23 @@
 ﻿home:
   skipToReport: 0
 
-settings: []
+settings:
+  requesters: [
+    description: 'Motifs de contact sélectionnés par date de :'
+    type: "buttons"
+    id: 'withVrac'
+    values: [
+      label: 'En Vrac Inclus'
+      value: true
+    ,
+      label: "Hors Vrac"
+      value: false
+    ]
+    # defaultSelected: 'first'
+    completeObjectMode: true
+    defaultSelected: 'Hors Vrac'
+    fields:['label', 'value']
+  ]
 glossary: []
 
 slides: [
@@ -111,10 +127,31 @@ slides: [
     parent_id: 20
     id: 20001
     title: 'Classement'
-    recommendation:
-      advert: 'Vue détaillée'
-      content: "<a href='https://www.panel.bio'>Panel Bio</a>"
-    commentary: "Classement du rayon (ou autres niveaux) dans les différents réseaux<br><br>choix de tous les indicateurs / affichage des indicateurs secondaires"
+    # recommendation:
+    #   advert: 'Vue détaillée'
+    #   content: "<a href='https://www.panel.bio'>Panel Bio</a>"
+    # chartOptions:
+    #   chartType: 'horizontal-barchart'
+    #   units:
+    #     value: " €"
+    #   data:
+    #     query:[
+    #       $match:
+    #         domain: "panel_periode_365"
+    #         "<%= report.ENTITY_COLUMN_ID %>": "<%= report.ENTITY_ID %>"
+    #     ,
+    #       $group:
+    #         _id:
+    #           reseau: "$reseau_label"
+    #         value: $sum: "$achat_prix_total_ttc"
+    #     ,
+    #       $project:
+    #         reseau: "$_id.reseau"
+    #         value_euros: $divide: ["$value", 100]
+    #     ]
+    #   value: "value_euros"
+    #   label: "reseau"
+    #   sort: "desc"
   }
   {
     level: 3
