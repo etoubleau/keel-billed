@@ -1,4 +1,6 @@
-﻿home:
+sharingOptions: true
+
+home:
   skipToReport: 0
 
 settings:
@@ -7,11 +9,11 @@ settings:
     type: "buttons"
     id: 'withVrac'
     values: [
-      label: 'En Vrac Inclus'
+      label: "Hors Vrac"
       value: false
     ,
-      label: "Hors Vrac"
-      value: true
+      label: 'En Vrac Inclus'
+      value: "__VOID__"
     ]
     completeObjectMode: true
     defaultSelected: 'Hors Vrac'
@@ -120,13 +122,14 @@ slides: [
             domain: $in: ["panel_periode_365","panel_periode_365p-1"]
             "<%= report.ENTITY_ID_COLUMN %>": "<%= report.UNIVERS == 'ALL' ? '__VOID__' : report.ENTITY_ID %>"
             prod_is_vrac: "<%= requestersManager.withVrac.value %>"
+            is_gms: 'false'
         ,
           $group:
             _id:
               categorie_id: "$<%= report.ENTITY_CHILD_ID_COLUMN %>"
               domain: "$domain"
               conso_id_user: "$conso_id_user"
-              mag_id_magasin: "$mag_id_magasin"
+              id_magasin: "$id_magasin"
             totaleuro: $sum: "$achat_prix_total_ttc"
             totalvolume: $sum: "$achat_quantite"
             label: $first: "$<%= report.ENTITY_CHILD_LABEL_COLUMN %>"
@@ -136,7 +139,7 @@ slides: [
               $group:
                 _id:
                   label: "$label"
-                  mag_id_magasin: "$_id.mag_id_magasin"
+                  id_magasin: "$_id.id_magasin"
                   domain: "$_id.domain"
             ,
               $group:
@@ -274,14 +277,56 @@ slides: [
                 indicateur: "$value.indicateur"
                 valeur: "$value.valeur"
                 valeurp_1: "$value.valeurp_1"
-            # ,
-              # $addFields:
-                # value: $cond: [$eq: ["$value", null], 0, $divide: ["$value", 100]]
-                # evolution: $cond: [
-                #   $in: ["$valuep_1", [0, null, ""]]
-                #   "-"
-                #   $divide: [$subtract: ["$value", "$valuep_1"], "$valuep_1"]
-                # ]
+            ,
+              $group:
+                _id:
+                  indicateur: '$indicateur'
+                record: $push:
+                  value: "$valeur"
+                  valuep_1: "$valeurp_1"
+                  label: "$label"
+                cum_value: $sum: "$valeur"
+                cum_valuep_1: $sum: "$valeurp_1"
+            ,
+              $unwind: "$record"
+            ,
+              $project:
+                _id: 0
+                cum_value: 1
+                cum_valuep_1: 1
+                indicateur: '$_id.indicateur'
+                valeur: "$record.value"
+                valeurp_1: "$record.valuep_1"
+                label: "$record.label"
+                value_pct: $cond: [
+                  $in: ["$cum_value", [0,null]]
+                  '-'
+                  $divide: ["$record.value", "$cum_value"]
+                ]
+                value_pctp_1: $cond: [
+                  $in: ["$cum_valuep_1", [0,null]]
+                  '-'
+                  $divide: ["$record.valuep_1", "$cum_valuep_1"]
+                ]
+            ,
+              $addFields:
+                values: [{valeur: "$valeur", type: "NB", indicateur: "$indicateur", valeurp_1: "$valeurp_1"},{valeur: "$value_pct", type: "%", indicateur: "$indicateur", valeurp_1: "$value_pctp_1"}]
+            ,
+              $unwind: "$values"
+            ,
+              $project:
+                indicateur: $switch:
+                  branches: [
+                    case: $eq: ["$values.type", "NB"]
+                    then: "$indicateur"
+                  ,
+                    case: $eq: ["$values.indicateur", "Total Vol."]
+                    then: $literal: "PM Vol."
+                  ]
+                  default: $literal: "PM €"
+                valeur: "$values.valeur"
+                valeurp_1: "$values.valeurp_1"
+                label: 1
             ]
         ,
           $addFields:
@@ -293,9 +338,41 @@ slides: [
           $unwind: "$values"
         ,
           $replaceRoot: newRoot: "$values"
+        ,
+          $addFields:
+            users: $arrayElemAt: [$filter:
+              input: "$users"
+              as: "u"
+              cond: $eq: ["$label", "$$u.label"]
+            ,
+             0]
+        ,
+          $addFields:
+            evolution: $cond: [
+              $or: [
+                $in: ["$valeurp_1", [0, null, ""]]
+              ,
+                $in: ["$users.valeurp_1", [0, null, ""]]
+              ,
+                $in: ["$users.valeur", [0, null, ""]]
+              ]
+              "-"
+              $divide: [$subtract: [$multiply: ["$valeur", $divide: ["$users.valeur", "$users.valeurp_1"]], "$valeurp_1"], "$valeurp_1"]
+            ]
+        ,
+          $addFields:
+            precision:
+              $switch:
+                branches: [
+                  case: $in: ["$indicateur", ["PM Vol.", "PM €"]]
+                  then: $literal: ".1%"
+                ]
+                default: $literal: ",.0f"
+
         ]
         precision:
           evolution: '.0%'
+          valeur: "precision"
       variation: "evolution"
       value: "valeur"
       label: "label"
