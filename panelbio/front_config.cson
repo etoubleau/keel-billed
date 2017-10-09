@@ -350,11 +350,13 @@ slides: [
           $addFields:
             evolution: $cond: [
               $or: [
-                $in: ["$valeurp_1", [0, null, ""]]
+                $in: ["$valeur", [0, null, "", "-"]]
               ,
-                $in: ["$users.valeurp_1", [0, null, ""]]
+                $in: ["$valeurp_1", [0, null, "", "-"]]
               ,
-                $in: ["$users.valeur", [0, null, ""]]
+                $in: ["$users.valeurp_1", [0, null, "", "-"]]
+              ,
+                $in: ["$users.valeur", [0, null, "", "-"]]
               ]
               "-"
               $divide: [$subtract: [$multiply: ["$valeur", $divide: ["$users.valeur", "$users.valeurp_1"]], "$valeurp_1"], "$valeurp_1"]
@@ -639,11 +641,13 @@ slides: [
           $addFields:
             evolution: $cond: [
               $or: [
-                $in: ["$valeurp_1", [0, null, ""]]
+                $in: ["$valeur", [0, null, "", "-"]]
               ,
-                $in: ["$users.valeurp_1", [0, null, ""]]
+                $in: ["$valeurp_1", [0, null, "", "-"]]
               ,
-                $in: ["$users.valeur", [0, null, ""]]
+                $in: ["$users.valeurp_1", [0, null, "", "-"]]
+              ,
+                $in: ["$users.valeur", [0, null, "", "-"]]
               ]
               "-"
               $divide: [$subtract: [$multiply: ["$valeur", $divide: ["$users.valeur", "$users.valeurp_1"]], "$valeurp_1"], "$valeurp_1"]
@@ -946,31 +950,33 @@ slides: [
             users: $arrayElemAt: [$filter:
               input: "$users"
               as: "u"
-              cond: $eq: ["$label", "$$u.label"]
+              cond: $and: [
+                $eq: ["$label", "$$u.label"]
+              ,
+                $eq: ["$label_reseau", "$$u.label_reseau"]
+              ]
             ,
              0]
         ,
           $addFields:
-            user: "$users.valeur"
-            userp_1: "$users.valeurp_1"
+            test:
+              $gt: ["$users.valeur", 0]
+            test2:
+              $gt: ["$users.valeurp_1", 0]
+            evolution: $cond: [
+              $or: [
+                $in: ["$valeur", [0, null, "", "-"]]
+              ,
+                $in: ["$valeurp_1", [0, null, "", "-"]]
+              ,
+                $in: ["$users.valeurp_1", [0, null, "", "-"]]
+              ,
+                $in: ["$users.valeur", [0, null, "", "-"]]
+              ]
+              "-"
+              $divide: [$subtract: [$multiply: ["$valeur", $divide: ["$users.valeur", "$users.valeurp_1"]], "$valeurp_1"], "$valeurp_1"]
+            ]
         ,
-        #   $addFields:
-        #     test:
-        #       $not: $gt: ["$userp_1", 0]
-        #     evolution: $cond: [
-        #       $or: [
-        #         $not: $gt: ["$valeur", 0]
-        #       ,
-        #         $not: $gt: ["$valeurp_1", 0]
-        #       ,
-        #         $not: $gt: ["$user", 0]
-        #       ,
-        #         $not: $gt: ["$userp_1", 0]
-        #       ]
-        #       "-"
-        #       $divide: [$subtract: [$multiply: ["$valeur", $divide: ["$users.valeur", "$users.valeurp_1"]], "$valeurp_1"], "$valeurp_1"]
-        #     ]
-        # ,
           $addFields:
             precision:
               $switch:
@@ -1279,11 +1285,13 @@ slides: [
           $addFields:
             evolution: $cond: [
               $or: [
-                $in: ["$valeurp_1", [0, null, ""]]
+                $in: ["$valeur", [0, null, "", "-"]]
               ,
-                $in: ["$users.valeurp_1", [0, null, ""]]
+                $in: ["$valeurp_1", [0, null, "", "-"]]
               ,
-                $in: ["$users.valeur", [0, null, ""]]
+                $in: ["$users.valeurp_1", [0, null, "", "-"]]
+              ,
+                $in: ["$users.valeur", [0, null, "", "-"]]
               ]
               "-"
               $divide: [$subtract: [$multiply: ["$valeur", $divide: ["$users.valeur", "$users.valeurp_1"]], "$valeurp_1"], "$valeurp_1"]
