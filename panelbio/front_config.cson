@@ -9,11 +9,11 @@ settings:
     type: "buttons"
     id: 'withVrac'
     values: [
-      label: "Hors Vrac"
-      value: false
-    ,
       label: 'En Vrac Inclus'
       value: "__VOID__"
+    ,
+      label: "Hors Vrac"
+      value: false
     ]
     completeObjectMode: true
     defaultSelected: 'Hors Vrac'
@@ -681,6 +681,7 @@ slides: [
     commentary: "Détails d'un réseau pour le rayon sélectionné par marque<br><br>chaque barre est une marque / reprise des indicateurs principaux / affichage des indicateurs secondaires"
   }
   {
+    # Réseaux - détail par catégorie
     level: 3
     parent_id: 20
     id: 20003
@@ -688,7 +689,308 @@ slides: [
     recommendation:
       advert: 'Vue détaillée'
       content: "<a href='https://www.panel.bio'>Panel Bio</a>"
-    commentary: "Détails d'un réseau pour le rayon sélectionné par catégorie<br><br>chaque barre est une catégorie (au niveau sélectionné en haut à droite) / reprise des indicateurs principaux / affichage des indicateurs secondaires"
+    chartOptions:
+      filters:
+        'upper-middle':
+          on: 'label_reseau'
+          type: 'dropdown'
+      chartType: 'horizontal-barchart'
+      units:
+        value: " €"
+      data:
+        query: [
+          $match:
+            domain: $in: ["panel_periode_365","panel_periode_365p-1"]
+            "<%= report.ENTITY_ID_COLUMN %>": "<%= report.UNIVERS == 'ALL' ? '__VOID__' : report.ENTITY_ID %>"
+            prod_is_vrac: "<%= requestersManager.withVrac.value %>"
+            is_gms: 'false'
+            reseau_label: $nin: ['', null]
+        ,
+          $group:
+            _id:
+              id_reseau: "$id_reseau"
+              domain: "$domain"
+              conso_id_user: "$conso_id_user"
+              id_magasin: "$id_magasin"
+              categorie_id: "$<%= report.ENTITY_CHILD_ID_COLUMN %>"
+            totaleuro: $sum: "$achat_prix_total_ttc"
+            totalvolume: $sum: "$achat_quantite"
+            label: $first: "$<%= report.ENTITY_CHILD_LABEL_COLUMN %>"
+            label_reseau: $first: "$reseau_label"
+        ,
+          $facet:
+            magasins: [
+              $group:
+                _id:
+                  label: "$label"
+                  id_magasin: "$_id.id_magasin"
+                  domain: "$_id.domain"
+                  label_reseau: "$label_reseau"
+            ,
+              $group:
+                _id:
+                  label: "$_id.label"
+                  label_reseau: "$_id.label_reseau"
+                  domain: "$_id.domain"
+                value: $sum: 1
+            ,
+              $group:
+                _id:
+                  label: "$_id.label"
+                  label_reseau: "$_id.label_reseau"
+                values: $push:
+                  valeur: "$value"
+                  domain: "$_id.domain"
+            ,
+              $addFields:
+                label: "$_id.label"
+                label_reseau: "$_id.label_reseau"
+                value:  $arrayElemAt: [$filter:
+                  input: "$values"
+                  as: "v"
+                  cond: $eq: ["$$v.domain", "panel_periode_365"]
+                ,
+                  0
+                ]
+                valuep_1: $arrayElemAt: [$filter:
+                  input: "$values"
+                  as: "v"
+                  cond: $eq: ["$$v.domain", "panel_periode_365p-1"]
+                ,
+                  0
+                ]
+            ,
+              $project:
+                label: 1
+                label_reseau: 1
+                _id: 0
+                indicateur: $literal: "Magasin distinct"
+                valeur: "$value.valeur"
+                valeurp_1: "$valuep_1.valeur"
+            ]
+            users: [
+              $group:
+                _id:
+                  label: "$label"
+                  conso_id_user: "$_id.conso_id_user"
+                  domain: "$_id.domain"
+                  label_reseau: "$label_reseau"
+            ,
+              $group:
+                _id:
+                  label: "$_id.label"
+                  domain: "$_id.domain"
+                  label_reseau: "$_id.label_reseau"
+                value: $sum: 1
+            ,
+              $group:
+                _id:
+                  label: "$_id.label"
+                  label_reseau: "$_id.label_reseau"
+                values: $push:
+                  valeur: "$value"
+                  domain: "$_id.domain"
+            ,
+              $addFields:
+                label: "$_id.label"
+                label_reseau: "$_id.label_reseau"
+                value:  $arrayElemAt: [$filter:
+                  input: "$values"
+                  as: "v"
+                  cond: $eq: ["$$v.domain", "panel_periode_365"]
+                ,
+                  0
+                ]
+                valuep_1: $arrayElemAt: [$filter:
+                  input: "$values"
+                  as: "v"
+                  cond: $eq: ["$$v.domain", "panel_periode_365p-1"]
+                ,
+                  0
+                ]
+            ,
+              $project:
+                label: 1
+                label_reseau: 1
+                _id: 0
+                indicateur: $literal: "Conso distinct"
+                valeur: "$value.valeur"
+                valeurp_1: "$valuep_1.valeur"
+            ]
+            totals: [
+              $group:
+                _id:
+                  id_reseau: "$_id.id_reseau"
+                  domain: "$_id.domain"
+                  label: "$label"
+                totaleuro: $sum: "$totaleuro"
+                totalvolume: $sum: "$totalvolume"
+                label: $first: "$label"
+                label_reseau: $first: "$label_reseau"
+            ,
+              $group:
+                _id:
+                  label: "$label"
+                  label_reseau: "$label_reseau"
+                values: $push:
+                  totaleuro: "$totaleuro"
+                  totalvolume: "$totalvolume"
+                  domain: "$_id.domain"
+            ,
+              $addFields:
+                label: "$_id.label"
+                label_reseau: "$_id.label_reseau"
+                value:  $arrayElemAt: [$filter:
+                  input: "$values"
+                  as: "v"
+                  cond: $eq: ["$$v.domain", "panel_periode_365"]
+                ,
+                  0
+                ]
+                valuep_1: $arrayElemAt: [$filter:
+                  input: "$values"
+                  as: "v"
+                  cond: $eq: ["$$v.domain", "panel_periode_365p-1"]
+                ,
+                  0
+                ]
+            ,
+              $project:
+                _id: 0
+                label: 1
+                label_reseau: 1
+                value: [
+                  indicateur: $literal: "Total €"
+                  valeur: $cond: [$eq: ["$value.totaleuro", null], 0, $divide: ["$value.totaleuro", 100]]
+                  valeurp_1: $cond: [$eq: ["$valuep_1.totaleuro", null], 0, $divide: ["$valuep_1.totaleuro", 100]]
+                ,
+                  indicateur: $literal: "Total Vol."
+                  valeur: "$value.totalvolume"
+                  valeurp_1: "$valuep_1.totalvolume"
+                ]
+            ,
+              $unwind: "$value"
+            ,
+              $project:
+                label: 1
+                label_reseau: 1
+                indicateur: "$value.indicateur"
+                valeur: "$value.valeur"
+                valeurp_1: "$value.valeurp_1"
+            ,
+              $group:
+                _id:
+                  indicateur: '$indicateur'
+                  label_reseau: "$label_reseau"
+                record: $push:
+                  value: "$valeur"
+                  valuep_1: "$valeurp_1"
+                  label: "$label"
+                cum_value: $sum: "$valeur"
+                cum_valuep_1: $sum: "$valeurp_1"
+            ,
+              $unwind: "$record"
+            ,
+              $project:
+                _id: 0
+                cum_value: 1
+                cum_valuep_1: 1
+                indicateur: '$_id.indicateur'
+                valeur: "$record.value"
+                valeurp_1: "$record.valuep_1"
+                label: "$record.label"
+                label_reseau: "$_id.label_reseau"
+                value_pct: $cond: [
+                  $in: ["$cum_value", [0,null]]
+                  '-'
+                  $divide: ["$record.value", "$cum_value"]
+                ]
+                value_pctp_1: $cond: [
+                  $in: ["$cum_valuep_1", [0,null]]
+                  '-'
+                  $divide: ["$record.valuep_1", "$cum_valuep_1"]
+                ]
+            ,
+              $addFields:
+                values: [{valeur: "$valeur", type: "NB", indicateur: "$indicateur", valeurp_1: "$valeurp_1"},{valeur: "$value_pct", type: "%", indicateur: "$indicateur", valeurp_1: "$value_pctp_1"}]
+            ,
+              $unwind: "$values"
+            ,
+              $project:
+                indicateur: $switch:
+                  branches: [
+                    case: $eq: ["$values.type", "NB"]
+                    then: "$indicateur"
+                  ,
+                    case: $eq: ["$values.indicateur", "Total Vol."]
+                    then: $literal: "PM Vol."
+                  ]
+                  default: $literal: "PM €"
+                valeur: "$values.valeur"
+                valeurp_1: "$values.valeurp_1"
+                label: 1
+                label_reseau: 1
+            ]
+        ,
+          $addFields:
+            values: $concatArrays: ["$magasins", "$users", "$totals"]
+        ,
+          $addFields:
+            "values.users": "$users"
+        ,
+          $unwind: "$values"
+        ,
+          $replaceRoot: newRoot: "$values"
+        ,
+          $addFields:
+            users: $arrayElemAt: [$filter:
+              input: "$users"
+              as: "u"
+              cond: $eq: ["$label", "$$u.label"]
+            ,
+             0]
+        ,
+          $addFields:
+            user: "$users.valeur"
+            userp_1: "$users.valeurp_1"
+        ,
+        #   $addFields:
+        #     test:
+        #       $not: $gt: ["$userp_1", 0]
+        #     evolution: $cond: [
+        #       $or: [
+        #         $not: $gt: ["$valeur", 0]
+        #       ,
+        #         $not: $gt: ["$valeurp_1", 0]
+        #       ,
+        #         $not: $gt: ["$user", 0]
+        #       ,
+        #         $not: $gt: ["$userp_1", 0]
+        #       ]
+        #       "-"
+        #       $divide: [$subtract: [$multiply: ["$valeur", $divide: ["$users.valeur", "$users.valeurp_1"]], "$valeurp_1"], "$valeurp_1"]
+        #     ]
+        # ,
+          $addFields:
+            precision:
+              $switch:
+                branches: [
+                  case: $in: ["$indicateur", ["PM Vol.", "PM €"]]
+                  then: $literal: ".1%"
+                ]
+                default: $literal: ",.0f"
+        ]
+        precision:
+          evolution: '.0%'
+          valeur: "precision"
+      variation: "evolution"
+      value: "valeur"
+      label: "label"
+      sort: "desc"
+    filters:
+      "bottom-right":
+        on: "indicateur"
+        type: "buttons"
   }
   {
     level: 3
