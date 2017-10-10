@@ -6,9 +6,15 @@ def generate_permissions(data):
     user_groups_permissions = []
     for entity in data:
         user_groups_permissions.append({
-            'group': entity[u'nom_entite'],
+            'group': entity[u'ENTITY_ID'],
             'reports': {
-                'ENTITY_ID': entity[u'ENTITY_ID'],
+                '$or': [
+                    {'ENTITY_ID': entity[u'ENTITY_ID']}
+                ,
+                    {'ENTITY_ID': entity[u'ID_DEPARTEMENT']}
+                ,
+                    {'ENTITY_ID': entity[u'ID_UNIVERS']}
+                ]
                 }
         })
 
