@@ -1468,6 +1468,7 @@ slides: [
         type: "buttons"
         order: custom: ['PM Vol.','PM €','Conso distinct','Magasin distinct','Total Vol.','Total €']
   }
+  # 30001 Fiche marque
   {
     level: 3
     parent_id: 30
@@ -1476,7 +1477,28 @@ slides: [
     recommendation:
       advert: 'Vue détaillée'
       content: "<a href='https://www.panel.bio'>Panel Bio</a>"
-    commentary: "Chart en haut : choix de la catégorie sélectionnée (age, sexe, etc) / choix de marque en haut (filtre pour le rayon sélectionné)<br><br>Chart en bas : Chiffres clés affichés pour la marque sélectionnée"
+    chartOptions:
+      chartType: 'score-card'
+      label: 'label'
+      value: 'value'
+      data:
+        query: [
+          $match:
+            domain: $in: ["panel_periode_365","panel_periode_365p-1"]
+            "<%= report.ENTITY_ID_COLUMN %>": "<%= report.UNIVERS == 'ALL' ? '__VOID__' : report.ENTITY_ID %>"
+            prod_is_vrac: "<%= requestersManager.withVrac.value %>"
+            is_gms: 'false'
+        ,
+          $group:
+            _id:
+              id_marque: "$id_marque"
+              domain: "$domain"
+              conso_id_user: "$conso_id_user"
+              id_magasin: "$id_magasin"
+            totaleuro: $sum: "$achat_prix_total_ttc"
+            totalvolume: $sum: "$achat_quantite"
+            label: $first: "$marque_label"
+        ]
   }
   # 30002   Classement des marques
   {
@@ -1825,10 +1847,10 @@ slides: [
             ,
               $group:
                 _id: "$marque_label"
+                total: $sum: '$achat_prix_total_ttc'
             ,
-              $sort: "_id" : 1
+              $sort: "total" : -1
           ]
-          default: "BONNETERRE"
       data:
         query: [
           $match:
