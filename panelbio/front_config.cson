@@ -331,6 +331,7 @@ slides: [
       "bottom-right":
         on: "indicateur"
         type: "buttons"
+        order: custom: ['PM Vol.','PM €','Conso distinct','Magasin distinct','Total Vol.','Total €']
   }
   # 10002 Tendances des catégories
   {
@@ -501,6 +502,7 @@ slides: [
       "bottom-right":
         on: "indicateur"
         type: "buttons"
+        order: custom: ['PM Vol.','PM €','Conso distinct','Magasin distinct','Total Vol.','Total €']
   }
   # 20001 Classement des reseaux
   {
@@ -781,6 +783,7 @@ slides: [
       "bottom-right":
         on: "indicateur"
         type: "buttons"
+        order: custom: ['PM Vol.','PM €','Conso distinct','Magasin distinct','Total Vol.','Total €']s
   }
   # 20002 Réseaux - détail par marque
   {
@@ -1120,6 +1123,7 @@ slides: [
       "bottom-right":
         on: "indicateur"
         type: "buttons"
+        order: custom: ['PM Vol.','PM €','Conso distinct','Magasin distinct','Total Vol.','Total €']
   }
   # 20003 Réseaux - détail par catégorie
   {
@@ -1435,6 +1439,7 @@ slides: [
       "bottom-right":
         on: "indicateur"
         type: "buttons"
+        order: custom: ['PM Vol.','PM €','Conso distinct','Magasin distinct','Total Vol.','Total €']
   }
   {
     level: 3
@@ -1746,6 +1751,7 @@ slides: [
       "bottom-right":
         on: "indicateur"
         type: "buttons"
+        order: custom: ['PM Vol.','PM €','Conso distinct','Magasin distinct','Total Vol.','Total €']
   }
   {
     level: 3
