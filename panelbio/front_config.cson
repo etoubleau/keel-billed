@@ -783,7 +783,7 @@ slides: [
       "bottom-right":
         on: "indicateur"
         type: "buttons"
-        order: custom: ['PM Vol.','PM €','Conso distinct','Magasin distinct','Total Vol.','Total €']s
+        order: custom: ['PM Vol.','PM €','Conso distinct','Magasin distinct','Total Vol.','Total €']
   }
   # 20002 Réseaux - détail par marque
   {
