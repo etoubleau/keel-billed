@@ -1627,7 +1627,25 @@ slides: [
                 valeur: "$value.valeur"
                 valeurp_1: "$valuep_1.valeur"
             ]
-            totalquantite: [
+            bestreseau: [
+              $match:
+                domain: 'panel_periode_365'
+            ,
+              $group:
+                _id:
+                  id_reseau: "$id_reseau"
+                totaleuro: $sum: "$achat_prix_total_ttc"
+                label_reseau: $first: "$reseau_label"
+            ,
+              $sort: "totaleuro": -1
+            ,
+              $limit: 1
+            ,
+              $addFields:
+                indicateur: $literal: "MEILLEUR RESEAU DE DISTRIB."
+                valeur: "$label_reseau"
+            ]
+            totals: [
               $group:
                 _id:
                   domain: "$domain"
@@ -1678,7 +1696,7 @@ slides: [
             ]
         ,
           $addFields:
-            values: $concatArrays: ["$magasins", "$users", "$products", "$totalquantite"]
+            values: $concatArrays: ["$magasins", "$users", "$products", "$totals", "$bestreseau"]
         ,
           $unwind: "$values"
         ,
