@@ -1840,11 +1840,9 @@ slides: [
         ,
           $group:
             _id:
-              id_marque: "$id_marque"
               domain: "$domain"
               conso_id_user: "$conso_id_user"
               id_magasin: "$id_magasin"
-              label_marque: "$marque_label"
             totaleuro: $sum: "$achat_prix_total_ttc"
             totalvolume: $sum: "$achat_quantite"
             label: $first: "$produit_label"
