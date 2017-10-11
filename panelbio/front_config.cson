@@ -1,5 +1,5 @@
 sharingOptions: true
-
+locale: 'fr'
 home:
   skipToReport: 0
 

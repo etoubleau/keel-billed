@@ -17,7 +17,7 @@ categories: [
             query:[
               $match:
                 domain: $in: ["panel_periode_365","panel_periode_365p-1"]
-                "<%= report.ENTITY_ID_COLUMN %>": "<%= report.ENTITY_ID %>"
+                "<%= report.PARENT_ID_COLUMN %>": "<%= report.PARENT_ID %>"
                 prod_is_vrac: 'false'
                 is_gms: 'false'
             ,
@@ -226,6 +226,9 @@ categories: [
                       then: $literal: ".1%"
                     ]
                     default: $literal: ",.0f"
+            ,
+              $match:
+                label: '<%= report.ENTITY_LABEL %>'
             ,
               $sort: valeur: -1
             ,
@@ -702,9 +705,58 @@ categories: [
     name: "Infos rayon"
     kpis: [
       {
-        type: "text"
-        name: "Progression du rayon"
-        value: ""
+        type: "line"
+        name: "Progression du Rayon (PM €)"
+        chartOptions:
+          value: 'value_pct'
+          date: 'date'
+          data:
+            query:[
+              $match:
+                domain: "panel_periode_365"
+                "<%= report.PARENT_ID_COLUMN %>": "<%= report.PARENT_ID %>"
+                prod_is_vrac: 'false'
+                is_gms: 'false'
+            ,
+              $group:
+                _id:
+                  categorie_id: "$<%= report.ENTITY_CHILD_ID_COLUMN %>"
+                  date: '$date_create'
+                totaleuro: $sum: "$achat_prix_total_ttc"
+                totalvolume: $sum: "$achat_quantite"
+                label: $first: "$<%= report.ENTITY_CHILD_LABEL_COLUMN %>"
+              ,
+                $group:
+                  _id:
+                    date: '$_id.date'
+                  record: $push:
+                    value: "$totaleuro"
+                    label: '$label'
+                  cum_value: $sum: "$totaleuro"
+              ,
+                $unwind: "$record"
+              ,
+                $project:
+                  _id: 0
+                  cum_value: 1
+                  value: "$record.value"
+                  label: "$record.label"
+                  date: '$_id.date'
+                  value_pct: $cond: [
+                    $in: ["$cum_value", [0,null]]
+                    '-'
+                    $divide: ["$record.value", "$cum_value"]
+                  ]
+            ,
+              $match:
+                label: '<%= report.ENTITY_LABEL %>'
+            ]
+            precision:
+              value_pct: '.1%'
+            date:
+              selector: 'date'
+              format: '%Y%m'
+        slide: 10001
       }
       {
         type: "text"
