@@ -61,7 +61,10 @@ slides: [
       advert: 'Vue détaillée'
       content: "<a href='https://www.panel.bio'>Panel Bio</a>"
     chartOptions:
-      chartType: 'horizontal-barchart'
+      chartType: 'horizontalBarchart'
+      legend:
+        type: 'identity-card'
+        filter: 'bottom-right'
       units:
         value: " €"
       data:
@@ -514,7 +517,10 @@ slides: [
       advert: 'Vue détaillée'
       content: "<a href='https://www.panel.bio'>Panel Bio</a>"
     chartOptions:
-      chartType: 'horizontal-barchart'
+      chartType: 'horizontalBarchart'
+      legend:
+        type: 'identity-card'
+        filter: 'bottom-right'
       units:
         value: " €"
       data:
@@ -795,7 +801,10 @@ slides: [
       advert: 'Vue détaillée'
       content: "<a href='https://www.panel.bio'>Panel Bio</a>"
     chartOptions:
-      chartType: 'horizontal-barchart'
+      chartType: 'horizontalBarchart'
+      legend:
+        type: 'identity-card'
+        filter: 'bottom-right'
       variation: "evolution"
       value: "valeur"
       label: "label"
@@ -814,10 +823,11 @@ slides: [
             ,
               $group:
                 _id: "$reseau_label"
+                total: $sum: '$achat_prix_total_ttc'
             ,
-              $sort: "_id" : 1
+              $sort: "total" : -1
           ]
-          default: "BIOCOOP"
+          # default: "SEILA"
       data:
         query: [
           $match:
@@ -1135,12 +1145,29 @@ slides: [
       advert: 'Vue détaillée'
       content: "<a href='https://www.panel.bio'>Panel Bio</a>"
     chartOptions:
-      filters:
-        'upper-middle':
-          on: 'label_reseau'
+      requesters:
+        "upper-middle":
+          id: "selectionReseau"
           type: 'dropdown'
-          reset: 'Sélectionnez un réseau'
-      chartType: 'horizontal-barchart'
+          fields: ['_id']
+          query: [
+            $match:
+              domain: 'panel_periode_365'
+              "<%= report.ENTITY_ID_COLUMN %>": "<%= report.UNIVERS == 'ALL' ? '__VOID__' : report.ENTITY_ID %>"
+              prod_is_vrac: "<%= requestersManager.withVrac.value %>"
+              is_gms: 'false'
+              reseau_label: $nin: [null, '']
+            ,
+              $group:
+                _id: "$reseau_label"
+                total: $sum: '$achat_prix_total_ttc'
+            ,
+              $sort: "total" : -1
+          ]
+      chartType: 'horizontalBarchart'
+      legend:
+        type: 'identity-card'
+        filter: 'bottom-right'
       packs: 'label_reseau'
       packNames: true
       units:
@@ -1152,7 +1179,7 @@ slides: [
             "<%= report.ENTITY_ID_COLUMN %>": "<%= report.UNIVERS == 'ALL' ? '__VOID__' : report.ENTITY_ID %>"
             prod_is_vrac: "<%= requestersManager.withVrac.value %>"
             is_gms: 'false'
-            reseau_label: $nin: ['', null]
+            reseau_label: '<%= requestersManager.selectionReseau %>'
         ,
           $group:
             _id:
@@ -1461,7 +1488,10 @@ slides: [
       advert: 'Vue détaillée'
       content: "<a href='https://www.panel.bio'>Panel Bio</a>"
     chartOptions:
-      chartType: 'horizontal-barchart'
+      chartType: 'horizontalBarchart'
+      legend:
+        type: 'identity-card'
+        filter: 'bottom-right'
       units:
         value: " €"
       data:
@@ -1773,7 +1803,10 @@ slides: [
       advert: 'Vue détaillée'
       content: "<a href='https://www.panel.bio'>Panel Bio</a>"
     chartOptions:
-      chartType: 'horizontal-barchart'
+      chartType: 'horizontalBarchart'
+      legend:
+        type: 'identity-card'
+        filter: 'bottom-right'
       variation: "evolution"
       value: "valeur"
       label: "label"
