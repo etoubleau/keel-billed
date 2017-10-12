@@ -9,11 +9,11 @@ settings:
     type: "buttons"
     id: 'withVrac'
     values: [
-      label: 'En Vrac Inclus'
-      value: "__VOID__"
-    ,
       label: "Hors Vrac"
       value: false
+    ,
+      label: 'En Vrac Inclus'
+      value: "__VOID__"
     ]
     completeObjectMode: true
     defaultSelected: 'Hors Vrac'
