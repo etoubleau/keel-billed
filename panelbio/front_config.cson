@@ -1778,6 +1778,7 @@ slides: [
     parent_id: 30
     id: 30001
     title: 'Fiche marque'
+    commentary: 'Fiche marque : <%= requestersManager.selectionMarque %>'
     recommendation:
       advert: 'Vue détaillée'
       content: "<a href='https://www.panel.bio'>Panel Bio</a>"
@@ -2055,8 +2056,10 @@ slides: [
               $skip: 1
           ]
       chartType: 'radarchart'
+      zeroBaseline: 0
       value: 'valeur'
       label: 'indicateur'
+      labelsOrder: order: order: custom: ['PM €','PM Vol.','Conso distinct','Magasin distinct','Total €','Total Vol.']
       serie: 'label'
       data:
         query:
@@ -2361,6 +2364,7 @@ slides: [
         type: 'identity-card'
         filter: 'bottom-right'
       variation: "evolution"
+      sort: 'desc'
       value: "valeur"
       label: "label"
       requesters:
@@ -2397,6 +2401,7 @@ slides: [
               conso_id_user: "$conso_id_user"
               id_magasin: "$id_magasin"
               label_produit: "$produit_label"
+              unit_price: '$achat_prix_unit_ttc'
             totaleuro: $sum: "$achat_prix_total_ttc"
             totalvolume: $sum: "$achat_quantite"
             label: $first: "$produit_label"
@@ -2687,6 +2692,7 @@ slides: [
       "bottom-right":
         on: "indicateur"
         type: "buttons"
+        order: custom: ['PM €','PM Vol.','Conso distinct','Magasin distinct','Total €','Total Vol.']
   }
   {
     level: 3
