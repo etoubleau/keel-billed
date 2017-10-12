@@ -827,7 +827,6 @@ slides: [
             ,
               $sort: "total" : -1
           ]
-          # default: "SEILA"
       data:
         query: [
           $match:
@@ -1468,241 +1467,6 @@ slides: [
         type: "buttons"
         order: custom: ['PM €','PM Vol.','Conso distinct','Magasin distinct','Total €','Total Vol.']
   }
-  # 30001 Fiche marque
-  {
-    level: 3
-    parent_id: 30
-    id: 30001
-    title: 'Fiche marque'
-    recommendation:
-      advert: 'Vue détaillée'
-      content: "<a href='https://www.panel.bio'>Panel Bio</a>"
-    chartOptions:
-      chartType: 'score-card'
-      label: 'indicateur'
-      value: 'valeur'
-      requesters:
-        "upper-middle":
-          id: "selectionMarque"
-          type: 'dropdown'
-          fields: ['_id']
-          query: [
-            $match:
-              domain: 'panel_periode_365'
-              "<%= report.ENTITY_ID_COLUMN %>": "<%= report.UNIVERS == 'ALL' ? '__VOID__' : report.ENTITY_ID %>"
-              prod_is_vrac: "<%= requestersManager.withVrac.value %>"
-              is_gms: 'false'
-              reseau_label: $nin: [null, '']
-            ,
-              $group:
-                _id: "$marque_label"
-                total: $sum: '$achat_prix_total_ttc'
-            ,
-              $sort: "total" : -1
-          ]
-      data:
-        query: [
-          $match:
-            domain: $in: ["panel_periode_365","panel_periode_365p-1"]
-            "<%= report.ENTITY_ID_COLUMN %>": "<%= report.UNIVERS == 'ALL' ? '__VOID__' : report.ENTITY_ID %>"
-            prod_is_vrac: "<%= requestersManager.withVrac.value %>"
-            is_gms: 'false'
-            marque_label: "<%= requestersManager.selectionMarque %>"
-        ,
-          $facet:
-            magasins: [
-              $group:
-                _id:
-                  domain: "$domain"
-                  id_magasin: "$id_magasin"
-            ,
-              $group:
-                _id:
-                  domain: "$_id.domain"
-                value: $sum: 1
-            ,
-              $group:
-                _id: null
-                values: $push:
-                  valeur: "$value"
-                  domain: "$_id.domain"
-            ,
-              $addFields:
-                value:  $arrayElemAt: [$filter:
-                  input: "$values"
-                  as: "v"
-                  cond: $eq: ["$$v.domain", "panel_periode_365"]
-                ,
-                  0
-                ]
-                valuep_1: $arrayElemAt: [$filter:
-                  input: "$values"
-                  as: "v"
-                  cond: $eq: ["$$v.domain", "panel_periode_365p-1"]
-                ,
-                  0
-                ]
-            ,
-              $project:
-                _id: 0
-                indicateur: $literal: "Magasin distinct"
-                valeur: "$value.valeur"
-                valeurp_1: "$valuep_1.valeur"
-            ]
-            users: [
-              $group:
-                _id:
-                  domain: "$domain"
-                  conso_id_user: "$conso_id_user"
-            ,
-              $group:
-                _id:
-                  domain: "$_id.domain"
-                value: $sum: 1
-            ,
-              $group:
-                _id: null
-                values: $push:
-                  valeur: "$value"
-                  domain: "$_id.domain"
-            ,
-              $addFields:
-                value:  $arrayElemAt: [$filter:
-                  input: "$values"
-                  as: "v"
-                  cond: $eq: ["$$v.domain", "panel_periode_365"]
-                ,
-                  0
-                ]
-                valuep_1: $arrayElemAt: [$filter:
-                  input: "$values"
-                  as: "v"
-                  cond: $eq: ["$$v.domain", "panel_periode_365p-1"]
-                ,
-                  0
-                ]
-            ,
-              $project:
-                _id: 0
-                indicateur: $literal: "Conso distinct"
-                valeur: "$value.valeur"
-                valeurp_1: "$valuep_1.valeur"
-            ]
-            products: [
-              $group:
-                _id:
-                  domain: "$domain"
-                  prod_id_produit: "$prod_id_produit"
-            ,
-              $group:
-                _id:
-                  domain: "$_id.domain"
-                value: $sum: 1
-            ,
-              $group:
-                _id: null
-                values: $push:
-                  valeur: "$value"
-                  domain: "$_id.domain"
-            ,
-              $addFields:
-                value:  $arrayElemAt: [$filter:
-                  input: "$values"
-                  as: "v"
-                  cond: $eq: ["$$v.domain", "panel_periode_365"]
-                ,
-                  0
-                ]
-                valuep_1: $arrayElemAt: [$filter:
-                  input: "$values"
-                  as: "v"
-                  cond: $eq: ["$$v.domain", "panel_periode_365p-1"]
-                ,
-                  0
-                ]
-            ,
-              $project:
-                _id: 0
-                indicateur: $literal: "Ref. distinct"
-                valeur: "$value.valeur"
-                valeurp_1: "$valuep_1.valeur"
-            ]
-            bestreseau: [
-              $match:
-                domain: 'panel_periode_365'
-            ,
-              $group:
-                _id:
-                  id_reseau: "$id_reseau"
-                totaleuro: $sum: "$achat_prix_total_ttc"
-                label_reseau: $first: "$reseau_label"
-            ,
-              $sort: "totaleuro": -1
-            ,
-              $limit: 1
-            ,
-              $addFields:
-                indicateur: $literal: "MEILLEUR RESEAU DE DISTRIB."
-                valeur: "$label_reseau"
-            ]
-            totals: [
-              $group:
-                _id:
-                  domain: "$domain"
-                totaleuro: $sum: "$achat_prix_total_ttc"
-                totalvolume: $sum: "$achat_quantite"
-            ,
-              $group:
-                _id: null
-                values: $push:
-                  totaleuro: "$totaleuro"
-                  totalvolume: "$totalvolume"
-                  domain: "$_id.domain"
-            ,
-              $addFields:
-                value:  $arrayElemAt: [$filter:
-                  input: "$values"
-                  as: "v"
-                  cond: $eq: ["$$v.domain", "panel_periode_365"]
-                ,
-                  0
-                ]
-                valuep_1: $arrayElemAt: [$filter:
-                  input: "$values"
-                  as: "v"
-                  cond: $eq: ["$$v.domain", "panel_periode_365p-1"]
-                ,
-                  0
-                ]
-            ,
-              $project:
-                _id: 0
-                value: [
-                  indicateur: $literal: "Total €"
-                  valeur: $cond: [$eq: ["$value.totaleuro", null], 0, $divide: ["$value.totaleuro", 100]]
-                  valeurp_1: $cond: [$eq: ["$valuep_1.totaleuro", null], 0, $divide: ["$valuep_1.totaleuro", 100]]
-                ,
-                  indicateur: $literal: "Total Vol."
-                  valeur: "$value.totalvolume"
-                  valeurp_1: "$valuep_1.totalvolume"
-                ]
-            ,
-              $unwind: "$value"
-            ,
-              $project:
-                indicateur: "$value.indicateur"
-                valeur: "$value.valeur"
-                valeurp_1: "$value.valeurp_1"
-            ]
-        ,
-          $addFields:
-            values: $concatArrays: ["$magasins", "$users", "$products", "$totals", "$bestreseau"]
-        ,
-          $unwind: "$values"
-        ,
-          $replaceRoot: newRoot: "$values"
-        ]
-  }
   # 30002   Classement des marques
   {
     level: 3
@@ -2008,6 +1772,242 @@ slides: [
         type: "buttons"
         order: custom: ['PM €','PM Vol.','Conso distinct','Magasin distinct','Total €','Total Vol.']
   }
+  # 30001 Fiche marque
+  {
+    level: 3
+    parent_id: 30
+    id: 30001
+    title: 'Fiche marque'
+    recommendation:
+      advert: 'Vue détaillée'
+      content: "<a href='https://www.panel.bio'>Panel Bio</a>"
+    chartOptions:
+      chartType: 'score-card'
+      label: 'indicateur'
+      value: 'valeur'
+      requesters:
+        "upper-middle":
+          id: "selectionMarque"
+          type: 'dropdown'
+          fields: ['_id']
+          query: [
+            $match:
+              domain: 'panel_periode_365'
+              "<%= report.ENTITY_ID_COLUMN %>": "<%= report.UNIVERS == 'ALL' ? '__VOID__' : report.ENTITY_ID %>"
+              prod_is_vrac: "<%= requestersManager.withVrac.value %>"
+              is_gms: 'false'
+              reseau_label: $nin: [null, '']
+            ,
+              $group:
+                _id: "$marque_label"
+                total: $sum: '$achat_prix_total_ttc'
+            ,
+              $sort: "total" : -1
+          ]
+      data:
+        query: [
+          $match:
+            domain: $in: ["panel_periode_365","panel_periode_365p-1"]
+            "<%= report.ENTITY_ID_COLUMN %>": "<%= report.UNIVERS == 'ALL' ? '__VOID__' : report.ENTITY_ID %>"
+            prod_is_vrac: "<%= requestersManager.withVrac.value %>"
+            is_gms: 'false'
+            marque_label: "<%= requestersManager.selectionMarque %>"
+        ,
+          $facet:
+            magasins: [
+              $group:
+                _id:
+                  domain: "$domain"
+                  id_magasin: "$id_magasin"
+            ,
+              $group:
+                _id:
+                  domain: "$_id.domain"
+                value: $sum: 1
+            ,
+              $group:
+                _id: null
+                values: $push:
+                  valeur: "$value"
+                  domain: "$_id.domain"
+            ,
+              $addFields:
+                value:  $arrayElemAt: [$filter:
+                  input: "$values"
+                  as: "v"
+                  cond: $eq: ["$$v.domain", "panel_periode_365"]
+                ,
+                  0
+                ]
+                valuep_1: $arrayElemAt: [$filter:
+                  input: "$values"
+                  as: "v"
+                  cond: $eq: ["$$v.domain", "panel_periode_365p-1"]
+                ,
+                  0
+                ]
+            ,
+              $project:
+                _id: 0
+                indicateur: $literal: "Magasin distinct"
+                valeur: "$value.valeur"
+                valeurp_1: "$valuep_1.valeur"
+            ]
+            users: [
+              $group:
+                _id:
+                  domain: "$domain"
+                  conso_id_user: "$conso_id_user"
+            ,
+              $group:
+                _id:
+                  domain: "$_id.domain"
+                value: $sum: 1
+            ,
+              $group:
+                _id: null
+                values: $push:
+                  valeur: "$value"
+                  domain: "$_id.domain"
+            ,
+              $addFields:
+                value:  $arrayElemAt: [$filter:
+                  input: "$values"
+                  as: "v"
+                  cond: $eq: ["$$v.domain", "panel_periode_365"]
+                ,
+                  0
+                ]
+                valuep_1: $arrayElemAt: [$filter:
+                  input: "$values"
+                  as: "v"
+                  cond: $eq: ["$$v.domain", "panel_periode_365p-1"]
+                ,
+                  0
+                ]
+            ,
+              $project:
+                _id: 0
+                indicateur: $literal: "Conso distinct"
+                valeur: "$value.valeur"
+                valeurp_1: "$valuep_1.valeur"
+            ]
+            products: [
+              $group:
+                _id:
+                  domain: "$domain"
+                  prod_id_produit: "$prod_id_produit"
+            ,
+              $group:
+                _id:
+                  domain: "$_id.domain"
+                value: $sum: 1
+            ,
+              $group:
+                _id: null
+                values: $push:
+                  valeur: "$value"
+                  domain: "$_id.domain"
+            ,
+              $addFields:
+                value:  $arrayElemAt: [$filter:
+                  input: "$values"
+                  as: "v"
+                  cond: $eq: ["$$v.domain", "panel_periode_365"]
+                ,
+                  0
+                ]
+                valuep_1: $arrayElemAt: [$filter:
+                  input: "$values"
+                  as: "v"
+                  cond: $eq: ["$$v.domain", "panel_periode_365p-1"]
+                ,
+                  0
+                ]
+            ,
+              $project:
+                _id: 0
+                indicateur: $literal: "Ref. distinct"
+                valeur: "$value.valeur"
+                valeurp_1: "$valuep_1.valeur"
+            ]
+            bestreseau: [
+              $match:
+                domain: 'panel_periode_365'
+            ,
+              $group:
+                _id:
+                  id_reseau: "$id_reseau"
+                totaleuro: $sum: "$achat_prix_total_ttc"
+                label_reseau: $first: "$reseau_label"
+            ,
+              $sort: "totaleuro": -1
+            ,
+              $limit: 1
+            ,
+              $addFields:
+                indicateur: $literal: "MEILLEUR RESEAU DE DISTRIB."
+                valeur: "$label_reseau"
+            ]
+            totals: [
+              $group:
+                _id:
+                  domain: "$domain"
+                totaleuro: $sum: "$achat_prix_total_ttc"
+                totalvolume: $sum: "$achat_quantite"
+            ,
+              $group:
+                _id: null
+                values: $push:
+                  totaleuro: "$totaleuro"
+                  totalvolume: "$totalvolume"
+                  domain: "$_id.domain"
+            ,
+              $addFields:
+                value:  $arrayElemAt: [$filter:
+                  input: "$values"
+                  as: "v"
+                  cond: $eq: ["$$v.domain", "panel_periode_365"]
+                ,
+                  0
+                ]
+                valuep_1: $arrayElemAt: [$filter:
+                  input: "$values"
+                  as: "v"
+                  cond: $eq: ["$$v.domain", "panel_periode_365p-1"]
+                ,
+                  0
+                ]
+            ,
+              $project:
+                _id: 0
+                value: [
+                  indicateur: $literal: "Total €"
+                  valeur: $cond: [$eq: ["$value.totaleuro", null], 0, $divide: ["$value.totaleuro", 100]]
+                  valeurp_1: $cond: [$eq: ["$valuep_1.totaleuro", null], 0, $divide: ["$valuep_1.totaleuro", 100]]
+                ,
+                  indicateur: $literal: "Total Vol."
+                  valeur: "$value.totalvolume"
+                  valeurp_1: "$valuep_1.totalvolume"
+                ]
+            ,
+              $unwind: "$value"
+            ,
+              $project:
+                indicateur: "$value.indicateur"
+                valeur: "$value.valeur"
+                valeurp_1: "$value.valeurp_1"
+            ]
+        ,
+          $addFields:
+            values: $concatArrays: ["$magasins", "$users", "$products", "$totals", "$bestreseau"]
+        ,
+          $unwind: "$values"
+        ,
+          $replaceRoot: newRoot: "$values"
+        ]
+  }
+  # 30003 Comparaison de marque
   {
     level: 3
     parent_id: 30
